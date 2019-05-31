@@ -1,0 +1,22 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'
+
+target 'LightningGame' do
+	use_frameworks!
+
+#Pods for LightningGame
+
+pod 'AFNetworking'
+pod 'Masonry'
+pod 'FMDB'
+pod 'MJRefresh'
+pod 'IQKeyboardManager'
+pod 'MBProgressHUD'
+pod 'SDWebImage', '~> 4.0'
+pod 'SDWebImage/WebP'
+pod 'SDWebImage/GIF'
+
+pod 'MLeaksFinder', :configurations => ['Debug']
+
+end
+

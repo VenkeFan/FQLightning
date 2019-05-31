@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  LightningGame
+
+  Created by fanqi_company on 2019/5/29.
+  Copyright © 2019 fanqi_company. All rights reserved.
+*/
+
+
+// NavBar
+navBar_kefu                 = "联系客服";
+
+// Sign In
+sign_name                   = "账号";
+sign_pwd                    = "密码";
+sign_name_placeholder       = "请输入账号/手机号";
+sign_pwd_placeholder        = "请输入6-16位英文或数字";
+sign_forget_pwd             = "忘记密码?";
+sign_in                     = "账号登录";
+sign_up                     = "账号注册";
+sign_visitor                = "游客登录";
+
+// Main
+main_today                  = "今日";
+main_before                 = "赛前";
+main_rolling                = "滚盘";
+main_finished               = "已结束";
