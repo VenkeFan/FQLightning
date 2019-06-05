@@ -8,7 +8,7 @@
 
 #import "LGMainViewController.h"
 
-#import "FQImageButton.h"
+#import "LGServiceButton.h"
 #import "FQSegmentedControl.h"
 #import "LGTournamentListView.h"
 
@@ -26,11 +26,15 @@
     [super viewDidLoad];
     
     [self layoutNavigationBar];
-    [self layoutBody];
+    [self initializeBody];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - UI
@@ -45,17 +49,8 @@
     UIButton *left2 = [self btnFactory:CGRectZero imgName:@"nav_rein" target:self action:@selector(navLeft2BtnClicked)];
     self.navBar.leftBtnArray = @[left1, left2];
     
-    FQImageButton *rightBtn = [FQImageButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.imageOrientation = FQImageButtonOrientation_Right;
-    rightBtn.backgroundColor = [UIColor clearColor];
-    [rightBtn setImage:[UIImage imageNamed:@"nav_kefu"] forState:UIControlStateNormal];
-    rightBtn.imageView.contentMode = UIViewContentModeCenter;
-    rightBtn.frame = CGRectMake(0, 0, kSizeScale(76), kSizeScale(22));
+    LGServiceButton *rightBtn = [LGServiceButton new];
     rightBtn.centerX = CGRectGetWidth(self.navBar.contentView.frame) - CGRectGetWidth(rightBtn.frame) * 0.5 - kNavBarPaddingX;
-    [rightBtn setTitle:kLocalizedString(@"navBar_kefu") forState:UIControlStateNormal];
-    [rightBtn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
-    rightBtn.titleLabel.font = kRegularFont(kNoteFontSize);
-    [rightBtn addTarget:self action:@selector(navRightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     self.navBar.rightBtn = rightBtn;
 }
 
@@ -69,7 +64,7 @@
     return btn;
 }
 
-- (void)layoutBody {
+- (void)initializeBody {
     _segmentedCtr = ({
         FQSegmentedControl *seg = [[FQSegmentedControl alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kSegmentHeight)];
         seg.backgroundColor = kNavBarColor;
@@ -168,10 +163,6 @@
 
 - (void)navLeft2BtnClicked {
     NSLog(@"******navLeft2BtnClicked");
-}
-
-- (void)navRightBtnClicked {
-    NSLog(@"联系客服");
 }
 
 @end

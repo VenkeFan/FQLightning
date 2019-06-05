@@ -14,12 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)instance;
 
-@property (nonatomic, assign, getter=isExpanded) BOOL expanded;
+@property (nonatomic, assign, readonly, getter=isExpanded) BOOL expanded;
 
-- (void)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic;
-
-- (void)display;
-- (void)dismiss;
+- (void)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName;
 
 @end
 

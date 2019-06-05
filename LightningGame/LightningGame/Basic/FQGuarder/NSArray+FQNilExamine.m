@@ -79,9 +79,6 @@
     
     for (   ; valueCnt < cnt; valueCnt++, objPtr++) {
         if (*objPtr == 0) {
-#if DEBUG
-            NSLog(@"%@", [NSThread callStackSymbols]);
-#endif
             break;
         }
     }

@@ -80,20 +80,20 @@
     return self.frame.size;
 }
 
-- (CGFloat)centerX {
+- (CGFloat)positionX {
     return self.position.x;
 }
 
-- (void)setCenterX:(CGFloat)centerX {
-    self.position = CGPointMake(centerX, self.position.y);
+- (void)setPositionX:(CGFloat)positionX {
+    self.position = CGPointMake(positionX, self.position.y);
 }
 
-- (CGFloat)centerY {
+- (CGFloat)positionY {
     return self.position.y;
 }
 
-- (void)setCenterY:(CGFloat)centerY {
-    self.position = CGPointMake(self.position.x, centerY);
+- (void)setPositionY:(CGFloat)positionY {
+    self.position = CGPointMake(self.position.x, positionY);
 }
 
 @end

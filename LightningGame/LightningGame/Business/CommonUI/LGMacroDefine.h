@@ -22,6 +22,7 @@
 #define kMarqueeBgColor                     kUIColorFromRGB(0x1A1C26)
 #define kInputBgColor                       kUIColorFromRGB(0x1A1C26)
 #define kSeparateLineColor                  kUIColorFromRGB(0x1A1C26)
+#define kPlaceholderColor                   kUIColorFromRGB(0x544A36)
 
 // font color
 #define kNameFontColor                      kUIColorFromRGB(0xCDC3B3)
@@ -29,7 +30,9 @@
 #define kScoreFontColor                     kUIColorFromRGB(0xEBE3D7)
 
 // font size
+#define kHeaderFontSize                     kSizeScale(16.0)
 #define kNameFontSize                       kSizeScale(14.0)
+#define kFieldFontSize                      kSizeScale(13.0)
 #define kScoreFontSize                      kSizeScale(22.0)
 #define kNoteFontSize                       kSizeScale(12.0)
 

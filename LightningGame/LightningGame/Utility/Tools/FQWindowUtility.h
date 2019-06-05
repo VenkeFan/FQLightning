@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (class, nonatomic, strong, readonly) UIViewController *currentViewController;
 @property (class, nonatomic, assign, readonly) CGFloat visibleKeyboardHeight;
+@property (class, nonatomic, strong, readonly) UIView *visibleKeyboard;
 + (BOOL)changeKeyWindowRootViewControllerWithNewClass:(Class)newClass;
 + (void)resignFirstResponder;
 

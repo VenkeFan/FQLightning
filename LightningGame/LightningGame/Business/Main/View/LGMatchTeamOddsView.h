@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) LGMatchTeamOddsViewStatus status;
 @property (nonatomic, assign) LGMatchTeamOddsViewDirection direction;
 
-- (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic;
+- (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName;
 
 @end
 

@@ -17,6 +17,7 @@
 
 #import "FQLanguageManager.h"
 #import "FQWindowUtility.h"
+#import "LGToastView.h"
 
 #import "UIView+FQExtension.h"
 #import "CALayer+FQExtension.h"

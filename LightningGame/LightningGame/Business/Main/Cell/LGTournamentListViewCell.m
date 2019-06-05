@@ -57,12 +57,12 @@
     
     _scoreLine.position = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.5, CGRectGetHeight(_containerView.frame) * 0.5 - kCellMarginY);
     _leftScore.position = CGPointMake(CGRectGetMinX(_scoreLine.frame) - kScoreLayerPaddingX - CGRectGetWidth(_leftScore.frame) * 0.5,
-                                      _scoreLine.centerY);
+                                      _scoreLine.positionY);
     _rightScore.position = CGPointMake(CGRectGetMaxX(_scoreLine.frame) + kScoreLayerPaddingX + CGRectGetWidth(_rightScore.frame) * 0.5,
-                                       _scoreLine.centerY);
+                                       _scoreLine.positionY);
 
-    _leftLogoView.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.25 - kCellMarginX, _scoreLine.centerY);
-    _rightLogoView.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.75 + kCellMarginX, _scoreLine.centerY);
+    _leftLogoView.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.25 - kCellMarginX, _scoreLine.positionY);
+    _rightLogoView.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.75 + kCellMarginX, _scoreLine.positionY);
     
     _leftOddsView.center = CGPointMake(_leftLogoView.centerX, CGRectGetHeight(_containerView.frame) - y - CGRectGetHeight(_leftOddsView.frame) * 0.5);
     _rightOddsView.center = CGPointMake(_rightLogoView.centerX, _leftOddsView.centerY);
@@ -130,6 +130,8 @@
 }
 
 - (void)setDataDic:(NSDictionary *)dataDic {
+    _dataDic = [dataDic copy];
+    
     {
         NSString *tourName = dataDic[kTournamentListKeyTournamentName];
         NSString *round = [dataDic[kTournamentListKeyRound] uppercaseString];
@@ -198,8 +200,8 @@
     [_leftLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, leftTeam[kTournamentTeamKeyLogo]]];
     [_rightLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, rightTeam[kTournamentTeamKeyLogo]]];
     
-    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds];
-    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds];
+    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kTournamentListKeyMatchName]];
+    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kTournamentListKeyMatchName]];
 }
 
 @end

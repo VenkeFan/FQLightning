@@ -278,10 +278,8 @@
 
 - (UIButton *)leftBtn {
     if (!_leftBtn) {
-        UIImage *image = [[UIImage imageNamed:@"common_icon_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
+        UIImage *image = [[UIImage imageNamed:@"nav_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tintColor = [UIColor whiteColor];
         btn.frame = CGRectMake(0, 0, CGRectGetHeight(self.contentView.bounds), CGRectGetHeight(self.contentView.bounds));
         [btn setImage:image forState:UIControlStateNormal];
         [btn setTitleColor:kNameFontColor forState:UIControlStateNormal];

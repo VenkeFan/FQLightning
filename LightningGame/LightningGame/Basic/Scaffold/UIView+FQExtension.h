@@ -35,4 +35,6 @@
 
 - (void)setHiddenWithAnimation:(BOOL)hidden;
 
+- (void)removeAllSubviews;
+
 @end

@@ -1,5 +1,5 @@
 //
-//  NSObject+AssociatedObject.h
+//  NSObject+MsgForwarding.h
 //  FQWidgets
 //
 //  Created by fanqi on 17/4/19.
@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (AssociatedObject)
+@interface NSObject (MsgForwarding)
 
-@property (nonatomic, strong) id associatedObject;
 
 @end

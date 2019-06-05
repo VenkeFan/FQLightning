@@ -44,7 +44,8 @@
     }
     
     for (UIView *possibleKeyboard in [keyboardWindow subviews]) {
-        if([possibleKeyboard isKindOfClass:NSClassFromString(@"UIPeripheralHostView")] || [possibleKeyboard isKindOfClass:NSClassFromString(@"UIKeyboard")]) {
+        if([possibleKeyboard isKindOfClass:NSClassFromString(@"UIPeripheralHostView")]
+           || [possibleKeyboard isKindOfClass:NSClassFromString(@"UIKeyboard")]) {
             return CGRectGetHeight(possibleKeyboard.bounds);
         } else if([possibleKeyboard isKindOfClass:NSClassFromString(@"UIInputSetContainerView")]) {
             for (UIView *possibleKeyboardSubview in [possibleKeyboard subviews]) {
@@ -56,6 +57,32 @@
     }
     
     return 0;
+}
+
++ (UIView *)visibleKeyboard {
+    UIView *keyboardView = nil;
+    NSArray *windows = [[UIApplication sharedApplication] windows];
+    for (UIWindow *window in [windows reverseObjectEnumerator]) {
+        keyboardView = [self p_findKeyboardInView:window];
+        if (keyboardView) {
+            return keyboardView;
+        }
+    }
+    return nil;
+}
+
++ (UIView *)p_findKeyboardInView:(UIView *)view {
+    for (UIView *subView in [view subviews]) {
+        if (strstr(object_getClassName(subView), "UIInputSetHostView")) {
+            return subView;
+        } else {
+            UIView *tempView = [self p_findKeyboardInView:subView];
+            if (tempView) {
+                return tempView;
+            }
+        }
+    }
+    return nil;
 }
 
 + (BOOL)changeKeyWindowRootViewControllerWithNewClass:(Class)newClass {

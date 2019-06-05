@@ -11,14 +11,26 @@
 navBar_kefu                 = "联系客服";
 
 // Sign In
-sign_name                   = "账号";
+sign_account                = "账号";
 sign_pwd                    = "密码";
-sign_name_placeholder       = "请输入账号/手机号";
+sign_account_placeholder    = "请输入账号/手机号";
 sign_pwd_placeholder        = "请输入6-16位英文或数字";
 sign_forget_pwd             = "忘记密码?";
 sign_in                     = "账号登录";
 sign_up                     = "账号注册";
 sign_visitor                = "游客登录";
+sign_pwd_confirm            = "确认密码";
+sign_name                   = "姓名";
+sign_name_placeholder       = "为保证资金安全，请填写真实姓名";
+sign_mobile                 = "电话";
+sign_mobile_place           = "填写新的手机号码";
+sign_get_verify             = "获取验证码";
+sign_verify                 = "验证码";
+sign_verify_place           = "输入验证码";
+sign_recommend              = "推荐码";
+sign_recommend_place        = "填写推荐码（选填）";
+sign_up_confirm             = "确认注册";
+sign_pwd_update             = "修改密码";
 
 // Main
 main_today                  = "今日";

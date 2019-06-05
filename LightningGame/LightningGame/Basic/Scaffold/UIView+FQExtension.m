@@ -176,4 +176,11 @@
     self.hidden = hidden;
 }
 
+- (void)removeAllSubviews {
+    [self.subviews enumerateObjectsWithOptions:NSEnumerationReverse
+                                    usingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                        [obj removeFromSuperview];
+                                    }];
+}
+
 @end

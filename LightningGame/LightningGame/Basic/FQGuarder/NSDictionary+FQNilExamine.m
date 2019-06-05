@@ -45,18 +45,12 @@
 
     for (   ; keyCnt < cnt; keyCnt++, objPtr++) {
         if (*objPtr == 0) {
-#if DEBUG
-            NSLog(@"%@", [NSThread callStackSymbols]);
-#endif
             break;
         }
     }
 
     for (   ; valueCnt < cnt; valueCnt++, keyPtr++) {
         if (*keyPtr == 0) {
-#if DEBUG
-            NSLog(@"%@", [NSThread callStackSymbols]);
-#endif
             break;
         }
     }
@@ -75,9 +69,6 @@
     
     for (int i = 0; i < minCnt; i++) {
         if (nil == keys[i] || nil == objects[i]) {
-#if DEBUG
-            NSLog(@"%@", [NSThread callStackSymbols]);
-#endif
             continue;
         }
         

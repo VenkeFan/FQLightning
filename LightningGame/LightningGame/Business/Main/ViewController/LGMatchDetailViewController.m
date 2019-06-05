@@ -28,12 +28,10 @@
     
     self.title = @"游戏竞猜";
     
-//    UIImageView *imgView = [[UIImageView alloc] init];
-//    imgView.frame = CGRectMake(20, kSystemStatusBarHeight, kScreenWidth - 40, kScreenHeight - kSystemStatusBarHeight - 20);
-//    imgView.backgroundColor = [UIColor cyanColor];
-//    imgView.image = [UIImage imageNamed:@"boom"];
-//    imgView.contentMode = UIViewContentModeCenter;
-//    [self.view addSubview:imgView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 @end

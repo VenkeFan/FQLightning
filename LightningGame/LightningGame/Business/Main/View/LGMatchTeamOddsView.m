@@ -22,6 +22,7 @@
 
 @property (nonatomic, copy) NSDictionary *teamDic;
 @property (nonatomic, copy) NSDictionary *oddsDic;
+@property (nonatomic, copy) NSString *matchName;
 
 @property (nonatomic, strong) UILabel *oddsLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -55,9 +56,10 @@
 
 #pragma mark - Public
 
-- (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic {
+- (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(nonnull NSString *)matchName {
     self.teamDic = teamDic;
     self.oddsDic = oddsDic;
+    self.matchName = matchName;
     
     _oddsLabel.text = oddsDic[kTournamentOddsKeyOdds];
     _nameLabel.text = teamDic[kTournamentTeamKeyName];
@@ -73,7 +75,7 @@
 #pragma mark - Event
 
 - (void)selfOnTapped {
-    [[LGMatchParlayView instance] display];
+    [[LGMatchParlayView instance] addTeamDic:self.teamDic oddsDic:self.oddsDic matchName:self.matchName];
 }
 
 #pragma mark - Setter
