@@ -75,6 +75,10 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
     _keyboard.top = kLGMatchParlayTableViewCellHeight;
 }
 
+- (void)dealloc {
+    
+}
+
 - (void)setDataDic:(NSMutableDictionary *)dataDic {
     _dataDic = dataDic;
     

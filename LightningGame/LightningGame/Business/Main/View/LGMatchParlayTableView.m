@@ -38,6 +38,10 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     self.tableView.frame = self.bounds;
 }
 
+- (void)dealloc {
+    
+}
+
 #pragma mark - Public
 
 - (void)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName {
@@ -103,10 +107,7 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
         if (self.itemArray.count > 0) {
             [self p_updateTableViewHeight];
         } else {
-            _keyboardIndexPath = nil;
-            if ([self.delegate respondsToSelector:@selector(matchParlayTableViewDidClear:)]) {
-                [self.delegate matchParlayTableViewDidClear:self];
-            }
+            [self clearAll];
         }
     }
 }

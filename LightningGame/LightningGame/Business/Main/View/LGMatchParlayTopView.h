@@ -10,7 +10,7 @@
 
 @class LGMatchParlayTopView;
 
-#define kLGMatchParlayViewTopHeight                 kSizeScale(30.0)
+#define kLGMatchParlayViewTopHeight                 kSizeScale(36.0)
 
 NS_ASSUME_NONNULL_BEGIN
 

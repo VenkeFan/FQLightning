@@ -47,6 +47,8 @@
     
 }
 
+#pragma mark - UI
+
 - (void)initializeUI {
     _contentView = [[UIView alloc] init];
     _contentView.backgroundColor = [UIColor clearColor];

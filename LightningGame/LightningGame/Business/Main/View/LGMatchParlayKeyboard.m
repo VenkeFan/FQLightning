@@ -24,6 +24,12 @@ NSInteger const kMatchParlayMaxBet              = 5000;
     return self;
 }
 
+- (void)dealloc {
+    
+}
+
+#pragma mark - UI
+
 - (void)initializeUI {
     CGFloat padding = 2.0;
     CGFloat x = padding, y = padding;

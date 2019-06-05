@@ -26,9 +26,7 @@
 @property (nonatomic, assign, readwrite) BOOL expanded;
 
 @property (nonatomic, strong) LGMatchParlayTopView *topView;
-
 @property (nonatomic, strong) LGMatchParlayTableView *contentView;
-
 @property (nonatomic, strong) LGMatchParlayBottomView *bottomView;
 
 @end
@@ -54,8 +52,8 @@
         
         _expanded = NO;
         
-        [self initializeUI];
-        [self addObservers];
+//        [self initializeUI];
+//        [self addObservers];
     }
     return self;
 }
@@ -101,6 +99,11 @@
     if (!teamDic || !oddsDic) {
         return;
     }
+    if (self.contentView.itemCount == 0) {
+        [self initializeUI];
+        [self addObservers];
+    }
+    
     [self.contentView addTeamDic:teamDic oddsDic:oddsDic matchName:matchName];
     
     if (self.contentView.itemCount == 1) {
@@ -205,6 +208,14 @@
     [self p_fold:YES
        completed:^{
            self.expanded = NO;
+           
+           [self removeObservers];
+           
+           [self removeAllSubviews];
+           [self->_bottomView removeFromSuperview];
+           self->_topView = nil;
+           self->_contentView = nil;
+           self->_bottomView = nil;
            [self removeFromSuperview];
        }];
 }

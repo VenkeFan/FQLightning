@@ -42,6 +42,12 @@
     return self;
 }
 
+- (void)dealloc {
+    
+}
+
+#pragma mark - UI
+
 - (void)initializeUI {
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     closeBtn.backgroundColor = [UIColor redColor];

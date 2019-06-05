@@ -8,6 +8,36 @@
 
 #import "LGMatchParlayTextField.h"
 
+static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
+
+@interface LGOpacityAnimation : CABasicAnimation
+
+@end
+
+@implementation LGOpacityAnimation
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.keyPath = @"opacity";
+        self.duration = 0.5;
+        self.fromValue = @(0);
+        self.toValue = @(1);
+        self.autoreverses = YES;
+        self.repeatCount = INFINITY;
+        self.removedOnCompletion = NO;
+        self.fillMode = kCAFillModeForwards;
+        self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    }
+    return self;
+}
+
+- (void)dealloc {
+//    NSLog(@"LGOpacityAnimation dealloc %@", self);
+}
+
+@end
+
+
 @interface LGMatchParlayTextField ()
 
 @property (nonatomic, strong) UIView *cursorView;
@@ -95,9 +125,14 @@
     if (isResponder) {
         _cursorView.hidden = NO;
         _inputView.hidden = NO;
+        
+        LGOpacityAnimation *animation = [LGOpacityAnimation animation];
+        [_cursorView.layer addAnimation:animation forKey:cursorAnimationKey];
     } else {
         _cursorView.hidden = YES;
         _inputView.hidden = YES;
+        
+        [_cursorView.layer removeAnimationForKey:cursorAnimationKey];
     }
 }
 
@@ -184,18 +219,6 @@
         _cursorView = [UIView new];
         _cursorView.backgroundColor = kMainOnTintColor;
         _cursorView.hidden = YES;
-        
-        CABasicAnimation *animation = [CABasicAnimation animation];
-        animation.keyPath = @"opacity";
-        animation.duration = 0.5;
-        animation.fromValue = @(0);
-        animation.toValue = @(1);
-        animation.autoreverses = YES;
-        animation.repeatCount = INFINITY;
-        animation.removedOnCompletion = NO;
-        animation.fillMode = kCAFillModeForwards;
-        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-        [_cursorView.layer addAnimation:animation forKey:nil];
     }
     return _cursorView;
 }
