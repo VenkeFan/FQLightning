@@ -33,6 +33,7 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = kMarqueeBgColor;
+        self.clipsToBounds = YES;
         
         [self initializeUI];
     }
@@ -169,7 +170,10 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [_field resignFirstResponder];
+    if (_field.isResponder) {
+        [_field resignFirstResponder];
+        return;
+    }
     
     if ([self.delegate respondsToSelector:@selector(matchParlayTableViewCellOnTapped:)]) {
         [self.delegate matchParlayTableViewCellOnTapped:self];

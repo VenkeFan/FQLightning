@@ -96,7 +96,6 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
     if (self.isResponder) {
         return YES;
     }
-    self.isResponder = YES;
     
     if ([self.delegate respondsToSelector:@selector(matchParlayTextFieldShouldBeginEditing:)]) {
         [self.delegate matchParlayTextFieldShouldBeginEditing:self];
@@ -109,8 +108,6 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
     if (!self.isResponder) {
         return YES;
     }
-    
-    self.isResponder = NO;
     
     if ([self.delegate respondsToSelector:@selector(matchParlayTextFieldShouldEndEditing:)]) {
         [self.delegate matchParlayTextFieldShouldEndEditing:self];

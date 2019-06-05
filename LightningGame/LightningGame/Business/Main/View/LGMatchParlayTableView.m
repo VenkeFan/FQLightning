@@ -18,7 +18,7 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 }
 
 @property (nonatomic, strong) NSMutableArray *itemArray;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong, readwrite) UITableView *tableView;
 
 @end
 
@@ -113,28 +113,34 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 }
 
 - (void)matchParlayTableViewCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell {
+    NSIndexPath *preIndexPath = _keyboardIndexPath;
     if (_keyboardIndexPath) {
-        LGMatchParlayTableViewCell *keyboardCell = [self.tableView cellForRowAtIndexPath:_keyboardIndexPath];
-        [self matchParlayTableViewCellKeyboardWillHide:keyboardCell];
+        if (_keyboardIndexPath && _keyboardIndexPath.row < self.itemArray.count) {
+            NSMutableDictionary *dicM = self.itemArray[_keyboardIndexPath.row];
+            [dicM setObject:@(NO) forKey:kLGMatchParlayTableViewCellKeyFieldFocused];
+            _keyboardIndexPath = nil;
+        }
     }
     
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.itemArray.count) {
-        _keyboardIndexPath = indexPath;
-        
         NSMutableDictionary *dicM = self.itemArray[indexPath.row];
         [dicM setObject:@(YES) forKey:kLGMatchParlayTableViewCellKeyFieldFocused];
         
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        if (preIndexPath) {
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath, preIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        } else {
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
         
+        _keyboardIndexPath = indexPath;
         [self p_updateTableViewHeight];
     }
 }
 
 - (void)matchParlayTableViewCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-
     if (indexPath && indexPath.row < self.itemArray.count) {
         NSMutableDictionary *dicM = self.itemArray[indexPath.row];
         [dicM setObject:@(NO) forKey:kLGMatchParlayTableViewCellKeyFieldFocused];

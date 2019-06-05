@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LGMatchParlayTableView : UIView
 
 @property (nonatomic, assign, readonly) NSUInteger itemCount;
+@property (nonatomic, strong, readonly) UITableView *tableView;
 @property (nonatomic, weak) id<LGMatchParlayTableViewDelegate> delegate;
 - (void)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName;
 - (void)clearAll;

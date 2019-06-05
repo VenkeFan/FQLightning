@@ -138,9 +138,10 @@
         [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration * 0.5
                          animations:^{
                              self.contentView.height = newHeight;
+                             self.contentView.tableView.height = newHeight;
                              self.height = kLGMatchParlayViewTopHeight + kLGMatchParlayViewBottomHeight + self.contentView.height;
                              if (self.isExpanded) {
-                               self.top = kScreenHeight - self.height;
+                                 self.top = kScreenHeight - self.height;
                              }
                          }];
     }
