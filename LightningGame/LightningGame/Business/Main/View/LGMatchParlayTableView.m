@@ -7,6 +7,7 @@
 //
 
 #import "LGMatchParlayTableView.h"
+#import "LGTournamentListKeys.h"
 #import "LGMatchParlayKeyboard.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
@@ -44,9 +45,22 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 
 #pragma mark - Public
 
-- (void)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName {
+- (BOOL)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName {
     if (!teamDic || !oddsDic) {
-        return;
+        return NO;
+    }
+    
+    for (int i = 0; i < self.itemArray.count; i++) {
+        NSMutableDictionary *dicM = self.itemArray[i];
+        NSDictionary *tmpTeam = dicM[kLGMatchParlayTableViewCellKeyTeamDic];
+        NSDictionary *tmpOdds = dicM[kLGMatchParlayTableViewCellKeyOddsDic];
+        NSString *tmpMatchName = dicM[kLGMatchParlayTableViewCellKeyMatchName];
+        
+        if ([tmpTeam[kTournamentTeamKeyMatchID] isEqual:teamDic[kTournamentTeamKeyMatchID]] &&
+            [tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]] &&
+            [matchName isEqual:tmpMatchName]) {
+            return NO;
+        }
     }
     
     NSMutableDictionary *dicM = [NSMutableDictionary dictionaryWithObjectsAndKeys:teamDic, kLGMatchParlayTableViewCellKeyTeamDic, oddsDic, kLGMatchParlayTableViewCellKeyOddsDic, matchName, kLGMatchParlayTableViewCellKeyMatchName, nil];
@@ -60,6 +74,8 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     }
     
     [self p_updateTableViewHeight];
+    
+    return YES;
 }
 
 - (void)clearAll {

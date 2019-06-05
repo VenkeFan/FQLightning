@@ -99,12 +99,16 @@
     if (!teamDic || !oddsDic) {
         return;
     }
+    
     if (self.contentView.itemCount == 0) {
         [self initializeUI];
         [self addObservers];
     }
     
-    [self.contentView addTeamDic:teamDic oddsDic:oddsDic matchName:matchName];
+    BOOL succeed = [self.contentView addTeamDic:teamDic oddsDic:oddsDic matchName:matchName];
+    if (!succeed) {
+        return;
+    }
     
     if (self.contentView.itemCount == 1) {
         [self p_expand];
@@ -177,6 +181,8 @@
     if (self.isExpanded) {
         return;
     }
+    self.expanded = YES;
+    
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [[UIApplication sharedApplication].keyWindow addSubview:self.bottomView];
     
@@ -194,21 +200,21 @@
                          self.top = kScreenHeight - self.height;
                      }
                      completion:^(BOOL finished) {
-                         self.expanded = YES;
+//                         self.expanded = YES;
                      }];
 }
 
 - (void)p_fold {
     [self p_fold:NO
        completed:^{
-           self.expanded = NO;
+//           self.expanded = NO;
        }];
 }
 
 - (void)p_destroy {
     [self p_fold:YES
        completed:^{
-           self.expanded = NO;
+//           self.expanded = NO;
            
            [self removeObservers];
            
@@ -227,6 +233,7 @@
     if (!self.isExpanded) {
         return;
     }
+    self.expanded = NO;
     
     [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration
                           delay:0.0

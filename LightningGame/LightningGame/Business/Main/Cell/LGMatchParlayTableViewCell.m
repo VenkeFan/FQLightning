@@ -34,6 +34,7 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = kMarqueeBgColor;
         self.clipsToBounds = YES;
+        self.contentView.clipsToBounds = YES;
         
         [self initializeUI];
     }
