@@ -55,6 +55,12 @@ NSString * const kAccountKeyAccountExpireInterval       = @"expires_in";
     [newAccount writeToFile:self.filePath atomically:NO];
 }
 
+- (void)signOut {
+    _account = nil;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:self.filePath error:nil];
+}
+
 #pragma mark - Getter
 
 - (NSString *)filePath {

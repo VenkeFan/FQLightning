@@ -11,6 +11,7 @@
 #import "LGVerifyCodeRequest.h"
 #import "LGSignUpRequest.h"
 #import "LGSignInRequest.h"
+#import "LGForgetPwdRequest.h"
 
 @interface LGSignFlowManager ()
 
@@ -89,35 +90,47 @@
     self.password = pwd;
     
     LGSignUpRequest *request = [LGSignUpRequest new];
-    [request signUpWithAccountName:accountName
-                               pwd:pwd
-                              name:name
-                            mobile:mobile
-                        verifyCode:verifyCode
-                           success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-                               [self setFlowStep:LGSignFlowStep_SignUp];
-                           }
-                           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                               
-                           }];
+    [request requestWithAccountName:accountName
+                                pwd:pwd
+                               name:name
+                             mobile:mobile
+                         verifyCode:verifyCode
+                            success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                                [self setFlowStep:LGSignFlowStep_SignUp];
+                            }
+                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                
+                            }];
 }
 
 - (void)signInWithAccountName:(NSString *)accountName
                           pwd:(NSString *)pwd {
     LGSignInRequest *request = [LGSignInRequest new];
-    [request signInWithAccountName:accountName
-                               pwd:pwd
-                           success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-                               [[LGAccountManager instance] updateAccount:responseObject];
-                               [self setFlowStep:LGSignFlowStep_SignIn];
-                           }
-                           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                               
-                           }];
+    [request requestWithAccountName:accountName
+                                pwd:pwd
+                            success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                                [[LGAccountManager instance] updateAccount:responseObject];
+                                [self setFlowStep:LGSignFlowStep_SignIn_Manual];
+                            }
+                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                
+                            }];
+}
+
+- (void)modifyPassword:(NSString *)newPwd mobile:(NSString *)mobile verifyCode:(NSString *)verifyCode {
+    LGForgetPwdRequest *request = [LGForgetPwdRequest new];
+    [request requestWithMobile:mobile
+                        newPwd:newPwd
+                    verifyCode:verifyCode
+                       success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                           [self setFlowStep:LGSignFlowStep_ModifyPassword];
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           
+                       }];
 }
 
 - (void)signOut {
-    
+    [[LGAccountManager instance] signOut];
 }
 
 + (BOOL)proofreadAccountName:(NSString *)accountName {
@@ -180,10 +193,16 @@
             
             break;
         case LGSignFlowStep_SignUp:
-            [self nextStep:LGSignFlowStep_SignIn];
+            [self nextStep:LGSignFlowStep_SignIn_Auto];
             break;
-        case LGSignFlowStep_SignIn:
+        case LGSignFlowStep_SignIn_Auto:
             [self nextStep:LGSignFlowStep_Home];
+            break;
+        case LGSignFlowStep_SignIn_Manual:
+            [self nextStep:LGSignFlowStep_Home];
+            break;
+        case LGSignFlowStep_ModifyPassword:
+            [self nextStep:LGSignFlowStep_SignIn_Manual];
             break;
         case LGSignFlowStep_Visitor:
             [self nextStep:LGSignFlowStep_Home];
@@ -196,24 +215,32 @@
 
 - (void)nextStep:(LGSignFlowStep)step {
     switch (step) {
-        case LGSignFlowStep_SignIn: {
+        case LGSignFlowStep_SignIn_Auto: {
             [self signInWithAccountName:self.accountName pwd:self.password];
         }
             break;
+        case LGSignFlowStep_SignIn_Manual: {
+            [self broadcast:step];
+        }
+            break;
         case LGSignFlowStep_Home: {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                for (NSInteger i = self.listenerArray.count - 1; i >= 0; i--) {
-                    id delegate = [self.listenerArray pointerAtIndex:i];
-                    if ([delegate respondsToSelector:@selector(signFlowManagerStepping:)]) {
-                        [delegate signFlowManagerStepping:step];
-                    }
-                }
-            });
+            [self broadcast:step];
         }
             break;
         default:
             break;
     }
+}
+
+- (void)broadcast:(LGSignFlowStep)step {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (NSInteger i = self.listenerArray.count - 1; i >= 0; i--) {
+            id delegate = [self.listenerArray pointerAtIndex:i];
+            if ([delegate respondsToSelector:@selector(signFlowManagerStepping:)]) {
+                [delegate signFlowManagerStepping:step];
+            }
+        }
+    });
 }
 
 #pragma mark - Getter

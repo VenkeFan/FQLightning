@@ -15,6 +15,7 @@
 		B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762922A8BB0C00155607 /* LGSignUpRequest.m */; };
 		B91A762F22A8DDE400155607 /* LGSignInRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762E22A8DDE400155607 /* LGSignInRequest.m */; };
 		B91A763322A8E8E900155607 /* LGSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A763222A8E8E900155607 /* LGSplashViewController.m */; };
+		B91A763622A910B700155607 /* LGForgetPwdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A763522A910B700155607 /* LGForgetPwdRequest.m */; };
 		B9229CF0229BECE00030691D /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229CEF229BECE00030691D /* YYFPSLabel.m */; };
 		B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229CF3229BED190030691D /* UINavigationController+FQExtension.m */; };
 		B9229D01229BEEC00030691D /* NSArray+FQNilExamine.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229CF6229BEEBF0030691D /* NSArray+FQNilExamine.m */; };
@@ -119,6 +120,8 @@
 		B91A763022A8E26700155607 /* LGAccountKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountKeys.h; sourceTree = "<group>"; };
 		B91A763122A8E8E900155607 /* LGSplashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSplashViewController.h; sourceTree = "<group>"; };
 		B91A763222A8E8E900155607 /* LGSplashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGSplashViewController.m; sourceTree = "<group>"; };
+		B91A763422A910B700155607 /* LGForgetPwdRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGForgetPwdRequest.h; sourceTree = "<group>"; };
+		B91A763522A910B700155607 /* LGForgetPwdRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGForgetPwdRequest.m; sourceTree = "<group>"; };
 		B9229CDD229BE48D0030691D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B9229CEB229BEC990030691D /* FQMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQMacroDefine.h; sourceTree = "<group>"; };
 		B9229CEC229BEC990030691D /* LGMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMacroDefine.h; sourceTree = "<group>"; };
@@ -552,6 +555,8 @@
 				B91A762922A8BB0C00155607 /* LGSignUpRequest.m */,
 				B91A762D22A8DDE400155607 /* LGSignInRequest.h */,
 				B91A762E22A8DDE400155607 /* LGSignInRequest.m */,
+				B91A763422A910B700155607 /* LGForgetPwdRequest.h */,
+				B91A763522A910B700155607 /* LGForgetPwdRequest.m */,
 				B9229D7E229E6EF90030691D /* LGTournamentBeforeRequest.h */,
 				B9229D7F229E6EF90030691D /* LGTournamentBeforeRequest.m */,
 				B9229D81229E6F120030691D /* LGTournamentTodayRequest.h */,
@@ -915,6 +920,7 @@
 				B9229D6B229E39A70030691D /* LGTournamentListManager.m in Sources */,
 				B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */,
 				B9229D68229E2DE80030691D /* LGTournamentListView.m in Sources */,
+				B91A763622A910B700155607 /* LGForgetPwdRequest.m in Sources */,
 				B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */,
 				B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */,
 			);

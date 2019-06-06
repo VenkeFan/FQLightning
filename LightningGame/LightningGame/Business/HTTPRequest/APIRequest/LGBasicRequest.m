@@ -18,9 +18,9 @@
 
 @implementation LGBasicRequest
 
-- (instancetype)initWithAPIName:(NSString *)api method:(HTTPRequestMethod)method {
+- (instancetype)initWithAPIName:(NSString *)apiName method:(HTTPRequestMethod)method {
     if (self = [super init]) {
-        _urlStr = [NSString stringWithFormat:@"%@%@", kBasicURL, api];
+        _urlStr = [NSString stringWithFormat:@"%@%@", kBasicURL, apiName];
         _method = method;
         _paraDic = [NSMutableDictionary dictionary];
     }

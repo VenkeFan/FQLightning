@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSDictionary *account;
 
 - (void)updateAccount:(NSDictionary *)newAccount;
+- (void)signOut;
 
 @end
 

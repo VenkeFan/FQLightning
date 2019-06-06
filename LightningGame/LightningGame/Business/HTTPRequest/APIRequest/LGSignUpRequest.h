@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGSignUpRequest : LGBasicRequest
 
-- (void)signUpWithAccountName:(NSString *)accountName
-                          pwd:(NSString *)pwd
-                         name:(NSString *)name
-                       mobile:(NSString *)mobile
-                   verifyCode:(NSString *)verifyCode
-                      success:(nullable RequestSucceedBlock)success
-                      failure:(nullable RequestFailBlock)failure;
+- (void)requestWithAccountName:(NSString *)accountName
+                           pwd:(NSString *)pwd
+                          name:(NSString *)name
+                        mobile:(NSString *)mobile
+                    verifyCode:(NSString *)verifyCode
+                       success:(nullable RequestSucceedBlock)success
+                       failure:(nullable RequestFailBlock)failure;
 
 @end
 

@@ -31,6 +31,7 @@ sign_recommend              = "推荐码";
 sign_recommend_place        = "填写推荐码（选填）";
 sign_up_confirm             = "确认注册";
 sign_pwd_update             = "修改密码";
+sign_pwd_new                = "新密码";
 
 // Main
 main_today                  = "今日";

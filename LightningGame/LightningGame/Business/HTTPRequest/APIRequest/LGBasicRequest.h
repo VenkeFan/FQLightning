@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGBasicRequest : NSObject
 
-- (instancetype)initWithAPIName:(NSString *)api method:(HTTPRequestMethod)method;
+- (instancetype)initWithAPIName:(NSString *)apiName method:(HTTPRequestMethod)method;
 
 - (void)requsetWithSuccess:(nullable RequestSucceedBlock)success
                    failure:(nullable RequestFailBlock)failure;

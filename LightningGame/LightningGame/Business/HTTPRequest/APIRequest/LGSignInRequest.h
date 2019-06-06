@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGSignInRequest : LGBasicRequest
 
-- (void)signInWithAccountName:(NSString *)accountName
-                          pwd:(NSString *)pwd
-                      success:(RequestSucceedBlock)success
-                      failure:(RequestFailBlock)failure;
+- (void)requestWithAccountName:(NSString *)accountName
+                           pwd:(NSString *)pwd
+                       success:(RequestSucceedBlock)success
+                       failure:(RequestFailBlock)failure;
 
 @end
 

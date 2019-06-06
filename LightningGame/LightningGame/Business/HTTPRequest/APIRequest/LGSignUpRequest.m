@@ -17,13 +17,13 @@
     return self;
 }
 
-- (void)signUpWithAccountName:(NSString *)accountName
-                          pwd:(NSString *)pwd
-                         name:(NSString *)name
-                       mobile:(NSString *)mobile
-                   verifyCode:(NSString *)verifyCode
-                      success:(RequestSucceedBlock)success
-                      failure:(RequestFailBlock)failure {
+- (void)requestWithAccountName:(NSString *)accountName
+                           pwd:(NSString *)pwd
+                          name:(NSString *)name
+                        mobile:(NSString *)mobile
+                    verifyCode:(NSString *)verifyCode
+                       success:(RequestSucceedBlock)success
+                       failure:(RequestFailBlock)failure {
     if (accountName.length == 0 || pwd.length == 0 || name.length == 0 || mobile.length == 0 || verifyCode.length == 0) {
         return;
     }

@@ -17,10 +17,10 @@
     return self;
 }
 
-- (void)signInWithAccountName:(NSString *)accountName
-                          pwd:(NSString *)pwd
-                      success:(RequestSucceedBlock)success
-                      failure:(RequestFailBlock)failure {
+- (void)requestWithAccountName:(NSString *)accountName
+                           pwd:(NSString *)pwd
+                       success:(RequestSucceedBlock)success
+                       failure:(RequestFailBlock)failure {
     if (accountName.length == 0 || pwd.length == 0) {
         return;
     }
