@@ -1,8 +1,8 @@
 //
-//  LGToastView.h
+//  LGSplashViewController.h
 //  LightningGame
 //
-//  Created by fanqi_company on 2019/6/4.
+//  Created by fanqi_company on 2019/6/6.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGToastView : UIView
-
-+ (void)showWithMessage:(NSString *)message;
+@interface LGSplashViewController : UIViewController
 
 @end
 

@@ -8,7 +8,7 @@
 
 #import "LGSignFieldView.h"
 
-@interface LGSignFieldView ()
+@interface LGSignFieldView () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *titleLab;
 @property (nonatomic, strong) UIView *vLine;
@@ -67,6 +67,7 @@
         x += (vLine.width + marginX);
         
         UITextField *txtField = [[UITextField alloc] init];
+        txtField.delegate = self;
         txtField.backgroundColor = [UIColor clearColor];
         txtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
                                                                          attributes:@{NSForegroundColorAttributeName: placeholderColor}];
@@ -105,12 +106,20 @@
     [super layoutSubviews];
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 #pragma mark - Events
 
 - (void)pwdFieldRightBtnClicked:(UIButton *)sender {
     sender.selected = !sender.isSelected;
     
-//    self.pwdField.secureTextEntry = !sender.isSelected;
+    self.txtField.secureTextEntry = !sender.isSelected;
 }
 
 @end

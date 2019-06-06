@@ -11,7 +11,7 @@
 #import "LGTournamentListKeys.h"
 #import "LGMatchTeamOddsView.h"
 #import "FQComponentFactory.h"
-#import "LGAPIURL.h"
+#import "LGAPIURLConfig.h"
 
 #define kScoreLayerPaddingX         kSizeScale(8.0)
 

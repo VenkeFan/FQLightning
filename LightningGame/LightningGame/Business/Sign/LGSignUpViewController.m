@@ -7,13 +7,16 @@
 //
 
 #import "LGSignUpViewController.h"
+#import "LGMainViewController.h"
 #import "FQComponentFactory.h"
 #import "LGServiceButton.h"
 #import "LGSignFieldView.h"
+#import "LGSignFlowManager.h"
+#import "LGAccountManager.h"
 
 #define kLGSignUpHeaderHeight               kSizeScale(166.0)
 
-@interface LGSignUpViewController () <UITextFieldDelegate>
+@interface LGSignUpViewController () <LGSignFlowManagerDelegate>
 
 @property (nonatomic, weak) UITextField *accountField;
 @property (nonatomic, weak) UITextField *pwdField;
@@ -22,7 +25,7 @@
 @property (nonatomic, weak) UITextField *mobileField;
 @property (nonatomic, weak) UITextField *verifyField;
 @property (nonatomic, weak) UITextField *recommendField;
-@property (nonatomic, strong) UIButton *getVerifyBtn;
+@property (nonatomic, strong) UIButton *verifyBtn;
 
 @end
 
@@ -36,6 +39,18 @@
     
     [self layoutNavigationBar];
     [self initializeUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[LGSignFlowManager instance] addListener:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[LGSignFlowManager instance] removeListener:self];
 }
 
 #pragma mark - UI
@@ -96,7 +111,6 @@
                                                                     field:&_pwdField
                                                                titleWidth:titleLabWidth
                                                                     isPwd:YES];
-        pwdView.txtField.delegate = self;
         pwdView.center = CGPointMake(centerX, centerY);
         [view addSubview:pwdView];
         centerY += (pwdView.height + paddingY);
@@ -106,7 +120,6 @@
                                                                      field:&_pwdConfirmField
                                                                 titleWidth:titleLabWidth
                                                                      isPwd:YES];
-        pwd2View.txtField.delegate = self;
         pwd2View.center = CGPointMake(centerX, centerY);
         [view addSubview:pwd2View];
         centerY += (pwd2View.height + paddingY);
@@ -115,7 +128,6 @@
                                                                placeholder:kLocalizedString(@"sign_name_placeholder")
                                                                      field:&_nameField
                                                                 titleWidth:titleLabWidth];
-        nameView.txtField.delegate = self;
         nameView.center = CGPointMake(centerX, centerY);
         [view addSubview:nameView];
         centerY += (nameView.height + paddingY);
@@ -124,7 +136,6 @@
                                                                  placeholder:kLocalizedString(@"sign_mobile_place")
                                                                        field:&_mobileField
                                                                   titleWidth:titleLabWidth];
-        mobileView.txtField.delegate = self;
         mobileView.txtField.keyboardType = UIKeyboardTypePhonePad;
         mobileView.center = CGPointMake(centerX, centerY);
         [view addSubview:mobileView];
@@ -139,14 +150,15 @@
             [btn setTitle:kLocalizedString(@"sign_get_verify") forState:UIControlStateNormal];
             [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
             btn.titleLabel.font = kRegularFont(kNoteFontSize);
+            [btn addTarget:self action:@selector(verifyBtnClicked) forControlEvents:UIControlEventTouchUpInside];
             [mobileView addSubview:btn];
+            _verifyBtn = btn;
         }
         
         LGSignFieldView *verifyView = [[LGSignFieldView alloc] initWithTitle:kLocalizedString(@"sign_verify")
                                                                  placeholder:kLocalizedString(@"sign_verify_place")
                                                                        field:&_verifyField
                                                                   titleWidth:titleLabWidth];
-        verifyView.txtField.delegate = self;
         verifyView.center = CGPointMake(centerX, centerY);
         [view addSubview:verifyView];
         centerY += (verifyView.height + paddingY);
@@ -155,7 +167,6 @@
                                                                     placeholder:kLocalizedString(@"sign_recommend_place")
                                                                           field:&_recommendField
                                                                      titleWidth:titleLabWidth];
-        recommendView.txtField.delegate = self;
         recommendView.center = CGPointMake(centerX, centerY);
         [view addSubview:recommendView];
         centerY += (recommendView.height + paddingY * 2);
@@ -176,20 +187,55 @@
     [scrollView addSubview:contentView];
 }
 
+#pragma mark - LGSignFlowManagerDelegate
+
+- (void)signFlowManagerStepping:(LGSignFlowStep)step {
+    switch (step) {
+        case LGSignFlowStep_Home: {
+            [self.navigationController setViewControllers:@[[LGMainViewController new]] animated:NO];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Events
+
+- (void)verifyBtnClicked {
+    [[LGSignFlowManager instance] fetchVerifyCode:self.mobileField.text];
+}
 
 - (void)registerBtnOnClicked {
     [self.view endEditing:YES];
+    
+    if (![LGSignFlowManager proofreadAccountName:self.accountField.text]) {
+        return;
+    }
+    if (![LGSignFlowManager proofreadPassword:self.pwdField.text]) {
+        return;
+    }
+    if (![LGSignFlowManager proofreadPassword:self.pwdField.text confirmPwd:self.pwdConfirmField.text]) {
+        return;
+    }
+    if (![LGSignFlowManager proofreadName:self.nameField.text]) {
+        return;
+    }
+    if (![LGSignFlowManager proofreadMobile:self.mobileField.text]) {
+        return;
+    }
+    if (![LGSignFlowManager proofreadVerifyCode:self.verifyField.text]) {
+        return;
+    }
+    [[LGSignFlowManager instance] signUpWithAccountName:self.accountField.text
+                                                    pwd:self.pwdField.text
+                                                   name:self.nameField.text
+                                                 mobile:self.mobileField.text
+                                             verifyCode:self.verifyField.text];
 }
 
 - (void)selfOnTapped {
     [self.view endEditing:YES];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
 }
 
 @end

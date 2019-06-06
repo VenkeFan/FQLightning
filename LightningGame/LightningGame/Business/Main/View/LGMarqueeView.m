@@ -8,7 +8,7 @@
 
 #import "LGMarqueeView.h"
 #import "FQComponentFactory.h"
-#import "LGmarqueeViewModel.h"
+#import "LGMarqueeViewModel.h"
 
 @interface LGMarqueeView () <LGMarqueeViewModelDelegate> {
     BOOL _hasLoaded;

@@ -144,7 +144,7 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
     @try {
         NSInteger ante = [strM integerValue];
         if (ante > kMatchParlayMaxBet) {
-            [LGToastView showWithText:@"超过最大投注额"];
+            [LGToastView showWithMessage:@"超过最大投注额"];
         } else {
             self.txtLabel.text = [NSString stringWithFormat:@"%ld", (long)ante];
             [self.txtLabel sizeToFit];

@@ -93,14 +93,15 @@
     UIWindow* window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = [newClass new];
     rootViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    UINavigationController *navCtr = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     
     [UIView transitionWithView:window
-                      duration:0.25f
+                      duration:0.5f
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
                         BOOL oldState = [UIView areAnimationsEnabled];
                         [UIView setAnimationsEnabled:NO];
-                        window.rootViewController = rootViewController;
+                        window.rootViewController = navCtr;
                         [UIView setAnimationsEnabled:oldState];
                     }
                     completion:nil];

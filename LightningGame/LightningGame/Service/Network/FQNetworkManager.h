@@ -14,6 +14,16 @@ typedef NS_ENUM(NSInteger, HTTPResponseStatus){
     HTTPResponseStatus_Authorize = 100001,      /**< 登录授权 */
 };
 
+typedef NS_ENUM(NSInteger, HTTPRequestMethod){
+    HTTPRequestMethod_GET,
+    HTTPRequestMethod_POST,
+    HTTPRequestMethod_PUT,
+    HTTPRequestMethod_DELETE,
+    HTTPRequestMethod_UPLOAD,
+    HTTPRequestMethod_HEAD,
+    HTTPRequestMethod_PATCH
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 /** 请求完成回调 */
@@ -25,19 +35,32 @@ typedef void(^RequestFailBlock)(NSURLSessionDataTask * _Nullable task, NSError *
 
 + (instancetype)sharedManager;
 
-- (NSURLSessionDataTask *)GET:(NSString *)URLString
-                   parameters:(nullable NSDictionary *)parameters
-                      success:(nullable RequestSucceedBlock)success
-                      failure:(nullable RequestFailBlock)failure;
+- (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
+                                        method:(HTTPRequestMethod)method
+                                    parameters:(nullable NSDictionary *)parameters
+                                       success:(nullable RequestSucceedBlock)success
+                                       failure:(nullable RequestFailBlock)failure;
 
-- (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(nullable NSDictionary *)parameters
-                       success:(nullable RequestSucceedBlock)success
-                       failure:(nullable RequestFailBlock)failure;
+- (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
+                                        method:(HTTPRequestMethod)method
+                                    parameters:(nullable NSDictionary *)parameters
+                                      progress:(nullable void (^)(NSProgress * _Nonnull))downloadProgress
+                                       success:(nullable RequestSucceedBlock)success
+                                       failure:(nullable RequestFailBlock)failure;
 
-+ (void)updateCookie:(NSString *)cookie;
+//- (NSURLSessionDataTask *)GET:(NSString *)URLString
+//                   parameters:(nullable NSDictionary *)parameters
+//                      success:(nullable RequestSucceedBlock)success
+//                      failure:(nullable RequestFailBlock)failure;
+//
+//- (NSURLSessionDataTask *)POST:(NSString *)URLString
+//                    parameters:(nullable NSDictionary *)parameters
+//                       success:(nullable RequestSucceedBlock)success
+//                       failure:(nullable RequestFailBlock)failure;
+
 - (void)cancelAllRequest;
 - (void)cancelRequestWithURL:(NSString *)url;
++ (void)updateCookie:(NSString *)cookie;
 
 @end
 

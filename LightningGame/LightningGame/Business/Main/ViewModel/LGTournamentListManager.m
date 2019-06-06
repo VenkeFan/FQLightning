@@ -66,6 +66,8 @@ NSString * const kTournamentOddsKeyMatchID                  = @"match_id";
 NSString * const kTournamentOddsKeyOdds                     = @"odds";
 NSString * const kTournamentOddsKeyTag                      = @"tag";
 
+#pragma mark - LGTournamentListManager
+
 @interface LGTournamentListManager ()
 
 @property (nonatomic, strong) LGBasicRequest *requset;

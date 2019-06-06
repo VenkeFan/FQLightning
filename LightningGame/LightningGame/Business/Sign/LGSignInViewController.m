@@ -9,9 +9,11 @@
 #import "LGSignInViewController.h"
 #import "LGSignUpViewController.h"
 #import "LGForgetPwdViewController.h"
+#import "LGMainViewController.h"
 #import "LGSignFieldView.h"
+#import "LGSignFlowManager.h"
 
-@interface LGSignInViewController () <UITextFieldDelegate>
+@interface LGSignInViewController () <LGSignFlowManagerDelegate>
 
 @property (nonatomic, weak) UITextField *accountField;
 @property (nonatomic, weak) UITextField *pwdField;
@@ -36,6 +38,20 @@
     
     [self initializeUI];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[LGSignFlowManager instance] addListener:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[LGSignFlowManager instance] removeListener:self];
+}
+
+#pragma mark - UI
 
 - (void)initializeUI {
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
@@ -121,6 +137,19 @@
     [scrollView addSubview:visitorBtn];
 }
 
+#pragma mark - LGSignFlowManagerDelegate
+
+- (void)signFlowManagerStepping:(LGSignFlowStep)step {
+    switch (step) {
+        case LGSignFlowStep_Home: {
+            [self.navigationController setViewControllers:@[[LGMainViewController new]] animated:NO];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Events
 
 - (void)pwdFieldRightBtnClicked:(UIButton *)sender {
@@ -138,6 +167,14 @@
 
 - (void)loginBtnOnClicked {
     [self.view endEditing:YES];
+    
+    if (![LGSignFlowManager proofreadAccountName:self.accountField.text]) {
+        return;
+    }
+    if (![LGSignFlowManager proofreadPassword:self.pwdField.text]) {
+        return;
+    }
+    [[LGSignFlowManager instance] signInWithAccountName:self.accountField.text pwd:self.pwdField.text];
 }
 
 - (void)registerBtnOnClicked {
@@ -154,12 +191,5 @@
 - (void)selfOnTapped {
     [self.view endEditing:YES];
 }
-
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-}
-
 
 @end

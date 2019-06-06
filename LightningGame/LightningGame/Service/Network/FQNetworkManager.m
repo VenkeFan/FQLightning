@@ -8,21 +8,10 @@
 
 #import "FQNetworkManager.h"
 #import "FQNetworkReachabilityManager.h"
-#import "LGAPIURL.h"
+#import "LGAPIURLConfig.h"
 
 #define kMaxRequestCount            (5)
 #define kMaxTimeoutInterval         (15.0)
-
-typedef NS_ENUM(NSInteger, HTTPRequestMethod){
-    HTTPRequestMethod_GET,
-    HTTPRequestMethod_POST,
-    HTTPRequestMethod_PUT,
-    HTTPRequestMethod_DELETE,
-    HTTPRequestMethod_UPLOAD,
-    HTTPRequestMethod_HEAD,
-    HTTPRequestMethod_PATCH
-};
-
 
 @interface FQNetworkManager ()
 
@@ -37,11 +26,11 @@ typedef NS_ENUM(NSInteger, HTTPRequestMethod){
     static FQNetworkManager *_instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:kBasicURL]];
+        _instance = [[super allocWithZone:NULL] init];
         _instance.operationQueue.maxConcurrentOperationCount = kMaxRequestCount;
         // 请求
         AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-        [requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+        [requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
         requestSerializer.timeoutInterval = kMaxTimeoutInterval;
         _instance.requestSerializer = requestSerializer;
         // 解析
@@ -58,36 +47,63 @@ typedef NS_ENUM(NSInteger, HTTPRequestMethod){
     return _instance;
 }
 
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    return [FQNetworkManager sharedManager];
+}
+
 #pragma mark - Public
 
-+ (void)updateCookie:(NSString *)cookie {
-    [[FQNetworkManager sharedManager].requestSerializer setValue:cookie
-                                              forHTTPHeaderField:@"Cookie"];
+- (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
+                                        method:(HTTPRequestMethod)method
+                                    parameters:(nullable NSDictionary *)parameters
+                                       success:(nullable RequestSucceedBlock)success
+                                       failure:(nullable RequestFailBlock)failure {
+    return [self requestWithURLString:URLString
+                               method:method
+                           parameters:parameters
+                             progress:nil
+                              success:success
+                              failure:failure];
 }
 
-- (NSURLSessionDataTask *)GET:(NSString *)URLString
-                   parameters:(nullable NSDictionary *)parameters
-                      success:(nullable RequestSucceedBlock)success
-                      failure:(nullable RequestFailBlock)failure {
-    return [self requestMethod:HTTPRequestMethod_GET
-                           URL:URLString
-                    parameters:parameters
-     constructingBodyWithBlock:nil
-                      success:success
-                       failure:failure];
+- (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
+                                        method:(HTTPRequestMethod)method
+                                    parameters:(nullable NSDictionary *)parameters
+                                      progress:(nullable void (^)(NSProgress * _Nonnull))downloadProgress
+                                       success:(nullable RequestSucceedBlock)success
+                                       failure:(nullable RequestFailBlock)failure {
+    return [self p_requestWithMethod:method
+                           URLString:URLString
+                          parameters:parameters
+                            progress:downloadProgress
+           constructingBodyWithBlock:nil
+                             success:success
+                             failure:failure];
 }
 
-- (NSURLSessionDataTask *)POST:(NSString *)URLString
-                   parameters:(nullable NSDictionary *)parameters
-                      success:(nullable RequestSucceedBlock)success
-                      failure:(nullable RequestFailBlock)failure {
-    return [self requestMethod:HTTPRequestMethod_POST
-                           URL:URLString
-                    parameters:parameters
-     constructingBodyWithBlock:nil
-                      success:success
-                       failure:failure];
-}
+//- (NSURLSessionDataTask *)GET:(NSString *)URLString
+//                   parameters:(nullable NSDictionary *)parameters
+//                      success:(nullable RequestSucceedBlock)success
+//                      failure:(nullable RequestFailBlock)failure {
+//    return [self requestMethod:HTTPRequestMethod_GET
+//                           URL:URLString
+//                    parameters:parameters
+//     constructingBodyWithBlock:nil
+//                      success:success
+//                       failure:failure];
+//}
+//
+//- (NSURLSessionDataTask *)POST:(NSString *)URLString
+//                   parameters:(nullable NSDictionary *)parameters
+//                      success:(nullable RequestSucceedBlock)success
+//                      failure:(nullable RequestFailBlock)failure {
+//    return [self requestMethod:HTTPRequestMethod_POST
+//                           URL:URLString
+//                    parameters:parameters
+//     constructingBodyWithBlock:nil
+//                      success:success
+//                       failure:failure];
+//}
 
 - (void)cancelAllRequest {
     @synchronized(self) {
@@ -114,23 +130,43 @@ typedef NS_ENUM(NSInteger, HTTPRequestMethod){
     };
 }
 
++ (void)updateCookie:(NSString *)cookie {
+    [[FQNetworkManager sharedManager].requestSerializer setValue:cookie
+                                              forHTTPHeaderField:@"Cookie"];
+}
+
 #pragma mark - Private
 
-- (NSURLSessionDataTask *)requestMethod:(HTTPRequestMethod)method
-                                    URL:(NSString *)URLString
-                             parameters:(NSDictionary *)parameters
-              constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> _Nonnull))block
-                                success:(RequestSucceedBlock)success
-                                failure:(RequestFailBlock)failure {
++ (NSURLSessionConfiguration *)setProxyWithConfig {
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    config.connectionProxyDictionary = @{
+                                         @"HTTPEnable":@YES,
+                                         (id)kCFStreamPropertyHTTPProxyHost:@"192.168.1.116",
+                                         (id)kCFStreamPropertyHTTPProxyPort:@9001,
+                                         @"HTTPSEnable":@YES,
+                                         (id)kCFStreamPropertyHTTPSProxyHost:@"192.168.1.116",
+                                         (id)kCFStreamPropertyHTTPSProxyPort:@9001};
+    
+    return config;
+}
+
+- (NSURLSessionDataTask *)p_requestWithMethod:(HTTPRequestMethod)method
+                                    URLString:(NSString *)URLString
+                                   parameters:(NSDictionary *)parameters
+                                     progress:(void (^)(NSProgress * _Nonnull))downloadProgress
+                    constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> _Nonnull))block
+                                      success:(RequestSucceedBlock)success
+                                      failure:(RequestFailBlock)failure {
     NSURLSessionDataTask *task = nil;
     
-    if (parameters == nil) {
-        parameters = @{@"token": self.token};
-    } else {
-        NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:parameters];
-        [dictM setObject:self.token forKey:@"token"];
-        parameters = dictM;
-    }
+//    if (parameters == nil) {
+//        parameters = @{@"token": self.token};
+//    } else {
+//        NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:parameters];
+//        [dictM setObject:self.token forKey:@"token"];
+//        parameters = dictM;
+//    }
     
     switch (method) {
         case HTTPRequestMethod_GET: {

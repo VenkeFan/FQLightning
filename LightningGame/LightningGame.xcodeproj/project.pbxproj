@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		0D112DA8654C0849D5EFFA56 /* Pods_LightningGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F08F033B20F8D98FFE1641 /* Pods_LightningGame.framework */; };
 		B91A761C22A78EBC00155607 /* LGMatchParlayTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A761B22A78EBC00155607 /* LGMatchParlayTopView.m */; };
+		B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A761F22A7D85F00155607 /* LGAccountManager.m */; };
+		B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */; };
+		B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762622A8AF1300155607 /* LGSignFlowManager.m */; };
+		B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762922A8BB0C00155607 /* LGSignUpRequest.m */; };
+		B91A762F22A8DDE400155607 /* LGSignInRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762E22A8DDE400155607 /* LGSignInRequest.m */; };
+		B91A763322A8E8E900155607 /* LGSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A763222A8E8E900155607 /* LGSplashViewController.m */; };
 		B9229CF0229BECE00030691D /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229CEF229BECE00030691D /* YYFPSLabel.m */; };
 		B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229CF3229BED190030691D /* UINavigationController+FQExtension.m */; };
 		B9229D01229BEEC00030691D /* NSArray+FQNilExamine.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229CF6229BEEBF0030691D /* NSArray+FQNilExamine.m */; };
@@ -40,7 +46,6 @@
 		B9229D6B229E39A70030691D /* LGTournamentListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D6A229E39A70030691D /* LGTournamentListManager.m */; };
 		B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D71229E5FB80030691D /* FQNetworkManager.m */; };
 		B9229D77229E5FB80030691D /* FQNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D73229E5FB80030691D /* FQNetworkReachabilityManager.m */; };
-		B9229D78229E5FB80030691D /* LGAPIURL.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D74229E5FB80030691D /* LGAPIURL.m */; };
 		B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D7C229E6EC90030691D /* LGBasicRequest.m */; };
 		B9229D80229E6EF90030691D /* LGTournamentBeforeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D7F229E6EF90030691D /* LGTournamentBeforeRequest.m */; };
 		B9229D83229E6F120030691D /* LGTournamentTodayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D82229E6F120030691D /* LGTournamentTodayRequest.m */; };
@@ -99,6 +104,21 @@
 		B4FF264629B3E02E0CEE385C /* Pods-LightningGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightningGame.debug.xcconfig"; path = "Target Support Files/Pods-LightningGame/Pods-LightningGame.debug.xcconfig"; sourceTree = "<group>"; };
 		B91A761A22A78EBC00155607 /* LGMatchParlayTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchParlayTopView.h; sourceTree = "<group>"; };
 		B91A761B22A78EBC00155607 /* LGMatchParlayTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchParlayTopView.m; sourceTree = "<group>"; };
+		B91A761E22A7D85F00155607 /* LGAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountManager.h; sourceTree = "<group>"; };
+		B91A761F22A7D85F00155607 /* LGAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAccountManager.m; sourceTree = "<group>"; };
+		B91A762122A7E40E00155607 /* LGVerifyCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGVerifyCodeRequest.h; sourceTree = "<group>"; };
+		B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGVerifyCodeRequest.m; sourceTree = "<group>"; };
+		B91A762522A8AF1300155607 /* LGSignFlowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignFlowManager.h; sourceTree = "<group>"; };
+		B91A762622A8AF1300155607 /* LGSignFlowManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGSignFlowManager.m; sourceTree = "<group>"; };
+		B91A762822A8BB0C00155607 /* LGSignUpRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignUpRequest.h; sourceTree = "<group>"; };
+		B91A762922A8BB0C00155607 /* LGSignUpRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGSignUpRequest.m; sourceTree = "<group>"; };
+		B91A762B22A8BFA100155607 /* LGAPIErrorCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAPIErrorCode.h; sourceTree = "<group>"; };
+		B91A762C22A8BFD600155607 /* LGAPIURLConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAPIURLConfig.h; sourceTree = "<group>"; };
+		B91A762D22A8DDE400155607 /* LGSignInRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignInRequest.h; sourceTree = "<group>"; };
+		B91A762E22A8DDE400155607 /* LGSignInRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGSignInRequest.m; sourceTree = "<group>"; };
+		B91A763022A8E26700155607 /* LGAccountKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountKeys.h; sourceTree = "<group>"; };
+		B91A763122A8E8E900155607 /* LGSplashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSplashViewController.h; sourceTree = "<group>"; };
+		B91A763222A8E8E900155607 /* LGSplashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGSplashViewController.m; sourceTree = "<group>"; };
 		B9229CDD229BE48D0030691D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B9229CEB229BEC990030691D /* FQMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQMacroDefine.h; sourceTree = "<group>"; };
 		B9229CEC229BEC990030691D /* LGMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMacroDefine.h; sourceTree = "<group>"; };
@@ -166,10 +186,8 @@
 		B9229D6A229E39A70030691D /* LGTournamentListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTournamentListManager.m; sourceTree = "<group>"; };
 		B9229D6D229E5FB80030691D /* FQNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		B9229D6E229E5FB80030691D /* FQNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQNetworkManager.h; sourceTree = "<group>"; };
-		B9229D70229E5FB80030691D /* LGAPIURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGAPIURL.h; sourceTree = "<group>"; };
 		B9229D71229E5FB80030691D /* FQNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQNetworkManager.m; sourceTree = "<group>"; };
 		B9229D73229E5FB80030691D /* FQNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		B9229D74229E5FB80030691D /* LGAPIURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGAPIURL.m; sourceTree = "<group>"; };
 		B9229D7B229E6EC90030691D /* LGBasicRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGBasicRequest.h; sourceTree = "<group>"; };
 		B9229D7C229E6EC90030691D /* LGBasicRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGBasicRequest.m; sourceTree = "<group>"; };
 		B9229D7E229E6EF90030691D /* LGTournamentBeforeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTournamentBeforeRequest.h; sourceTree = "<group>"; };
@@ -280,6 +298,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B91A761D22A7D84900155607 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				B91A763022A8E26700155607 /* LGAccountKeys.h */,
+				B91A761E22A7D85F00155607 /* LGAccountManager.h */,
+				B91A761F22A7D85F00155607 /* LGAccountManager.m */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		B91A762422A8AEA400155607 /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				B91A762522A8AF1300155607 /* LGSignFlowManager.h */,
+				B91A762622A8AF1300155607 /* LGSignFlowManager.m */,
+			);
+			path = Management;
+			sourceTree = "<group>";
+		};
 		B9229CE4229BEBC80030691D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,9 +327,10 @@
 		B9229CE5229BEBDA0030691D /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				B91A761D22A7D84900155607 /* Account */,
 				B9F61A5122A4BC5200CDC29E /* HTTPRequest */,
 				B9F61A5022A4BC0F00CDC29E /* CommonUI */,
-				B9C3A17622A0F8AE00E282B0 /* SignIn */,
+				B9C3A17622A0F8AE00E282B0 /* Sign */,
 				B9229D16229CCAED0030691D /* Main */,
 			);
 			path = Business;
@@ -508,6 +546,12 @@
 			children = (
 				B9229D7B229E6EC90030691D /* LGBasicRequest.h */,
 				B9229D7C229E6EC90030691D /* LGBasicRequest.m */,
+				B91A762122A7E40E00155607 /* LGVerifyCodeRequest.h */,
+				B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */,
+				B91A762822A8BB0C00155607 /* LGSignUpRequest.h */,
+				B91A762922A8BB0C00155607 /* LGSignUpRequest.m */,
+				B91A762D22A8DDE400155607 /* LGSignInRequest.h */,
+				B91A762E22A8DDE400155607 /* LGSignInRequest.m */,
 				B9229D7E229E6EF90030691D /* LGTournamentBeforeRequest.h */,
 				B9229D7F229E6EF90030691D /* LGTournamentBeforeRequest.m */,
 				B9229D81229E6F120030691D /* LGTournamentTodayRequest.h */,
@@ -592,9 +636,12 @@
 			path = LightningGameUITests;
 			sourceTree = "<group>";
 		};
-		B9C3A17622A0F8AE00E282B0 /* SignIn */ = {
+		B9C3A17622A0F8AE00E282B0 /* Sign */ = {
 			isa = PBXGroup;
 			children = (
+				B91A762422A8AEA400155607 /* Management */,
+				B91A763122A8E8E900155607 /* LGSplashViewController.h */,
+				B91A763222A8E8E900155607 /* LGSplashViewController.m */,
 				B9C3A17A22A0FA2600E282B0 /* LGSignInViewController.h */,
 				B9C3A17B22A0FA2600E282B0 /* LGSignInViewController.m */,
 				B9C3A17722A0F9F700E282B0 /* LGSignUpViewController.h */,
@@ -602,7 +649,7 @@
 				B9F61A5822A4F5F100CDC29E /* LGForgetPwdViewController.h */,
 				B9F61A5922A4F5F100CDC29E /* LGForgetPwdViewController.m */,
 			);
-			path = SignIn;
+			path = Sign;
 			sourceTree = "<group>";
 		};
 		B9F61A5022A4BC0F00CDC29E /* CommonUI */ = {
@@ -622,8 +669,8 @@
 		B9F61A5122A4BC5200CDC29E /* HTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
-				B9229D70229E5FB80030691D /* LGAPIURL.h */,
-				B9229D74229E5FB80030691D /* LGAPIURL.m */,
+				B91A762B22A8BFA100155607 /* LGAPIErrorCode.h */,
+				B91A762C22A8BFD600155607 /* LGAPIURLConfig.h */,
 				B9229D7A229E6A680030691D /* APIRequest */,
 			);
 			path = HTTPRequest;
@@ -808,7 +855,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */,
-				B9229D78229E5FB80030691D /* LGAPIURL.m in Sources */,
 				B9229D40229D03450030691D /* FQRunTimeUtility.m in Sources */,
 				B9229D41229D03450030691D /* FQGZipUtility.m in Sources */,
 				B9229D86229E6F220030691D /* LGTournamentRollingRequest.m in Sources */,
@@ -820,8 +866,10 @@
 				B9229D23229CD3180030691D /* LGMatchDetailViewController.m in Sources */,
 				B9229D14229C17070030691D /* NSAttributedString+FQNilExamine.m in Sources */,
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
+				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
 				B9C3A170229FC38E00E282B0 /* LGMarqueeViewModel.m in Sources */,
+				B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */,
 				B9229D4A229D0B670030691D /* FQWindowUtility.m in Sources */,
 				B9229D3B229D011C0030691D /* FQLanguageManager.m in Sources */,
 				B9229D20229CCBCA0030691D /* UIViewController+FQExtension.m in Sources */,
@@ -833,6 +881,7 @@
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
 				B91A761C22A78EBC00155607 /* LGMatchParlayTopView.m in Sources */,
 				B9229D83229E6F120030691D /* LGTournamentTodayRequest.m in Sources */,
+				B91A763322A8E8E900155607 /* LGSplashViewController.m in Sources */,
 				B9F61A6C22A6566300CDC29E /* LGToastView.m in Sources */,
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
 				B9229D02229BEEC00030691D /* NSString+FQNilExamine.m in Sources */,
@@ -846,6 +895,7 @@
 				B9493690229BCBE9000C3D24 /* main.m in Sources */,
 				B9F61A6922A63B0C00CDC29E /* LGMatchParlayTextField.m in Sources */,
 				B9229D4D229D66E90030691D /* FQImageButton.m in Sources */,
+				B91A762F22A8DDE400155607 /* LGSignInRequest.m in Sources */,
 				B9229D77229E5FB80030691D /* FQNetworkReachabilityManager.m in Sources */,
 				B9229D2F229CF8C40030691D /* FQEncryptionUtility.m in Sources */,
 				B9C3A17522A0D21400E282B0 /* LGMatchParlayView.m in Sources */,
@@ -856,12 +906,14 @@
 				B9C3A164229F7DEB00E282B0 /* LGMatchTeamOddsView.m in Sources */,
 				B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */,
 				B9229D47229D07260030691D /* FQSegmentedControl.m in Sources */,
+				B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */,
 				B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */,
 				B9229D04229BEEC00030691D /* UIImageView+FQExtension.m in Sources */,
 				B9229D0E229BF04F0030691D /* NSDate+FQExtension.m in Sources */,
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
 				B9229D35229CFD940030691D /* FQFileManagerUtility.m in Sources */,
 				B9229D6B229E39A70030691D /* LGTournamentListManager.m in Sources */,
+				B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */,
 				B9229D68229E2DE80030691D /* LGTournamentListView.m in Sources */,
 				B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */,
 				B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */,

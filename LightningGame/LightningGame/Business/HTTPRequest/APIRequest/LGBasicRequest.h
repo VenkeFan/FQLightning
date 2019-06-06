@@ -7,10 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FQNetworkManager.h"
+#import "LGAPIURLConfig.h"
+#import "LGAPIErrorCode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LGBasicRequest : NSObject
+
+- (instancetype)initWithAPIName:(NSString *)api method:(HTTPRequestMethod)method;
+
+- (void)requsetWithSuccess:(nullable RequestSucceedBlock)success
+                   failure:(nullable RequestFailBlock)failure;
+- (void)cancel;
+
+@property (nonatomic, copy) NSMutableDictionary *paraDic;
 
 @end
 

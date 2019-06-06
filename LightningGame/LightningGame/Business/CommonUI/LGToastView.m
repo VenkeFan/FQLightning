@@ -11,11 +11,11 @@
 
 @implementation LGToastView
 
-+ (void)showWithText:(NSString *)text {
++ (void)showWithMessage:(NSString *)message {
     dispatch_async(dispatch_get_main_queue(), ^{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:kCurrentWindow animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text = text;
+        hud.label.text = message;
         [hud hideAnimated:YES afterDelay:1.5];
     });
 }
