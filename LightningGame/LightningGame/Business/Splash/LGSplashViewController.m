@@ -7,9 +7,8 @@
 //
 
 #import "LGSplashViewController.h"
-#import "LGSignFlowManager.h"
-#import "LGMainViewController.h"
-#import "LGSignInViewController.h"
+#import "CTMediator+LGMainActions.h"
+#import "CTMediator+LGSignActions.h"
 
 @interface LGSplashViewController ()
 
@@ -33,11 +32,14 @@
 }
 
 - (void)launch {
+    UIViewController *root = nil;
     if ([LGAccountManager instance].account) {
-        [FQWindowUtility changeKeyWindowRootViewControllerWithNewClass:[LGMainViewController class]];
+        root = [[CTMediator sharedInstance] mediator_generateMainController];
     } else {
-        [FQWindowUtility changeKeyWindowRootViewControllerWithNewClass:[LGSignInViewController class]];
+        root = [[CTMediator sharedInstance] mediator_generateSignInController];
     }
+    
+    [FQWindowUtility changeKeyWindowRootViewController:root];
 }
 
 @end

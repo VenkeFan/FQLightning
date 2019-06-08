@@ -85,15 +85,14 @@
     return nil;
 }
 
-+ (BOOL)changeKeyWindowRootViewControllerWithNewClass:(Class)newClass {
-    if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:newClass]) {
++ (BOOL)changeKeyWindowRootViewController:(UIViewController *)newCtr {
+    if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[newCtr class]]) {
         return NO;
     }
     
-    UIWindow* window = [UIApplication sharedApplication].keyWindow;
-    UIViewController *rootViewController = [newClass new];
-    rootViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    UINavigationController *navCtr = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    newCtr.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    UINavigationController *navCtr = [[UINavigationController alloc] initWithRootViewController:newCtr];
     
     [UIView transitionWithView:window
                       duration:0.5f

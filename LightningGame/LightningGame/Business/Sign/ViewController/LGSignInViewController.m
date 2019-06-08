@@ -9,9 +9,9 @@
 #import "LGSignInViewController.h"
 #import "LGSignUpViewController.h"
 #import "LGForgetPwdViewController.h"
-#import "LGMainViewController.h"
 #import "LGSignFieldView.h"
 #import "LGSignFlowManager.h"
+#import "CTMediator+LGMainActions.h"
 
 @interface LGSignInViewController () <LGSignFlowManagerDelegate>
 
@@ -142,7 +142,8 @@
 - (void)signFlowManagerStepping:(LGSignFlowStep)step {
     switch (step) {
         case LGSignFlowStep_Home: {
-            [self.navigationController setViewControllers:@[[LGMainViewController new]] animated:NO];
+            UIViewController *mainCtr = [[CTMediator sharedInstance] mediator_generateMainController];
+            [self.navigationController setViewControllers:@[mainCtr] animated:NO];
         }
             break;
         default:

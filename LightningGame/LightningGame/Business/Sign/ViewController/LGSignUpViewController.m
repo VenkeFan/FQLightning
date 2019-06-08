@@ -7,12 +7,12 @@
 //
 
 #import "LGSignUpViewController.h"
-#import "LGMainViewController.h"
 #import "FQComponentFactory.h"
 #import "LGServiceButton.h"
 #import "LGSignFieldView.h"
 #import "LGSignFlowManager.h"
 #import "LGAccountManager.h"
+#import "CTMediator+LGMainActions.h"
 
 #define kLGSignUpHeaderHeight               kSizeScale(166.0)
 
@@ -192,7 +192,8 @@
 - (void)signFlowManagerStepping:(LGSignFlowStep)step {
     switch (step) {
         case LGSignFlowStep_Home: {
-            [self.navigationController setViewControllers:@[[LGMainViewController new]] animated:NO];
+            UIViewController *mainCtr = [[CTMediator sharedInstance] mediator_generateMainController];
+            [self.navigationController setViewControllers:@[mainCtr] animated:NO];
         }
             break;
         default:
