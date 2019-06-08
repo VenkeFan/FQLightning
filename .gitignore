@@ -1,2 +1,8 @@
 .DS_Store
 */.DS_Store
+
+LGAPIURLConfig.h
+*/LGAPIURLConfig.h
+
+LGAPIErrorCode.h
+*/LGAPIErrorCode.h

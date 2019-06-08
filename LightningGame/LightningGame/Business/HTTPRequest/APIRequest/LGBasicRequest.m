@@ -18,6 +18,11 @@
 
 @implementation LGBasicRequest
 
+- (instancetype)init {
+    NSAssert(![self isKindOfClass:[LGBasicRequest class]], @"You should not init LGBasicRequest directly, use -initWithAPIName:method: instead");
+    return nil;
+}
+
 - (instancetype)initWithAPIName:(NSString *)apiName method:(HTTPRequestMethod)method {
     if (self = [super init]) {
         _urlStr = [NSString stringWithFormat:@"%@%@", kBasicURL, apiName];
