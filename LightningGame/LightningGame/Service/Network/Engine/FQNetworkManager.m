@@ -7,8 +7,8 @@
 //
 
 #import "FQNetworkManager.h"
+#import <AFNetworking/AFNetworking.h>
 #import "FQNetworkReachabilityManager.h"
-#import "LGAPIURLConfig.h"
 
 #define kMaxRequestCount            (5)
 #define kMaxTimeoutInterval         (15.0)
@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *> *allTasks;
 @property (nonatomic, strong) NSMutableDictionary *token;
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
 
@@ -27,12 +28,14 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [[super allocWithZone:NULL] init];
-        _instance.operationQueue.maxConcurrentOperationCount = kMaxRequestCount;
+        
+        _instance.sessionManager = [[AFHTTPSessionManager alloc] init];
+        _instance.sessionManager.operationQueue.maxConcurrentOperationCount = kMaxRequestCount;
         // 请求
         AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
         requestSerializer.timeoutInterval = kMaxTimeoutInterval;
-        _instance.requestSerializer = requestSerializer;
+        _instance.sessionManager.requestSerializer = requestSerializer;
         // 解析
         AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
         responseSerializer.removesKeysWithNullValues = YES;
@@ -40,9 +43,9 @@
                                                      @"application/json", @"text/html",
                                                      @"text/json", @"text/javascript",
                                                      @"text/plain", nil];
-        _instance.responseSerializer = responseSerializer;
+        _instance.sessionManager.responseSerializer = responseSerializer;
         // 设置 cookie
-        _instance.requestSerializer.HTTPShouldHandleCookies = YES;
+        _instance.sessionManager.requestSerializer.HTTPShouldHandleCookies = YES;
     });
     return _instance;
 }
@@ -81,30 +84,6 @@
                              failure:failure];
 }
 
-//- (NSURLSessionDataTask *)GET:(NSString *)URLString
-//                   parameters:(nullable NSDictionary *)parameters
-//                      success:(nullable RequestSucceedBlock)success
-//                      failure:(nullable RequestFailBlock)failure {
-//    return [self requestMethod:HTTPRequestMethod_GET
-//                           URL:URLString
-//                    parameters:parameters
-//     constructingBodyWithBlock:nil
-//                      success:success
-//                       failure:failure];
-//}
-//
-//- (NSURLSessionDataTask *)POST:(NSString *)URLString
-//                   parameters:(nullable NSDictionary *)parameters
-//                      success:(nullable RequestSucceedBlock)success
-//                      failure:(nullable RequestFailBlock)failure {
-//    return [self requestMethod:HTTPRequestMethod_POST
-//                           URL:URLString
-//                    parameters:parameters
-//     constructingBodyWithBlock:nil
-//                      success:success
-//                       failure:failure];
-//}
-
 - (void)cancelAllRequest {
     @synchronized(self) {
         [self.allTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -131,8 +110,8 @@
 }
 
 + (void)updateCookie:(NSString *)cookie {
-    [[FQNetworkManager sharedManager].requestSerializer setValue:cookie
-                                              forHTTPHeaderField:@"Cookie"];
+    [[FQNetworkManager sharedManager].sessionManager.requestSerializer setValue:cookie
+                                                             forHTTPHeaderField:@"Cookie"];
 }
 
 #pragma mark - Private
@@ -170,7 +149,7 @@
     
     switch (method) {
         case HTTPRequestMethod_GET: {
-            task = [self GET:URLString
+            task = [self.sessionManager GET:URLString
                   parameters:parameters
                     progress:^(NSProgress * _Nonnull downloadProgress) {
                         
@@ -186,7 +165,7 @@
             break;
         }
         case HTTPRequestMethod_POST: {
-            task = [self POST:URLString
+            task = [self.sessionManager POST:URLString
                    parameters:parameters
                      progress:^(NSProgress * _Nonnull downloadProgress) {
                          
@@ -202,7 +181,7 @@
             break;
         }
         case HTTPRequestMethod_PUT: {
-            task = [self PUT:URLString
+            task = [self.sessionManager PUT:URLString
                   parameters:parameters
                      success:^(NSURLSessionDataTask *task, id responseObject) {
                          
@@ -215,7 +194,7 @@
             break;
         }
         case HTTPRequestMethod_DELETE: {
-            task = [self DELETE:URLString
+            task = [self.sessionManager DELETE:URLString
                      parameters:parameters
                         success:^(NSURLSessionDataTask *task, id responseObject) {
                             
@@ -228,7 +207,7 @@
             break;
         }
         case HTTPRequestMethod_UPLOAD: {
-            task = [self POST:URLString
+            task = [self.sessionManager POST:URLString
                    parameters:parameters
     constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if (block) {
