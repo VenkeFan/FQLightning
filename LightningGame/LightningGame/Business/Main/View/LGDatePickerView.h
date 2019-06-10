@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LGDatePickerViewModel.h"
 
-@class LGDatePickerView;
+@class LGDatePickerView, LGDatePickerViewModel;
 
 #define kDatePickerViewHeight              kSizeScale(22.0)
 
@@ -26,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) LGDatePickerViewModel *viewModel;
 @property (nonatomic, assign, getter=isPreviously) BOOL previously;
 @property (nonatomic, weak) id<LGDatePickerViewDelegate> delegate;
+
+- (void)setIndex:(NSUInteger)index;
 
 @end
 

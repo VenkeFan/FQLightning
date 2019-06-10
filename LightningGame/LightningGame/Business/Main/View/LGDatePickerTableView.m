@@ -23,7 +23,7 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kSizeScale(350) + kSafeAreaBottomY)]) {
-        self.backgroundColor = [UIColor cyanColor];
+        self.backgroundColor = kMainBgColor;
         
         _isDisplay = NO;
         
@@ -97,6 +97,7 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = [self.viewModel stringFromDate:self.viewModel.itemArray[indexPath.row]];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textColor = kNameFontColor;
     return cell;
 }
 

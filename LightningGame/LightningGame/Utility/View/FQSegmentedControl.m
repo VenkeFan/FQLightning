@@ -93,10 +93,20 @@
     _hSeparateLine = hLineView;
     
     CGFloat lineWith = width; // (actualWidth + 20) > width ? width : (actualWidth + 20);
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 2, lineWith, 2)];
-    lineView.layer.cornerRadius = CGRectGetHeight(lineView.bounds) * 0.5;
-    lineView.backgroundColor = self.markLineColor;
-    lineView.center = CGPointMake(_btnArray[_currentIndex].center.x, lineView.center.y);
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 2, lineWith, 2)];
+//    lineView.layer.cornerRadius = CGRectGetHeight(lineView.bounds) * 0.5;
+//    lineView.backgroundColor = self.markLineColor;
+//    lineView.center = CGPointMake(_btnArray[_currentIndex].center.x, lineView.center.y);
+//    [self addSubview:lineView];
+//    _markLine = lineView;
+    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor clearColor];
+    UIImage *img = [UIImage imageNamed:@"segment_mark"];
+    lineView.layer.contents = (__bridge id)img.CGImage;
+    lineView.layer.contentsGravity = kCAGravityResizeAspect;
+    lineView.frame = CGRectMake(0, 0, lineWith, img.size.height);
+    lineView.center = CGPointMake(_btnArray[_currentIndex].center.x, self.height - lineView.height * 0.5);
     [self addSubview:lineView];
     _markLine = lineView;
 }

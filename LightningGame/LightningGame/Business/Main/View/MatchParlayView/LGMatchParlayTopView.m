@@ -20,7 +20,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = kUIColorFromRGB(0x2C5C70);
+        self.backgroundColor = kMainOnTintColor;
         
         if (@available(iOS 11.0, *)) {
             self.layer.cornerRadius = kCornerRadius;

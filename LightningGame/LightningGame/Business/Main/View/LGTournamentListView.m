@@ -116,7 +116,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 #pragma mark - LGDatePickerTableViewDelegate
 
 - (void)datePickerTableView:(LGDatePickerTableView *)view didSelectIndex:(NSUInteger)index {
-    [self.datePickerView.viewModel setCurrentIndex:index];
+    [self.datePickerView setIndex:index];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

@@ -7,6 +7,7 @@
 //
 
 #import "LGDatePickerView.h"
+#import "LGDatePickerViewModel.h"
 
 @interface LGDatePickerView ()
 
@@ -34,6 +35,8 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    self.layer.cornerRadius = CGRectGetHeight(self.frame) * 0.5;
+    
     _dateBtn.frame = CGRectMake(0, 0, kSizeScale(140.0), self.height);
     _dateBtn.center = CGPointMake(self.width * 0.5, self.height * 0.5);
     _leftBtn.frame = CGRectMake(0, 0, self.height, self.height);
@@ -49,7 +52,7 @@
 - (void)initializeUI {
     _dateBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.backgroundColor = [UIColor cyanColor];
+        btn.backgroundColor = [UIColor clearColor];
         [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
         btn.titleLabel.font = kRegularFont(kNoteFontSize);
         [btn addTarget:self action:@selector(dateBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -82,6 +85,12 @@
         btn;
     });
     [self addSubview:_rightBtn];
+}
+
+#pragma mark - Public
+
+- (void)setIndex:(NSUInteger)index {
+    [self.viewModel setCurrentIndex:index];
 }
 
 #pragma mark - KVO

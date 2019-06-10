@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "boom@2X.png",
+      "filename" : "segment_mark@2X.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "boom@3X.png",
+      "filename" : "segment_mark@3X.png",
       "scale" : "3x"
     }
   ],
