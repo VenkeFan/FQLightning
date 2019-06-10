@@ -20,7 +20,7 @@ NSString * const kLGMediatorActionShowAlert                         = @"showAler
 - (UIViewController *)mediator_generateMainController {
     UIViewController *viewController = [self performTarget:kLGMediatorTargetMain
                                                     action:kLGMediatorActionNativeGenerateMainController
-                                                    params:@{@"testKey": @"testValue"}
+                                                    params:@{}
                                          shouldCacheTarget:NO];
     if ([viewController isKindOfClass:[UIViewController class]]) {
         return viewController;

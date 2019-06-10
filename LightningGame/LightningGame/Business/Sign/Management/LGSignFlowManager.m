@@ -89,6 +89,7 @@
     self.accountName = accountName;
     self.password = pwd;
     
+    [LGLoadingView display];
     LGSignUpRequest *request = [LGSignUpRequest new];
     [request requestWithAccountName:accountName
                                 pwd:pwd
@@ -105,6 +106,7 @@
 
 - (void)signInWithAccountName:(NSString *)accountName
                           pwd:(NSString *)pwd {
+    [LGLoadingView display];
     LGSignInRequest *request = [LGSignInRequest new];
     [request requestWithAccountName:accountName
                                 pwd:pwd
@@ -224,6 +226,7 @@
         }
             break;
         case LGSignFlowStep_Home: {
+            [LGLoadingView dismiss];
             [self broadcast:step];
         }
             break;

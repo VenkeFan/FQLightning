@@ -17,7 +17,7 @@ NSString * const kLGMediatorActionNativeGenerateSignInController = @"nativeGener
 - (UIViewController *)mediator_generateSignInController {
     UIViewController *viewController = [self performTarget:kLGMediatorTargetSignIn
                                                     action:kLGMediatorActionNativeGenerateSignInController
-                                                    params:@{@"testKey": @"testValue"}
+                                                    params:@{}
                                          shouldCacheTarget:NO];
     if ([viewController isKindOfClass:[UIViewController class]]) {
         return viewController;

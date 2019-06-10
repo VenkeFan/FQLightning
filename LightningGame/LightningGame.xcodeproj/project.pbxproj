@@ -76,6 +76,7 @@
 		B9D9101E22ABA71A00D54911 /* Target_Main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9101C22ABA71A00D54911 /* Target_Main.m */; };
 		B9D9102422ABA73F00D54911 /* CTMediator+LGMainActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9102322ABA73F00D54911 /* CTMediator+LGMainActions.m */; };
 		B9D9102722ABA74600D54911 /* CTMediator+LGSignActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9102522ABA74600D54911 /* CTMediator+LGSignActions.m */; };
+		B9D9102D22ADF36A00D54911 /* LGLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9102C22ADF36A00D54911 /* LGLoadingView.m */; };
 		B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */; };
 		B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5622A4C7BA00CDC29E /* LGSignFieldView.m */; };
 		B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5922A4F5F100CDC29E /* LGForgetPwdViewController.m */; };
@@ -253,6 +254,8 @@
 		B9D9102322ABA73F00D54911 /* CTMediator+LGMainActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+LGMainActions.m"; sourceTree = "<group>"; };
 		B9D9102522ABA74600D54911 /* CTMediator+LGSignActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+LGSignActions.m"; sourceTree = "<group>"; };
 		B9D9102622ABA74600D54911 /* CTMediator+LGSignActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTMediator+LGSignActions.h"; sourceTree = "<group>"; };
+		B9D9102B22ADF36A00D54911 /* LGLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGLoadingView.h; sourceTree = "<group>"; };
+		B9D9102C22ADF36A00D54911 /* LGLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGLoadingView.m; sourceTree = "<group>"; };
 		B9F61A5222A4BCD500CDC29E /* LGServiceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGServiceButton.h; sourceTree = "<group>"; };
 		B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGServiceButton.m; sourceTree = "<group>"; };
 		B9F61A5522A4C7BA00CDC29E /* LGSignFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignFieldView.h; sourceTree = "<group>"; };
@@ -772,6 +775,8 @@
 				B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */,
 				B9F61A6A22A6566300CDC29E /* LGToastView.h */,
 				B9F61A6B22A6566300CDC29E /* LGToastView.m */,
+				B9D9102B22ADF36A00D54911 /* LGLoadingView.h */,
+				B9D9102C22ADF36A00D54911 /* LGLoadingView.m */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -1022,6 +1027,7 @@
 				B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */,
 				B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */,
 				B9229D04229BEEC00030691D /* UIImageView+FQExtension.m in Sources */,
+				B9D9102D22ADF36A00D54911 /* LGLoadingView.m in Sources */,
 				B9229D0E229BF04F0030691D /* NSDate+FQExtension.m in Sources */,
 				B9D9101522ABA64600D54911 /* CTMediator.m in Sources */,
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
