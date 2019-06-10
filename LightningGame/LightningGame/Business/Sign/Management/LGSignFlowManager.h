@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
                 mobile:(NSString *)mobile
             verifyCode:(NSString *)verifyCode;
 - (void)signOut;
+- (void)visit;
 
 + (BOOL)proofreadAccountName:(NSString *)accountName;
 + (BOOL)proofreadPassword:(NSString *)password;

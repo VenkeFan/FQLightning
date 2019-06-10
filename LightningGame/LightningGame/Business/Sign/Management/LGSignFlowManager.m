@@ -135,6 +135,10 @@
     [[LGAccountManager instance] signOut];
 }
 
+- (void)visit {
+    [self setFlowStep:LGSignFlowStep_Visitor];
+}
+
 + (BOOL)proofreadAccountName:(NSString *)accountName {
     if (accountName.length < 6 || accountName.length > 16) {
         [LGToastView showWithMessage:@"账号格式错误"];

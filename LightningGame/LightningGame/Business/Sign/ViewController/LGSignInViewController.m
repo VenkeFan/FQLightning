@@ -187,6 +187,8 @@
 
 - (void)visitorBtnOnClicked {
     [self.view endEditing:YES];
+    
+    [[LGSignFlowManager instance] visit];
 }
 
 - (void)selfOnTapped {
