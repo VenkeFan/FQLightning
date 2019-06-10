@@ -10,14 +10,15 @@
 
 @interface NSDate (FQExtension)
 
-/**
- 13位时间戳转UTC时间
- */
 + (NSDate *)dateWithTimestamp:(NSTimeInterval)timestamp;
-
-/**
- 当前13位时间戳
- */
 + (NSTimeInterval)currentUnixTimeInterval;
++ (NSDate *)dateFromISO8601String:(NSString *)string;
+- (NSString *)ISO8601String;
+
+- (NSInteger)weekday;
+- (NSString *)weekdayString;
+- (NSInteger)weekdayOrdinal;
+- (NSInteger)weekOfMonth;
+- (NSInteger)weekOfYear;
 
 @end

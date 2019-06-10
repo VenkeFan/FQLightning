@@ -77,6 +77,9 @@
 		B9D9102422ABA73F00D54911 /* CTMediator+LGMainActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9102322ABA73F00D54911 /* CTMediator+LGMainActions.m */; };
 		B9D9102722ABA74600D54911 /* CTMediator+LGSignActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9102522ABA74600D54911 /* CTMediator+LGSignActions.m */; };
 		B9D9102D22ADF36A00D54911 /* LGLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9102C22ADF36A00D54911 /* LGLoadingView.m */; };
+		B9D9103122ADFD3400D54911 /* LGDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103022ADFD3400D54911 /* LGDatePickerView.m */; };
+		B9D9103422AE0D9800D54911 /* LGDatePickerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103322AE0D9800D54911 /* LGDatePickerViewModel.m */; };
+		B9D9103722AE46EB00D54911 /* LGDatePickerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103622AE46EA00D54911 /* LGDatePickerTableView.m */; };
 		B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */; };
 		B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5622A4C7BA00CDC29E /* LGSignFieldView.m */; };
 		B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5922A4F5F100CDC29E /* LGForgetPwdViewController.m */; };
@@ -256,6 +259,12 @@
 		B9D9102622ABA74600D54911 /* CTMediator+LGSignActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTMediator+LGSignActions.h"; sourceTree = "<group>"; };
 		B9D9102B22ADF36A00D54911 /* LGLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGLoadingView.h; sourceTree = "<group>"; };
 		B9D9102C22ADF36A00D54911 /* LGLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGLoadingView.m; sourceTree = "<group>"; };
+		B9D9102F22ADFD3400D54911 /* LGDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGDatePickerView.h; sourceTree = "<group>"; };
+		B9D9103022ADFD3400D54911 /* LGDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGDatePickerView.m; sourceTree = "<group>"; };
+		B9D9103222AE0D9800D54911 /* LGDatePickerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGDatePickerViewModel.h; sourceTree = "<group>"; };
+		B9D9103322AE0D9800D54911 /* LGDatePickerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGDatePickerViewModel.m; sourceTree = "<group>"; };
+		B9D9103522AE46EA00D54911 /* LGDatePickerTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGDatePickerTableView.h; sourceTree = "<group>"; };
+		B9D9103622AE46EA00D54911 /* LGDatePickerTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGDatePickerTableView.m; sourceTree = "<group>"; };
 		B9F61A5222A4BCD500CDC29E /* LGServiceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGServiceButton.h; sourceTree = "<group>"; };
 		B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGServiceButton.m; sourceTree = "<group>"; };
 		B9F61A5522A4C7BA00CDC29E /* LGSignFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignFieldView.h; sourceTree = "<group>"; };
@@ -478,24 +487,17 @@
 		B9229D18229CCAFE0030691D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B9D9102E22ADFD0200D54911 /* MatchParlayView */,
 				B9229D66229E2DE80030691D /* LGTournamentListView.h */,
 				B9229D67229E2DE80030691D /* LGTournamentListView.m */,
 				B9C3A162229F7DEB00E282B0 /* LGMatchTeamOddsView.h */,
 				B9C3A163229F7DEB00E282B0 /* LGMatchTeamOddsView.m */,
 				B9C3A16B229FA3F800E282B0 /* LGMarqueeView.h */,
 				B9C3A16C229FA3F800E282B0 /* LGMarqueeView.m */,
-				B9C3A17322A0D21400E282B0 /* LGMatchParlayView.h */,
-				B9C3A17422A0D21400E282B0 /* LGMatchParlayView.m */,
-				B9F61A5B22A5001900CDC29E /* LGMatchParlayTableView.h */,
-				B9F61A5C22A5001900CDC29E /* LGMatchParlayTableView.m */,
-				B91A761A22A78EBC00155607 /* LGMatchParlayTopView.h */,
-				B91A761B22A78EBC00155607 /* LGMatchParlayTopView.m */,
-				B9F61A6D22A75A6700CDC29E /* LGMatchParlayBottomView.h */,
-				B9F61A6E22A75A6700CDC29E /* LGMatchParlayBottomView.m */,
-				B9F61A6422A6060F00CDC29E /* LGMatchParlayKeyboard.h */,
-				B9F61A6522A6060F00CDC29E /* LGMatchParlayKeyboard.m */,
-				B9F61A6722A63B0C00CDC29E /* LGMatchParlayTextField.h */,
-				B9F61A6822A63B0C00CDC29E /* LGMatchParlayTextField.m */,
+				B9D9102F22ADFD3400D54911 /* LGDatePickerView.h */,
+				B9D9103022ADFD3400D54911 /* LGDatePickerView.m */,
+				B9D9103522AE46EA00D54911 /* LGDatePickerTableView.h */,
+				B9D9103622AE46EA00D54911 /* LGDatePickerTableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,6 +509,8 @@
 				B9229D6A229E39A70030691D /* LGTournamentListManager.m */,
 				B9C3A16E229FC38E00E282B0 /* LGMarqueeViewModel.h */,
 				B9C3A16F229FC38E00E282B0 /* LGMarqueeViewModel.m */,
+				B9D9103222AE0D9800D54911 /* LGDatePickerViewModel.h */,
+				B9D9103322AE0D9800D54911 /* LGDatePickerViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -767,6 +771,25 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B9D9102E22ADFD0200D54911 /* MatchParlayView */ = {
+			isa = PBXGroup;
+			children = (
+				B9C3A17322A0D21400E282B0 /* LGMatchParlayView.h */,
+				B9C3A17422A0D21400E282B0 /* LGMatchParlayView.m */,
+				B9F61A5B22A5001900CDC29E /* LGMatchParlayTableView.h */,
+				B9F61A5C22A5001900CDC29E /* LGMatchParlayTableView.m */,
+				B91A761A22A78EBC00155607 /* LGMatchParlayTopView.h */,
+				B91A761B22A78EBC00155607 /* LGMatchParlayTopView.m */,
+				B9F61A6D22A75A6700CDC29E /* LGMatchParlayBottomView.h */,
+				B9F61A6E22A75A6700CDC29E /* LGMatchParlayBottomView.m */,
+				B9F61A6422A6060F00CDC29E /* LGMatchParlayKeyboard.h */,
+				B9F61A6522A6060F00CDC29E /* LGMatchParlayKeyboard.m */,
+				B9F61A6722A63B0C00CDC29E /* LGMatchParlayTextField.h */,
+				B9F61A6822A63B0C00CDC29E /* LGMatchParlayTextField.m */,
+			);
+			path = MatchParlayView;
+			sourceTree = "<group>";
+		};
 		B9F61A5022A4BC0F00CDC29E /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,6 +1008,7 @@
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
 				B9C3A170229FC38E00E282B0 /* LGMarqueeViewModel.m in Sources */,
 				B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */,
+				B9D9103122ADFD3400D54911 /* LGDatePickerView.m in Sources */,
 				B9229D4A229D0B670030691D /* FQWindowUtility.m in Sources */,
 				B9229D3B229D011C0030691D /* FQLanguageManager.m in Sources */,
 				B9229D20229CCBCA0030691D /* UIViewController+FQExtension.m in Sources */,
@@ -1002,6 +1026,7 @@
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
 				B9229D02229BEEC00030691D /* NSString+FQNilExamine.m in Sources */,
 				B9229D1D229CCB270030691D /* LGMainViewController.m in Sources */,
+				B9D9103722AE46EB00D54911 /* LGDatePickerTableView.m in Sources */,
 				B9229D80229E6EF90030691D /* LGTournamentBeforeRequest.m in Sources */,
 				B9229D3E229D02980030691D /* FQTimerManager.m in Sources */,
 				B9229D0D229BF04F0030691D /* UIView+FQExtension.m in Sources */,
@@ -1037,6 +1062,7 @@
 				B9229D68229E2DE80030691D /* LGTournamentListView.m in Sources */,
 				B91A763622A910B700155607 /* LGForgetPwdRequest.m in Sources */,
 				B9D9102722ABA74600D54911 /* CTMediator+LGSignActions.m in Sources */,
+				B9D9103422AE0D9800D54911 /* LGDatePickerViewModel.m in Sources */,
 				B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */,
 				B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */,
 			);

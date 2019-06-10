@@ -10,11 +10,13 @@
 #import <MJRefresh/MJRefresh.h>
 #import "LGTournamentListViewCell.h"
 #import "LGMarqueeView.h"
+#import "LGDatePickerView.h"
+#import "LGDatePickerTableView.h"
 #import "LGMatchDetailViewController.h"
 
 static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 
-@interface LGTournamentListView () <LGTournamentListManagerDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface LGTournamentListView () <LGTournamentListManagerDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isLoaded;
 }
 
@@ -22,7 +24,8 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) LGMarqueeView *marqueeView;
-@property (nonatomic, strong) UIView *datePickerView;
+@property (nonatomic, strong) LGDatePickerView *datePickerView;
+@property (nonatomic, strong) LGDatePickerTableView *dateTableView;
 
 @end
 
@@ -103,6 +106,19 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     [self.dataArray addObjectsFromArray:data];
 }
 
+#pragma mark - LGDatePickerViewDelegate
+
+- (void)datePickerViewDidClickedDate:(LGDatePickerView *)view {
+    self.dateTableView.viewModel = view.viewModel;
+    [self.dateTableView displayInParentView:self];
+}
+
+#pragma mark - LGDatePickerTableViewDelegate
+
+- (void)datePickerTableView:(LGDatePickerTableView *)view didSelectIndex:(NSUInteger)index {
+    [self.datePickerView.viewModel setCurrentIndex:index];
+}
+
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -119,7 +135,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
         [self.marqueeView fetchData];
         
     } else {
-        self.datePickerView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kMarqueeViewHeight);
+        self.datePickerView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kDatePickerViewHeight);
         [view addSubview:self.datePickerView];
     }
     
@@ -190,12 +206,21 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     return _marqueeView;
 }
 
-- (UIView *)datePickerView {
+- (LGDatePickerView *)datePickerView {
     if (!_datePickerView) {
-        _datePickerView = [[UIView alloc] initWithFrame:CGRectZero];
-        _datePickerView.backgroundColor = [UIColor cyanColor];
+        _datePickerView = [[LGDatePickerView alloc] initWithFrame:CGRectZero];
+        _datePickerView.delegate = self;
+        _datePickerView.previously = (self.listType == LGTournamentListType_Finished);
     }
     return _datePickerView;
+}
+
+- (LGDatePickerTableView *)dateTableView {
+    if (!_dateTableView) {
+        _dateTableView = [LGDatePickerTableView new];
+        _dateTableView.delegate = self;
+    }
+    return _dateTableView;
 }
 
 @end
