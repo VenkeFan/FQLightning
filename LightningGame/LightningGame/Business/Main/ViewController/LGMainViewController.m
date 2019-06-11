@@ -7,7 +7,7 @@
 //
 
 #import "LGMainViewController.h"
-
+#import "CTMediator+LGProfileActions.h"
 #import "LGServiceButton.h"
 #import "FQSegmentedControl.h"
 #import "LGTournamentListView.h"
@@ -158,7 +158,8 @@
 #pragma mark - Event
 
 - (void)navLeft1BtnClicked {
-    NSLog(@"!!!!!!navLeft1BtnClicked");
+    UIViewController *profileCtr = [[CTMediator sharedInstance] mediator_generateProfileController];
+    [self.navigationController pushViewController:profileCtr animated:YES];
 }
 
 - (void)navLeft2BtnClicked {

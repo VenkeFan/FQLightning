@@ -12,8 +12,8 @@
 @implementation Target_Main
 
 - (UIViewController *)action_nativeGenerateMainController:(NSDictionary *)params {
-    LGMainViewController *mainCtr = [LGMainViewController new];
-    return mainCtr;
+    LGMainViewController *ctr = [LGMainViewController new];
+    return ctr;
 }
 
 @end

@@ -12,8 +12,8 @@
 @implementation Target_SignIn
 
 - (UIViewController *)action_nativeGenerateSignInController:(NSDictionary *)params {
-    LGSignInViewController *mainCtr = [LGSignInViewController new];
-    return mainCtr;
+    LGSignInViewController *ctr = [LGSignInViewController new];
+    return ctr;
 }
 
 @end

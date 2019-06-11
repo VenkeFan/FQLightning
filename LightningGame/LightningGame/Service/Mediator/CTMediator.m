@@ -95,7 +95,7 @@ NSString * const kCTMediatorParamsKeySwiftTargetModuleName = @"kCTMediatorParams
     SEL action = NSSelectorFromString(actionString);
     
     if (target == nil) {
-        // 这里是处理无响应请求的地方之一，这个demo做得比较简单，如果没有可以响应的target，就直接return了。实际开发过程中是可以事先给一个固定的target专门用于在这个时候顶上，然后处理这种请求的
+        // 这里是处理无响应请求的地方之一，如果没有可以响应的target，就直接return了。实际开发过程中是可以事先给一个固定的target专门用于在这个时候顶上，然后处理这种请求的
         [self NoTargetActionResponseWithTargetString:targetClassString selectorString:actionString originParams:params];
         return nil;
     }

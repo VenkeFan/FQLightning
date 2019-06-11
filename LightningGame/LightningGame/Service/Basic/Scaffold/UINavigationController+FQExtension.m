@@ -8,6 +8,7 @@
 
 #import "UINavigationController+FQExtension.h"
 #import "FQRunTimeUtility.h"
+#import "FQAnimatedTransitioning.h"
 
 @interface UINavigationController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
@@ -33,10 +34,28 @@
        didShowViewController:(UIViewController *)viewController
                     animated:(BOOL)animated {
     if (navigationController.viewControllers.count > 1) {
-        self.interactivePopGestureRecognizer.enabled = YES;
+        if ([NSStringFromClass([navigationController.topViewController class]) isEqualToString:@"LGProfileViewController"]) {
+            self.interactivePopGestureRecognizer.enabled = NO;
+        } else {
+            self.interactivePopGestureRecognizer.enabled = YES;
+        }
     } else {
         self.interactivePopGestureRecognizer.enabled = NO;
     }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    
+    if ([NSStringFromClass([fromVC class]) isEqualToString:@"LGProfileViewController"]
+        || [NSStringFromClass([toVC class]) isEqualToString:@"LGProfileViewController"]) {
+        return [FQAnimatedTransitioning new];
+    }
+
+    return nil;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController {
+    return nil;
 }
 
 #pragma mark - UIGestureRecognizerDelegate

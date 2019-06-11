@@ -80,6 +80,10 @@
 		B9D9103122ADFD3400D54911 /* LGDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103022ADFD3400D54911 /* LGDatePickerView.m */; };
 		B9D9103422AE0D9800D54911 /* LGDatePickerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103322AE0D9800D54911 /* LGDatePickerViewModel.m */; };
 		B9D9103722AE46EB00D54911 /* LGDatePickerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103622AE46EA00D54911 /* LGDatePickerTableView.m */; };
+		B9D9103E22AE819900D54911 /* LGProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9103D22AE819900D54911 /* LGProfileViewController.m */; };
+		B9D9104222AE81B400D54911 /* Target_Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104122AE81B400D54911 /* Target_Profile.m */; };
+		B9D9104622AE820200D54911 /* CTMediator+LGProfileActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104522AE820200D54911 /* CTMediator+LGProfileActions.m */; };
+		B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */; };
 		B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */; };
 		B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5622A4C7BA00CDC29E /* LGSignFieldView.m */; };
 		B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5922A4F5F100CDC29E /* LGForgetPwdViewController.m */; };
@@ -265,6 +269,14 @@
 		B9D9103322AE0D9800D54911 /* LGDatePickerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGDatePickerViewModel.m; sourceTree = "<group>"; };
 		B9D9103522AE46EA00D54911 /* LGDatePickerTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGDatePickerTableView.h; sourceTree = "<group>"; };
 		B9D9103622AE46EA00D54911 /* LGDatePickerTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGDatePickerTableView.m; sourceTree = "<group>"; };
+		B9D9103C22AE819900D54911 /* LGProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGProfileViewController.h; sourceTree = "<group>"; };
+		B9D9103D22AE819900D54911 /* LGProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGProfileViewController.m; sourceTree = "<group>"; };
+		B9D9104022AE81B400D54911 /* Target_Profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Target_Profile.h; sourceTree = "<group>"; };
+		B9D9104122AE81B400D54911 /* Target_Profile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Target_Profile.m; sourceTree = "<group>"; };
+		B9D9104422AE820200D54911 /* CTMediator+LGProfileActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTMediator+LGProfileActions.h"; sourceTree = "<group>"; };
+		B9D9104522AE820200D54911 /* CTMediator+LGProfileActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+LGProfileActions.m"; sourceTree = "<group>"; };
+		B9D9104722AE84DF00D54911 /* FQAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQAnimatedTransitioning.h; sourceTree = "<group>"; };
+		B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQAnimatedTransitioning.m; sourceTree = "<group>"; };
 		B9F61A5222A4BCD500CDC29E /* LGServiceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGServiceButton.h; sourceTree = "<group>"; };
 		B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGServiceButton.m; sourceTree = "<group>"; };
 		B9F61A5522A4C7BA00CDC29E /* LGSignFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignFieldView.h; sourceTree = "<group>"; };
@@ -359,6 +371,7 @@
 			children = (
 				B9D9101F22ABA72400D54911 /* ModuleCategories */,
 				B9D9102822ABA75500D54911 /* Splash */,
+				B9D9103822AE810300D54911 /* Profile */,
 				B9229D16229CCAED0030691D /* Main */,
 				B9C3A17622A0F8AE00E282B0 /* Sign */,
 				B91A761D22A7D84900155607 /* Account */,
@@ -464,11 +477,11 @@
 			isa = PBXGroup;
 			children = (
 				B9D9101B22ABA70D00D54911 /* Actions */,
-				B9229D1A229CCB0D0030691D /* Model */,
-				B9229D19229CCB050030691D /* ViewModel */,
 				B9229D8D229E7D2C0030691D /* Cell */,
+				B9229D1A229CCB0D0030691D /* Model */,
 				B9229D18229CCAFE0030691D /* View */,
 				B9229D17229CCAF60030691D /* ViewController */,
+				B9229D19229CCB050030691D /* ViewModel */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -669,8 +682,8 @@
 			children = (
 				B9D9101622ABA6D100D54911 /* Actions */,
 				B91A762422A8AEA400155607 /* Management */,
-				B9D9101A22ABA6F000D54911 /* ViewController */,
 				B9D9102A22ABAB8900D54911 /* View */,
+				B9D9101A22ABA6F000D54911 /* ViewController */,
 			);
 			path = Sign;
 			sourceTree = "<group>";
@@ -718,6 +731,7 @@
 		B9D9101F22ABA72400D54911 /* ModuleCategories */ = {
 			isa = PBXGroup;
 			children = (
+				B9D9104322AE81EB00D54911 /* Profile */,
 				B9D9102122ABA73400D54911 /* Main */,
 				B9D9102022ABA72C00D54911 /* Sign */,
 			);
@@ -788,6 +802,60 @@
 				B9F61A6822A63B0C00CDC29E /* LGMatchParlayTextField.m */,
 			);
 			path = MatchParlayView;
+			sourceTree = "<group>";
+		};
+		B9D9103822AE810300D54911 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B9D9103F22AE819E00D54911 /* Actions */,
+				B9D9103B22AE818300D54911 /* View */,
+				B9D9103A22AE817700D54911 /* ViewController */,
+				B9D9103922AE816F00D54911 /* ViewModel */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		B9D9103922AE816F00D54911 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B9D9103A22AE817700D54911 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B9D9104722AE84DF00D54911 /* FQAnimatedTransitioning.h */,
+				B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */,
+				B9D9103C22AE819900D54911 /* LGProfileViewController.h */,
+				B9D9103D22AE819900D54911 /* LGProfileViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B9D9103B22AE818300D54911 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B9D9103F22AE819E00D54911 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				B9D9104022AE81B400D54911 /* Target_Profile.h */,
+				B9D9104122AE81B400D54911 /* Target_Profile.m */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		B9D9104322AE81EB00D54911 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B9D9104422AE820200D54911 /* CTMediator+LGProfileActions.h */,
+				B9D9104522AE820200D54911 /* CTMediator+LGProfileActions.m */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		B9F61A5022A4BC0F00CDC29E /* CommonUI */ = {
@@ -1003,6 +1071,7 @@
 				B9229D89229E6F310030691D /* LGTournamentFinishedRequest.m in Sources */,
 				B9229D23229CD3180030691D /* LGMatchDetailViewController.m in Sources */,
 				B9229D14229C17070030691D /* NSAttributedString+FQNilExamine.m in Sources */,
+				B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */,
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
 				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
@@ -1021,6 +1090,7 @@
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
 				B91A761C22A78EBC00155607 /* LGMatchParlayTopView.m in Sources */,
 				B9229D83229E6F120030691D /* LGTournamentTodayRequest.m in Sources */,
+				B9D9104222AE81B400D54911 /* Target_Profile.m in Sources */,
 				B91A763322A8E8E900155607 /* LGSplashViewController.m in Sources */,
 				B9F61A6C22A6566300CDC29E /* LGToastView.m in Sources */,
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
@@ -1047,6 +1117,7 @@
 				B9F61A5D22A5001900CDC29E /* LGMatchParlayTableView.m in Sources */,
 				B9F61A6622A6060F00CDC29E /* LGMatchParlayKeyboard.m in Sources */,
 				B9C3A164229F7DEB00E282B0 /* LGMatchTeamOddsView.m in Sources */,
+				B9D9104622AE820200D54911 /* CTMediator+LGProfileActions.m in Sources */,
 				B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */,
 				B9229D47229D07260030691D /* FQSegmentedControl.m in Sources */,
 				B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */,
@@ -1055,6 +1126,7 @@
 				B9D9102D22ADF36A00D54911 /* LGLoadingView.m in Sources */,
 				B9229D0E229BF04F0030691D /* NSDate+FQExtension.m in Sources */,
 				B9D9101522ABA64600D54911 /* CTMediator.m in Sources */,
+				B9D9103E22AE819900D54911 /* LGProfileViewController.m in Sources */,
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
 				B9229D35229CFD940030691D /* FQFileManagerUtility.m in Sources */,
 				B9229D6B229E39A70030691D /* LGTournamentListManager.m in Sources */,
