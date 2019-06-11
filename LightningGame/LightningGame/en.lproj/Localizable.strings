@@ -42,3 +42,5 @@ main_finished               = "已结束";
 // Parlay
 parlay_delete_all           = "删除全部";
 parlay_gain                 = "预计返还";
+parlay_confirm              = "确认";
+parlay_max                  = "最大";

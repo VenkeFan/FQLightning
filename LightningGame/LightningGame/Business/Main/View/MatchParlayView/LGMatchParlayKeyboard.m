@@ -8,8 +8,8 @@
 
 #import "LGMatchParlayKeyboard.h"
 
-#define kParlayKeyboardKeyColor                 kUIColorFromRGB(0x3F475A)
-#define kParlayKeyboardKeyFontSize              kSizeScale(18.0)
+#define kParlayKeyboardKeyColor                 kUIColorFromRGB(0x3B3635)
+#define kParlayKeyboardKeyFontSize              kSizeScale(9.0)
 
 NSInteger const kMatchParlayMaxBet              = 5000;
 
@@ -31,58 +31,63 @@ NSInteger const kMatchParlayMaxBet              = 5000;
 #pragma mark - UI
 
 - (void)initializeUI {
-    CGFloat padding = 2.0;
-    CGFloat x = padding, y = padding;
-    CGFloat height = (self.height - (2 + 1) * (padding)) / 2.0;
+    CGFloat padding = kSizeScale(3.0);
+    CGFloat x = kSizeScale(6.0), y = padding;
+    int countInRow = 7;
     int numbers = 10;
-    CGFloat numberWidth = (self.width - (numbers + 1) * padding) / (float)numbers;
-    CGFloat bigWidth = (self.width - (3 + 1) * padding) / 3.0;
+    CGFloat numberWidth = (self.width - x * 2 - (countInRow - 1) * padding) / countInRow; // (self.width - (numbers + 1) * padding) / (float)numbers;
+    CGFloat height = (self.height - (2 + 1) * (padding)) / 2.0;
+    CGFloat bigWidth = numberWidth * 2 + padding;
     
     UIButton* (^createButton)(NSString *) = ^(NSString *title) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setBackgroundColor:kParlayKeyboardKeyColor];
         [btn setTitle:title forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        btn.layer.cornerRadius = kCornerRadius;
+        [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
+        btn.layer.cornerRadius = kSizeScale(3.0);
         btn.titleLabel.font = kRegularFont(kParlayKeyboardKeyFontSize);
         
         return btn;
     };
     
+    CGFloat left = x, top = y;
     for (int i = 0; i < numbers; i++) {
+        left = x + (i % (numbers / 2)) * (numberWidth + padding);
+        top = y + (i / (numbers / 2)) * (height + padding);
+        
         UIButton *numberBtn = createButton([NSString stringWithFormat:@"%d", i + 1]);
         numberBtn.tag = i + 1;
         if (i == numbers - 1) {
             [numberBtn setTitle:@"0" forState:UIControlStateNormal];
             numberBtn.tag = 0;
         }
-        numberBtn.frame = CGRectMake(x + i * (numberWidth + padding), y, numberWidth, height);
+        numberBtn.frame = CGRectMake(left, top, numberWidth, height);
         [numberBtn addTarget:self action:@selector(numberBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:numberBtn];
     }
-    y += (height + padding);
     
-    UIButton *maxBetBtn = createButton([NSString stringWithFormat:@"最大投注\n%ld", (long)kMatchParlayMaxBet]);
-    maxBetBtn.frame = CGRectMake(x, y, bigWidth, height);
-    maxBetBtn.titleLabel.font = kRegularFont(kSizeScale(14.0));
+    left += (padding + numberWidth);
+    UIButton *confirmBtn = createButton(kLocalizedString(@"parlay_confirm"));
+    confirmBtn.frame = CGRectMake(left, top, bigWidth, height);
+    confirmBtn.titleLabel.font = kRegularFont(kParlayKeyboardKeyFontSize);
+    [confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:confirmBtn];
+    
+    top = y;
+    UIButton *maxBetBtn = createButton([NSString stringWithFormat:@"%@\n%ld", kLocalizedString(@"parlay_max"), (long)kMatchParlayMaxBet]);
+    maxBetBtn.frame = CGRectMake(left, top, numberWidth, height);
+    maxBetBtn.titleLabel.font = kRegularFont(kSizeScale(7.0));
     maxBetBtn.titleLabel.numberOfLines = 0;
     maxBetBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [maxBetBtn addTarget:self action:@selector(maxBetBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:maxBetBtn];
-    x += (maxBetBtn.width + padding);
     
-    UIButton *delBtn = createButton(@"Delete");
-    delBtn.frame = CGRectMake(x, y, bigWidth, height);
-    delBtn.titleLabel.font = kRegularFont(kSizeScale(14.0));
+    left += (padding + numberWidth);
+    UIButton *delBtn = createButton(nil);
+    delBtn.frame = CGRectMake(left, top, numberWidth, height);
+    [delBtn setImage:[UIImage imageNamed:@"main_delete_keyboard"] forState:UIControlStateNormal];
     [delBtn addTarget:self action:@selector(delBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:delBtn];
-    x += (delBtn.width + padding);
-    
-    UIButton *confirmBtn = createButton(@"确定");
-    confirmBtn.frame = CGRectMake(x, y, bigWidth, height);
-    confirmBtn.titleLabel.font = kRegularFont(kSizeScale(14.0));
-    [confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:confirmBtn];
 }
 
 #pragma mark - Events
