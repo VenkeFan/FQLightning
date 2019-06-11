@@ -7,6 +7,7 @@
 //
 
 #import "LGMainViewController.h"
+#import "YYFPSLabel.h"
 #import "CTMediator+LGProfileActions.h"
 #import "LGServiceButton.h"
 #import "FQSegmentedControl.h"
@@ -27,6 +28,13 @@
     
     [self layoutNavigationBar];
     [self initializeBody];
+    
+    {
+        YYFPSLabel *fpsLabel = [[YYFPSLabel alloc] init];
+        [fpsLabel sizeToFit];
+        fpsLabel.center = CGPointMake(CGRectGetMidX(kCurrentWindow.frame), kSystemStatusBarHeight);
+        [kCurrentWindow addSubview:fpsLabel];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

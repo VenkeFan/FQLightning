@@ -17,7 +17,7 @@ NSInteger const kMatchParlayMaxBet              = 5000;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:CGRectMake(0, 0, kScreenWidth, kLGMatchParlayKeyboardHeight)]) {
-        self.backgroundColor = kMarqueeBgColor;
+        self.backgroundColor = kCellBgColor;
         
         [self initializeUI];
     }

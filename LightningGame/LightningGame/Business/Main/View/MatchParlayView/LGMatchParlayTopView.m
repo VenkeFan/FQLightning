@@ -50,21 +50,29 @@
 
 - (void)initializeUI {
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeBtn.backgroundColor = [UIColor redColor];
+    closeBtn.backgroundColor = [UIColor clearColor];
     closeBtn.frame = CGRectMake(0, 0, self.height, self.height);
     closeBtn.center = CGPointMake(self.width - closeBtn.width * 0.5, self.height * 0.5);
+    [closeBtn setTitle:@"×" forState:UIControlStateNormal];
+    [closeBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
+    closeBtn.titleLabel.font = kRegularFont(kScoreFontSize);
     [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:closeBtn];
+    
+    UIView *line = [UIView new];
+    line.backgroundColor = kMainBgColor;
+    line.frame = CGRectMake(CGRectGetMinX(closeBtn.frame), 0, 1.0, self.height);
+    [self addSubview:line];
     
     UIControl *clearCtr = ({
         UIControl *ctr =  [[UIControl alloc] init];
         [ctr addTarget:self action:@selector(clearCtrClicked) forControlEvents:UIControlEventTouchUpInside];
         
-        CGFloat padding = 4.0;
+        CGFloat padding = kSizeScale(14.0);
         self.countLab = [UILabel new];
-        self.countLab.backgroundColor = kUIColorFromRGB(0x282F42);
+        self.countLab.backgroundColor = kMainBgColor;
         self.countLab.text = @"1";
-        self.countLab.textColor = [UIColor whiteColor];
+        self.countLab.textColor = kMainOnTintColor;
         self.countLab.font = kRegularFont(kNoteFontSize);
         self.countLab.textAlignment = NSTextAlignmentCenter;
         [self.countLab sizeToFit];
@@ -78,7 +86,8 @@
         }];
         
         UILabel *lab = [FQComponentFactory labelWithFont:kRegularFont(kNoteFontSize)];
-        lab.text = @"删除全部";
+        lab.text = kLocalizedString(@"parlay_delete_all");
+        lab.textColor = kUIColorFromRGB(0x000000);
         [ctr addSubview:lab];
         [lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.countLab.mas_right).offset(padding);

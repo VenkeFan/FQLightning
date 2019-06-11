@@ -50,7 +50,7 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
 @synthesize text = _text;
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    if (self = [super initWithFrame:CGRectMake(0, 0, kSizeScale(70.0), kSizeScale(20.0))]) {
         _isResponder = NO;
         [self initializeUI];
     }
@@ -71,6 +71,10 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
 }
 
 - (void)initializeUI {
+    self.backgroundColor = kInputBgColor;
+    self.layer.borderColor = kMainOnTintColor.CGColor;
+    self.layer.borderWidth = 1.0;
+    
     [self addSubview:self.cursorView];
     [self addSubview:self.txtLabel];
     

@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LGSplashViewController.h"
-#import "YYFPSLabel.h"
 #import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
@@ -23,13 +22,6 @@
     [self.window makeKeyAndVisible];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    
-    {
-        YYFPSLabel *fpsLabel = [[YYFPSLabel alloc] init];
-        [fpsLabel sizeToFit];
-        fpsLabel.center = CGPointMake(CGRectGetMidX(self.window.frame), kSystemStatusBarHeight);
-        [self.window addSubview:fpsLabel];
-    }
     
     return YES;
 }

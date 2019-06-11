@@ -38,3 +38,7 @@ main_today                  = "今日";
 main_before                 = "赛前";
 main_rolling                = "滚盘";
 main_finished               = "已结束";
+
+// Parlay
+parlay_delete_all           = "删除全部";
+parlay_gain                 = "预计返还";

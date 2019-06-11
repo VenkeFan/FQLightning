@@ -7,7 +7,6 @@
 //
 
 #import "LGProfileViewController.h"
-#import "FQAnimatedTransitioning.h"
 
 @interface LGProfileViewController ()
 

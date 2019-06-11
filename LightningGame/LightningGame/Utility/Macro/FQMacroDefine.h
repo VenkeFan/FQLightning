@@ -104,8 +104,8 @@ isiPhoneX;   \
 #define kSafeAreaBottomY                    (kIsiPhoneX ? kSafeAreaBottomConstHeight : 0)
 
 // 适配
-#define kSizeScale(size)                    ((size) * (kScreenWidth / 375.0))
-//#define kSizeScale(size)                    (size)
+//#define kSizeScale(size)                    ((size) * (kScreenWidth / 375.0))
+#define kSizeScale(size)                    (size)
 
 #pragma mark - Custom Method
 
