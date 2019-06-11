@@ -229,7 +229,7 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
         _txtLabel = [UILabel new];
         _txtLabel.backgroundColor = [UIColor clearColor];
         _txtLabel.textColor = kMainOnTintColor;
-        _txtLabel.font = kRegularFont(kNameFontSize);
+        _txtLabel.font = kRegularFont(kTinyFontSize);
         _txtLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _txtLabel;

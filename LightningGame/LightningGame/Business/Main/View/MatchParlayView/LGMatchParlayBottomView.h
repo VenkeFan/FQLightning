@@ -10,7 +10,7 @@
 
 @class LGMatchParlayBottomView;
 
-#define kLGMatchParlayViewBottomContentHeight       kSizeScale(45.0)
+#define kLGMatchParlayViewBottomContentHeight       kSizeScale(52.0)
 #define kLGMatchParlayViewBottomHeight              (kLGMatchParlayViewBottomContentHeight + kSafeAreaBottomY)
 
 NS_ASSUME_NONNULL_BEGIN
