@@ -9,7 +9,6 @@
 #import "LGMatchParlayKeyboard.h"
 
 #define kParlayKeyboardKeyColor                 kUIColorFromRGB(0x3B3635)
-#define kParlayKeyboardKeyFontSize              kSizeScale(9.0)
 
 NSInteger const kMatchParlayMaxBet              = 5000;
 
@@ -35,7 +34,7 @@ NSInteger const kMatchParlayMaxBet              = 5000;
     CGFloat x = kSizeScale(6.0), y = padding;
     int countInRow = 7;
     int numbers = 10;
-    CGFloat numberWidth = (self.width - x * 2 - (countInRow - 1) * padding) / countInRow; // (self.width - (numbers + 1) * padding) / (float)numbers;
+    CGFloat numberWidth = (self.width - x * 2 - (countInRow - 1) * padding) / countInRow;
     CGFloat height = (self.height - (2 + 1) * (padding)) / 2.0;
     CGFloat bigWidth = numberWidth * 2 + padding;
     
@@ -45,7 +44,7 @@ NSInteger const kMatchParlayMaxBet              = 5000;
         [btn setTitle:title forState:UIControlStateNormal];
         [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
         btn.layer.cornerRadius = kSizeScale(3.0);
-        btn.titleLabel.font = kRegularFont(kParlayKeyboardKeyFontSize);
+        btn.titleLabel.font = kRegularFont(kTinyFontSize);
         
         return btn;
     };
@@ -69,14 +68,14 @@ NSInteger const kMatchParlayMaxBet              = 5000;
     left += (padding + numberWidth);
     UIButton *confirmBtn = createButton(kLocalizedString(@"parlay_confirm"));
     confirmBtn.frame = CGRectMake(left, top, bigWidth, height);
-    confirmBtn.titleLabel.font = kRegularFont(kParlayKeyboardKeyFontSize);
+    confirmBtn.titleLabel.font = kRegularFont(kTinyFontSize);
     [confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:confirmBtn];
     
     top = y;
     UIButton *maxBetBtn = createButton([NSString stringWithFormat:@"%@\n%ld", kLocalizedString(@"parlay_max"), (long)kMatchParlayMaxBet]);
     maxBetBtn.frame = CGRectMake(left, top, numberWidth, height);
-    maxBetBtn.titleLabel.font = kRegularFont(kSizeScale(7.0));
+    maxBetBtn.titleLabel.font = kRegularFont(kSizeScale(9.0));
     maxBetBtn.titleLabel.numberOfLines = 0;
     maxBetBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [maxBetBtn addTarget:self action:@selector(maxBetBtnClicked) forControlEvents:UIControlEventTouchUpInside];

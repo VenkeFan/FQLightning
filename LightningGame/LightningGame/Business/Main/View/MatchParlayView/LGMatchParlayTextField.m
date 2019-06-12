@@ -50,7 +50,7 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
 @synthesize text = _text;
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:CGRectMake(0, 0, kSizeScale(70.0), kSizeScale(20.0))]) {
+    if (self = [super initWithFrame:CGRectMake(0, 0, kSizeScale(70.0), kSizeScale(28.0))]) {
         _isResponder = NO;
         [self initializeUI];
     }

@@ -10,7 +10,7 @@
 
 @class LGMatchParlayTableViewCell;
 
-#define kLGMatchParlayTableViewCellHeight                   kSizeScale(50.0)
+#define kLGMatchParlayTableViewCellHeight                   kSizeScale(68.0)
 
 NS_ASSUME_NONNULL_BEGIN
 

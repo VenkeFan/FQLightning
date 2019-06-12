@@ -10,7 +10,7 @@
 
 @class LGMatchParlayKeyboard;
 
-#define kLGMatchParlayKeyboardHeight                kSizeScale(52.0)
+#define kLGMatchParlayKeyboardHeight                kSizeScale(70.0)
 
 extern NSInteger const kMatchParlayMaxBet;
 

@@ -85,9 +85,9 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat x = 0, y = kSizeScale(5.0);
+    CGFloat x = 0, y = kSizeScale(10.0);
     
-    _delBtn.frame = CGRectMake(x, 0, kLGMatchParlayTableViewCellHeight, kLGMatchParlayTableViewCellHeight);
+    _delBtn.frame = CGRectMake(x, 0, kSizeScale(50.0), kSizeScale(50.0));
     
     _field.left = self.width - kSizeScale(13.0) - _field.width;
     _field.top = y;
@@ -100,11 +100,11 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
     _teamNameLab.width = CGRectGetMinX(_field.frame) - CGRectGetMaxX(_delBtn.frame);
     
     _groupNameLab.left = _teamNameLab.left;
-    _groupNameLab.top = CGRectGetMaxY(_teamNameLab.frame) + kSizeScale(3.0);
+    _groupNameLab.top = CGRectGetMaxY(_teamNameLab.frame) + kSizeScale(6.0);
     _groupNameLab.width = _teamNameLab.width;
     
     _matchNameLab.left = _teamNameLab.left;
-    _matchNameLab.top = CGRectGetMaxY(_groupNameLab.frame);
+    _matchNameLab.top = CGRectGetMaxY(_groupNameLab.frame) + kSizeScale(4.0);
     _matchNameLab.width = _teamNameLab.width;
     
     _keyboard.top = kLGMatchParlayTableViewCellHeight;
@@ -150,7 +150,7 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
 }
 
 - (void)matchParlayTextFieldShouldEndEditing:(LGMatchParlayTextField *)textField {
-    if (textField.text.length > 0) {
+    if (textField.text) {
         [self.dataDic setObject:textField.text forKey:kLGMatchParlayTableViewCellKeyFieldText];
     }
     
@@ -164,7 +164,7 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
 }
 
 - (void)matchParlayTextField:(LGMatchParlayTextField *)textField didEditing:(NSString *)string {
-    if (textField.text.length > 0) {
+    if (textField.text) {
         [self.dataDic setObject:textField.text forKey:kLGMatchParlayTableViewCellKeyFieldText];
     }
 }

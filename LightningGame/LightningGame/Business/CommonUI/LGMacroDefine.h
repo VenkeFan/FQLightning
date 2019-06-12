@@ -35,7 +35,7 @@
 #define kFieldFontSize                      kSizeScale(13.0)
 #define kScoreFontSize                      kSizeScale(22.0)
 #define kNoteFontSize                       kSizeScale(12.0)
-#define kTinyFontSize                       kSizeScale(9.0)
+#define kTinyFontSize                       kSizeScale(10.0)
 
 // cornerRadius
 #define kCornerRadius                       kSizeScale(6.0)
