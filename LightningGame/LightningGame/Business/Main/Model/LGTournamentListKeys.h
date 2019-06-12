@@ -62,5 +62,6 @@ extern NSString * const kTournamentOddsKeyName;
 extern NSString * const kTournamentOddsKeyMatchID;
 extern NSString * const kTournamentOddsKeyOdds;
 extern NSString * const kTournamentOddsKeyTag;
+extern NSString * const kTournamentOddsExoticKeyIsSelected;
 
 #endif /* LGTournamentListKeys_h */

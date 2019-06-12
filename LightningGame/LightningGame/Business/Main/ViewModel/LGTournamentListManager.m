@@ -11,6 +11,7 @@
 #import "LGTournamentTodayRequest.h"
 #import "LGTournamentRollingRequest.h"
 #import "LGTournamentFinishedRequest.h"
+#import "NSDictionary+FQExtension.h"
 
 #pragma mark - ListKey
 
@@ -65,6 +66,7 @@ NSString * const kTournamentOddsKeyName                     = @"name";
 NSString * const kTournamentOddsKeyMatchID                  = @"match_id";
 NSString * const kTournamentOddsKeyOdds                     = @"odds";
 NSString * const kTournamentOddsKeyTag                      = @"tag";
+NSString * const kTournamentOddsExoticKeyIsSelected         = @"isSelected";
 
 #pragma mark - LGTournamentListManager
 
@@ -82,7 +84,8 @@ NSString * const kTournamentOddsKeyTag                      = @"tag";
         return;
     }
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSDictionary *dic = [LGTournamentListManager dictionaryWithJSON:data];
+    NSMutableDictionary *dic = [[LGTournamentListManager dictionaryWithJSON:data] fq_mutableDictionary];
+    
     NSArray *array = [dic objectForKey:@"result"];
     
     if ([self.delegate respondsToSelector:@selector(managerDidFetch:data:last:errCode:)]) {

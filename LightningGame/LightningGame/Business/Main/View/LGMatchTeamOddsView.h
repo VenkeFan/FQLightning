@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGMatchTeamOddsView : UIView
 
-@property (nonatomic, assign) LGMatchTeamOddsViewStatus status;
 @property (nonatomic, assign) LGMatchTeamOddsViewDirection direction;
 
 - (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName;

@@ -114,6 +114,14 @@
     }
 }
 
+- (void)removeTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName {
+    if (!teamDic || !oddsDic) {
+        return;
+    }
+    
+    [self.contentView removeTeamDic:teamDic oddsDic:oddsDic matchName:matchName];
+}
+
 #pragma mark - Observer
 
 - (void)addObservers {
@@ -229,7 +237,7 @@
 - (void)p_fold:(BOOL)isDestroy completed:(void(^)(void))completed {
     [FQWindowUtility resignFirstResponder];
     
-    if (!self.isExpanded) {
+    if (!self.isExpanded && !isDestroy) {
         return;
     }
     self.expanded = NO;

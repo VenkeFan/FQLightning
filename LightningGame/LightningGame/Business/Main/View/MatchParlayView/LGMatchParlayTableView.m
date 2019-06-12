@@ -12,7 +12,9 @@
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
 
-static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
+NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
+NSString * const kMatchParlayTableViewRemoveItemNotif = @"kMatchParlayTableViewRemoveItemNotif";
+NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableViewRemoveAllItemsNotif";
 
 @interface LGMatchParlayTableView () <UITableViewDelegate, UITableViewDataSource, LGMatchParlayTableViewCellDelegate> {
     NSIndexPath *_keyboardIndexPath;
@@ -58,7 +60,7 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
         
         if ([tmpTeam[kTournamentTeamKeyMatchID] isEqual:teamDic[kTournamentTeamKeyMatchID]] &&
             [tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]] &&
-            [matchName isEqual:tmpMatchName]) {
+            [tmpMatchName isEqual:matchName]) {
             return NO;
         }
     }
@@ -78,7 +80,38 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     return YES;
 }
 
+- (BOOL)removeTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName {
+    if (!teamDic || !oddsDic) {
+        return NO;
+    }
+    
+    for (int i = 0; i < self.itemArray.count; i++) {
+        NSMutableDictionary *dicM = self.itemArray[i];
+        NSDictionary *tmpTeam = dicM[kLGMatchParlayTableViewCellKeyTeamDic];
+        NSDictionary *tmpOdds = dicM[kLGMatchParlayTableViewCellKeyOddsDic];
+        NSString *tmpMatchName = dicM[kLGMatchParlayTableViewCellKeyMatchName];
+        
+        if ([tmpTeam[kTournamentTeamKeyMatchID] isEqual:teamDic[kTournamentTeamKeyMatchID]] &&
+            [tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]] &&
+            [tmpMatchName isEqual:matchName]) {
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [self p_removeItemWithIndexPath:indexPath];
+            
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (void)clearAll {
+    NSMutableArray *oddsArrayM = [NSMutableArray array];
+    [self.itemArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [oddsArrayM addObject:[obj objectForKey:kLGMatchParlayTableViewCellKeyOddsDic]];
+    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMatchParlayTableViewRemoveAllItemsNotif object:oddsArrayM];
+    
     [[self mutableArrayValueForKey:@"itemArray"] removeAllObjects];
     _keyboardIndexPath = nil;
     if ([self.delegate respondsToSelector:@selector(matchParlayTableViewDidClear:)]) {
@@ -112,20 +145,7 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 
 - (void)matchParlayTableViewCellDidDeleted:(LGMatchParlayTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    if (indexPath.row < self.itemArray.count) {
-        if ([indexPath compare:_keyboardIndexPath] == NSOrderedSame) {
-            _keyboardIndexPath = nil;
-        }
-        
-        [[self mutableArrayValueForKey:@"itemArray"] removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        
-        if (self.itemArray.count > 0) {
-            [self p_updateTableViewHeight];
-        } else {
-            [self clearAll];
-        }
-    }
+    [self p_removeItemWithIndexPath:indexPath];
 }
 
 - (void)matchParlayTableViewCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell {
@@ -175,6 +195,26 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 
 #pragma mark - Private
 
+- (void)p_removeItemWithIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < self.itemArray.count) {
+        if ([indexPath compare:_keyboardIndexPath] == NSOrderedSame) {
+            _keyboardIndexPath = nil;
+        }
+        
+        NSMutableDictionary *dicM = self.itemArray[indexPath.row];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMatchParlayTableViewRemoveItemNotif object:dicM[kLGMatchParlayTableViewCellKeyOddsDic]];
+        
+        [[self mutableArrayValueForKey:@"itemArray"] removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
+        if (self.itemArray.count > 0) {
+            [self p_updateTableViewHeight];
+        } else {
+            [self clearAll];
+        }
+    }
+}
+
 - (void)p_updateTableViewHeight {
     CGFloat height = kLGMatchParlayTableViewCellHeight * self.itemArray.count;
     if (_keyboardIndexPath) {
@@ -206,7 +246,7 @@ static NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.backgroundColor = kMarqueeBgColor;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[LGMatchParlayTableViewCell class] forCellReuseIdentifier:kMatchParlayCellReuseID];

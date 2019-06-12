@@ -12,6 +12,7 @@
 #import "LGMarqueeView.h"
 #import "LGDatePickerView.h"
 #import "LGDatePickerTableView.h"
+#import "LGMatchParlayTableView.h"
 #import "LGMatchDetailViewController.h"
 
 static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
@@ -53,6 +54,15 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
         header.lastUpdatedTimeLabel.hidden = YES;
         header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
         _tableView.mj_header = header;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(matchParlayDidRemoveItemNotif:)
+                                                     name:kMatchParlayTableViewRemoveItemNotif
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(matchParlayDidRemoveAllItemsNotif:)
+                                                     name:kMatchParlayTableViewRemoveAllItemsNotif
+                                                   object:nil];
     }
     return self;
 }
@@ -61,6 +71,10 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     [super layoutSubviews];
     
     _tableView.frame = self.bounds;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Public
@@ -161,6 +175,51 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     
     LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kTournamentListKeyID]];
     [FQWindowUtility.currentViewController.navigationController pushViewController:ctr animated:YES];
+}
+
+#pragma mark - Notification
+
+- (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
+    NSDictionary *oddsDic = notification.object;
+    for (int i = 0; i < self.dataArray.count; i++) {
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kTournamentListKeyOdds];
+        if (oddsArray) {
+            for (int j = 0; j < oddsArray.count; j++) {
+                NSMutableDictionary *tmpOdds = oddsArray[j];
+                if ([tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]]) {
+                    [tmpOdds setObject:@(NO) forKey:kTournamentOddsExoticKeyIsSelected];
+                    
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }
+        }
+    }
+}
+
+- (void)matchParlayDidRemoveAllItemsNotif:(NSNotification *)notification {
+    NSArray *notiOddsArray = notification.object;
+    for (int i = 0; i < self.dataArray.count; i++) {
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kTournamentListKeyOdds];
+        if (!oddsArray) {
+            continue;
+        }
+        
+        for (int j = 0; j < oddsArray.count; j++) {
+            NSMutableDictionary *tmpOdds = oddsArray[j];
+            
+            for (int k = 0; k < notiOddsArray.count; k++) {
+                NSDictionary *notiOdds = notiOddsArray[k];
+                
+                if ([tmpOdds[kTournamentOddsKeyOddsID] isEqual:notiOdds[kTournamentOddsKeyOddsID]]) {
+                    [tmpOdds setObject:@(NO) forKey:kTournamentOddsExoticKeyIsSelected];
+                    
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }
+        }
+    }
 }
 
 #pragma mark - Private

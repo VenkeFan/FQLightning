@@ -84,6 +84,7 @@
 		B9D9104222AE81B400D54911 /* Target_Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104122AE81B400D54911 /* Target_Profile.m */; };
 		B9D9104622AE820200D54911 /* CTMediator+LGProfileActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104522AE820200D54911 /* CTMediator+LGProfileActions.m */; };
 		B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */; };
+		B9D9104F22B0EDC000D54911 /* NSDictionary+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104E22B0EDC000D54911 /* NSDictionary+FQExtension.m */; };
 		B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */; };
 		B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5622A4C7BA00CDC29E /* LGSignFieldView.m */; };
 		B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5922A4F5F100CDC29E /* LGForgetPwdViewController.m */; };
@@ -277,6 +278,8 @@
 		B9D9104522AE820200D54911 /* CTMediator+LGProfileActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CTMediator+LGProfileActions.m"; sourceTree = "<group>"; };
 		B9D9104722AE84DF00D54911 /* FQAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQAnimatedTransitioning.h; sourceTree = "<group>"; };
 		B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQAnimatedTransitioning.m; sourceTree = "<group>"; };
+		B9D9104D22B0EDC000D54911 /* NSDictionary+FQExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FQExtension.h"; sourceTree = "<group>"; };
+		B9D9104E22B0EDC000D54911 /* NSDictionary+FQExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FQExtension.m"; sourceTree = "<group>"; };
 		B9F61A5222A4BCD500CDC29E /* LGServiceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGServiceButton.h; sourceTree = "<group>"; };
 		B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGServiceButton.m; sourceTree = "<group>"; };
 		B9F61A5522A4C7BA00CDC29E /* LGSignFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignFieldView.h; sourceTree = "<group>"; };
@@ -452,6 +455,8 @@
 				B9229CF3229BED190030691D /* UINavigationController+FQExtension.m */,
 				B9229D1E229CCBCA0030691D /* UIViewController+FQExtension.h */,
 				B9229D1F229CCBCA0030691D /* UIViewController+FQExtension.m */,
+				B9D9104D22B0EDC000D54911 /* NSDictionary+FQExtension.h */,
+				B9D9104E22B0EDC000D54911 /* NSDictionary+FQExtension.m */,
 			);
 			path = Scaffold;
 			sourceTree = "<group>";
@@ -1083,6 +1088,7 @@
 				B9229D20229CCBCA0030691D /* UIViewController+FQExtension.m in Sources */,
 				B9229D06229BEEC00030691D /* UIScrollView+FQEmptyData.m in Sources */,
 				B9C3A16A229F93F100E282B0 /* FQComponentFactory.m in Sources */,
+				B9D9104F22B0EDC000D54911 /* NSDictionary+FQExtension.m in Sources */,
 				B9D9102422ABA73F00D54911 /* CTMediator+LGMainActions.m in Sources */,
 				B9229D01229BEEC00030691D /* NSArray+FQNilExamine.m in Sources */,
 				B9229D2C229CF63E0030691D /* FQSystemUtility.m in Sources */,

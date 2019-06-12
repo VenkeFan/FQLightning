@@ -20,12 +20,16 @@
 
 @interface LGMatchTeamOddsView ()
 
+@property (nonatomic, assign) LGMatchTeamOddsViewStatus status;
+@property (nonatomic, assign, getter=isSelected) BOOL selected;
+
 @property (nonatomic, copy) NSDictionary *teamDic;
-@property (nonatomic, copy) NSDictionary *oddsDic;
+@property (nonatomic, strong) NSMutableDictionary *oddsDic;
 @property (nonatomic, copy) NSString *matchName;
 
 @property (nonatomic, strong) UILabel *oddsLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) CALayer *lockLayer;
 
 @end
 
@@ -35,12 +39,21 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = kMarqueeBgColor;
         self.layer.cornerRadius = kCornerRadius;
+        _selected = NO;
         
         _oddsLabel = [UILabel new];
         _oddsLabel.textAlignment = NSTextAlignmentCenter;
         _oddsLabel.textColor = kNameFontColor;
         _oddsLabel.font = kRegularFont(kNameFontSize);
         [self addSubview:_oddsLabel];
+        
+        _lockLayer = [CALayer layer];
+        UIImage *img = [UIImage imageNamed:@"main_lock"];
+        _lockLayer.frame = (CGRect){.origin = CGPointZero, .size = img.size};
+        _lockLayer.contents = (__bridge id)img.CGImage;
+        _lockLayer.contentsScale = [[UIScreen mainScreen] scale];
+        _lockLayer.contentsGravity = kCAGravityResizeAspect;
+        [self.layer addSublayer:_lockLayer];
         
         _nameLabel = [UILabel new];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -58,24 +71,40 @@
 
 - (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(nonnull NSString *)matchName {
     self.teamDic = teamDic;
-    self.oddsDic = oddsDic;
+    self.oddsDic = (NSMutableDictionary *)oddsDic;
     self.matchName = matchName;
+    [self setSelected:[self.oddsDic[kTournamentOddsExoticKeyIsSelected] boolValue]];
+    
+    _oddsLabel.hidden = YES;
+    _lockLayer.hidden = YES;
     
     _oddsLabel.text = oddsDic[kTournamentOddsKeyOdds];
     _nameLabel.text = teamDic[kTournamentTeamKeyName];
     
     if (kIsNull(oddsDic[kTournamentOddsKeyOdds])) {
-        _nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        [self setStatus:LGMatchTeamOddsViewStatus_Disable];
     } else {
-        _oddsLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, kViewPaddingY + CGRectGetHeight(_oddsLabel.frame) * 0.5);
-        _nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) - kViewPaddingY - CGRectGetHeight(_nameLabel.frame) * 0.5);
+        if ([oddsDic[kTournamentOddsKeyStatus] integerValue] == 2) {
+            [self setStatus:LGMatchTeamOddsViewStatus_Enable];
+        } else {
+            [self setStatus:LGMatchTeamOddsViewStatus_Locked];
+        }
     }
 }
 
 #pragma mark - Event
 
 - (void)selfOnTapped {
-    [[LGMatchParlayView instance] addTeamDic:self.teamDic oddsDic:self.oddsDic matchName:self.matchName];
+    if (self.status == LGMatchTeamOddsViewStatus_Enable) {
+        self.selected = !self.isSelected;
+        
+        if (self.isSelected) {
+            [[LGMatchParlayView instance] addTeamDic:self.teamDic oddsDic:self.oddsDic matchName:self.matchName];
+            
+        } else {
+            [[LGMatchParlayView instance] removeTeamDic:self.teamDic oddsDic:self.oddsDic matchName:self.matchName];
+        }
+    }
 }
 
 #pragma mark - Setter
@@ -104,18 +133,43 @@
     }
 }
 
+- (void)setSelected:(BOOL)selected {
+    if (_selected == selected) {
+        return;
+    }
+    
+    _selected = selected;
+    
+    [self.oddsDic setObject:@(self.isSelected) forKey:kTournamentOddsExoticKeyIsSelected];
+    
+    if (selected) {
+        self.layer.borderColor = kMainOnTintColor.CGColor;
+        self.layer.borderWidth = 1.0;
+    } else {
+        self.layer.borderWidth = 0.0;
+    }
+}
+
 - (void)setStatus:(LGMatchTeamOddsViewStatus)status {
     _status = status;
     
     switch (status) {
-        case LGMatchTeamOddsViewStatus_Enable:
+        case LGMatchTeamOddsViewStatus_Enable: {
+            _oddsLabel.hidden = NO;
             
+            _oddsLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, kViewPaddingY + CGRectGetHeight(_oddsLabel.frame) * 0.5);
+            _nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) - kViewPaddingY - CGRectGetHeight(_nameLabel.frame) * 0.5);
+        }
             break;
-        case LGMatchTeamOddsViewStatus_Disable:
-            
+        case LGMatchTeamOddsViewStatus_Disable: {
+            _nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        }
             break;
         case LGMatchTeamOddsViewStatus_Locked:
+            _lockLayer.hidden = NO;
             
+            _lockLayer.position = CGPointMake(CGRectGetWidth(self.frame) * 0.5, kViewPaddingY + CGRectGetHeight(_oddsLabel.frame) * 0.5);
+            _nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) - kViewPaddingY - CGRectGetHeight(_nameLabel.frame) * 0.5);
             break;
     }
 }
