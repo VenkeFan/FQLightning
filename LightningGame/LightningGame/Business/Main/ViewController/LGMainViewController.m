@@ -11,13 +11,13 @@
 #import "CTMediator+LGProfileActions.h"
 #import "LGServiceButton.h"
 #import "FQSegmentedControl.h"
-#import "LGTournamentListView.h"
+#import "LGMatchListView.h"
 
 @interface LGMainViewController () <FQSegmentedControlDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, copy) NSArray<LGTournamentListView *> *listViewArray;
+@property (nonatomic, copy) NSArray<LGMatchListView *> *listViewArray;
 
 @end
 
@@ -100,27 +100,27 @@
     });
     [self.view addSubview:_scrollView];
     
-    LGTournamentListView* (^createListView)(CGFloat) = ^(CGFloat x) {
-        LGTournamentListView *listView = [LGTournamentListView new];
+    LGMatchListView* (^createListView)(CGFloat) = ^(CGFloat x) {
+        LGMatchListView *listView = [LGMatchListView new];
         listView.frame = CGRectMake(x, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height);
         
         return listView;
     };
     
-    LGTournamentListView *beforeView = createListView(0);
-    beforeView.listType = LGTournamentListType_Before;
+    LGMatchListView *beforeView = createListView(0);
+    beforeView.listType = LGMatchListType_Before;
     [self.scrollView addSubview:beforeView];
     
-    LGTournamentListView *todayView = createListView(CGRectGetMaxX(beforeView.frame));
-    todayView.listType = LGTournamentListType_Today;
+    LGMatchListView *todayView = createListView(CGRectGetMaxX(beforeView.frame));
+    todayView.listType = LGMatchListType_Today;
     [self.scrollView addSubview:todayView];
     
-    LGTournamentListView *rollingView = createListView(CGRectGetMaxX(todayView.frame));
-    rollingView.listType = LGTournamentListType_Rolling;
+    LGMatchListView *rollingView = createListView(CGRectGetMaxX(todayView.frame));
+    rollingView.listType = LGMatchListType_Rolling;
     [self.scrollView addSubview:rollingView];
     
-    LGTournamentListView *finishedView = createListView(CGRectGetMaxX(rollingView.frame));
-    finishedView.listType = LGTournamentListType_Finished;
+    LGMatchListView *finishedView = createListView(CGRectGetMaxX(rollingView.frame));
+    finishedView.listType = LGMatchListType_Finished;
     [self.scrollView addSubview:finishedView];
     
     self.listViewArray = @[beforeView, todayView, rollingView, finishedView];
@@ -145,7 +145,7 @@
                          self.scrollView.contentOffset = CGPointMake(kScreenWidth * index, 0);
                      }
                      completion:^(BOOL finished) {
-                         LGTournamentListView *listView = self.listViewArray[index];
+                         LGMatchListView *listView = self.listViewArray[index];
                          [listView display];
                      }];
 }

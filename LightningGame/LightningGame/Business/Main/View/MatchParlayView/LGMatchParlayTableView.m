@@ -7,7 +7,7 @@
 //
 
 #import "LGMatchParlayTableView.h"
-#import "LGTournamentListKeys.h"
+#import "LGMatchListKeys.h"
 #import "LGMatchParlayKeyboard.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
@@ -58,8 +58,8 @@ NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableV
         NSDictionary *tmpOdds = dicM[kLGMatchParlayTableViewCellKeyOddsDic];
         NSString *tmpMatchName = dicM[kLGMatchParlayTableViewCellKeyMatchName];
         
-        if ([tmpTeam[kTournamentTeamKeyMatchID] isEqual:teamDic[kTournamentTeamKeyMatchID]] &&
-            [tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]] &&
+        if ([tmpTeam[kMatchTeamKeyMatchID] isEqual:teamDic[kMatchTeamKeyMatchID]] &&
+            [tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]] &&
             [tmpMatchName isEqual:matchName]) {
             return NO;
         }
@@ -91,8 +91,8 @@ NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableV
         NSDictionary *tmpOdds = dicM[kLGMatchParlayTableViewCellKeyOddsDic];
         NSString *tmpMatchName = dicM[kLGMatchParlayTableViewCellKeyMatchName];
         
-        if ([tmpTeam[kTournamentTeamKeyMatchID] isEqual:teamDic[kTournamentTeamKeyMatchID]] &&
-            [tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]] &&
+        if ([tmpTeam[kMatchTeamKeyMatchID] isEqual:teamDic[kMatchTeamKeyMatchID]] &&
+            [tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]] &&
             [tmpMatchName isEqual:matchName]) {
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];

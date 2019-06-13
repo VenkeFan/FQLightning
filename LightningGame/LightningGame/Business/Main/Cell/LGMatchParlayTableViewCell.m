@@ -7,7 +7,7 @@
 //
 
 #import "LGMatchParlayTableViewCell.h"
-#import "LGTournamentListKeys.h"
+#import "LGMatchListKeys.h"
 #import "FQComponentFactory.h"
 #import "LGMatchParlayTextField.h"
 #import "LGMatchParlayKeyboard.h"
@@ -124,9 +124,9 @@ NSString * const kLGMatchParlayTableViewCellKeyFieldText        = @"kLGMatchParl
     }
     _field.text = dataDic[kLGMatchParlayTableViewCellKeyFieldText];
     
-    _teamNameLab.text = [[dataDic objectForKey:kLGMatchParlayTableViewCellKeyTeamDic] objectForKey:kTournamentTeamKeyName];
+    _teamNameLab.text = [[dataDic objectForKey:kLGMatchParlayTableViewCellKeyTeamDic] objectForKey:kMatchTeamKeyName];
     [_teamNameLab sizeToFit];
-    _groupNameLab.text = [[dataDic objectForKey:kLGMatchParlayTableViewCellKeyOddsDic] objectForKey:kTournamentOddsKeyGroupName];
+    _groupNameLab.text = [[dataDic objectForKey:kLGMatchParlayTableViewCellKeyOddsDic] objectForKey:kMatchOddsKeyGroupName];
     [_groupNameLab sizeToFit];
     _matchNameLab.text = [dataDic objectForKey:kLGMatchParlayTableViewCellKeyMatchName];
     [_matchNameLab sizeToFit];

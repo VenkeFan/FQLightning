@@ -1,13 +1,13 @@
 //
-//  LGTournamentBeforeRequest.m
+//  LGMatchTodayRequest.m
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import "LGTournamentBeforeRequest.h"
+#import "LGMatchTodayRequest.h"
 
-@implementation LGTournamentBeforeRequest
+@implementation LGMatchTodayRequest
 
 @end

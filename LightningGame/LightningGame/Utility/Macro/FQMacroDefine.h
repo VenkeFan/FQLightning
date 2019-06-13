@@ -36,6 +36,9 @@ DEFER_STRINGIFY(__FILE__) " line " DEFER_STRINGIFY(__LINE__)
 
 #pragma mark - Font
 
+//#define kFontName                   @"Heiti SC"
+//#define kRegularFont(fontSize)      ([UIFont fontWithName:kFontName size:fontSize])
+
 #define kRegularFont(size)   \
 ({  \
 UIFont *font;   \

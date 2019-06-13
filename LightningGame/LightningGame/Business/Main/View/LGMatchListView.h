@@ -1,5 +1,5 @@
 //
-//  LGTournamentListView.h
+//  LGMatchListView.h
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LGTournamentListManager.h"
+#import "LGMatchListManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGTournamentListView : UIView
+@interface LGMatchListView : UIView
 
-@property (nonatomic, assign) LGTournamentListType listType;
+@property (nonatomic, assign) LGMatchListType listType;
 
 - (void)display;
 

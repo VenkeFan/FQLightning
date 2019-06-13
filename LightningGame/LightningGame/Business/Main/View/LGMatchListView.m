@@ -1,27 +1,27 @@
 //
-//  LGTournamentListView.m
+//  LGMatchListView.m
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import "LGTournamentListView.h"
+#import "LGMatchListView.h"
 #import <MJRefresh/MJRefresh.h>
-#import "LGTournamentListViewCell.h"
+#import "LGMatchListViewCell.h"
 #import "LGMarqueeView.h"
 #import "LGDatePickerView.h"
 #import "LGDatePickerTableView.h"
 #import "LGMatchParlayTableView.h"
 #import "LGMatchDetailViewController.h"
 
-static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
+static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 
-@interface LGTournamentListView () <LGTournamentListManagerDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface LGMatchListView () <LGMatchListManagerDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isLoaded;
 }
 
-@property (nonatomic, strong) LGTournamentListManager *manager;
+@property (nonatomic, strong) LGMatchListManager *manager;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) LGMarqueeView *marqueeView;
@@ -30,18 +30,19 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 
 @end
 
-@implementation LGTournamentListView
+@implementation LGMatchListView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _isLoaded = NO;
         
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, kLGMatchListViewCellHeight * 0.5, 0);
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView registerClass:[LGTournamentListViewCell class] forCellReuseIdentifier:kTournamentCellReuseID];
-        _tableView.rowHeight = kLGTournamentListViewCellHeight;
+        [_tableView registerClass:[LGMatchListViewCell class] forCellReuseIdentifier:kMatchCellReuseID];
+        _tableView.rowHeight = kLGMatchListViewCellHeight;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addSubview:_tableView];
         
@@ -97,9 +98,9 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     [self.manager loadMoreData];
 }
 
-#pragma mark - LGTournamentListManagerDelegate
+#pragma mark - LGMatchListManagerDelegate
 
-- (void)managerDidFetch:(LGTournamentListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
+- (void)managerDidFetch:(LGMatchListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
     [self.tableView.mj_header endRefreshing];
     
     if (data.count == 0) {
@@ -112,7 +113,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     [self.tableView reloadData];
 }
 
-- (void)managerDidMore:(LGTournamentListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
+- (void)managerDidMore:(LGMatchListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
     if (data.count == 0) {
         return;
     }
@@ -143,7 +144,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     UIView *view = [UIView new];
     view.backgroundColor = kMainBgColor;
     
-    if (self.listType == LGTournamentListType_Today || self.listType == LGTournamentListType_Rolling) {
+    if (self.listType == LGMatchListType_Today || self.listType == LGMatchListType_Rolling) {
         self.marqueeView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kMarqueeViewHeight);
         [view addSubview:self.marqueeView];
         [self.marqueeView fetchData];
@@ -165,7 +166,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LGTournamentListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTournamentCellReuseID];
+    LGMatchListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMatchCellReuseID];
     [cell setDataDic:self.dataArray[indexPath.row]];
     return cell;
 }
@@ -173,7 +174,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataArray[indexPath.row];
     
-    LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kTournamentListKeyID]];
+    LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kMatchListKeyID]];
     [FQWindowUtility.currentViewController.navigationController pushViewController:ctr animated:YES];
 }
 
@@ -182,12 +183,12 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 - (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
     NSDictionary *oddsDic = notification.object;
     for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kTournamentListKeyOdds];
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchListKeyOdds];
         if (oddsArray) {
             for (int j = 0; j < oddsArray.count; j++) {
                 NSMutableDictionary *tmpOdds = oddsArray[j];
-                if ([tmpOdds[kTournamentOddsKeyOddsID] isEqual:oddsDic[kTournamentOddsKeyOddsID]]) {
-                    [tmpOdds setObject:@(NO) forKey:kTournamentOddsExoticKeyIsSelected];
+                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]]) {
+                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
                     
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
                     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -200,7 +201,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 - (void)matchParlayDidRemoveAllItemsNotif:(NSNotification *)notification {
     NSArray *notiOddsArray = notification.object;
     for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kTournamentListKeyOdds];
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchListKeyOdds];
         if (!oddsArray) {
             continue;
         }
@@ -211,8 +212,8 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
             for (int k = 0; k < notiOddsArray.count; k++) {
                 NSDictionary *notiOdds = notiOddsArray[k];
                 
-                if ([tmpOdds[kTournamentOddsKeyOddsID] isEqual:notiOdds[kTournamentOddsKeyOddsID]]) {
-                    [tmpOdds setObject:@(NO) forKey:kTournamentOddsExoticKeyIsSelected];
+                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:notiOdds[kMatchOddsKeyOddsID]]) {
+                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
                     
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
                     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -242,9 +243,9 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
 
 #pragma mark - Getter
 
-- (LGTournamentListManager *)manager {
+- (LGMatchListManager *)manager {
     if (!_manager) {
-        _manager = [LGTournamentListManager new];
+        _manager = [LGMatchListManager new];
         _manager.delegate = self;
         _manager.listType = _listType;
     }
@@ -269,7 +270,7 @@ static NSString * const kTournamentCellReuseID = @"LGTournamentListViewCell";
     if (!_datePickerView) {
         _datePickerView = [[LGDatePickerView alloc] initWithFrame:CGRectZero];
         _datePickerView.delegate = self;
-        _datePickerView.previously = (self.listType == LGTournamentListType_Finished);
+        _datePickerView.previously = (self.listType == LGMatchListType_Finished);
     }
     return _datePickerView;
 }

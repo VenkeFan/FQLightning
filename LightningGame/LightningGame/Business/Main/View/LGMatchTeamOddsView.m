@@ -7,7 +7,7 @@
 //
 
 #import "LGMatchTeamOddsView.h"
-#import "LGTournamentListKeys.h"
+#import "LGMatchListKeys.h"
 #import "LGMatchParlayView.h"
 
 #define kViewPaddingY                       kSizeScale(4.0)
@@ -73,18 +73,18 @@
     self.teamDic = teamDic;
     self.oddsDic = (NSMutableDictionary *)oddsDic;
     self.matchName = matchName;
-    [self setSelected:[self.oddsDic[kTournamentOddsExoticKeyIsSelected] boolValue]];
+    [self setSelected:[self.oddsDic[kMatchOddsExoticKeyIsSelected] boolValue]];
     
     _oddsLabel.hidden = YES;
     _lockLayer.hidden = YES;
     
-    _oddsLabel.text = oddsDic[kTournamentOddsKeyOdds];
-    _nameLabel.text = teamDic[kTournamentTeamKeyName];
+    _oddsLabel.text = oddsDic[kMatchOddsKeyOdds];
+    _nameLabel.text = teamDic[kMatchTeamKeyName];
     
-    if (kIsNull(oddsDic[kTournamentOddsKeyOdds])) {
+    if (kIsNull(oddsDic[kMatchOddsKeyOdds])) {
         [self setStatus:LGMatchTeamOddsViewStatus_Disable];
     } else {
-        if ([oddsDic[kTournamentOddsKeyStatus] integerValue] == 2) {
+        if ([oddsDic[kMatchOddsKeyStatus] integerValue] == 2) {
             [self setStatus:LGMatchTeamOddsViewStatus_Enable];
         } else {
             [self setStatus:LGMatchTeamOddsViewStatus_Locked];
@@ -140,7 +140,7 @@
     
     _selected = selected;
     
-    [self.oddsDic setObject:@(self.isSelected) forKey:kTournamentOddsExoticKeyIsSelected];
+    [self.oddsDic setObject:@(self.isSelected) forKey:kMatchOddsExoticKeyIsSelected];
     
     if (selected) {
         self.layer.borderColor = kMainOnTintColor.CGColor;

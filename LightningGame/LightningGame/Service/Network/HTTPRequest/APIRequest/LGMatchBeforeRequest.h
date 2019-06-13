@@ -1,5 +1,5 @@
 //
-//  LGTournamentFinishedRequest.h
+//  LGMatchBeforeRequest.h
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGTournamentFinishedRequest : LGBasicRequest
+@interface LGMatchBeforeRequest : LGBasicRequest
 
 @end
 

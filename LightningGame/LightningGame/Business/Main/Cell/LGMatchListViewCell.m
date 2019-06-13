@@ -1,21 +1,21 @@
 //
-//  LGTournamentListViewCell.m
+//  LGMatchListViewCell.m
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import "LGTournamentListViewCell.h"
+#import "LGMatchListViewCell.h"
 #import <CoreText/CoreText.h>
-#import "LGTournamentListKeys.h"
+#import "LGMatchListKeys.h"
 #import "LGMatchTeamOddsView.h"
 #import "FQComponentFactory.h"
 #import "LGAPIURLConfig.h"
 
 #define kScoreLayerPaddingX         kSizeScale(8.0)
 
-@interface LGTournamentListViewCell ()
+@interface LGMatchListViewCell ()
 
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIView *titleView;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation LGTournamentListViewCell
+@implementation LGMatchListViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -48,7 +48,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    _containerView.frame = CGRectMake(kCellMarginX, 0, CGRectGetWidth(self.frame) - kCellMarginX * 2, kLGTournamentListViewCellContainerHeight);
+    _containerView.frame = CGRectMake(kCellMarginX, 0, CGRectGetWidth(self.frame) - kCellMarginX * 2, kLGMatchListViewCellContainerHeight);
 
     CGFloat x = 8.0, y = 8.0;
     
@@ -133,8 +133,8 @@
     _dataDic = [dataDic copy];
     
     {
-        NSString *tourName = dataDic[kTournamentListKeyTournamentName];
-        NSString *round = [dataDic[kTournamentListKeyRound] uppercaseString];
+        NSString *tourName = dataDic[kMatchListKeyTournamentName];
+        NSString *round = [dataDic[kMatchListKeyRound] uppercaseString];
         NSMutableString *strM = [NSMutableString stringWithFormat:@"%@/%@", tourName, round];
         NSMutableAttributedString *strAttr = [[NSMutableAttributedString alloc] initWithString:strM];
         [strAttr addAttributes:@{NSFontAttributeName: kRegularFont(kNameFontSize)} range:NSMakeRange(0, strM.length)];
@@ -144,8 +144,8 @@
         _tourNameLabel.attributedText = strAttr;
     }
     
-    NSArray *teamArray = dataDic[kTournamentListKeyTeam];
-    NSArray *oddsArray = dataDic[kTournamentListKeyOdds];
+    NSArray *teamArray = dataDic[kMatchListKeyTeam];
+    NSArray *oddsArray = dataDic[kMatchListKeyOdds];
     
     NSDictionary *leftTeam, *rightTeam;
     NSDictionary *leftOdds, *rightOdds;
@@ -156,7 +156,7 @@
     }
     
     if (oddsArray.count >= 2) {
-        if ([leftTeam[kTournamentTeamKeyTeamID] isEqual:oddsArray[0][kTournamentOddsKeyTeamID]]) {
+        if ([leftTeam[kMatchTeamKeyTeamID] isEqual:oddsArray[0][kMatchOddsKeyTeamID]]) {
             leftOdds = oddsArray[0];
             rightOdds = oddsArray[1];
         } else {
@@ -168,7 +168,7 @@
     {
         NSAttributedString* (^scoreStr)(NSDictionary *) = ^(NSDictionary *team) {
             NSString *score = @"0";
-            id obj = team[kTournamentTeamKeyScore][kTournamentScoreKeyTotal];
+            id obj = team[kMatchTeamKeyScore][kMatchScoreKeyTotal];
             if (obj && [obj respondsToSelector:@selector(stringValue)]) {
                 score = [obj stringValue];
             }
@@ -197,11 +197,11 @@
         _leftScore.string = leftScoreAttr;
         _rightScore.string = rightScoreAttr;
     }
-    [_leftLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, leftTeam[kTournamentTeamKeyLogo]]];
-    [_rightLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, rightTeam[kTournamentTeamKeyLogo]]];
+    [_leftLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, leftTeam[kMatchTeamKeyLogo]]];
+    [_rightLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, rightTeam[kMatchTeamKeyLogo]]];
     
-    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kTournamentListKeyMatchName]];
-    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kTournamentListKeyMatchName]];
+    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kMatchListKeyMatchName]];
+    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kMatchListKeyMatchName]];
 }
 
 @end

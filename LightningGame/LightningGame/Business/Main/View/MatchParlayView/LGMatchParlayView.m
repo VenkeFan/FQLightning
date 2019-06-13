@@ -7,7 +7,7 @@
 //
 
 #import "LGMatchParlayView.h"
-#import "LGTournamentListKeys.h"
+#import "LGMatchListKeys.h"
 #import "LGMatchParlayTableView.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
