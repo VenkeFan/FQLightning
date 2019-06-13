@@ -9,24 +9,24 @@
 #ifndef LGMatchListKeys_h
 #define LGMatchListKeys_h
 
-#pragma mark - ListKey
+#pragma mark - MatchKey
 
-extern NSString * const kMatchListKeyGameID;
-extern NSString * const kMatchListKeyStatus;
-extern NSString * const kMatchListKeyID;
-extern NSString * const kMatchListKeyEnableParlay;
-extern NSString * const kMatchListKeyGameName;
-extern NSString * const kMatchListKeyMatchName;
-extern NSString * const kMatchListKeyMatchShortName;
-extern NSString * const kMatchListKeyStartTime;
-extern NSString * const kMatchListKeyEndTime;
-extern NSString * const kMatchListKeyRound;
-extern NSString * const kMatchListKeyTournamentID;
-extern NSString * const kMatchListKeyTournamentName;
-extern NSString * const kMatchListKeyTournamentShortName;
-extern NSString * const kMatchListKeyPlayCount;
-extern NSString * const kMatchListKeyTeam;
-extern NSString * const kMatchListKeyOdds;
+extern NSString * const kMatchKeyGameID;
+extern NSString * const kMatchKeyStatus;
+extern NSString * const kMatchKeyID;
+extern NSString * const kMatchKeyEnableParlay;
+extern NSString * const kMatchKeyGameName;
+extern NSString * const kMatchKeyMatchName;
+extern NSString * const kMatchKeyMatchShortName;
+extern NSString * const kMatchKeyStartTime;
+extern NSString * const kMatchKeyEndTime;
+extern NSString * const kMatchKeyRound;
+extern NSString * const kMatchKeyTournamentID;
+extern NSString * const kMatchKeyTournamentName;
+extern NSString * const kMatchKeyTournamentShortName;
+extern NSString * const kMatchKeyPlayCount;
+extern NSString * const kMatchKeyTeam;
+extern NSString * const kMatchKeyOdds;
 
 #pragma mark - TeamKey
 
@@ -45,6 +45,10 @@ extern NSString * const kMatchScoreKeyTotal;
 
 #pragma mark - OddsKey
 
+extern NSString * const kMatchOddsKeyEnableParlay;
+extern NSString * const kMatchOddsKeyGameID;
+extern NSString * const kMatchOddsKeyTournamentID;
+extern NSString * const kMatchOddsKeySortIndex;
 extern NSString * const kMatchOddsKeyGroupID;
 extern NSString * const kMatchOddsKeyValue;
 extern NSString * const kMatchOddsKeyWin;

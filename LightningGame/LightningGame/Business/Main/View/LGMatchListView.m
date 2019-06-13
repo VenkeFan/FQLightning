@@ -21,7 +21,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
     BOOL _isLoaded;
 }
 
-@property (nonatomic, strong) LGMatchListViewModel *manager;
+@property (nonatomic, strong) LGMatchListViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) LGMarqueeView *marqueeView;
@@ -48,9 +48,9 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
         
         MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
                                                                          refreshingAction:@selector(beginRefresh)];
-//        [header setTitle:@"下拉加载更多" forState:MJRefreshStateIdle];
-//        [header setTitle:@"下拉加载更多" forState:MJRefreshStatePulling];
-//        [header setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
+//        [header setTitle:@"下拉刷新" forState:MJRefreshStateIdle];
+//        [header setTitle:@"下拉刷新" forState:MJRefreshStatePulling];
+//        [header setTitle:@"正在刷新" forState:MJRefreshStateRefreshing];
         header.automaticallyChangeAlpha = YES;
         header.lastUpdatedTimeLabel.hidden = YES;
         header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
@@ -91,11 +91,11 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 #pragma mark - Network
 
 - (void)beginRefresh {
-    [self.manager fetchData];
+    [self.viewModel fetchData];
 }
 
 - (void)loadMore {
-    [self.manager loadMoreData];
+    [self.viewModel loadMoreData];
 }
 
 #pragma mark - LGMatchListViewModelDelegate
@@ -174,7 +174,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataArray[indexPath.row];
     
-    LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kMatchListKeyID]];
+    LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kMatchKeyID]];
     [FQWindowUtility.currentViewController.navigationController pushViewController:ctr animated:YES];
 }
 
@@ -183,7 +183,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 - (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
     NSDictionary *oddsDic = notification.object;
     for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchListKeyOdds];
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOdds];
         if (oddsArray) {
             for (int j = 0; j < oddsArray.count; j++) {
                 NSMutableDictionary *tmpOdds = oddsArray[j];
@@ -201,7 +201,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 - (void)matchParlayDidRemoveAllItemsNotif:(NSNotification *)notification {
     NSArray *notiOddsArray = notification.object;
     for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchListKeyOdds];
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOdds];
         if (!oddsArray) {
             continue;
         }
@@ -243,13 +243,13 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 
 #pragma mark - Getter
 
-- (LGMatchListViewModel *)manager {
-    if (!_manager) {
-        _manager = [LGMatchListViewModel new];
-        _manager.delegate = self;
-        _manager.listType = _listType;
+- (LGMatchListViewModel *)viewModel {
+    if (!_viewModel) {
+        _viewModel = [LGMatchListViewModel new];
+        _viewModel.delegate = self;
+        _viewModel.listType = _listType;
     }
-    return _manager;
+    return _viewModel;
 }
 
 - (NSMutableArray *)dataArray {

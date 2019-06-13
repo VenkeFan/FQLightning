@@ -133,8 +133,8 @@
     _dataDic = [dataDic copy];
     
     {
-        NSString *tourName = dataDic[kMatchListKeyTournamentName];
-        NSString *round = [dataDic[kMatchListKeyRound] uppercaseString];
+        NSString *tourName = dataDic[kMatchKeyTournamentName];
+        NSString *round = [dataDic[kMatchKeyRound] uppercaseString];
         NSMutableString *strM = [NSMutableString stringWithFormat:@"%@/%@", tourName, round];
         NSMutableAttributedString *strAttr = [[NSMutableAttributedString alloc] initWithString:strM];
         [strAttr addAttributes:@{NSFontAttributeName: kRegularFont(kNameFontSize)} range:NSMakeRange(0, strM.length)];
@@ -144,8 +144,8 @@
         _tourNameLabel.attributedText = strAttr;
     }
     
-    NSArray *teamArray = dataDic[kMatchListKeyTeam];
-    NSArray *oddsArray = dataDic[kMatchListKeyOdds];
+    NSArray *teamArray = dataDic[kMatchKeyTeam];
+    NSArray *oddsArray = dataDic[kMatchKeyOdds];
     
     NSDictionary *leftTeam, *rightTeam;
     NSDictionary *leftOdds, *rightOdds;
@@ -197,11 +197,15 @@
         _leftScore.string = leftScoreAttr;
         _rightScore.string = rightScoreAttr;
     }
-    [_leftLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, leftTeam[kMatchTeamKeyLogo]]];
-    [_rightLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, rightTeam[kMatchTeamKeyLogo]]];
+    if (leftTeam[kMatchTeamKeyLogo]) {
+        [_leftLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, leftTeam[kMatchTeamKeyLogo]]];
+    }
+    if (rightTeam[kMatchTeamKeyLogo]) {
+        [_rightLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, rightTeam[kMatchTeamKeyLogo]]];
+    }
     
-    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kMatchListKeyMatchName]];
-    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kMatchListKeyMatchName]];
+    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kMatchKeyMatchName]];
+    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kMatchKeyMatchName]];
 }
 
 @end

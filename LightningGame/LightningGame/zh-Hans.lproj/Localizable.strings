@@ -39,6 +39,9 @@ main_before                 = "赛前";
 main_rolling                = "滚盘";
 main_finished               = "已结束";
 
+// Detail
+detail_title                = "游戏竞猜";
+
 // Parlay
 parlay_delete_all           = "删除全部";
 parlay_gain                 = "预计返还";

@@ -19,6 +19,9 @@
         || [self isKindOfClass:NSClassFromString(@"UITextInputController")]
         || [NSStringFromClass([self class]) hasPrefix:@"UIKeyboard"]
         || [methodName isEqualToString:@"dealloc"]) {
+#if DEBUG
+        NSLog(@"MsgForwarding: %@ - %@", NSStringFromSelector(aSelector), [NSThread callStackSymbols]);
+#endif
         return nil;
     }
     

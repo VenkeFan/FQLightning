@@ -114,6 +114,14 @@
 #pragma mark - Public
 
 - (void)setItems:(NSArray *)items {
+    if (items.count != _items.count) {
+        [_btnArray removeAllObjects];
+        [self removeAllSubviews];
+        _items = items;
+        [self setNeedsLayout];
+        return;
+    }
+    
     _items = items;
     
     if (_btnArray.count > items.count) {

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSDictionary (FQExtension)
 
++ (NSDictionary *)dictionaryWithJSON:(id)json;
 - (NSMutableDictionary *)fq_mutableDictionary;
 
 @end

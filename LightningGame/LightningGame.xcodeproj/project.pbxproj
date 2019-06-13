@@ -85,6 +85,7 @@
 		B9D9104622AE820200D54911 /* CTMediator+LGProfileActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104522AE820200D54911 /* CTMediator+LGProfileActions.m */; };
 		B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */; };
 		B9D9104F22B0EDC000D54911 /* NSDictionary+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9104E22B0EDC000D54911 /* NSDictionary+FQExtension.m */; };
+		B9D9105222B1EA9F00D54911 /* LGMatchDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9105122B1EA9F00D54911 /* LGMatchDetailViewModel.m */; };
 		B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */; };
 		B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5622A4C7BA00CDC29E /* LGSignFieldView.m */; };
 		B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F61A5922A4F5F100CDC29E /* LGForgetPwdViewController.m */; };
@@ -280,6 +281,8 @@
 		B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQAnimatedTransitioning.m; sourceTree = "<group>"; };
 		B9D9104D22B0EDC000D54911 /* NSDictionary+FQExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FQExtension.h"; sourceTree = "<group>"; };
 		B9D9104E22B0EDC000D54911 /* NSDictionary+FQExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FQExtension.m"; sourceTree = "<group>"; };
+		B9D9105022B1EA9F00D54911 /* LGMatchDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailViewModel.h; sourceTree = "<group>"; };
+		B9D9105122B1EA9F00D54911 /* LGMatchDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailViewModel.m; sourceTree = "<group>"; };
 		B9F61A5222A4BCD500CDC29E /* LGServiceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGServiceButton.h; sourceTree = "<group>"; };
 		B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGServiceButton.m; sourceTree = "<group>"; };
 		B9F61A5522A4C7BA00CDC29E /* LGSignFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSignFieldView.h; sourceTree = "<group>"; };
@@ -468,10 +471,10 @@
 				B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */,
 				B9229CFF229BEEC00030691D /* NSArray+FQNilExamine.h */,
 				B9229CF6229BEEBF0030691D /* NSArray+FQNilExamine.m */,
-				B9229CF7229BEEBF0030691D /* NSAttributedString+FQNilExamine.h */,
-				B9229CF9229BEEBF0030691D /* NSAttributedString+FQNilExamine.m */,
 				B9229CF5229BEEBF0030691D /* NSDictionary+FQNilExamine.h */,
 				B9229CFE229BEEC00030691D /* NSDictionary+FQNilExamine.m */,
+				B9229CF7229BEEBF0030691D /* NSAttributedString+FQNilExamine.h */,
+				B9229CF9229BEEBF0030691D /* NSAttributedString+FQNilExamine.m */,
 				B9229CFA229BEEC00030691D /* NSString+FQNilExamine.h */,
 				B9229CF8229BEEBF0030691D /* NSString+FQNilExamine.m */,
 			);
@@ -525,6 +528,8 @@
 			children = (
 				B9229D69229E39A70030691D /* LGMatchListViewModel.h */,
 				B9229D6A229E39A70030691D /* LGMatchListViewModel.m */,
+				B9D9105022B1EA9F00D54911 /* LGMatchDetailViewModel.h */,
+				B9D9105122B1EA9F00D54911 /* LGMatchDetailViewModel.m */,
 				B9C3A16E229FC38E00E282B0 /* LGMarqueeViewModel.h */,
 				B9C3A16F229FC38E00E282B0 /* LGMarqueeViewModel.m */,
 				B9D9103222AE0D9800D54911 /* LGDatePickerViewModel.h */,
@@ -1093,6 +1098,7 @@
 				B9229D01229BEEC00030691D /* NSArray+FQNilExamine.m in Sources */,
 				B9229D2C229CF63E0030691D /* FQSystemUtility.m in Sources */,
 				B9C3A17922A0F9F700E282B0 /* LGSignUpViewController.m in Sources */,
+				B9D9105222B1EA9F00D54911 /* LGMatchDetailViewModel.m in Sources */,
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
 				B91A761C22A78EBC00155607 /* LGMatchParlayTopView.m in Sources */,
 				B9229D83229E6F120030691D /* LGMatchTodayRequest.m in Sources */,

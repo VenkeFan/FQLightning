@@ -13,24 +13,24 @@
 #import "LGMatchFinishedRequest.h"
 #import "NSDictionary+FQExtension.h"
 
-#pragma mark - ListKey
+#pragma mark - MatchKey
 
-NSString * const kMatchListKeyGameID                   = @"game_id";
-NSString * const kMatchListKeyStatus                   = @"status";
-NSString * const kMatchListKeyID                       = @"id";
-NSString * const kMatchListKeyEnableParlay             = @"enable_parlay";
-NSString * const kMatchListKeyGameName                 = @"game_name";
-NSString * const kMatchListKeyMatchName                = @"match_name";
-NSString * const kMatchListKeyMatchShortName           = @"match_short_name";
-NSString * const kMatchListKeyStartTime                = @"start_time";
-NSString * const kMatchListKeyEndTime                  = @"end_time";
-NSString * const kMatchListKeyRound                    = @"round";
-NSString * const kMatchListKeyTournamentID             = @"tournament_id";
-NSString * const kMatchListKeyTournamentName           = @"tournament_name";
-NSString * const kMatchListKeyTournamentShortName      = @"tournament_short_name";
-NSString * const kMatchListKeyPlayCount                = @"play_count";
-NSString * const kMatchListKeyTeam                     = @"team";
-NSString * const kMatchListKeyOdds                     = @"odds";
+NSString * const kMatchKeyGameID                       = @"game_id";
+NSString * const kMatchKeyStatus                       = @"status";
+NSString * const kMatchKeyID                           = @"id";
+NSString * const kMatchKeyEnableParlay                 = @"enable_parlay";
+NSString * const kMatchKeyGameName                     = @"game_name";
+NSString * const kMatchKeyMatchName                    = @"match_name";
+NSString * const kMatchKeyMatchShortName               = @"match_short_name";
+NSString * const kMatchKeyStartTime                    = @"start_time";
+NSString * const kMatchKeyEndTime                      = @"end_time";
+NSString * const kMatchKeyRound                        = @"round";
+NSString * const kMatchKeyTournamentID                 = @"tournament_id";
+NSString * const kMatchKeyTournamentName               = @"tournament_name";
+NSString * const kMatchKeyTournamentShortName          = @"tournament_short_name";
+NSString * const kMatchKeyPlayCount                    = @"play_count";
+NSString * const kMatchKeyTeam                         = @"team";
+NSString * const kMatchKeyOdds                         = @"odds";
 
 #pragma mark - TeamKey
 
@@ -49,6 +49,10 @@ NSString * const kMatchScoreKeyTotal                   = @"total";
 
 #pragma mark - OddsKey
 
+NSString * const kMatchOddsKeyEnableParlay             = @"enable_parlay";
+NSString * const kMatchOddsKeyGameID                   = @"game_id";
+NSString * const kMatchOddsKeyTournamentID             = @"tournament_id";
+NSString * const kMatchOddsKeySortIndex                = @"sort_index";
 NSString * const kMatchOddsKeyGroupID                  = @"odds_group_id";
 NSString * const kMatchOddsKeyValue                    = @"value";
 NSString * const kMatchOddsKeyWin                      = @"win";
@@ -84,7 +88,7 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
         return;
     }
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSMutableDictionary *dic = [[LGMatchListViewModel dictionaryWithJSON:data] fq_mutableDictionary];
+    NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
     
     NSArray *array = [dic objectForKey:@"result"];
     
@@ -97,25 +101,25 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
     
 }
 
-#pragma mark - Private
-
-+ (NSDictionary *)dictionaryWithJSON:(id)json {
-    if (!json || json == (id)kCFNull) return nil;
-    NSDictionary *dic = nil;
-    NSData *jsonData = nil;
-    if ([json isKindOfClass:[NSDictionary class]]) {
-        dic = json;
-    } else if ([json isKindOfClass:[NSString class]]) {
-        jsonData = [(NSString *)json dataUsingEncoding : NSUTF8StringEncoding];
-    } else if ([json isKindOfClass:[NSData class]]) {
-        jsonData = json;
-    }
-    if (jsonData) {
-        dic = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
-        if (![dic isKindOfClass:[NSDictionary class]]) dic = nil;
-    }
-    return dic;
-}
+//#pragma mark - Private
+//
+//+ (NSDictionary *)dictionaryWithJSON:(id)json {
+//    if (!json || json == (id)kCFNull) return nil;
+//    NSDictionary *dic = nil;
+//    NSData *jsonData = nil;
+//    if ([json isKindOfClass:[NSDictionary class]]) {
+//        dic = json;
+//    } else if ([json isKindOfClass:[NSString class]]) {
+//        jsonData = [(NSString *)json dataUsingEncoding : NSUTF8StringEncoding];
+//    } else if ([json isKindOfClass:[NSData class]]) {
+//        jsonData = json;
+//    }
+//    if (jsonData) {
+//        dic = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
+//        if (![dic isKindOfClass:[NSDictionary class]]) dic = nil;
+//    }
+//    return dic;
+//}
 
 #pragma mark - Getter
 
