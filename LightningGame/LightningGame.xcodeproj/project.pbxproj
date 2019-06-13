@@ -44,7 +44,7 @@
 		B9229D4D229D66E90030691D /* FQImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D4B229D66E90030691D /* FQImageButton.m */; };
 		B9229D62229E21EF0030691D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9229D64229E21EF0030691D /* Localizable.strings */; };
 		B9229D68229E2DE80030691D /* LGMatchListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D67229E2DE80030691D /* LGMatchListView.m */; };
-		B9229D6B229E39A70030691D /* LGMatchListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D6A229E39A70030691D /* LGMatchListManager.m */; };
+		B9229D6B229E39A70030691D /* LGMatchListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D6A229E39A70030691D /* LGMatchListViewModel.m */; };
 		B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D71229E5FB80030691D /* FQNetworkManager.m */; };
 		B9229D77229E5FB80030691D /* FQNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D73229E5FB80030691D /* FQNetworkReachabilityManager.m */; };
 		B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D7C229E6EC90030691D /* LGBasicRequest.m */; };
@@ -199,8 +199,8 @@
 		B9229D65229E21F30030691D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9229D66229E2DE80030691D /* LGMatchListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListView.h; sourceTree = "<group>"; };
 		B9229D67229E2DE80030691D /* LGMatchListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListView.m; sourceTree = "<group>"; };
-		B9229D69229E39A70030691D /* LGMatchListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListManager.h; sourceTree = "<group>"; };
-		B9229D6A229E39A70030691D /* LGMatchListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListManager.m; sourceTree = "<group>"; };
+		B9229D69229E39A70030691D /* LGMatchListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListViewModel.h; sourceTree = "<group>"; };
+		B9229D6A229E39A70030691D /* LGMatchListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListViewModel.m; sourceTree = "<group>"; };
 		B9229D6D229E5FB80030691D /* FQNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		B9229D6E229E5FB80030691D /* FQNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQNetworkManager.h; sourceTree = "<group>"; };
 		B9229D71229E5FB80030691D /* FQNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQNetworkManager.m; sourceTree = "<group>"; };
@@ -523,8 +523,8 @@
 		B9229D19229CCB050030691D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B9229D69229E39A70030691D /* LGMatchListManager.h */,
-				B9229D6A229E39A70030691D /* LGMatchListManager.m */,
+				B9229D69229E39A70030691D /* LGMatchListViewModel.h */,
+				B9229D6A229E39A70030691D /* LGMatchListViewModel.m */,
 				B9C3A16E229FC38E00E282B0 /* LGMarqueeViewModel.h */,
 				B9C3A16F229FC38E00E282B0 /* LGMarqueeViewModel.m */,
 				B9D9103222AE0D9800D54911 /* LGDatePickerViewModel.h */,
@@ -1135,7 +1135,7 @@
 				B9D9103E22AE819900D54911 /* LGProfileViewController.m in Sources */,
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
 				B9229D35229CFD940030691D /* FQFileManagerUtility.m in Sources */,
-				B9229D6B229E39A70030691D /* LGMatchListManager.m in Sources */,
+				B9229D6B229E39A70030691D /* LGMatchListViewModel.m in Sources */,
 				B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */,
 				B9229D68229E2DE80030691D /* LGMatchListView.m in Sources */,
 				B91A763622A910B700155607 /* LGForgetPwdRequest.m in Sources */,

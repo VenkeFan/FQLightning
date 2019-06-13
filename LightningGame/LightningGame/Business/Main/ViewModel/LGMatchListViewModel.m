@@ -1,12 +1,12 @@
 //
-//  LGMatchListManager.m
+//  LGMatchListViewModel.m
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import "LGMatchListManager.h"
+#import "LGMatchListViewModel.h"
 #import "LGMatchBeforeRequest.h"
 #import "LGMatchTodayRequest.h"
 #import "LGMatchRollingRequest.h"
@@ -68,15 +68,15 @@ NSString * const kMatchOddsKeyOdds                     = @"odds";
 NSString * const kMatchOddsKeyTag                      = @"tag";
 NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 
-#pragma mark - LGMatchListManager
+#pragma mark - LGMatchListViewModel
 
-@interface LGMatchListManager ()
+@interface LGMatchListViewModel ()
 
 @property (nonatomic, strong) LGBasicRequest *requset;
 
 @end
 
-@implementation LGMatchListManager
+@implementation LGMatchListViewModel
 
 - (void)fetchData {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
@@ -84,12 +84,12 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
         return;
     }
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSMutableDictionary *dic = [[LGMatchListManager dictionaryWithJSON:data] fq_mutableDictionary];
+    NSMutableDictionary *dic = [[LGMatchListViewModel dictionaryWithJSON:data] fq_mutableDictionary];
     
     NSArray *array = [dic objectForKey:@"result"];
     
-    if ([self.delegate respondsToSelector:@selector(managerDidFetch:data:last:errCode:)]) {
-        [self.delegate managerDidFetch:self data:array last:YES errCode:-1];
+    if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+        [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  LGMatchListManager.h
+//  LGMatchListViewModel.h
 //  LightningGame
 //
 //  Created by fanqi_company on 2019/5/29.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LGMatchListKeys.h"
 
-@class LGMatchListManager;
+@class LGMatchListViewModel;
 
 typedef NS_ENUM(NSInteger, LGMatchListType) {
     LGMatchListType_Today,
@@ -20,16 +20,16 @@ typedef NS_ENUM(NSInteger, LGMatchListType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol LGMatchListManagerDelegate <NSObject>
+@protocol LGMatchListViewModelDelegate <NSObject>
 
-- (void)managerDidFetch:(LGMatchListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
-- (void)managerDidMore:(LGMatchListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
+- (void)matchListDidFetch:(LGMatchListViewModel *)viewModel data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
+- (void)matchListDidMore:(LGMatchListViewModel *)viewModel data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
 
 @end
 
-@interface LGMatchListManager : NSObject
+@interface LGMatchListViewModel : NSObject
 
-@property (nonatomic, weak) id<LGMatchListManagerDelegate> delegate;
+@property (nonatomic, weak) id<LGMatchListViewModelDelegate> delegate;
 @property (nonatomic, assign) LGMatchListType listType;
 
 - (void)fetchData;

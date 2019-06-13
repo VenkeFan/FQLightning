@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LGMatchListManager.h"
+#import "LGMatchListViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

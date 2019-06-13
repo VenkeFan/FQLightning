@@ -17,11 +17,11 @@
 
 static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 
-@interface LGMatchListView () <LGMatchListManagerDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface LGMatchListView () <LGMatchListViewModelDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isLoaded;
 }
 
-@property (nonatomic, strong) LGMatchListManager *manager;
+@property (nonatomic, strong) LGMatchListViewModel *manager;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) LGMarqueeView *marqueeView;
@@ -98,9 +98,9 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
     [self.manager loadMoreData];
 }
 
-#pragma mark - LGMatchListManagerDelegate
+#pragma mark - LGMatchListViewModelDelegate
 
-- (void)managerDidFetch:(LGMatchListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
+- (void)matchListDidFetch:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
     [self.tableView.mj_header endRefreshing];
     
     if (data.count == 0) {
@@ -113,7 +113,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
     [self.tableView reloadData];
 }
 
-- (void)managerDidMore:(LGMatchListManager *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
+- (void)matchListDidMore:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
     if (data.count == 0) {
         return;
     }
@@ -243,9 +243,9 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 
 #pragma mark - Getter
 
-- (LGMatchListManager *)manager {
+- (LGMatchListViewModel *)manager {
     if (!_manager) {
-        _manager = [LGMatchListManager new];
+        _manager = [LGMatchListViewModel new];
         _manager.delegate = self;
         _manager.listType = _listType;
     }
