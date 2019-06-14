@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)matchDetailDidFetch:(LGMatchDetailViewModel *)viewModel
                    matchDic:(NSMutableDictionary *)matchDic
+                  teamArray:(NSArray *)teamArray
                     oddsDic:(NSMutableDictionary *)oddsDic
                     errCode:(NSInteger)errCode;
 

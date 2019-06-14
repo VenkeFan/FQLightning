@@ -62,6 +62,7 @@
 		B9493690229BCBE9000C3D24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B949368F229BCBE9000C3D24 /* main.m */; };
 		B949369A229BCBE9000C3D24 /* LightningGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493699229BCBE9000C3D24 /* LightningGameTests.m */; };
 		B94936A5229BCBE9000C3D24 /* LightningGameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B94936A4229BCBE9000C3D24 /* LightningGameUITests.m */; };
+		B9609CCC22B26D93003005BA /* LGMatchDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CCB22B26D93003005BA /* LGMatchDetailTableViewCell.m */; };
 		B9C3A164229F7DEB00E282B0 /* LGMatchTeamOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchTeamOddsView.m */; };
 		B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */; };
 		B9C3A16A229F93F100E282B0 /* FQComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A169229F93F100E282B0 /* FQComponentFactory.m */; };
@@ -236,6 +237,8 @@
 		B94936A0229BCBE9000C3D24 /* LightningGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightningGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94936A4229BCBE9000C3D24 /* LightningGameUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightningGameUITests.m; sourceTree = "<group>"; };
 		B94936A6229BCBE9000C3D24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9609CCA22B26D93003005BA /* LGMatchDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailTableViewCell.h; sourceTree = "<group>"; };
+		B9609CCB22B26D93003005BA /* LGMatchDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailTableViewCell.m; sourceTree = "<group>"; };
 		B9C3A162229F7DEB00E282B0 /* LGMatchTeamOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchTeamOddsView.h; sourceTree = "<group>"; };
 		B9C3A163229F7DEB00E282B0 /* LGMatchTeamOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchTeamOddsView.m; sourceTree = "<group>"; };
 		B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MsgForwarding.m"; sourceTree = "<group>"; };
@@ -621,6 +624,8 @@
 			children = (
 				B9229D8E229E7D4A0030691D /* LGMatchListViewCell.h */,
 				B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */,
+				B9609CCA22B26D93003005BA /* LGMatchDetailTableViewCell.h */,
+				B9609CCB22B26D93003005BA /* LGMatchDetailTableViewCell.m */,
 				B9F61A5E22A5044800CDC29E /* LGMatchParlayTableViewCell.h */,
 				B9F61A5F22A5044800CDC29E /* LGMatchParlayTableViewCell.m */,
 			);
@@ -1147,6 +1152,7 @@
 				B91A763622A910B700155607 /* LGForgetPwdRequest.m in Sources */,
 				B9D9102722ABA74600D54911 /* CTMediator+LGSignActions.m in Sources */,
 				B9D9103422AE0D9800D54911 /* LGDatePickerViewModel.m in Sources */,
+				B9609CCC22B26D93003005BA /* LGMatchDetailTableViewCell.m in Sources */,
 				B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */,
 				B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */,
 			);

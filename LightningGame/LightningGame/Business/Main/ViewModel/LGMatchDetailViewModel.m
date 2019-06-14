@@ -27,10 +27,11 @@
     NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
 
     NSArray *oddsArray = resultDic[kMatchKeyOdds];
+    NSArray *teamArray = resultDic[kMatchKeyTeam];
     NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
     
-    if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:oddsDic:errCode:)]) {
-        [self.delegate matchDetailDidFetch:self matchDic:resultDic oddsDic:oddsDic errCode:-1];
+    if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
+        [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic errCode:-1];
     }
 }
 
@@ -41,6 +42,8 @@
         return @"第一局";
     } else if ([stageKey isEqualToString:@"r2"]) {
         return @"第二局";
+    } else if ([stageKey isEqualToString:@"r3"]) {
+        return @"第三局";
     }
     return nil;
 }

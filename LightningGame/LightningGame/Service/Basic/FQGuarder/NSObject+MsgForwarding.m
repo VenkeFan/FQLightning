@@ -15,12 +15,16 @@
 #pragma clang diagnostic ignored"-Wobjc-protocol-method-implementation"
 - (id)forwardingTargetForSelector:(SEL)aSelector {
     NSString *methodName = NSStringFromSelector(aSelector);
-    if ([NSStringFromClass([self class]) hasPrefix:@"_"]
-        || [self isKindOfClass:NSClassFromString(@"UITextInputController")]
-        || [NSStringFromClass([self class]) hasPrefix:@"UIKeyboard"]
-        || [methodName isEqualToString:@"dealloc"]) {
+    if (/* [NSStringFromClass([self class]) hasPrefix:@"_"] || */
+        [self isKindOfClass:NSClassFromString(@"UITextInputController")] ||
+        [NSStringFromClass([self class]) hasPrefix:@"UIKeyboard"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"_UIAppearance"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"_UIBarItemAppearance"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"_UITraitBasedAppearance"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"_UIPropertyBasedAppearance"] ||
+        [methodName isEqualToString:@"dealloc"]) {
 #if DEBUG
-        NSLog(@"MsgForwarding: %@ - %@", NSStringFromSelector(aSelector), [NSThread callStackSymbols]);
+        NSLog(@"[%@ %p %@]", NSStringFromClass([self class]), self, NSStringFromSelector(aSelector));
 #endif
         return nil;
     }

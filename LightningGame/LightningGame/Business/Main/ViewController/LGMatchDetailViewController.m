@@ -11,8 +11,9 @@
 #import <MJRefresh/MJRefresh.h>
 #import "FQSegmentedControl.h"
 #import "LGMatchListViewCell.h"
+#import "LGMatchDetailTableViewCell.h"
 
-static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailOddsCell";
+static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailTableViewCell";
 
 static CGFloat const edgeAll = kSizeScale(8.0);
 
@@ -22,6 +23,7 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 
 @property (nonatomic, strong) LGMatchDetailViewModel *viewModel;
 @property (nonatomic, strong) NSMutableDictionary *matchDicM;
+@property (nonatomic, copy) NSArray *teamArrayI;
 @property (nonatomic, strong) NSMutableDictionary *oddsDicM;
 
 @property (nonatomic, strong) UIView *topContentView;
@@ -30,6 +32,7 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 @property (nonatomic, strong) UIView *oddsContentView;
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableDictionary<NSIndexPath *, NSNumber *> *cellHeightDicM;
 
 @end
 
@@ -67,7 +70,7 @@ static CGFloat const edgeAll = kSizeScale(8.0);
     
     _topCell = [[LGMatchListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     _topCell.frame = _topContentView.bounds;
-    _topCell.backgroundColor = [UIColor redColor];
+    _topCell.backgroundColor = [UIColor clearColor];
     [_topContentView addSubview:_topCell];
 }
 
@@ -97,7 +100,7 @@ static CGFloat const edgeAll = kSizeScale(8.0);
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kMatchDetailOddsReuseID];
+        [tableView registerClass:[LGMatchDetailTableViewCell class] forCellReuseIdentifier:kMatchDetailOddsReuseID];
         
         MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
                                                                          refreshingAction:@selector(beginRefresh)];
@@ -124,11 +127,13 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 
 - (void)matchDetailDidFetch:(LGMatchDetailViewModel *)viewModel
                    matchDic:(NSMutableDictionary *)matchDic
+                  teamArray:(NSArray *)teamArray
                     oddsDic:(NSMutableDictionary *)oddsDic
                     errCode:(NSInteger)errCode {
     [self.tableView.mj_header endRefreshing];
     
     self.matchDicM = matchDic;
+    self.teamArrayI = teamArray;
     self.oddsDicM = oddsDic;
     
     [self.topCell setDataDic:self.matchDicM];
@@ -146,7 +151,8 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 #pragma mark - FQSegmentedControlDelegate
 
 - (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex {
-    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -196,14 +202,17 @@ static CGFloat const edgeAll = kSizeScale(8.0);
     return [[self.oddsDicM objectForKey:self.oddsDicM.allKeys[section]] count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kSizeScale(40.0);
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LGMatchDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMatchDetailOddsReuseID];
+    [cell setMatchDic:self.matchDicM
+            teamArray:self.teamArrayI
+            oddsArray:[[self.oddsDicM objectForKey:self.oddsDicM.allKeys[indexPath.section]] objectAtIndex:indexPath.row]];
+    [cell setCellHeightDic:self.cellHeightDicM indexPath:indexPath];
+    return cell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMatchDetailOddsReuseID];
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
-    return cell;
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+//    [self.segmentedCtr setCurrentIndex:section];
 }
 
 #pragma mark - Getter
@@ -214,6 +223,13 @@ static CGFloat const edgeAll = kSizeScale(8.0);
         _viewModel.delegate = self;
     }
     return _viewModel;
+}
+
+- (NSMutableDictionary<NSIndexPath *, NSNumber *> *)cellHeightDicM {
+    if (!_cellHeightDicM) {
+        _cellHeightDicM = [NSMutableDictionary dictionary];
+    }
+    return _cellHeightDicM;
 }
 
 @end
