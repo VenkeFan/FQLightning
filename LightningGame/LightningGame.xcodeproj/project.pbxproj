@@ -55,6 +55,8 @@
 		B9229D8C229E74180030691D /* list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B9229D8B229E74180030691D /* list_sample.json */; };
 		B9229D90229E7D4A0030691D /* LGMatchListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */; };
 		B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D92229EA6600030691D /* CALayer+FQExtension.m */; };
+		B945C1FE22B395E50031E82C /* detail_sample2.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FC22B395E50031E82C /* detail_sample2.json */; };
+		B945C1FF22B395E50031E82C /* detail_sample1.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FD22B395E50031E82C /* detail_sample1.json */; };
 		B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493681229BCBE7000C3D24 /* AppDelegate.m */; };
 		B9493688229BCBE7000C3D24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9493686229BCBE7000C3D24 /* Main.storyboard */; };
 		B949368A229BCBE9000C3D24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9493689229BCBE9000C3D24 /* Assets.xcassets */; };
@@ -63,7 +65,9 @@
 		B949369A229BCBE9000C3D24 /* LightningGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493699229BCBE9000C3D24 /* LightningGameTests.m */; };
 		B94936A5229BCBE9000C3D24 /* LightningGameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B94936A4229BCBE9000C3D24 /* LightningGameUITests.m */; };
 		B9609CCC22B26D93003005BA /* LGMatchDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CCB22B26D93003005BA /* LGMatchDetailTableViewCell.m */; };
-		B9C3A164229F7DEB00E282B0 /* LGMatchTeamOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchTeamOddsView.m */; };
+		B9609CD222B36CCD003005BA /* LGMatchListOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CD122B36CCD003005BA /* LGMatchListOddsView.m */; };
+		B9609CD522B36EA5003005BA /* LGMatchDetailOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CD422B36EA5003005BA /* LGMatchDetailOddsView.m */; };
+		B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */; };
 		B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */; };
 		B9C3A16A229F93F100E282B0 /* FQComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A169229F93F100E282B0 /* FQComponentFactory.m */; };
 		B9C3A16D229FA3F800E282B0 /* LGMarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A16C229FA3F800E282B0 /* LGMarqueeView.m */; };
@@ -223,6 +227,8 @@
 		B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListViewCell.m; sourceTree = "<group>"; };
 		B9229D91229EA6600030691D /* CALayer+FQExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+FQExtension.h"; sourceTree = "<group>"; };
 		B9229D92229EA6600030691D /* CALayer+FQExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+FQExtension.m"; sourceTree = "<group>"; };
+		B945C1FC22B395E50031E82C /* detail_sample2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample2.json; sourceTree = "<group>"; };
+		B945C1FD22B395E50031E82C /* detail_sample1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample1.json; sourceTree = "<group>"; };
 		B949367D229BCBE7000C3D24 /* LightningGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9493680229BCBE7000C3D24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9493681229BCBE7000C3D24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -239,8 +245,12 @@
 		B94936A6229BCBE9000C3D24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9609CCA22B26D93003005BA /* LGMatchDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailTableViewCell.h; sourceTree = "<group>"; };
 		B9609CCB22B26D93003005BA /* LGMatchDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailTableViewCell.m; sourceTree = "<group>"; };
-		B9C3A162229F7DEB00E282B0 /* LGMatchTeamOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchTeamOddsView.h; sourceTree = "<group>"; };
-		B9C3A163229F7DEB00E282B0 /* LGMatchTeamOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchTeamOddsView.m; sourceTree = "<group>"; };
+		B9609CD022B36CCD003005BA /* LGMatchListOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListOddsView.h; sourceTree = "<group>"; };
+		B9609CD122B36CCD003005BA /* LGMatchListOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListOddsView.m; sourceTree = "<group>"; };
+		B9609CD322B36EA5003005BA /* LGMatchDetailOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailOddsView.h; sourceTree = "<group>"; };
+		B9609CD422B36EA5003005BA /* LGMatchDetailOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailOddsView.m; sourceTree = "<group>"; };
+		B9C3A162229F7DEB00E282B0 /* LGMatchBasicOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchBasicOddsView.h; sourceTree = "<group>"; };
+		B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchBasicOddsView.m; sourceTree = "<group>"; };
 		B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MsgForwarding.m"; sourceTree = "<group>"; };
 		B9C3A166229F842200E282B0 /* NSObject+MsgForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MsgForwarding.h"; sourceTree = "<group>"; };
 		B9C3A168229F93F100E282B0 /* FQComponentFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQComponentFactory.h; sourceTree = "<group>"; };
@@ -511,11 +521,10 @@
 		B9229D18229CCAFE0030691D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B945C1FB22B391C60031E82C /* MatchOddsView */,
 				B9D9102E22ADFD0200D54911 /* MatchParlayView */,
 				B9229D66229E2DE80030691D /* LGMatchListView.h */,
 				B9229D67229E2DE80030691D /* LGMatchListView.m */,
-				B9C3A162229F7DEB00E282B0 /* LGMatchTeamOddsView.h */,
-				B9C3A163229F7DEB00E282B0 /* LGMatchTeamOddsView.m */,
 				B9C3A16B229FA3F800E282B0 /* LGMarqueeView.h */,
 				B9C3A16C229FA3F800E282B0 /* LGMarqueeView.m */,
 				B9D9102F22ADFD3400D54911 /* LGDatePickerView.h */,
@@ -546,6 +555,8 @@
 			children = (
 				B9229D8B229E74180030691D /* list_sample.json */,
 				B9C3A17122A0C4ED00E282B0 /* detail_sample.json */,
+				B945C1FD22B395E50031E82C /* detail_sample1.json */,
+				B945C1FC22B395E50031E82C /* detail_sample2.json */,
 				B9229D8A229E73500030691D /* LGMatchListKeys.h */,
 			);
 			path = Model;
@@ -630,6 +641,19 @@
 				B9F61A5F22A5044800CDC29E /* LGMatchParlayTableViewCell.m */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B945C1FB22B391C60031E82C /* MatchOddsView */ = {
+			isa = PBXGroup;
+			children = (
+				B9C3A162229F7DEB00E282B0 /* LGMatchBasicOddsView.h */,
+				B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */,
+				B9609CD022B36CCD003005BA /* LGMatchListOddsView.h */,
+				B9609CD122B36CCD003005BA /* LGMatchListOddsView.m */,
+				B9609CD322B36EA5003005BA /* LGMatchDetailOddsView.h */,
+				B9609CD422B36EA5003005BA /* LGMatchDetailOddsView.m */,
+			);
+			path = MatchOddsView;
 			sourceTree = "<group>";
 		};
 		B9493674229BCBE7000C3D24 = {
@@ -1003,12 +1027,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B945C1FF22B395E50031E82C /* detail_sample1.json in Resources */,
 				B949368D229BCBE9000C3D24 /* LaunchScreen.storyboard in Resources */,
 				B9229D62229E21EF0030691D /* Localizable.strings in Resources */,
 				B9C3A17222A0C4ED00E282B0 /* detail_sample.json in Resources */,
 				B9229D8C229E74180030691D /* list_sample.json in Resources */,
 				B949368A229BCBE9000C3D24 /* Assets.xcassets in Resources */,
 				B9493688229BCBE7000C3D24 /* Main.storyboard in Resources */,
+				B945C1FE22B395E50031E82C /* detail_sample2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,7 +1159,7 @@
 				B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */,
 				B9F61A5D22A5001900CDC29E /* LGMatchParlayTableView.m in Sources */,
 				B9F61A6622A6060F00CDC29E /* LGMatchParlayKeyboard.m in Sources */,
-				B9C3A164229F7DEB00E282B0 /* LGMatchTeamOddsView.m in Sources */,
+				B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */,
 				B9D9104622AE820200D54911 /* CTMediator+LGProfileActions.m in Sources */,
 				B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */,
 				B9229D47229D07260030691D /* FQSegmentedControl.m in Sources */,
@@ -1147,8 +1173,10 @@
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
 				B9229D35229CFD940030691D /* FQFileManagerUtility.m in Sources */,
 				B9229D6B229E39A70030691D /* LGMatchListViewModel.m in Sources */,
+				B9609CD222B36CCD003005BA /* LGMatchListOddsView.m in Sources */,
 				B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */,
 				B9229D68229E2DE80030691D /* LGMatchListView.m in Sources */,
+				B9609CD522B36EA5003005BA /* LGMatchDetailOddsView.m in Sources */,
 				B91A763622A910B700155607 /* LGForgetPwdRequest.m in Sources */,
 				B9D9102722ABA74600D54911 /* CTMediator+LGSignActions.m in Sources */,
 				B9D9103422AE0D9800D54911 /* LGDatePickerViewModel.m in Sources */,

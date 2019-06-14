@@ -12,6 +12,7 @@
 #import "FQSegmentedControl.h"
 #import "LGMatchListViewCell.h"
 #import "LGMatchDetailTableViewCell.h"
+#import "LGMatchParlayTableView.h"
 
 static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailTableViewCell";
 
@@ -50,6 +51,8 @@ static CGFloat const edgeAll = kSizeScale(8.0);
     
     self.title = kLocalizedString(@"detail_title");
     
+    [self addNotification];
+    
     [self initializeTopView];
     [self initializeOddsContentView];
     
@@ -58,6 +61,10 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)initializeTopView {
@@ -121,6 +128,125 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 
 - (void)beginRefresh {
     [self.viewModel fetchDataWithMatchID:self.matchID];
+}
+
+#pragma mark - Notification
+
+- (void)addNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(matchParlayDidRemoveItemNotif:)
+                                                 name:kMatchParlayTableViewRemoveItemNotif
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(matchParlayDidRemoveAllItemsNotif:)
+                                                 name:kMatchParlayTableViewRemoveAllItemsNotif
+                                               object:nil];
+}
+
+- (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
+    NSDictionary *notiOddsDic = notification.object;
+    __block NSIndexPath *indexPath = nil;
+    
+//    for (int i = 0; i < self.oddsDicM.allKeys.count; i++) {
+//        NSArray *stageArray = [self.oddsDicM objectForKey:self.oddsDicM.allKeys[i]];
+//
+//        for (int j = 0; j < stageArray.count; j++) {
+//            NSArray *groupArray = stageArray[j];
+//
+//            for (int k = 0; k < groupArray.count; k++) {
+//                NSMutableDictionary *tmpOdds = groupArray[k];
+//
+//                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]]) {
+//                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+//
+//                    indexPath = [NSIndexPath indexPathForRow:j inSection:i];
+//                    break;
+//                }
+//            }
+//        }
+//    }
+    
+    [self traversalOddsDicM:^(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop) {
+        if ([oddsDic[kMatchOddsKeyOddsID] isEqual:notiOddsDic[kMatchOddsKeyOddsID]]) {
+            [oddsDic setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+            
+            indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            
+            *stop = YES;
+        }
+    }];
+    
+    if (indexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)matchParlayDidRemoveAllItemsNotif:(NSNotification *)notification {
+    NSArray *notiOddsArray = notification.object;
+    NSMutableArray<NSIndexPath *> *indexPathArray = [NSMutableArray array];
+    
+//    for (int i = 0; i < self.oddsDicM.allKeys.count; i++) {
+//        NSArray *stageArray = [self.oddsDicM objectForKey:self.oddsDicM.allKeys[i]];
+//
+//        for (int j = 0; j < stageArray.count; j++) {
+//            NSArray *groupArray = stageArray[j];
+//
+//            for (int k = 0; k < groupArray.count; k++) {
+//                NSMutableDictionary *tmpOdds = groupArray[k];
+//
+//                for (int l = 0; l < notiOddsArray.count; l++) {
+//                    NSDictionary *notiOdds = notiOddsArray[l];
+//
+//                    if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:notiOdds[kMatchOddsKeyOddsID]]) {
+//                        [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+//
+//                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:j inSection:i];
+//                        [indexPathArray addObject:indexPath];
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    [self traversalOddsDicM:^(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop) {
+        for (int l = 0; l < notiOddsArray.count; l++) {
+            NSDictionary *notiOdds = notiOddsArray[l];
+            
+            if ([oddsDic[kMatchOddsKeyOddsID] isEqual:notiOdds[kMatchOddsKeyOddsID]]) {
+                [oddsDic setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                [indexPathArray addObject:indexPath];
+            }
+        }
+    }];
+    
+    if (indexPathArray.count > 0) {
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)traversalOddsDicM:(void(^)(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop))block {
+    BOOL finished = NO;
+    for (int i = 0; i < self.oddsDicM.allKeys.count; i++) {
+        NSArray *stageArray = [self.oddsDicM objectForKey:self.oddsDicM.allKeys[i]];
+        
+        for (int j = 0; j < stageArray.count; j++) {
+            NSArray *groupArray = stageArray[j];
+            
+            for (int k = 0; k < groupArray.count; k++) {
+                NSMutableDictionary *tmpOdds = groupArray[k];
+                
+                if (block) {
+                    block(i, j, tmpOdds, &finished);
+                    
+                    if (finished) {
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
 
 #pragma mark - LGMatchDetailViewModelDelegate

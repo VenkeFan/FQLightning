@@ -9,7 +9,7 @@
 #import "LGMatchListViewCell.h"
 #import <CoreText/CoreText.h>
 #import "LGMatchListKeys.h"
-#import "LGMatchTeamOddsView.h"
+#import "LGMatchListOddsView.h"
 #import "FQComponentFactory.h"
 #import "LGAPIURLConfig.h"
 
@@ -28,8 +28,8 @@
 @property (nonatomic, strong) CATextLayer *leftScore;
 @property (nonatomic, strong) CATextLayer *rightScore;
 
-@property (nonatomic, strong) LGMatchTeamOddsView *leftOddsView;
-@property (nonatomic, strong) LGMatchTeamOddsView *rightOddsView;
+@property (nonatomic, strong) LGMatchBasicOddsView *leftOddsView;
+@property (nonatomic, strong) LGMatchBasicOddsView *rightOddsView;
 
 @end
 
@@ -119,12 +119,10 @@
     }
     
     {
-        _leftOddsView = [LGMatchTeamOddsView new];
-        _leftOddsView.direction = LGMatchTeamOddsViewDirection_Vertical;
+        _leftOddsView = [LGMatchListOddsView new];
         [_containerView addSubview:_leftOddsView];
         
-        _rightOddsView = [LGMatchTeamOddsView new];
-        _rightOddsView.direction = LGMatchTeamOddsViewDirection_Vertical;
+        _rightOddsView = [LGMatchListOddsView new];
         [_containerView addSubview:_rightOddsView];
     }
 }

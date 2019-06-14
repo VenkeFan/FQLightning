@@ -8,11 +8,9 @@
 
 #import "LGMatchDetailTableViewCell.h"
 #import "LGMatchListKeys.h"
-#import "LGMatchTeamOddsView.h"
+#import "LGMatchDetailOddsView.h"
 
 #define kMatchDetailTableViewCellPadding        kSizeScale(8.0)
-#define kMatchDetailTableViewCellOddsHeight     kSizeScale(40.0)
-#define kMatchDetailTableViewCellOddsWidth      kSizeScale(160.0)
 
 @interface LGMatchDetailTableViewCell ()
 
@@ -51,15 +49,15 @@
     {
         CGFloat y = CGRectGetMaxY(_groupNameLab.frame) + padding;
         
-        CGFloat itemWidth = kMatchDetailTableViewCellOddsWidth;
-        CGFloat itemHeight = kMatchDetailTableViewCellOddsHeight;
+        CGFloat itemWidth = kMatchTeamOddsHViewWidth;
+        CGFloat itemHeight = kMatchTeamOddsHViewHeight;
         CGFloat itemPadding = self.width - x * 2 - itemWidth * 2;
         NSInteger countInRow = 2;
         CGFloat totalHeight = 0;
         
         for (int i = 0; i < _oddsGroupView.subviews.count; i++) {
-            LGMatchTeamOddsView *oddsView = _oddsGroupView.subviews[i];
-            if (![oddsView isKindOfClass:[LGMatchTeamOddsView class]]) {
+            LGMatchBasicOddsView *oddsView = _oddsGroupView.subviews[i];
+            if (![oddsView isKindOfClass:[LGMatchBasicOddsView class]]) {
                 continue;
             }
             
@@ -96,9 +94,9 @@
         for (int i = 0; i < oddsArray.count; i++) {
             NSDictionary *oddsDic = oddsArray[i];
             
-            LGMatchTeamOddsView *oddsView = [LGMatchTeamOddsView new];
-            oddsView.direction = LGMatchTeamOddsViewDirection_Horizontal;
+            LGMatchDetailOddsView *oddsView = [LGMatchDetailOddsView new];
             [oddsView setTeamDic:teamArray.firstObject oddsDic:oddsDic matchName:matchDic[kMatchKeyMatchName]];
+            oddsView.direction = ((i & 1) == 0) ? LGMatchDetailOddsView_Left : LGMatchDetailOddsView_Right;
             [_oddsGroupView addSubview:oddsView];
         }
     }

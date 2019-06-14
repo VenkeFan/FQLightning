@@ -56,14 +56,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
         header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
         _tableView.mj_header = header;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(matchParlayDidRemoveItemNotif:)
-                                                     name:kMatchParlayTableViewRemoveItemNotif
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(matchParlayDidRemoveAllItemsNotif:)
-                                                     name:kMatchParlayTableViewRemoveAllItemsNotif
-                                                   object:nil];
+        [self addNotification];
     }
     return self;
 }
@@ -179,6 +172,17 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 }
 
 #pragma mark - Notification
+
+- (void)addNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(matchParlayDidRemoveItemNotif:)
+                                                 name:kMatchParlayTableViewRemoveItemNotif
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(matchParlayDidRemoveAllItemsNotif:)
+                                                 name:kMatchParlayTableViewRemoveAllItemsNotif
+                                               object:nil];
+}
 
 - (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
     NSDictionary *oddsDic = notification.object;
