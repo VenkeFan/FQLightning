@@ -18,7 +18,7 @@
 @implementation LGMatchDetailViewModel
 
 - (void)fetchDataWithMatchID:(NSString *)matchID {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample.json" ofType:nil];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
     if (!filePath) {
         return;
     }

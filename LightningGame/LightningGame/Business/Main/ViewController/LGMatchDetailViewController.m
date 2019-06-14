@@ -328,12 +328,22 @@ static CGFloat const edgeAll = kSizeScale(8.0);
     return [[self.oddsDicM objectForKey:self.oddsDicM.allKeys[section]] count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[self.cellHeightDicM objectForKey:indexPath] floatValue] > 0) {
+        return [[self.cellHeightDicM objectForKey:indexPath] floatValue];
+    }
+    
+    CGFloat height = [LGMatchDetailTableViewCell cellHeight:[[self.oddsDicM objectForKey:self.oddsDicM.allKeys[indexPath.section]] objectAtIndex:indexPath.row]];
+    [self.cellHeightDicM setObject:@(height) forKey:indexPath];
+    
+    return height;;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LGMatchDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMatchDetailOddsReuseID];
     [cell setMatchDic:self.matchDicM
             teamArray:self.teamArrayI
             oddsArray:[[self.oddsDicM objectForKey:self.oddsDicM.allKeys[indexPath.section]] objectAtIndex:indexPath.row]];
-    [cell setCellHeightDic:self.cellHeightDicM indexPath:indexPath];
     return cell;
 }
 

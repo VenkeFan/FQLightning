@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LGMatchDetailTableViewCell : UITableViewCell
 
 - (void)setMatchDic:(NSDictionary *)matchDic teamArray:(NSArray *)teamArray oddsArray:(NSArray *)oddsArray;
-- (void)setCellHeightDic:(NSMutableDictionary *)cellHeightDic indexPath:(NSIndexPath *)indexPath;
++ (CGFloat)cellHeight:(NSArray *)oddsArray;
 
 @end
 

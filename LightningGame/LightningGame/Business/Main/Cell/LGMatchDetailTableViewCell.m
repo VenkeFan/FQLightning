@@ -10,6 +10,7 @@
 #import "LGMatchListKeys.h"
 #import "LGMatchDetailOddsView.h"
 
+#define kMatchDetailTableViewCellLineHeight     kSizeScale(14.0)
 #define kMatchDetailTableViewCellPadding        kSizeScale(8.0)
 
 @interface LGMatchDetailTableViewCell ()
@@ -41,7 +42,7 @@
     CGFloat x = kMatchDetailTableViewCellPadding;
     CGFloat padding = kMatchDetailTableViewCellPadding;
     
-    _line.frame = CGRectMake(0, 0, kSizeScale(2.0), kSizeScale(14.0));
+    _line.frame = CGRectMake(0, 0, kSizeScale(2.0), kMatchDetailTableViewCellLineHeight);
     _line.center = CGPointMake(x + _line.width * 0.5, padding + _line.height * 0.5);
     _groupNameLab.frame = CGRectMake(CGRectGetMaxX(_line.frame) + x, 0, self.width - (CGRectGetMaxX(_line.frame) + x) * 2, _groupNameLab.font.pointSize * 1.5);
     _groupNameLab.centerY = _line.centerY;
@@ -53,7 +54,6 @@
         CGFloat itemHeight = kMatchTeamOddsHViewHeight;
         CGFloat itemPadding = self.width - x * 2 - itemWidth * 2;
         NSInteger countInRow = 2;
-        CGFloat totalHeight = 0;
         
         for (int i = 0; i < _oddsGroupView.subviews.count; i++) {
             LGMatchBasicOddsView *oddsView = _oddsGroupView.subviews[i];
@@ -62,10 +62,10 @@
             }
             
             oddsView.frame = CGRectMake((i % countInRow) * (itemWidth + itemPadding), (i / countInRow) * (itemHeight + padding), itemWidth, itemHeight);
-            totalHeight = (i / countInRow) * (itemHeight + padding);
         }
         
-        totalHeight += (itemHeight);
+        CGFloat totalHeight = ceilf(_oddsGroupView.subviews.count / (float)countInRow) * (itemHeight + padding);
+        totalHeight -= padding;
         _oddsGroupView.frame = CGRectMake(x, y, self.width - x * 2, totalHeight);
     }
 }
@@ -102,20 +102,17 @@
     }
 }
 
-- (void)setCellHeightDic:(NSMutableDictionary *)cellHeightDic indexPath:(NSIndexPath *)indexPath {
-    _cellHeightDicM = cellHeightDic;
-    _indexPath = indexPath;
-}
-
-- (CGSize)sizeThatFits:(CGSize)size {
-    if ([[self.cellHeightDicM objectForKey:self.indexPath] floatValue] > 0) {
-        return CGSizeMake(size.width, [[self.cellHeightDicM objectForKey:self.indexPath] floatValue]);
-    }
++ (CGFloat)cellHeight:(NSArray *)oddsArray {
+    CGFloat totalHeight = 0;
     
-    CGSize newSize = CGSizeMake(size.width, CGRectGetMaxY(_oddsGroupView.frame));
-    [self.cellHeightDicM setObject:@(newSize.height) forKey:self.indexPath];
+    totalHeight += (kMatchDetailTableViewCellLineHeight + kMatchDetailTableViewCellPadding);
+    totalHeight += kMatchDetailTableViewCellPadding;
     
-    return newSize;
+    CGFloat oddsContentViewHeight = ceilf(oddsArray.count / 2.0) * (kMatchTeamOddsHViewHeight + kMatchDetailTableViewCellPadding);
+    
+    totalHeight += oddsContentViewHeight;
+    
+    return totalHeight;
 }
 
 @end
