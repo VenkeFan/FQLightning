@@ -38,6 +38,9 @@ main_today                  = "今日";
 main_before                 = "赛前";
 main_rolling                = "滚盘";
 main_finished               = "已结束";
+main_match_prepare          = "未开始";
+main_match_live             = "观看直播";
+main_match_rolling          = "滚盘";
 
 // Detail
 detail_title                = "游戏竞猜";

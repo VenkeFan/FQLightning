@@ -149,7 +149,7 @@
                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                            UIImage *img = image;
                            
-                           img = [image resizeToSize:size];
+//                           img = [image resizeToSize:size];
                            if (cornerRadius > 0) {
                                img = [img imageByRoundCornerRadius:cornerRadius borderWidth:borderWidth borderColor:borderColor];
                            }

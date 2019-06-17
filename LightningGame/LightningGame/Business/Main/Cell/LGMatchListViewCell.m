@@ -12,6 +12,7 @@
 #import "LGMatchListOddsView.h"
 #import "FQComponentFactory.h"
 #import "LGAPIURLConfig.h"
+#import "FQImageButton.h"
 
 #define kScoreLayerPaddingX         kSizeScale(8.0)
 
@@ -20,6 +21,10 @@
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UILabel *tourNameLabel;
+@property (nonatomic, strong) UILabel *countLab;
+
+@property (nonatomic, strong) FQImageButton *topStatusBtn;
+@property (nonatomic, strong) FQImageButton *btmStatusBtn;
 
 @property (nonatomic, strong) UIImageView *leftLogoView;
 @property (nonatomic, strong) UIImageView *rightLogoView;
@@ -50,22 +55,28 @@
     
     _containerView.frame = CGRectMake(kCellMarginX, 0, CGRectGetWidth(self.frame) - kCellMarginX * 2, kLGMatchListViewCellContainerHeight);
 
-    CGFloat x = 8.0, y = 8.0;
+    CGFloat x = kSizeScale(6.0), y = kSizeScale(6.0);
     
     _titleView.frame = CGRectMake(x, y, CGRectGetWidth(_containerView.frame) - x * 2, kSizeScale(24.0));
     _tourNameLabel.frame = CGRectMake(x, 0, CGRectGetWidth(_titleView.frame) - x * 2, CGRectGetHeight(_titleView.frame));
+    _countLab.center = CGPointMake(CGRectGetWidth(_titleView.frame) - x - CGRectGetWidth(_countLab.frame) * 0.5, CGRectGetHeight(_titleView.frame) * 0.5);
     
-    _scoreLine.position = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.5, CGRectGetHeight(_containerView.frame) * 0.5 - kCellMarginY);
+    _topStatusBtn.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.5, CGRectGetMaxY(_titleView.frame) + y + _topStatusBtn.height * 0.5);
+    _topStatusBtn.layer.cornerRadius = _topStatusBtn.height * 0.5;
+    
+    _scoreLine.position = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.5, CGRectGetHeight(_containerView.frame) * 0.5);
     _leftScore.position = CGPointMake(CGRectGetMinX(_scoreLine.frame) - kScoreLayerPaddingX - CGRectGetWidth(_leftScore.frame) * 0.5,
                                       _scoreLine.positionY);
     _rightScore.position = CGPointMake(CGRectGetMaxX(_scoreLine.frame) + kScoreLayerPaddingX + CGRectGetWidth(_rightScore.frame) * 0.5,
                                        _scoreLine.positionY);
-
-    _leftLogoView.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.25 - kCellMarginX, _scoreLine.positionY);
-    _rightLogoView.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.75 + kCellMarginX, _scoreLine.positionY);
     
-    _leftOddsView.center = CGPointMake(_leftLogoView.centerX, CGRectGetHeight(_containerView.frame) - y - CGRectGetHeight(_leftOddsView.frame) * 0.5);
-    _rightOddsView.center = CGPointMake(_rightLogoView.centerX, _leftOddsView.centerY);
+    _leftOddsView.center = CGPointMake(x + _leftOddsView.width * 0.5, CGRectGetHeight(_containerView.frame) - y - CGRectGetHeight(_leftOddsView.frame) * 0.5);
+    _rightOddsView.center = CGPointMake(_containerView.width - x - _rightOddsView.width * 0.5, _leftOddsView.centerY);
+
+    _leftLogoView.center = CGPointMake(_leftOddsView.centerX, _scoreLine.positionY);
+    _rightLogoView.center = CGPointMake(_rightOddsView.centerX, _scoreLine.positionY);
+    
+    _btmStatusBtn.center = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.5, _leftOddsView.centerY);
 }
 
 - (void)initializeUI {
@@ -87,15 +98,51 @@
         _tourNameLabel.textAlignment = NSTextAlignmentLeft;
         [view addSubview:_tourNameLabel];
         
+        _countLab = [UILabel new];
+        _countLab.backgroundColor = kMainBgColor;
+        _countLab.text = @"1";
+        _countLab.textColor = kUIColorFromRGB(0xFFFFFF);
+        _countLab.font = kRegularFont(kNoteFontSize);
+        _countLab.textAlignment = NSTextAlignmentCenter;
+        [_countLab sizeToFit];
+        _countLab.layer.cornerRadius = _countLab.height * 0.5;
+        _countLab.layer.masksToBounds = YES;
+        [view addSubview:_countLab];
+        
         view;
     });
     [_containerView addSubview:_titleView];
     
     {
+        _topStatusBtn = [FQImageButton buttonWithType:UIButtonTypeCustom];
+        _topStatusBtn.enabled = NO;
+        _topStatusBtn.imageOrientation = FQImageButtonOrientation_Left;
+        _topStatusBtn.backgroundColor = kMainOnTintColor;
+//        _topStatusBtn.frame = CGRectMake(0, 0, kSizeScale(54.0), kSizeScale(14.0));
+        _topStatusBtn.imageEdgeInsets = UIEdgeInsetsMake(0, kSizeScale(2.0), 0, kSizeScale(2.0));
+        _topStatusBtn.layer.cornerRadius = _topStatusBtn.height * 0.5;
+        _topStatusBtn.layer.masksToBounds = YES;
+        [_topStatusBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateDisabled];
+        _topStatusBtn.titleLabel.font = kRegularFont(kTinyFontSize);
+        [_containerView addSubview:_topStatusBtn];
+        
+        
+        _btmStatusBtn = [FQImageButton buttonWithType:UIButtonTypeCustom];
+        _btmStatusBtn.enabled = NO;
+        _btmStatusBtn.imageOrientation = FQImageButtonOrientation_Top;
+        _btmStatusBtn.backgroundColor = [UIColor clearColor];
+        _btmStatusBtn.frame = CGRectMake(0, 0, kSizeScale(50.0), kSizeScale(40.0));
+        [_btmStatusBtn setTitleColor:kMainOnTintColor forState:UIControlStateDisabled];
+        _btmStatusBtn.titleLabel.font = kRegularFont(kNoteFontSize);
+        _btmStatusBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_containerView addSubview:_btmStatusBtn];
+    }
+    
+    {
         _scoreLine = [CALayer layer];
         _scoreLine.backgroundColor = kMarqueeBgColor.CGColor;
         _scoreLine.height = 2.0;
-        _scoreLine.width = kSizeScale(20.0);
+        _scoreLine.width = kSizeScale(14.0);
         [_containerView.layer addSublayer:_scoreLine];
         
         _leftScore = [FQComponentFactory textLayerWithFont:nil];
@@ -140,6 +187,11 @@
         [strAttr addAttributes:@{NSForegroundColorAttributeName: kMainOnTintColor} range:NSMakeRange(tourName.length, strM.length - tourName.length)];
         
         _tourNameLabel.attributedText = strAttr;
+        
+        _countLab.text = [NSString stringWithFormat:@"+%@", [dataDic[kMatchKeyPlayCount] stringValue]];
+        [_countLab sizeToFit];
+        _countLab.width += 12.0;
+        _countLab.height += 2.0;
     }
     
     NSArray *teamArray = dataDic[kMatchKeyTeam];
@@ -148,9 +200,17 @@
     NSDictionary *leftTeam, *rightTeam;
     NSDictionary *leftOdds, *rightOdds;
     
-    if (teamArray.count >= 2) {
-        leftTeam = teamArray[0];
-        rightTeam = teamArray[1];
+//    if (teamArray.count >= 2) {
+//        leftTeam = teamArray[0];
+//        rightTeam = teamArray[1];
+//    }
+    
+    for (NSDictionary *tmp in teamArray) {
+        if ([tmp[kMatchTeamKeyPos] integerValue] == 1) {
+            leftTeam = tmp;
+        } else if ([tmp[kMatchTeamKeyPos] integerValue] == 2) {
+            rightTeam = tmp;
+        }
     }
     
     if (oddsArray.count >= 2) {
@@ -196,14 +256,58 @@
         _rightScore.string = rightScoreAttr;
     }
     if (leftTeam[kMatchTeamKeyLogo]) {
-        [_leftLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, leftTeam[kMatchTeamKeyLogo]]];
+        [_leftLogoView fq_setImageWithURLString:leftTeam[kMatchTeamKeyLogo]];
     }
     if (rightTeam[kMatchTeamKeyLogo]) {
-        [_rightLogoView fq_setImageWithURLString:[NSString stringWithFormat:@"%@%@", kLGImageHost, rightTeam[kMatchTeamKeyLogo]]];
+        [_rightLogoView fq_setImageWithURLString:rightTeam[kMatchTeamKeyLogo]];
     }
     
     [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kMatchKeyMatchName]];
     [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kMatchKeyMatchName]];
+    
+    {
+        LGMatchStatus status = (LGMatchStatus)[dataDic[kMatchKeyStatus] integerValue];
+        switch (status) {
+            case LGMatchStatus_Prepare: {
+                self.topStatusBtn.hidden = NO;
+                self.btmStatusBtn.hidden = NO;
+                
+                [self.topStatusBtn setImage:[UIImage imageNamed:@"main_notStarted"] forState:UIControlStateDisabled];
+                [self.topStatusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
+                [self.topStatusBtn sizeToFit];
+                self.topStatusBtn.width += 6.0;
+                self.topStatusBtn.height += 4.0;
+                
+                [self.btmStatusBtn setImage:[UIImage imageNamed:@"main_notStarted2"] forState:UIControlStateDisabled];
+                [self.btmStatusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
+            }
+                break;
+            case LGMatchStatus_Rolling: {
+                self.topStatusBtn.hidden = NO;
+                self.btmStatusBtn.hidden = NO;
+                
+                [self.topStatusBtn setImage:[UIImage imageNamed:@"main_started"] forState:UIControlStateDisabled];
+                [self.topStatusBtn setTitle:kLocalizedString(@"main_match_live") forState:UIControlStateNormal];
+                [self.topStatusBtn sizeToFit];
+                self.topStatusBtn.width += 6.0;
+                self.topStatusBtn.height += 4.0;
+                
+                [self.btmStatusBtn setImage:[UIImage imageNamed:@"main_rolling"] forState:UIControlStateDisabled];
+                [self.btmStatusBtn setTitle:kLocalizedString(@"main_match_rolling") forState:UIControlStateNormal];
+            }
+                break;
+            case LGMatchStatus_Finished: {
+                self.topStatusBtn.hidden = YES;
+                self.btmStatusBtn.hidden = YES;
+            }
+                break;
+            case LGMatchStatus_Canceled: {
+                self.topStatusBtn.hidden = YES;
+                self.btmStatusBtn.hidden = YES;
+            }
+                break;
+        }
+    }
 }
 
 @end

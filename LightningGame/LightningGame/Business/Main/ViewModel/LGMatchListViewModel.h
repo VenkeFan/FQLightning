@@ -12,18 +12,18 @@
 @class LGMatchListViewModel;
 
 typedef NS_ENUM(NSInteger, LGMatchListType) {
-    LGMatchListType_Today,
-    LGMatchListType_Rolling,
-    LGMatchListType_Before,
-    LGMatchListType_Finished
+    LGMatchListType_Today = 1,
+    LGMatchListType_Rolling = 2,
+    LGMatchListType_Before = 3,
+    LGMatchListType_Finished = 4
 };
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol LGMatchListViewModelDelegate <NSObject>
 
-- (void)matchListDidFetch:(LGMatchListViewModel *)viewModel data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
-- (void)matchListDidMore:(LGMatchListViewModel *)viewModel data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
+- (void)matchListDidFetch:(LGMatchListViewModel *)viewModel data:(nullable NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
+- (void)matchListDidMore:(LGMatchListViewModel *)viewModel data:(nullable NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
 
 @end
 

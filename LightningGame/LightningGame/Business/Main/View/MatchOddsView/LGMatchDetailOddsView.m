@@ -64,7 +64,7 @@
     [self.nameLabel sizeToFit];
 }
 
-- (void)setStatus:(LGMatchBasicOddsViewStatus)status {
+- (void)setStatus:(LGMatchOddsStatus)status {
     [super setStatus:status];
     
     self.oddsLabel.hidden = YES;
@@ -74,24 +74,64 @@
     self.oddsLabel.centerY = self.height * 0.5;
     
     switch (status) {
-        case LGMatchBasicOddsViewStatus_Enable: {
+        case LGMatchOddsStatus_Normal: {
             self.oddsLabel.hidden = NO;
         }
             break;
-        case LGMatchBasicOddsViewStatus_Disable: {
-            
-        }
-            break;
-        case LGMatchBasicOddsViewStatus_Locked: {
+        case LGMatchOddsStatus_Locked: {
             self.lockLayer.hidden = NO;
         }
             break;
+        case LGMatchOddsStatus_Hidden: {
+            
+        }
+            break;
+        case LGMatchOddsStatus_Finished: {
+            
+        }
+            break;
+        case LGMatchOddsStatus_Exception: {
+            
+        }
+            break;
     }
+    
+//    switch (status) {
+//        case LGMatchOddsStatus_Enable: {
+//            self.oddsLabel.hidden = NO;
+//        }
+//            break;
+//        case LGMatchOddsStatus_Disable: {
+//            
+//        }
+//            break;
+//        case LGMatchOddsStatus_Locked: {
+//            self.lockLayer.hidden = NO;
+//        }
+//            break;
+//    }
 }
 
 - (CGFloat)nameLabelWidth {
-    CGFloat labWidth = self.nameLabel.width;
-    return labWidth > kMaxNameLabelWidth ? kMaxNameLabelWidth: labWidth;
+//    CGFloat labWidth = self.nameLabel.width;
+//    return labWidth > kMaxNameLabelWidth ? kMaxNameLabelWidth: labWidth;
+    
+    
+    if (self.nameLabel.width > kMaxNameLabelWidth) {
+        [self adjustNameLabelFont];
+    }
+    return self.nameLabel.width;
+}
+
+- (void)adjustNameLabelFont {
+    UIFont *font = self.nameLabel.font;
+    UIFont *newFont = [UIFont fontWithName:font.familyName size:font.pointSize - 2.0];
+    self.nameLabel.font = newFont;
+    [self.nameLabel sizeToFit];
+    
+    if (self.nameLabel.width > kMaxNameLabelWidth) {
+        [self adjustNameLabelFont];
+    }
 }
 
 @end

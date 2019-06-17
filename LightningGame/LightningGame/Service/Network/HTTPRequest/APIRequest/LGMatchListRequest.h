@@ -1,8 +1,8 @@
 //
-//  LGMatchRollingRequest.h
+//  LGMatchListRequest.h
 //  LightningGame
 //
-//  Created by fanqi_company on 2019/5/29.
+//  Created by fanqi_company on 2019/6/17.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGMatchRollingRequest : LGBasicRequest
+@interface LGMatchListRequest : LGBasicRequest
+
+- (instancetype)initWithType:(NSInteger)type;
 
 @end
 

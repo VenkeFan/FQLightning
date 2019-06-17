@@ -48,13 +48,10 @@
 		B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D71229E5FB80030691D /* FQNetworkManager.m */; };
 		B9229D77229E5FB80030691D /* FQNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D73229E5FB80030691D /* FQNetworkReachabilityManager.m */; };
 		B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D7C229E6EC90030691D /* LGBasicRequest.m */; };
-		B9229D80229E6EF90030691D /* LGMatchBeforeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D7F229E6EF90030691D /* LGMatchBeforeRequest.m */; };
-		B9229D83229E6F120030691D /* LGMatchTodayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D82229E6F120030691D /* LGMatchTodayRequest.m */; };
-		B9229D86229E6F220030691D /* LGMatchRollingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D85229E6F220030691D /* LGMatchRollingRequest.m */; };
-		B9229D89229E6F310030691D /* LGMatchFinishedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D88229E6F310030691D /* LGMatchFinishedRequest.m */; };
 		B9229D8C229E74180030691D /* list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B9229D8B229E74180030691D /* list_sample.json */; };
 		B9229D90229E7D4A0030691D /* LGMatchListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */; };
 		B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D92229EA6600030691D /* CALayer+FQExtension.m */; };
+		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B945C1FE22B395E50031E82C /* detail_sample2.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FC22B395E50031E82C /* detail_sample2.json */; };
 		B945C1FF22B395E50031E82C /* detail_sample1.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FD22B395E50031E82C /* detail_sample1.json */; };
 		B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493681229BCBE7000C3D24 /* AppDelegate.m */; };
@@ -213,20 +210,14 @@
 		B9229D73229E5FB80030691D /* FQNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		B9229D7B229E6EC90030691D /* LGBasicRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGBasicRequest.h; sourceTree = "<group>"; };
 		B9229D7C229E6EC90030691D /* LGBasicRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGBasicRequest.m; sourceTree = "<group>"; };
-		B9229D7E229E6EF90030691D /* LGMatchBeforeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchBeforeRequest.h; sourceTree = "<group>"; };
-		B9229D7F229E6EF90030691D /* LGMatchBeforeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchBeforeRequest.m; sourceTree = "<group>"; };
-		B9229D81229E6F120030691D /* LGMatchTodayRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchTodayRequest.h; sourceTree = "<group>"; };
-		B9229D82229E6F120030691D /* LGMatchTodayRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchTodayRequest.m; sourceTree = "<group>"; };
-		B9229D84229E6F220030691D /* LGMatchRollingRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchRollingRequest.h; sourceTree = "<group>"; };
-		B9229D85229E6F220030691D /* LGMatchRollingRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchRollingRequest.m; sourceTree = "<group>"; };
-		B9229D87229E6F310030691D /* LGMatchFinishedRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchFinishedRequest.h; sourceTree = "<group>"; };
-		B9229D88229E6F310030691D /* LGMatchFinishedRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchFinishedRequest.m; sourceTree = "<group>"; };
 		B9229D8A229E73500030691D /* LGMatchListKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListKeys.h; sourceTree = "<group>"; };
 		B9229D8B229E74180030691D /* list_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = list_sample.json; sourceTree = "<group>"; };
 		B9229D8E229E7D4A0030691D /* LGMatchListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListViewCell.h; sourceTree = "<group>"; };
 		B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListViewCell.m; sourceTree = "<group>"; };
 		B9229D91229EA6600030691D /* CALayer+FQExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+FQExtension.h"; sourceTree = "<group>"; };
 		B9229D92229EA6600030691D /* CALayer+FQExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+FQExtension.m"; sourceTree = "<group>"; };
+		B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRequest.h; sourceTree = "<group>"; };
+		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B945C1FC22B395E50031E82C /* detail_sample2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample2.json; sourceTree = "<group>"; };
 		B945C1FD22B395E50031E82C /* detail_sample1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample1.json; sourceTree = "<group>"; };
 		B949367D229BCBE7000C3D24 /* LightningGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -618,14 +609,8 @@
 				B91A762E22A8DDE400155607 /* LGSignInRequest.m */,
 				B91A763422A910B700155607 /* LGForgetPwdRequest.h */,
 				B91A763522A910B700155607 /* LGForgetPwdRequest.m */,
-				B9229D7E229E6EF90030691D /* LGMatchBeforeRequest.h */,
-				B9229D7F229E6EF90030691D /* LGMatchBeforeRequest.m */,
-				B9229D81229E6F120030691D /* LGMatchTodayRequest.h */,
-				B9229D82229E6F120030691D /* LGMatchTodayRequest.m */,
-				B9229D84229E6F220030691D /* LGMatchRollingRequest.h */,
-				B9229D85229E6F220030691D /* LGMatchRollingRequest.m */,
-				B9229D87229E6F310030691D /* LGMatchFinishedRequest.h */,
-				B9229D88229E6F310030691D /* LGMatchFinishedRequest.m */,
+				B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */,
+				B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */,
 			);
 			path = APIRequest;
 			sourceTree = "<group>";
@@ -1104,12 +1089,10 @@
 				B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */,
 				B9229D40229D03450030691D /* FQRunTimeUtility.m in Sources */,
 				B9229D41229D03450030691D /* FQGZipUtility.m in Sources */,
-				B9229D86229E6F220030691D /* LGMatchRollingRequest.m in Sources */,
 				B9C3A16D229FA3F800E282B0 /* LGMarqueeView.m in Sources */,
 				B9229D15229C170F0030691D /* NSDictionary+FQNilExamine.m in Sources */,
 				B9229D90229E7D4A0030691D /* LGMatchListViewCell.m in Sources */,
 				B9F61A6022A5044800CDC29E /* LGMatchParlayTableViewCell.m in Sources */,
-				B9229D89229E6F310030691D /* LGMatchFinishedRequest.m in Sources */,
 				B9229D23229CD3180030691D /* LGMatchDetailViewController.m in Sources */,
 				B9229D14229C17070030691D /* NSAttributedString+FQNilExamine.m in Sources */,
 				B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */,
@@ -1132,7 +1115,6 @@
 				B9D9105222B1EA9F00D54911 /* LGMatchDetailViewModel.m in Sources */,
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
 				B91A761C22A78EBC00155607 /* LGMatchParlayTopView.m in Sources */,
-				B9229D83229E6F120030691D /* LGMatchTodayRequest.m in Sources */,
 				B9D9104222AE81B400D54911 /* Target_Profile.m in Sources */,
 				B91A763322A8E8E900155607 /* LGSplashViewController.m in Sources */,
 				B9F61A6C22A6566300CDC29E /* LGToastView.m in Sources */,
@@ -1140,7 +1122,6 @@
 				B9229D02229BEEC00030691D /* NSString+FQNilExamine.m in Sources */,
 				B9229D1D229CCB270030691D /* LGMainViewController.m in Sources */,
 				B9D9103722AE46EB00D54911 /* LGDatePickerTableView.m in Sources */,
-				B9229D80229E6EF90030691D /* LGMatchBeforeRequest.m in Sources */,
 				B9229D3E229D02980030691D /* FQTimerManager.m in Sources */,
 				B9229D0D229BF04F0030691D /* UIView+FQExtension.m in Sources */,
 				B9F61A6F22A75A6700CDC29E /* LGMatchParlayBottomView.m in Sources */,
@@ -1155,6 +1136,7 @@
 				B9229D77229E5FB80030691D /* FQNetworkReachabilityManager.m in Sources */,
 				B9229D2F229CF8C40030691D /* FQEncryptionUtility.m in Sources */,
 				B9C3A17522A0D21400E282B0 /* LGMatchParlayView.m in Sources */,
+				B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */,
 				B9229CF0229BECE00030691D /* YYFPSLabel.m in Sources */,
 				B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */,
 				B9F61A5D22A5001900CDC29E /* LGMatchParlayTableView.m in Sources */,

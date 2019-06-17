@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, LGMatchBasicOddsViewStatus) {
-    LGMatchBasicOddsViewStatus_Enable,
-    LGMatchBasicOddsViewStatus_Disable,
-    LGMatchBasicOddsViewStatus_Locked
+typedef NS_ENUM(NSInteger, LGMatchOddsStatus) {
+    LGMatchOddsStatus_Normal = 1,
+    LGMatchOddsStatus_Locked = 2,
+    LGMatchOddsStatus_Hidden = 4,
+    LGMatchOddsStatus_Finished = 5,
+    LGMatchOddsStatus_Exception = 99
 };
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LGMatchBasicOddsView : UIView
 
-@property (nonatomic, assign) LGMatchBasicOddsViewStatus status;
+@property (nonatomic, assign) LGMatchOddsStatus status;
 
 @property (nonatomic, strong, readonly) UILabel *oddsLabel;
 @property (nonatomic, strong, readonly) UILabel *nameLabel;

@@ -66,21 +66,23 @@
     self.nameLabel.text = teamDic[kMatchTeamKeyName];
     [self.nameLabel sizeToFit];
     
-    if (kIsNull(oddsDic[kMatchOddsKeyOdds])) {
-        [self setStatus:LGMatchBasicOddsViewStatus_Disable];
-    } else {
-        if ([oddsDic[kMatchOddsKeyStatus] integerValue] == 2) {
-            [self setStatus:LGMatchBasicOddsViewStatus_Enable];
-        } else {
-            [self setStatus:LGMatchBasicOddsViewStatus_Locked];
-        }
-    }
+    [self setStatus:[oddsDic[kMatchOddsKeyStatus] integerValue]];
+    
+//    if (kIsNull(oddsDic[kMatchOddsKeyOdds])) {
+//        [self setStatus:LGMatchOddsStatus_Disable];
+//    } else {
+//        if ([oddsDic[kMatchOddsKeyStatus] integerValue] == 2) {
+//            [self setStatus:LGMatchOddsStatus_Enable];
+//        } else {
+//            [self setStatus:LGMatchOddsStatus_Locked];
+//        }
+//    }
 }
 
 #pragma mark - Event
 
 - (void)selfOnTapped {
-    if (self.status == LGMatchBasicOddsViewStatus_Enable) {
+    if (self.status == LGMatchOddsStatus_Normal) {
         self.selected = !self.isSelected;
         
         if (self.isSelected) {

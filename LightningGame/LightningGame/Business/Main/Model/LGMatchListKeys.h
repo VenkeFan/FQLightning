@@ -9,6 +9,13 @@
 #ifndef LGMatchListKeys_h
 #define LGMatchListKeys_h
 
+typedef NS_ENUM(NSInteger, LGMatchStatus) {
+    LGMatchStatus_Prepare = 1,
+    LGMatchStatus_Rolling = 2,
+    LGMatchStatus_Finished = 3,
+    LGMatchStatus_Canceled = 4
+};
+
 #pragma mark - MatchKey
 
 extern NSString * const kMatchKeyGameID;

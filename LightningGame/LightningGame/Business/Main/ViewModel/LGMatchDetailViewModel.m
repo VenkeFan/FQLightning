@@ -25,7 +25,7 @@
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
     NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
-
+    
     NSArray *oddsArray = resultDic[kMatchKeyOdds];
     NSArray *teamArray = resultDic[kMatchKeyTeam];
     NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];

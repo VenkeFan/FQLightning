@@ -26,7 +26,7 @@
     
     switch (_imageOrientation) {
         case FQImageButtonOrientation_Left: {
-            frame = CGRectMake(0,
+            frame = CGRectMake(imgEdge.left,
                                (contentRect.size.height - imgSize.height) * 0.5,
                                imgSize.width,
                                imgSize.height);
@@ -72,7 +72,7 @@
     
     switch (_imageOrientation) {
         case FQImageButtonOrientation_Left: {
-            frame = CGRectMake(imgSize.width + imgEdge.right,
+            frame = CGRectMake(imgSize.width + imgEdge.left + imgEdge.right,
                                0,
                                contentRect.size.width - imgSize.width - imgEdge.right,
                                contentRect.size.height);

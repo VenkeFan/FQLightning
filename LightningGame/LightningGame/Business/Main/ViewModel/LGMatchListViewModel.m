@@ -7,10 +7,7 @@
 //
 
 #import "LGMatchListViewModel.h"
-#import "LGMatchBeforeRequest.h"
-#import "LGMatchTodayRequest.h"
-#import "LGMatchRollingRequest.h"
-#import "LGMatchFinishedRequest.h"
+#import "LGMatchListRequest.h"
 #import "NSDictionary+FQExtension.h"
 
 #pragma mark - MatchKey
@@ -64,7 +61,7 @@ NSString * const kMatchOddsKeyMatchName                = @"match_name";
 NSString * const kMatchOddsKeyGroupName                = @"group_name";
 NSString * const kMatchOddsKeyGroupShortName           = @"group_short_name";
 NSString * const kMatchOddsKeyID                       = @"id";
-NSString * const kMatchOddsKeyOddsID                   = @"odds_id";
+NSString * const kMatchOddsKeyOddsID                   = @"id";
 NSString * const kMatchOddsKeyTeamID                   = @"team_id";
 NSString * const kMatchOddsKeyName                     = @"name";
 NSString * const kMatchOddsKeyMatchID                  = @"match_id";
@@ -76,71 +73,49 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 
 @interface LGMatchListViewModel ()
 
-@property (nonatomic, strong) LGBasicRequest *requset;
+@property (nonatomic, strong) LGMatchListRequest *requset;
 
 @end
 
 @implementation LGMatchListViewModel
 
 - (void)fetchData {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
-    if (!filePath) {
-        return;
-    }
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
+//    if (!filePath) {
+//        return;
+//    }
+//    NSData *data = [NSData dataWithContentsOfFile:filePath];
+//    NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+//
+//    NSArray *array = [dic objectForKey:@"result"];
+//
+//    if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+//        [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
+//    }
     
-    NSArray *array = [dic objectForKey:@"result"];
     
-    if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-        [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
-    }
+    LGMatchListRequest *request = [[LGMatchListRequest alloc] initWithType:self.listType];
+    [request requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSArray *arrayI = (NSArray *)responseObject;
+        NSMutableArray *arrayM = [NSMutableArray arrayWithCapacity:arrayI.count];
+        [arrayI enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSMutableDictionary *dic = [obj fq_mutableDictionary];
+            [arrayM addObject:dic];
+        }];
+        
+        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+            [self.delegate matchListDidFetch:self data:arrayM last:YES errCode:LGErrorCode_Success];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+            [self.delegate matchListDidFetch:self data:nil last:YES errCode:error.code];
+        }
+    }];
 }
 
 - (void)loadMoreData {
     
-}
-
-//#pragma mark - Private
-//
-//+ (NSDictionary *)dictionaryWithJSON:(id)json {
-//    if (!json || json == (id)kCFNull) return nil;
-//    NSDictionary *dic = nil;
-//    NSData *jsonData = nil;
-//    if ([json isKindOfClass:[NSDictionary class]]) {
-//        dic = json;
-//    } else if ([json isKindOfClass:[NSString class]]) {
-//        jsonData = [(NSString *)json dataUsingEncoding : NSUTF8StringEncoding];
-//    } else if ([json isKindOfClass:[NSData class]]) {
-//        jsonData = json;
-//    }
-//    if (jsonData) {
-//        dic = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
-//        if (![dic isKindOfClass:[NSDictionary class]]) dic = nil;
-//    }
-//    return dic;
-//}
-
-#pragma mark - Getter
-
-- (LGBasicRequest *)requset {
-    if (!_requset) {
-        switch (self.listType) {
-            case LGMatchListType_Today:
-                _requset = [[LGMatchTodayRequest alloc] init];
-                break;
-            case LGMatchListType_Before:
-                _requset = [[LGMatchBeforeRequest alloc] init];
-                break;
-            case LGMatchListType_Rolling:
-                _requset = [[LGMatchRollingRequest alloc] init];
-                break;
-            case LGMatchListType_Finished:
-                _requset = [[LGMatchFinishedRequest alloc] init];
-                break;
-        }
-    }
-    return _requset;
 }
 
 @end
