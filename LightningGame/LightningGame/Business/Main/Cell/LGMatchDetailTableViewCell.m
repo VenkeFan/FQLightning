@@ -91,6 +91,28 @@
     
     {
         [_oddsGroupView removeAllSubviews];
+        
+        NSDictionary *leftTeam, *rightTeam;
+        NSDictionary *leftOdds, *rightOdds;
+        
+        for (NSDictionary *tmp in teamArray) {
+            if ([tmp[kMatchTeamKeyPos] integerValue] == 1) {
+                leftTeam = tmp;
+            } else if ([tmp[kMatchTeamKeyPos] integerValue] == 2) {
+                rightTeam = tmp;
+            }
+        }
+        
+        if (oddsArray.count >= 2) {
+            if ([leftTeam[kMatchTeamKeyTeamID] isEqual:oddsArray[0][kMatchOddsKeyTeamID]]) {
+                leftOdds = oddsArray[0];
+                rightOdds = oddsArray[1];
+            } else {
+                leftOdds = oddsArray[1];
+                rightOdds = oddsArray[0];
+            }
+        }
+        
         for (int i = 0; i < oddsArray.count; i++) {
             NSDictionary *oddsDic = oddsArray[i];
             

@@ -41,6 +41,8 @@ main_finished               = "已结束";
 main_match_prepare          = "未开始";
 main_match_live             = "观看直播";
 main_match_rolling          = "滚盘";
+main_match_process          = "比赛进行中";
+main_match_cancel           = "已取消";
 
 // Detail
 detail_title                = "游戏竞猜";

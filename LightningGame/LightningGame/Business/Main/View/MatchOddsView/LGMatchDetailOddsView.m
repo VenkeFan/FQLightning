@@ -34,29 +34,6 @@
     return self;
 }
 
-- (void)setDirection:(LGMatchDetailOddsViewDirection)direction {
-    _direction = direction;
-    
-    switch (direction) {
-        case LGMatchDetailOddsView_Left: {
-            self.nameLabel.center = CGPointMake(kViewPaddingX + self.nameLabelWidth * 0.5, self.height * 0.5);
-            
-            self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
-            self.oddsLabel.center = CGPointMake(self.width - kViewPaddingX - self.oddsLabel.width * 0.5, self.height * 0.5);
-        }
-            break;
-        case LGMatchDetailOddsView_Right: {
-            self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
-            self.oddsLabel.center = CGPointMake(kViewPaddingX + self.oddsLabel.width * 0.5, self.height * 0.5);
-            
-            self.nameLabel.center = CGPointMake(self.width - kViewPaddingX - self.nameLabelWidth * 0.5, self.height * 0.5);
-        }
-            break;
-    }
-    
-    self.lockLayer.position = self.oddsLabel.center;
-}
-
 - (void)setTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(nonnull NSString *)matchName {
     [super setTeamDic:teamDic oddsDic:oddsDic matchName:matchName];
     
@@ -64,14 +41,17 @@
     [self.nameLabel sizeToFit];
 }
 
+- (void)setDirection:(LGMatchDetailOddsViewDirection)direction {
+    _direction = direction;
+    
+    [self p_updateLayout];
+}
+
 - (void)setStatus:(LGMatchOddsStatus)status {
     [super setStatus:status];
     
     self.oddsLabel.hidden = YES;
     self.lockLayer.hidden = YES;
-    
-    self.nameLabel.centerY = self.height * 0.5;
-    self.oddsLabel.centerY = self.height * 0.5;
     
     switch (status) {
         case LGMatchOddsStatus_Normal: {
@@ -96,6 +76,8 @@
             break;
     }
     
+    [self p_updateLayout];
+    
 //    switch (status) {
 //        case LGMatchOddsStatus_Enable: {
 //            self.oddsLabel.hidden = NO;
@@ -110,6 +92,52 @@
 //        }
 //            break;
 //    }
+}
+
+- (void)p_updateLayout {
+    switch (self.direction) {
+        case LGMatchDetailOddsView_Left: {
+            self.nameLabel.center = CGPointMake(kViewPaddingX + self.nameLabelWidth * 0.5, self.height * 0.5);
+            
+            self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
+            self.oddsLabel.center = CGPointMake(self.width - kViewPaddingX - self.oddsLabel.width * 0.5, self.height * 0.5);
+        }
+            break;
+        case LGMatchDetailOddsView_Right: {
+            self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
+            self.oddsLabel.center = CGPointMake(kViewPaddingX + self.oddsLabel.width * 0.5, self.height * 0.5);
+            
+            self.nameLabel.center = CGPointMake(self.width - kViewPaddingX - self.nameLabelWidth * 0.5, self.height * 0.5);
+        }
+            break;
+    }
+    
+    switch (self.status) {
+        case LGMatchOddsStatus_Normal: {
+            self.nameLabel.centerY = self.height * 0.5;
+            self.oddsLabel.centerY = self.height * 0.5;
+        }
+            break;
+        case LGMatchOddsStatus_Locked: {
+            self.nameLabel.centerY = self.height * 0.5;
+            self.oddsLabel.centerY = self.height * 0.5;
+        }
+            break;
+        case LGMatchOddsStatus_Hidden: {
+            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        }
+            break;
+        case LGMatchOddsStatus_Finished: {
+            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        }
+            break;
+        case LGMatchOddsStatus_Exception: {
+            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        }
+            break;
+    }
+    
+    self.lockLayer.position = self.oddsLabel.center;
 }
 
 - (CGFloat)nameLabelWidth {

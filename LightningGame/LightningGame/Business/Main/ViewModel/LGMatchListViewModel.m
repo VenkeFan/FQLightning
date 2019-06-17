@@ -50,7 +50,7 @@ NSString * const kMatchOddsKeyEnableParlay             = @"enable_parlay";
 NSString * const kMatchOddsKeyGameID                   = @"game_id";
 NSString * const kMatchOddsKeyTournamentID             = @"tournament_id";
 NSString * const kMatchOddsKeySortIndex                = @"sort_index";
-NSString * const kMatchOddsKeyGroupID                  = @"odds_group_id";
+NSString * const kMatchOddsKeyGroupID                  = @"group_id";
 NSString * const kMatchOddsKeyValue                    = @"value";
 NSString * const kMatchOddsKeyWin                      = @"win";
 NSString * const kMatchOddsKeyStatus                   = @"status";
@@ -80,18 +80,22 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 @implementation LGMatchListViewModel
 
 - (void)fetchData {
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
-//    if (!filePath) {
+    {
+        // test data
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
+//        if (!filePath) {
+//            return;
+//        }
+//        NSData *data = [NSData dataWithContentsOfFile:filePath];
+//        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+//        
+//        NSArray *array = [dic objectForKey:@"result"];
+//        
+//        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+//            [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
+//        }
 //        return;
-//    }
-//    NSData *data = [NSData dataWithContentsOfFile:filePath];
-//    NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
-//
-//    NSArray *array = [dic objectForKey:@"result"];
-//
-//    if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-//        [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
-//    }
+    }
     
     
     LGMatchListRequest *request = [[LGMatchListRequest alloc] initWithType:self.listType];
@@ -102,11 +106,15 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
             NSMutableDictionary *dic = [obj fq_mutableDictionary];
             [arrayM addObject:dic];
         }];
-        
+
+        [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1[kMatchKeyStartTime] compare:obj2[kMatchKeyStartTime]] == NSOrderedAscending;
+        }];
+
         if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
             [self.delegate matchListDidFetch:self data:arrayM last:YES errCode:LGErrorCode_Success];
         }
-        
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
             [self.delegate matchListDidFetch:self data:nil last:YES errCode:error.code];

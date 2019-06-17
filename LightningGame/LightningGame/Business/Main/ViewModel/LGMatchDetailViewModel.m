@@ -7,6 +7,7 @@
 //
 
 #import "LGMatchDetailViewModel.h"
+#import "LGMatchDetailRequest.h"
 #import "NSDictionary+FQExtension.h"
 
 @interface LGMatchDetailViewModel ()
@@ -18,21 +19,41 @@
 @implementation LGMatchDetailViewModel
 
 - (void)fetchDataWithMatchID:(NSString *)matchID {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
-    if (!filePath) {
-        return;
+    {
+        // test data
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
+//        if (!filePath) {
+//            return;
+//        }
+//        NSData *data = [NSData dataWithContentsOfFile:filePath];
+//        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+//        NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
+//
+//        NSArray *oddsArray = resultDic[kMatchKeyOdds];
+//        NSArray *teamArray = resultDic[kMatchKeyTeam];
+//        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
+//
+//        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
+//            [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic errCode:-1];
+//        }
+//        return;
     }
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
-    NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
     
-    NSArray *oddsArray = resultDic[kMatchKeyOdds];
-    NSArray *teamArray = resultDic[kMatchKeyTeam];
-    NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
-    
-    if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
-        [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic errCode:-1];
-    }
+    LGMatchDetailRequest *request = [[LGMatchDetailRequest alloc] initWithMatchID:matchID];
+    [request requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSArray *oddsArray = responseObject[kMatchKeyOdds];
+        NSArray *teamArray = responseObject[kMatchKeyTeam];
+        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
+
+        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
+            [self.delegate matchDetailDidFetch:self matchDic:responseObject teamArray:teamArray oddsDic:oddsDic errCode:LGErrorCode_Success];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
+            [self.delegate matchDetailDidFetch:self matchDic:nil teamArray:nil oddsDic:nil errCode:error.code];
+        }
+    }];
 }
 
 + (NSString *)matchStage:(NSString *)stageKey {
@@ -44,8 +65,15 @@
         return @"第二局";
     } else if ([stageKey isEqualToString:@"r3"]) {
         return @"第三局";
+    } else if ([stageKey isEqualToString:@"map1"]) {
+        return @"地图一";
+    } else if ([stageKey isEqualToString:@"map2"]) {
+        return @"地图二";
+    } else if ([stageKey isEqualToString:@"map3"]) {
+        return @"地图三";
     }
-    return nil;
+    
+    return @"";
 }
 
 - (NSMutableDictionary *)p_handleMatchStage:(NSArray *)oddsArray {

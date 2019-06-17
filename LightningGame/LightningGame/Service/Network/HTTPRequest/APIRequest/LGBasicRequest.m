@@ -77,9 +77,7 @@
                                               failure(task, generateError(LGErrorCode_UnDefine));
                                           }
                                       } @finally {
-                                          if (failure) {
-                                              failure(task, generateError(LGErrorCode_UnDefine));
-                                          }
+                                          
                                       }
                                   }
                                   failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

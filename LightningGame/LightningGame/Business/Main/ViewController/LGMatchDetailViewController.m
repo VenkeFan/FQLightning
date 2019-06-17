@@ -10,13 +10,15 @@
 #import "LGMatchDetailViewModel.h"
 #import <MJRefresh/MJRefresh.h>
 #import "FQSegmentedControl.h"
-#import "LGMatchListViewCell.h"
+#import "LGMatchDetailHeaderView.h"
 #import "LGMatchDetailTableViewCell.h"
 #import "LGMatchParlayTableView.h"
 
-static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailTableViewCell";
+#define kLGMatchDetailHeaderContentHeight           kSizeScale(148.0)
+#define kLGMatchDetailHeaderPlayererHeight          kSizeScale(270.0)
 
-static CGFloat const edgeAll = kSizeScale(8.0);
+static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailTableViewCell";
+static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
 @interface LGMatchDetailViewController () <LGMatchDetailViewModelDelegate, FQSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -28,7 +30,7 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 @property (nonatomic, strong) NSMutableDictionary *oddsDicM;
 
 @property (nonatomic, strong) UIView *topContentView;
-@property (nonatomic, strong) LGMatchListViewCell *topCell;
+@property (nonatomic, strong) LGMatchDetailHeaderView *headerView;
 
 @property (nonatomic, strong) UIView *oddsContentView;
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
@@ -69,21 +71,21 @@ static CGFloat const edgeAll = kSizeScale(8.0);
 
 - (void)initializeTopView {
     _topContentView = [[UIView alloc] init];
-    _topContentView.frame = CGRectMake(edgeAll, kNavBarHeight, self.view.width - edgeAll * 2, kSizeScale(166.0));
+    _topContentView.frame = CGRectMake(kDetailViewEdgeAll, kNavBarHeight, self.view.width - kDetailViewEdgeAll * 2, kLGMatchDetailHeaderContentHeight);
     _topContentView.backgroundColor = kCellBgColor;
     _topContentView.layer.cornerRadius = kCornerRadius;
     _topContentView.layer.masksToBounds = YES;
     [self.view addSubview:_topContentView];
     
-    _topCell = [[LGMatchListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    _topCell.frame = _topContentView.bounds;
-    _topCell.backgroundColor = [UIColor clearColor];
-    [_topContentView addSubview:_topCell];
+    _headerView = [[LGMatchDetailHeaderView alloc] init];
+    _headerView.frame = _topContentView.bounds;
+    _headerView.backgroundColor = [UIColor clearColor];
+    [_topContentView addSubview:_headerView];
 }
 
 - (void)initializeOddsContentView {
     _oddsContentView = [[UIView alloc] init];
-    _oddsContentView.frame = CGRectMake(edgeAll, CGRectGetMaxY(_topContentView.frame) + edgeAll, self.view.width - edgeAll * 2, self.view.height - CGRectGetMaxY(_topContentView.frame) - edgeAll * 2 - kSafeAreaBottomY);
+    _oddsContentView.frame = CGRectMake(kDetailViewEdgeAll, CGRectGetMaxY(_topContentView.frame) + kDetailViewEdgeAll, self.view.width - kDetailViewEdgeAll * 2, self.view.height - CGRectGetMaxY(_topContentView.frame) - kDetailViewEdgeAll * 2 - kSafeAreaBottomY);
     _oddsContentView.backgroundColor = kCellBgColor;
     _oddsContentView.layer.cornerRadius = kCornerRadius;
     _oddsContentView.layer.masksToBounds = YES;
@@ -262,7 +264,7 @@ static CGFloat const edgeAll = kSizeScale(8.0);
     self.teamArrayI = teamArray;
     self.oddsDicM = oddsDic;
     
-    [self.topCell setDataDic:self.matchDicM];
+    [self.headerView setDataDic:self.matchDicM];
     
     NSMutableArray *stageArray = [NSMutableArray arrayWithCapacity:self.oddsDicM.allKeys.count];
     [self.oddsDicM.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

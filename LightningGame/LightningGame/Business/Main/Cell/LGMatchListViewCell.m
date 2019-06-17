@@ -11,10 +11,7 @@
 #import "LGMatchListKeys.h"
 #import "LGMatchListOddsView.h"
 #import "FQComponentFactory.h"
-#import "LGAPIURLConfig.h"
 #import "FQImageButton.h"
-
-#define kScoreLayerPaddingX         kSizeScale(8.0)
 
 @interface LGMatchListViewCell ()
 
@@ -56,6 +53,7 @@
     _containerView.frame = CGRectMake(kCellMarginX, 0, CGRectGetWidth(self.frame) - kCellMarginX * 2, kLGMatchListViewCellContainerHeight);
 
     CGFloat x = kSizeScale(6.0), y = kSizeScale(6.0);
+    CGFloat paddingX = kSizeScale(8.0);
     
     _titleView.frame = CGRectMake(x, y, CGRectGetWidth(_containerView.frame) - x * 2, kSizeScale(24.0));
     _tourNameLabel.frame = CGRectMake(x, 0, CGRectGetWidth(_titleView.frame) - x * 2, CGRectGetHeight(_titleView.frame));
@@ -65,9 +63,9 @@
     _topStatusBtn.layer.cornerRadius = _topStatusBtn.height * 0.5;
     
     _scoreLine.position = CGPointMake(CGRectGetWidth(_containerView.frame) * 0.5, CGRectGetHeight(_containerView.frame) * 0.5);
-    _leftScore.position = CGPointMake(CGRectGetMinX(_scoreLine.frame) - kScoreLayerPaddingX - CGRectGetWidth(_leftScore.frame) * 0.5,
+    _leftScore.position = CGPointMake(CGRectGetMinX(_scoreLine.frame) - paddingX - CGRectGetWidth(_leftScore.frame) * 0.5,
                                       _scoreLine.positionY);
-    _rightScore.position = CGPointMake(CGRectGetMaxX(_scoreLine.frame) + kScoreLayerPaddingX + CGRectGetWidth(_rightScore.frame) * 0.5,
+    _rightScore.position = CGPointMake(CGRectGetMaxX(_scoreLine.frame) + paddingX + CGRectGetWidth(_rightScore.frame) * 0.5,
                                        _scoreLine.positionY);
     
     _leftOddsView.center = CGPointMake(x + _leftOddsView.width * 0.5, CGRectGetHeight(_containerView.frame) - y - CGRectGetHeight(_leftOddsView.frame) * 0.5);

@@ -128,7 +128,7 @@
     }
     
     __weak typeof(self) weakSelf = self;
-    CGSize size = weakSelf.frame.size;
+//    CGSize size = weakSelf.frame.size;
     
     [self sd_setImageWithURL:url
             placeholderImage:placeholder
