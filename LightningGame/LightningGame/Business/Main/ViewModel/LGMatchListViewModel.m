@@ -28,6 +28,7 @@ NSString * const kMatchKeyTournamentShortName          = @"tournament_short_name
 NSString * const kMatchKeyPlayCount                    = @"play_count";
 NSString * const kMatchKeyTeam                         = @"team";
 NSString * const kMatchKeyOdds                         = @"odds";
+NSString * const kMatchKeyLiveUrl                      = @"live_url";
 
 #pragma mark - TeamKey
 
@@ -82,19 +83,19 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 - (void)fetchData {
     {
         // test data
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
-//        if (!filePath) {
-//            return;
-//        }
-//        NSData *data = [NSData dataWithContentsOfFile:filePath];
-//        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
-//        
-//        NSArray *array = [dic objectForKey:@"result"];
-//        
-//        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-//            [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
-//        }
-//        return;
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
+        if (!filePath) {
+            return;
+        }
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+        
+        NSArray *array = [dic objectForKey:@"result"];
+        
+        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+            [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
+        }
+        return;
     }
     
     

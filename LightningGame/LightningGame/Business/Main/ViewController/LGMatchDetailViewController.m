@@ -11,16 +11,17 @@
 #import <MJRefresh/MJRefresh.h>
 #import "FQSegmentedControl.h"
 #import "LGMatchDetailHeaderView.h"
+#import "LGMatchDetailPlayerView.h"
 #import "LGMatchDetailTableViewCell.h"
 #import "LGMatchParlayTableView.h"
 
 #define kLGMatchDetailHeaderContentHeight           kSizeScale(148.0)
-#define kLGMatchDetailHeaderPlayererHeight          kSizeScale(270.0)
+#define kLGMatchDetailHeaderPlayerHeight            kSizeScale(270.0)
 
 static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailTableViewCell";
 static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
-@interface LGMatchDetailViewController () <LGMatchDetailViewModelDelegate, FQSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface LGMatchDetailViewController () <LGMatchDetailViewModelDelegate, FQSegmentedControlDelegate, LGMatchDetailHeaderViewDelegate, LGMatchDetailPlayerViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, copy) NSString *matchID;
 
@@ -31,6 +32,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
 @property (nonatomic, strong) UIView *topContentView;
 @property (nonatomic, strong) LGMatchDetailHeaderView *headerView;
+@property (nonatomic, strong) LGMatchDetailPlayerView *playerView;
 
 @property (nonatomic, strong) UIView *oddsContentView;
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
@@ -65,7 +67,15 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+}
+
 - (void)dealloc {
+//    [_playerView stop];
+//    [_playerView removeFromSuperview];
+//    _playerView = nil;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -78,6 +88,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     [self.view addSubview:_topContentView];
     
     _headerView = [[LGMatchDetailHeaderView alloc] init];
+    _headerView.delegate = self;
     _headerView.frame = _topContentView.bounds;
     _headerView.backgroundColor = [UIColor clearColor];
     [_topContentView addSubview:_headerView];
@@ -281,6 +292,58 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 - (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+#pragma mark - LGMatchDetailHeaderViewDelegate
+
+- (void)matchDetailHeaderViewDidPlay:(LGMatchDetailHeaderView *)view {
+//    NSString *liveUrl = self.matchDicM[kMatchKeyLiveUrl];
+//    TODO("test data");
+//    liveUrl = @"https://rayapi.livet.cn/m3u8url/raybet?url=https://www.huya.com/lck";
+//    if (liveUrl.length == 0) {
+//        return;
+//    }
+//
+//    _playerView = [[FQAVPlayerView alloc] initWithFrame:CGRectMake(0, 0, _topContentView.width, kLGMatchDetailHeaderPlayerHeight)];
+//    [_topContentView addSubview:_playerView];
+//    [_playerView setUrlString:liveUrl];
+//    [_playerView play];
+//
+    
+    _playerView = [[LGMatchDetailPlayerView alloc] initWithFrame:CGRectMake(0, 0, _topContentView.width, kLGMatchDetailHeaderPlayerHeight)];
+    _playerView.delegate = self;
+    [_playerView setDataDic:self.matchDicM];
+    [_topContentView addSubview:_playerView];
+    
+    CGFloat delta = _playerView.height - _headerView.height;
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.topContentView.height += delta;
+                         self.oddsContentView.top += delta;
+                         self.oddsContentView.height -= delta;
+                         self.tableView.height -= delta;
+                     }];
+}
+
+#pragma mark - LGMatchDetailPlayerViewDelegate
+
+- (void)matchDetailPlayerViewDidStop:(LGMatchDetailPlayerView *)headerView {
+//    [_playerView stop];
+//    [_playerView removeFromSuperview];
+//    _playerView = nil;
+//
+    [_playerView removeFromSuperview];
+    
+    CGFloat delta = _headerView.height - _playerView.height;
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.topContentView.height += delta;
+                         self.oddsContentView.top += delta;
+                         self.oddsContentView.height -= delta;
+                         self.tableView.height -= delta;
+                     } completion:^(BOOL finished) {
+                         self.playerView = nil;
+                     }];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

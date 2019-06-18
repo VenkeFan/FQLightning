@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class LGMatchDetailHeaderView;
+
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol LGMatchDetailHeaderViewDelegate <NSObject>
+
+- (void)matchDetailHeaderViewDidPlay:(LGMatchDetailHeaderView *)view;
+
+@end
 
 @interface LGMatchDetailHeaderView : UIView
 
 @property (nonatomic, copy) NSDictionary *dataDic;
+@property (nonatomic, weak) id<LGMatchDetailHeaderViewDelegate> delegate;
 
 @end
 

@@ -7,7 +7,6 @@
 //
 
 #import "LGMatchDetailHeaderView.h"
-#import <CoreText/CoreText.h>
 #import "LGMatchListKeys.h"
 #import "FQComponentFactory.h"
 #import "FQImageButton.h"
@@ -16,7 +15,7 @@
 
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UILabel *tourNameLabel;
-@property (nonatomic, strong) UILabel *countLab;
+//@property (nonatomic, strong) UILabel *countLab;
 
 @property (nonatomic, strong) UIImageView *leftLogoView;
 @property (nonatomic, strong) UIImageView *rightLogoView;
@@ -110,7 +109,7 @@
         _statusBtn.layer.masksToBounds = YES;
         [_statusBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
         _statusBtn.titleLabel.font = kRegularFont(kTinyFontSize);
-        [_statusBtn addTarget:self action:@selector(statusBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_statusBtn addTarget:self action:@selector(statusBtnOnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_statusBtn];
     }
     
@@ -221,13 +220,13 @@
         LGMatchStatus status = (LGMatchStatus)[dataDic[kMatchKeyStatus] integerValue];
         switch (status) {
             case LGMatchStatus_Prepare: {
-                self.statusBtn.hidden = NO;
+                self.statusBtn.hidden = YES;
                 
-                [self.statusBtn setImage:[UIImage imageNamed:@"main_notStarted"] forState:UIControlStateNormal];
-                [self.statusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
-                [self.statusBtn sizeToFit];
-                self.statusBtn.width += 6.0;
-                self.statusBtn.height += 4.0;
+//                [self.statusBtn setImage:[UIImage imageNamed:@"main_notStarted"] forState:UIControlStateNormal];
+//                [self.statusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
+//                [self.statusBtn sizeToFit];
+//                self.statusBtn.width += 6.0;
+//                self.statusBtn.height += 4.0;
                 
                 self.statusLabel.text = kLocalizedString(@"main_match_prepare");
                 [self.statusLabel sizeToFit];
@@ -237,7 +236,7 @@
                 self.statusBtn.hidden = NO;
                 
                 [self.statusBtn setImage:[UIImage imageNamed:@"main_started"] forState:UIControlStateNormal];
-                [self.statusBtn setTitle:kLocalizedString(@"main_match_live") forState:UIControlStateNormal];
+                [self.statusBtn setTitle:kLocalizedString(@"main_match_play") forState:UIControlStateNormal];
                 [self.statusBtn sizeToFit];
                 self.statusBtn.width += 6.0;
                 self.statusBtn.height += 4.0;
@@ -266,8 +265,10 @@
 
 #pragma mark - Events
 
-- (void)statusBtnOnClicked {
-    
+- (void)statusBtnOnClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(matchDetailHeaderViewDidPlay:)]) {
+        [self.delegate matchDetailHeaderViewDidPlay:self];
+    }
 }
 
 @end

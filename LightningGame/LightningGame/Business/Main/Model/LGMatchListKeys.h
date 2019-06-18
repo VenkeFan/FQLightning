@@ -34,6 +34,7 @@ extern NSString * const kMatchKeyTournamentShortName;
 extern NSString * const kMatchKeyPlayCount;
 extern NSString * const kMatchKeyTeam;
 extern NSString * const kMatchKeyOdds;
+extern NSString * const kMatchKeyLiveUrl;
 
 #pragma mark - TeamKey
 

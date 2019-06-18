@@ -285,7 +285,7 @@
                 self.btmStatusBtn.hidden = NO;
                 
                 [self.topStatusBtn setImage:[UIImage imageNamed:@"main_started"] forState:UIControlStateDisabled];
-                [self.topStatusBtn setTitle:kLocalizedString(@"main_match_live") forState:UIControlStateNormal];
+                [self.topStatusBtn setTitle:kLocalizedString(@"main_match_play") forState:UIControlStateNormal];
                 [self.topStatusBtn sizeToFit];
                 self.topStatusBtn.width += 6.0;
                 self.topStatusBtn.height += 4.0;
