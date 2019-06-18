@@ -6,9 +6,8 @@
 //  Copyright © 2018年 fan qi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
 #import "FQAbstractPlayerView.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface FQAVPlayerView : FQAbstractPlayerView
 

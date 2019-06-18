@@ -261,6 +261,7 @@
 		B9727B1222B771BF002B335C /* LGMatchDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailHeaderView.m; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
+		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
 		B9C3A162229F7DEB00E282B0 /* LGMatchBasicOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchBasicOddsView.h; sourceTree = "<group>"; };
 		B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchBasicOddsView.m; sourceTree = "<group>"; };
 		B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MsgForwarding.m"; sourceTree = "<group>"; };
@@ -740,6 +741,7 @@
 				B94E4FAE22B79CAD00A56F13 /* FQAVPlayerView.m */,
 				B94E4FB122B79CB600A56F13 /* FQPlayerOperateView.h */,
 				B94E4FB222B79CB600A56F13 /* FQPlayerOperateView.m */,
+				B9BE555722B8D62700D04395 /* FQPlayerConfig.h */,
 			);
 			path = Player;
 			sourceTree = "<group>";

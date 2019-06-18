@@ -20,23 +20,23 @@
 
 - (void)fetchDataWithMatchID:(NSString *)matchID {
     {
-        // test data
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
-        if (!filePath) {
-            return;
-        }
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
-        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
-        NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
-
-        NSArray *oddsArray = resultDic[kMatchKeyOdds];
-        NSArray *teamArray = resultDic[kMatchKeyTeam];
-        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
-
-        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
-            [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic errCode:-1];
-        }
-        return;
+//        TODO(@"test data");
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
+//        if (!filePath) {
+//            return;
+//        }
+//        NSData *data = [NSData dataWithContentsOfFile:filePath];
+//        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+//        NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
+//
+//        NSArray *oddsArray = resultDic[kMatchKeyOdds];
+//        NSArray *teamArray = resultDic[kMatchKeyTeam];
+//        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
+//
+//        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
+//            [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic errCode:-1];
+//        }
+//        return;
     }
     
     LGMatchDetailRequest *request = [[LGMatchDetailRequest alloc] initWithMatchID:matchID];

@@ -19,7 +19,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
     [FQPlayerViewStatus_Failed]          = @"FQPlayerViewStatus_Failed"
 };
 
-@interface FQAVPlayerView () <FQPlayerOperateViewDelegate> {
+@interface FQAVPlayerView () {
     id _timeObserver;
 }
 
@@ -60,9 +60,6 @@ NSString * const FQPlayerViewStatusMapping[] = {
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.preImgLayer.contentsGravity = kCAGravityResizeAspectFill;
-        
-        self.operateView.delegate = self;
-        [self bringSubviewToFront:self.operateView];
     }
     return self;
 }
@@ -70,12 +67,6 @@ NSString * const FQPlayerViewStatusMapping[] = {
 + (Class)layerClass {
     return [AVPlayerLayer class];
 }
-
-//- (void)layoutSubviews {
-//    [super layoutSubviews];
-//    
-//    self.operateView.frame = self.bounds;
-//}
 
 - (void)dealloc {
     [self p_destroyPlayer];
@@ -224,10 +215,10 @@ NSString * const FQPlayerViewStatusMapping[] = {
         CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds; // 缓冲总长度
         
-        NSLog(@"%@", [NSString stringWithFormat:@"caching section: [%f, %f], total caching: %f, playbuffer: %f, totalDurationSeconds: %f", startSeconds, durationSeconds, totalBuffer, self.playBuffer, self.totalDurationSeconds]);
+        NSLog(@"********** %@", [NSString stringWithFormat:@"caching section: [%f, %f], total caching: %f, playbuffer: %f, totalDurationSeconds: %f", startSeconds, durationSeconds, totalBuffer, self.playBuffer, self.totalDurationSeconds]);
         
         if (!isnan(totalBuffer)) {
-            self.operateView.cacheProgress = totalBuffer / self.totalDurationSeconds;
+            self.cacheProgress = totalBuffer / self.totalDurationSeconds;
             
             if (self.playerViewStatus != FQPlayerViewStatus_Paused
                 && self.playerViewStatus != FQPlayerViewStatus_Stopped
@@ -242,11 +233,11 @@ NSString * const FQPlayerViewStatusMapping[] = {
             [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
         }
     } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
-//        NSLog(@"playbackLikelyToKeepUp: %zd", [change[@"new"] integerValue]);
+        NSLog(@"********** playbackLikelyToKeepUp: %zd", [change[@"new"] integerValue]);
     } else if ([keyPath isEqualToString:@"playbackBufferFull"]) {
-//        NSLog(@"playbackBufferFull: %zd", [change[@"new"] integerValue]);
+        NSLog(@"********** playbackBufferFull: %zd", [change[@"new"] integerValue]);
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
-//        NSLog(@"playbackBufferEmpty: %zd", [change[@"new"] integerValue]);
+        NSLog(@"********** playbackBufferEmpty: %zd", [change[@"new"] integerValue]);
     }
 }
 
@@ -265,49 +256,6 @@ NSString * const FQPlayerViewStatusMapping[] = {
 
 - (void)didPlaybackStalled:(NSNotification *)notification {
 //    NSLog(@"didPlaybackStalled");
-}
-
-#pragma mark - FQPlayerOperateViewDelegate
-
-- (void)playerOperateViewDidClickedPlay:(FQPlayerOperateView *)operateView {
-    if (self.playerViewStatus != FQPlayerViewStatus_Playing) {
-        [self play];
-    } else {
-        [self pause];
-    }
-}
-
-- (void)playerOperateViewDidClickedRotate:(FQPlayerOperateView *)operateView {
-    if ([self.delegate respondsToSelector:@selector(playerViewOrientationDidChanged:)]) {
-        [self.delegate playerViewOrientationDidChanged:self];
-    }
-}
-
-- (void)playerOperateView:(FQPlayerOperateView *)operateView didVolumeChanged:(BOOL)mute {
-    [self p_setVolume:mute];
-}
-
-- (void)playerOperateView:(FQPlayerOperateView *)operateView didSliderValueChanged:(CGFloat)changedValue {
-    [self pause];
-    CMTime durationTime = _player.currentItem.duration;
-    CGFloat changedSeconds = changedValue * self.totalDurationSeconds;
-    CMTime changedTime = CMTimeMake(changedSeconds * durationTime.timescale, durationTime.timescale);
-    
-    if (_player) {
-        [_player seekToTime:changedTime
-          completionHandler:^(BOOL finished) {
-              if (self.operateView.playProgress != changedValue) {
-                  self.operateView.playProgress = changedValue;
-              }
-              [self play];
-          }];
-    }
-}
-
-- (void)playerOperateView:(FQPlayerOperateView *)operateView didDiaplayToolsChanged:(BOOL)displayTools {
-    if ([self.delegate respondsToSelector:@selector(playerView:didDiaplayToolsChanged:)]) {
-        [self.delegate playerView:self didDiaplayToolsChanged:displayTools];
-    }
 }
 
 #pragma mark - Private
@@ -348,7 +296,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
     
     _player = [AVPlayer playerWithPlayerItem:playerItem];
     [(AVPlayerLayer *)self.layer setPlayer:_player];
-    [self p_setVolume:[FQPlayerOperateView isMute]];
+    [self p_setVolume:[FQAbstractPlayerView isMute]];
     
     if (!_timeObserver) {
         __weak typeof(self) weakSelf = self;
@@ -361,8 +309,8 @@ NSString * const FQPlayerViewStatusMapping[] = {
                                                                  
                                                                  weakSelf.playBuffer = seconds;
                                                                  
-                                                                 weakSelf.operateView.playSeconds = seconds;
-                                                                 weakSelf.operateView.duration = duration;
+                                                                 weakSelf.playSeconds = seconds;
+                                                                 weakSelf.duration = duration;
                                                              }
                                                          }];
         
@@ -380,10 +328,10 @@ NSString * const FQPlayerViewStatusMapping[] = {
 //- (void)p_updatePlayerViewStatusWithCtrStatus:(AVPlayerTimeControlStatus)status {
 //    switch (status) {
 //        case AVPlayerTimeControlStatusPlaying:
-//            self.playerViewStatus = FQPlayerViewStatus_Playing;
+//            [self setPlayerViewStatus:FQPlayerViewStatus_Playing];
 //            break;
 //        case AVPlayerTimeControlStatusPaused:
-//            self.playerViewStatus = FQPlayerViewStatus_Paused;
+//            [self setPlayerViewStatus:FQPlayerViewStatus_Paused];
 //            break;
 //        default:
 //            break;
@@ -402,8 +350,8 @@ NSString * const FQPlayerViewStatusMapping[] = {
     [_player pause];
     [_player seekToTime:kCMTimeZero];
     
-    self.operateView.playSeconds = 0;
-    self.operateView.duration = self.totalDurationSeconds;
+    self.playSeconds = 0;
+    self.duration = self.totalDurationSeconds;
 }
 
 - (void)p_destroyPlayer {

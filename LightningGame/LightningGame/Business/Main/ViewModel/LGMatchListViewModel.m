@@ -82,20 +82,20 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 
 - (void)fetchData {
     {
-        // test data
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
-        if (!filePath) {
-            return;
-        }
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
-        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
-        
-        NSArray *array = [dic objectForKey:@"result"];
-        
-        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-            [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
-        }
-        return;
+//        TODO(@"test data");
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
+//        if (!filePath) {
+//            return;
+//        }
+//        NSData *data = [NSData dataWithContentsOfFile:filePath];
+//        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
+//        
+//        NSArray *array = [dic objectForKey:@"result"];
+//        
+//        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
+//            [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
+//        }
+//        return;
     }
     
     

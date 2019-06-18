@@ -10,6 +10,8 @@
 #import "FQNetworkReachabilityManager.h"
 #import "UIView+FQRotatable.h"
 
+static BOOL _mute = NO;
+
 @interface FQAbstractPlayerView () <FQPlayerOperateViewDelegate> {
     __weak UIView *_previousSuperView;
     CGRect _originalFrame;
@@ -22,6 +24,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _loop = YES;
+        _playProgress = 0.0;
+        _cacheProgress = 0.0;
         
         [self rt_initializeArgument];
         [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -58,6 +62,7 @@
 
 - (void)initializeUI {
     [self addSubview:self.operateView];
+    [self.operateView prepare];
 }
 
 #pragma mark - FQPlayerOperateViewDelegate
@@ -114,41 +119,41 @@
 - (void)p_changeOrientation {
     __weak typeof(self) weakSelf = self;
     [self rt_manualChangeOrientation:^{
-//        __strong typeof(weakSelf) strSelf = weakSelf;
-//        switch (strSelf.orientation) {
-//            case UIDeviceOrientationPortrait: {
-//                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspectFill];
-//                [strSelf.operateView setPlayerOrientation:FQPlayerViewOrientation_Portrait];
-//            }
-//                break;
-//            case UIDeviceOrientationLandscapeLeft: {
-//                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
-//                [strSelf.operateView setPlayerOrientation:FQPlayerViewOrientation_Landscape];
-//            }
-//                break;
-//            case UIDeviceOrientationLandscapeRight: {
-//                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
-//                [strSelf.operateView setPlayerOrientation:FQPlayerViewOrientation_Landscape];
-//            }
-//                break;
-//            default:
-//                break;
-//        }
+        __strong typeof(weakSelf) strSelf = weakSelf;
+        switch (strSelf.orientation) {
+            case UIDeviceOrientationPortrait: {
+                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspectFill];
+                [strSelf setPlayerOrientation:FQPlayerViewOrientation_Portrait];
+            }
+                break;
+            case UIDeviceOrientationLandscapeLeft: {
+                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
+                [strSelf setPlayerOrientation:FQPlayerViewOrientation_Landscape];
+            }
+                break;
+            case UIDeviceOrientationLandscapeRight: {
+                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
+                [strSelf setPlayerOrientation:FQPlayerViewOrientation_Landscape];
+            }
+                break;
+            default:
+                break;
+        }
     }];
 }
 
 #pragma mark - Setter
 
++ (void)setMute:(BOOL)mute {
+    _mute = mute;
+}
+
 - (void)setWindowMode:(FQPlayerViewWindowMode)windowMode {
     _windowMode = windowMode;
-    
-    self.operateView.windowMode = windowMode;
 }
 
 - (void)setPlayerOrientation:(FQPlayerViewOrientation)playerOrientation {
     _playerOrientation = playerOrientation;
-    
-    self.operateView.playerOrientation = playerOrientation;
 }
 
 - (void)setPlayerViewStatus:(FQPlayerViewStatus)playerViewStatus {
@@ -184,14 +189,40 @@
             break;
     }
     
-    [self.operateView setPlayerViewStatus:playerViewStatus];
-    
     if ([self.delegate respondsToSelector:@selector(playerView:statusDidChanged:)]) {
         [self.delegate playerView:self statusDidChanged:playerViewStatus];
     }
 }
 
+- (void)setPlaySeconds:(CGFloat)playSeconds {
+    _playSeconds = playSeconds;
+    
+    if (_duration > 0) {
+        [self setPlayProgress:_playSeconds / _duration];
+    }
+}
+
+- (void)setDuration:(CGFloat)duration {
+    _duration = duration;
+    
+    if (_duration > 0) {
+        [self setPlayProgress:_playSeconds / _duration];
+    }
+}
+
+- (void)setPlayProgress:(CGFloat)playProgress {
+    _playProgress = playProgress;
+}
+
+- (void)setCacheProgress:(CGFloat)cacheProgress {
+    _cacheProgress = cacheProgress;
+}
+
 #pragma mark - Getter
+
++ (BOOL)isMute {
+    return _mute;
+}
 
 - (FQPlayerOperateView *)operateView {
     if (!_operateView) {

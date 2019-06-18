@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FQPlayerOperateView.h"
-
-typedef NS_ENUM(NSInteger, WLPlayerViewGravity) {
-    WLPlayerViewGravity_ResizeAspectFill,
-    WLPlayerViewGravity_ResizeAspect
-};
+#import "FQPlayerConfig.h"
 
 @protocol WLBasicPlayerProtocol <NSObject>
 
@@ -37,6 +33,8 @@ typedef NS_ENUM(NSInteger, WLPlayerViewGravity) {
 
 @interface FQAbstractPlayerView : UIView <WLBasicPlayerProtocol>
 
+@property (class, nonatomic, assign, getter=isMute) BOOL mute;
+
 @property (nonatomic, strong) FQPlayerOperateView *operateView;
 
 @property (nonatomic, assign) FQPlayerViewStatus playerViewStatus;
@@ -44,8 +42,11 @@ typedef NS_ENUM(NSInteger, WLPlayerViewGravity) {
 @property (nonatomic, assign) FQPlayerViewWindowMode windowMode;
 @property (nonatomic, assign) FQPlayerViewOrientation playerOrientation;
 
-@property (nonatomic, assign, readonly) CGFloat position;
 @property (nonatomic, assign, getter=isLoop) BOOL loop;
+@property (nonatomic, assign) CGFloat playProgress;
+@property (nonatomic, assign) CGFloat cacheProgress;
+@property (nonatomic, assign) CGFloat playSeconds;
+@property (nonatomic, assign) CGFloat duration;
 
 @property (nonatomic, weak) id<WLPlayerViewDelegate> delegate;
 
