@@ -17,6 +17,7 @@
 @interface LGMatchDetailOddsView ()
 
 @property (nonatomic, assign) CGFloat nameLabelWidth;
+@property (nonatomic, strong) CALayer *flagLayer;
 
 @end
 
@@ -30,6 +31,13 @@
         
         self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
         self.oddsLabel.center = CGPointMake(self.width - kViewPaddingX - self.oddsLabel.width * 0.5, self.height * 0.5);
+        
+        _flagLayer = [CALayer layer];
+        _flagLayer.hidden = YES;
+        _flagLayer.frame = CGRectMake(0, 0, kSizeScale(25.0), kSizeScale(35.0));
+        _flagLayer.contentsScale = kScreenScale;
+        _flagLayer.contentsGravity = kCAGravityResizeAspect;
+        [self.layer addSublayer:_flagLayer];
     }
     return self;
 }
@@ -39,6 +47,10 @@
     
     self.nameLabel.text = oddsDic[kMatchOddsKeyName];
     [self.nameLabel sizeToFit];
+    
+    self.flagLayer.contents = [oddsDic[kMatchOddsKeyWin] integerValue] == 1 ?
+    (__bridge id)[UIImage imageNamed:@"main_win"].CGImage :
+    (__bridge id)[UIImage imageNamed:@"main_lose"].CGImage;
 }
 
 - (void)setDirection:(LGMatchDetailOddsViewDirection)direction {
@@ -52,6 +64,7 @@
     
     self.oddsLabel.hidden = YES;
     self.lockLayer.hidden = YES;
+    self.flagLayer.hidden = YES;
     
     switch (status) {
         case LGMatchOddsStatus_Normal: {
@@ -67,7 +80,7 @@
         }
             break;
         case LGMatchOddsStatus_Finished: {
-            
+            self.flagLayer.hidden = NO;
         }
             break;
         case LGMatchOddsStatus_Exception: {
@@ -77,21 +90,6 @@
     }
     
     [self p_updateLayout];
-    
-//    switch (status) {
-//        case LGMatchOddsStatus_Enable: {
-//            self.oddsLabel.hidden = NO;
-//        }
-//            break;
-//        case LGMatchOddsStatus_Disable: {
-//            
-//        }
-//            break;
-//        case LGMatchOddsStatus_Locked: {
-//            self.lockLayer.hidden = NO;
-//        }
-//            break;
-//    }
 }
 
 - (void)p_updateLayout {
@@ -135,9 +133,14 @@
             self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
         }
             break;
+        default: {
+            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        }
+            break;
     }
     
     self.lockLayer.position = self.oddsLabel.center;
+    self.flagLayer.position = self.oddsLabel.center;
 }
 
 - (CGFloat)nameLabelWidth {

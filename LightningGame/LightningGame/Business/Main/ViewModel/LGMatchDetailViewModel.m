@@ -10,6 +10,18 @@
 #import "LGMatchDetailRequest.h"
 #import "NSDictionary+FQExtension.h"
 
+NSString * const LGMatchStageMapping[] = {
+    [1] = @"一",
+    [2] = @"二",
+    [3] = @"三",
+    [4] = @"四",
+    [5] = @"五",
+    [6] = @"六",
+    [7] = @"七",
+    [8] = @"八",
+    [9] = @"九"
+};
+
 @interface LGMatchDetailViewModel ()
 
 @property (nonatomic, strong) NSMutableDictionary *matchStateDicM;
@@ -72,6 +84,15 @@
     } else if ([stageKey isEqualToString:@"map3"]) {
         return @"地图三";
     }
+    
+//    if ([stageKey isEqualToString:@"final"]) {
+//        return @"全场";
+//    } else if ([stageKey hasPrefix:@"r"]) {
+//        NSString *index = [stageKey substringFromIndex:[stageKey rangeOfString:@"r"].length];
+//
+//    } else if ([stageKey hasPrefix:@"map"]) {
+//
+//    }
     
     return @"";
 }

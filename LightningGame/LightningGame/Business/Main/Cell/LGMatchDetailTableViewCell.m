@@ -114,10 +114,14 @@
         }
         
         for (int i = 0; i < oddsArray.count; i++) {
-            NSDictionary *oddsDic = oddsArray[i];
-            
             LGMatchDetailOddsView *oddsView = [LGMatchDetailOddsView new];
-            [oddsView setTeamDic:teamArray.firstObject oddsDic:oddsDic matchName:matchDic[kMatchKeyMatchName]];
+            if (i == 0) {
+                [oddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:matchDic[kMatchKeyMatchName]];
+            } else if (i == 1) {
+                [oddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:matchDic[kMatchKeyMatchName]];
+            } else {
+                [oddsView setTeamDic:teamArray.firstObject oddsDic:oddsArray[i] matchName:matchDic[kMatchKeyMatchName]];
+            }
             oddsView.direction = ((i & 1) == 0) ? LGMatchDetailOddsView_Left : LGMatchDetailOddsView_Right;
             [_oddsGroupView addSubview:oddsView];
         }

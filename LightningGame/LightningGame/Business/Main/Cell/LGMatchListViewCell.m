@@ -33,6 +33,9 @@
 @property (nonatomic, strong) LGMatchBasicOddsView *leftOddsView;
 @property (nonatomic, strong) LGMatchBasicOddsView *rightOddsView;
 
+@property (nonatomic, strong) CALayer *leftFlag;
+@property (nonatomic, strong) CALayer *rightFlag;
+
 @end
 
 @implementation LGMatchListViewCell
@@ -70,6 +73,9 @@
     
     _leftOddsView.center = CGPointMake(x + _leftOddsView.width * 0.5, CGRectGetHeight(_containerView.frame) - y - CGRectGetHeight(_leftOddsView.frame) * 0.5);
     _rightOddsView.center = CGPointMake(_containerView.width - x - _rightOddsView.width * 0.5, _leftOddsView.centerY);
+    
+    _leftFlag.position = CGPointMake(CGRectGetMaxX(_leftOddsView.frame) + x + _leftFlag.width * 0.5, _leftOddsView.centerY);
+    _rightFlag.position = CGPointMake(CGRectGetMinX(_rightOddsView.frame) - x - _rightFlag.width * 0.5, _leftOddsView.centerY);
 
     _leftLogoView.center = CGPointMake(_leftOddsView.centerX, _scoreLine.positionY);
     _rightLogoView.center = CGPointMake(_rightOddsView.centerX, _scoreLine.positionY);
@@ -170,6 +176,20 @@
         _rightOddsView = [LGMatchListOddsView new];
         [_containerView addSubview:_rightOddsView];
     }
+    
+    {
+        _leftFlag = [CALayer layer];
+        _leftFlag.frame = CGRectMake(0, 0, kSizeScale(25.0), kSizeScale(35.0));
+        _leftFlag.contentsScale = kScreenScale;
+        _leftFlag.contentsGravity = kCAGravityResizeAspect;
+        [_containerView.layer addSublayer:_leftFlag];
+        
+        _rightFlag = [CALayer layer];
+        _rightFlag.frame = (CGRect){.origin = CGPointZero, .size = _leftFlag.size};
+        _rightFlag.contentsScale = kScreenScale;
+        _rightFlag.contentsGravity = kCAGravityResizeAspect;
+        [_containerView.layer addSublayer:_rightFlag];
+    }
 }
 
 - (void)setDataDic:(NSDictionary *)dataDic {
@@ -197,11 +217,6 @@
     
     NSDictionary *leftTeam, *rightTeam;
     NSDictionary *leftOdds, *rightOdds;
-    
-//    if (teamArray.count >= 2) {
-//        leftTeam = teamArray[0];
-//        rightTeam = teamArray[1];
-//    }
     
     for (NSDictionary *tmp in teamArray) {
         if ([tmp[kMatchTeamKeyPos] integerValue] == 1) {
@@ -253,55 +268,79 @@
         _leftScore.string = leftScoreAttr;
         _rightScore.string = rightScoreAttr;
     }
-    if (leftTeam[kMatchTeamKeyLogo]) {
-        [_leftLogoView fq_setImageWithURLString:leftTeam[kMatchTeamKeyLogo]];
-    }
-    if (rightTeam[kMatchTeamKeyLogo]) {
-        [_rightLogoView fq_setImageWithURLString:rightTeam[kMatchTeamKeyLogo]];
-    }
-    
-    [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kMatchKeyMatchName]];
-    [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kMatchKeyMatchName]];
     
     {
+        if (leftTeam[kMatchTeamKeyLogo]) {
+            [_leftLogoView fq_setImageWithURLString:leftTeam[kMatchTeamKeyLogo]];
+        }
+        if (rightTeam[kMatchTeamKeyLogo]) {
+            [_rightLogoView fq_setImageWithURLString:rightTeam[kMatchTeamKeyLogo]];
+        }
+    }
+    
+    {
+        [_leftOddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:dataDic[kMatchKeyMatchName]];
+        [_rightOddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:dataDic[kMatchKeyMatchName]];
+    }
+    
+    {
+        _leftFlag.hidden = YES;
+        _rightFlag.hidden = YES;
+        
         LGMatchStatus status = (LGMatchStatus)[dataDic[kMatchKeyStatus] integerValue];
         switch (status) {
             case LGMatchStatus_Prepare: {
-                self.topStatusBtn.hidden = NO;
-                self.btmStatusBtn.hidden = NO;
+                _topStatusBtn.hidden = NO;
+                _btmStatusBtn.hidden = NO;
                 
-                [self.topStatusBtn setImage:[UIImage imageNamed:@"main_notStarted"] forState:UIControlStateDisabled];
-                [self.topStatusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
-                [self.topStatusBtn sizeToFit];
-                self.topStatusBtn.width += 6.0;
-                self.topStatusBtn.height += 4.0;
+                [_topStatusBtn setImage:[UIImage imageNamed:@"main_notStarted"] forState:UIControlStateDisabled];
+                [_topStatusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
+                [_topStatusBtn sizeToFit];
+                _topStatusBtn.width += 6.0;
+                _topStatusBtn.height += 4.0;
                 
-                [self.btmStatusBtn setImage:[UIImage imageNamed:@"main_notStarted2"] forState:UIControlStateDisabled];
-                [self.btmStatusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
+                [_btmStatusBtn setImage:[UIImage imageNamed:@"main_notStarted2"] forState:UIControlStateDisabled];
+                [_btmStatusBtn setTitle:kLocalizedString(@"main_match_prepare") forState:UIControlStateNormal];
             }
                 break;
             case LGMatchStatus_Rolling: {
-                self.topStatusBtn.hidden = NO;
-                self.btmStatusBtn.hidden = NO;
+                _topStatusBtn.hidden = NO;
+                _btmStatusBtn.hidden = NO;
                 
-                [self.topStatusBtn setImage:[UIImage imageNamed:@"main_started"] forState:UIControlStateDisabled];
-                [self.topStatusBtn setTitle:kLocalizedString(@"main_match_play") forState:UIControlStateNormal];
-                [self.topStatusBtn sizeToFit];
-                self.topStatusBtn.width += 6.0;
-                self.topStatusBtn.height += 4.0;
+                [_topStatusBtn setImage:[UIImage imageNamed:@"main_started"] forState:UIControlStateDisabled];
+                [_topStatusBtn setTitle:kLocalizedString(@"main_match_play") forState:UIControlStateNormal];
+                [_topStatusBtn sizeToFit];
+                _topStatusBtn.width += 6.0;
+                _topStatusBtn.height += 4.0;
                 
-                [self.btmStatusBtn setImage:[UIImage imageNamed:@"main_rolling"] forState:UIControlStateDisabled];
-                [self.btmStatusBtn setTitle:kLocalizedString(@"main_match_rolling") forState:UIControlStateNormal];
+                [_btmStatusBtn setImage:[UIImage imageNamed:@"main_rolling"] forState:UIControlStateDisabled];
+                [_btmStatusBtn setTitle:kLocalizedString(@"main_match_rolling") forState:UIControlStateNormal];
             }
                 break;
             case LGMatchStatus_Finished: {
-                self.topStatusBtn.hidden = YES;
-                self.btmStatusBtn.hidden = YES;
+                _topStatusBtn.hidden = YES;
+                _btmStatusBtn.hidden = YES;
+                
+                {
+                    _leftFlag.hidden = NO;
+                    _rightFlag.hidden = NO;
+                    
+                     id(^flagImage)(NSDictionary *) = ^(NSDictionary *oddsDic) {
+                         if (!oddsDic) {
+                             return (__bridge id)nil;
+                         }
+                         return [oddsDic[kMatchOddsKeyWin] integerValue] == 1 ?
+                         (__bridge id)[UIImage imageNamed:@"main_win"].CGImage :
+                         (__bridge id)[UIImage imageNamed:@"main_lose"].CGImage;
+                    };
+                    _leftFlag.contents = flagImage(leftOdds);
+                    _rightFlag.contents = flagImage(rightOdds);
+                }
             }
                 break;
             case LGMatchStatus_Canceled: {
-                self.topStatusBtn.hidden = YES;
-                self.btmStatusBtn.hidden = YES;
+                _topStatusBtn.hidden = YES;
+                _btmStatusBtn.hidden = YES;
             }
                 break;
         }

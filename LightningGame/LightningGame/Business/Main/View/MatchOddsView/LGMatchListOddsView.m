@@ -59,28 +59,11 @@
             self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
         }
             break;
+        default: {
+            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+        }
+            break;
     }
-    
-//    switch (status) {
-//        case LGMatchOddsStatus_Enable: {
-//            self.oddsLabel.hidden = NO;
-//            
-//            self.oddsLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, kViewPaddingY + CGRectGetHeight(self.oddsLabel.frame) * 0.5);
-//            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) - kViewPaddingY - CGRectGetHeight(self.nameLabel.frame) * 0.5);
-//        }
-//            break;
-//        case LGMatchOddsStatus_Disable: {
-//            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
-//        }
-//            break;
-//        case LGMatchOddsStatus_Locked: {
-//            self.lockLayer.hidden = NO;
-//
-//            self.lockLayer.position = CGPointMake(CGRectGetWidth(self.frame) * 0.5, kViewPaddingY + CGRectGetHeight(self.oddsLabel.frame) * 0.5);
-//            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) - kViewPaddingY - CGRectGetHeight(self.nameLabel.frame) * 0.5);
-//        }
-//            break;
-//    }
 }
 
 @end

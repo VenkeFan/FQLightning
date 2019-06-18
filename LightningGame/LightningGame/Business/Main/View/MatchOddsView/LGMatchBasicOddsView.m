@@ -67,16 +67,6 @@
     [self.nameLabel sizeToFit];
     
     [self setStatus:[oddsDic[kMatchOddsKeyStatus] integerValue]];
-    
-//    if (kIsNull(oddsDic[kMatchOddsKeyOdds])) {
-//        [self setStatus:LGMatchOddsStatus_Disable];
-//    } else {
-//        if ([oddsDic[kMatchOddsKeyStatus] integerValue] == 2) {
-//            [self setStatus:LGMatchOddsStatus_Enable];
-//        } else {
-//            [self setStatus:LGMatchOddsStatus_Locked];
-//        }
-//    }
 }
 
 #pragma mark - Event
