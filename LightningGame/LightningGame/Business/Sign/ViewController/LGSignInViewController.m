@@ -151,6 +151,10 @@
     }
 }
 
+- (void)signFlowManagerFailed:(NSError *)error {
+    
+}
+
 #pragma mark - Events
 
 - (void)pwdFieldRightBtnClicked:(UIButton *)sender {

@@ -161,6 +161,10 @@
     }
 }
 
+- (void)signFlowManagerFailed:(NSError *)error {
+    
+}
+
 #pragma mark - Events
 
 - (void)verifyBtnClicked {

@@ -169,7 +169,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 //            for (int k = 0; k < groupArray.count; k++) {
 //                NSMutableDictionary *tmpOdds = groupArray[k];
 //
-//                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]]) {
+//                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:notiOddsDic[kMatchOddsKeyOddsID]]) {
 //                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
 //
 //                    indexPath = [NSIndexPath indexPathForRow:j inSection:i];
@@ -182,13 +182,13 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     [self traversalOddsDicM:^(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop) {
         if ([oddsDic[kMatchOddsKeyOddsID] isEqual:notiOddsDic[kMatchOddsKeyOddsID]]) {
             [oddsDic setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
-            
+
             indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-            
+
             *stop = YES;
         }
     }];
-    
+
     if (indexPath) {
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
@@ -297,19 +297,6 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 #pragma mark - LGMatchDetailHeaderViewDelegate
 
 - (void)matchDetailHeaderViewDidPlay:(LGMatchDetailHeaderView *)view {
-//    NSString *liveUrl = self.matchDicM[kMatchKeyLiveUrl];
-//    TODO("test data");
-//    liveUrl = @"https://rayapi.livet.cn/m3u8url/raybet?url=https://www.huya.com/lck";
-//    if (liveUrl.length == 0) {
-//        return;
-//    }
-//
-//    _playerView = [[FQAVPlayerView alloc] initWithFrame:CGRectMake(0, 0, _topContentView.width, kLGMatchDetailHeaderPlayerHeight)];
-//    [_topContentView addSubview:_playerView];
-//    [_playerView setUrlString:liveUrl];
-//    [_playerView play];
-//
-    
     _playerView = [[LGMatchDetailPlayerView alloc] initWithFrame:CGRectMake(0, 0, _topContentView.width, kLGMatchDetailHeaderPlayerHeight)];
     _playerView.delegate = self;
     [_playerView setDataDic:self.matchDicM];
@@ -328,10 +315,6 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 #pragma mark - LGMatchDetailPlayerViewDelegate
 
 - (void)matchDetailPlayerViewDidStop:(LGMatchDetailPlayerView *)headerView {
-//    [_playerView stop];
-//    [_playerView removeFromSuperview];
-//    _playerView = nil;
-//
     [_playerView removeFromSuperview];
     
     CGFloat delta = _headerView.height - _playerView.height;

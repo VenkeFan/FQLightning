@@ -71,6 +71,7 @@
 		B9609CD522B36EA5003005BA /* LGMatchDetailOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CD422B36EA5003005BA /* LGMatchDetailOddsView.m */; };
 		B9727B1322B771BF002B335C /* LGMatchDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9727B1222B771BF002B335C /* LGMatchDetailHeaderView.m */; };
 		B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555222B8869000D04395 /* UIView+FQRotatable.m */; };
+		B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555922B908BE00D04395 /* LGOAuthRequest.m */; };
 		B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */; };
 		B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */; };
 		B9C3A16A229F93F100E282B0 /* FQComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A169229F93F100E282B0 /* FQComponentFactory.m */; };
@@ -262,6 +263,8 @@
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
+		B9BE555822B908BE00D04395 /* LGOAuthRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGOAuthRequest.h; sourceTree = "<group>"; };
+		B9BE555922B908BE00D04395 /* LGOAuthRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGOAuthRequest.m; sourceTree = "<group>"; };
 		B9C3A162229F7DEB00E282B0 /* LGMatchBasicOddsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchBasicOddsView.h; sourceTree = "<group>"; };
 		B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchBasicOddsView.m; sourceTree = "<group>"; };
 		B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MsgForwarding.m"; sourceTree = "<group>"; };
@@ -636,6 +639,8 @@
 				B91A762922A8BB0C00155607 /* LGSignUpRequest.m */,
 				B91A762D22A8DDE400155607 /* LGSignInRequest.h */,
 				B91A762E22A8DDE400155607 /* LGSignInRequest.m */,
+				B9BE555822B908BE00D04395 /* LGOAuthRequest.h */,
+				B9BE555922B908BE00D04395 /* LGOAuthRequest.m */,
 				B91A763422A910B700155607 /* LGForgetPwdRequest.h */,
 				B91A763522A910B700155607 /* LGForgetPwdRequest.m */,
 				B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */,
@@ -1203,6 +1208,7 @@
 				B9229D0E229BF04F0030691D /* NSDate+FQExtension.m in Sources */,
 				B9D9101522ABA64600D54911 /* CTMediator.m in Sources */,
 				B9D9103E22AE819900D54911 /* LGProfileViewController.m in Sources */,
+				B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */,
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
 				B9229D35229CFD940030691D /* FQFileManagerUtility.m in Sources */,
 				B9229D6B229E39A70030691D /* LGMatchListViewModel.m in Sources */,

@@ -11,6 +11,7 @@
 #import "LGVerifyCodeRequest.h"
 #import "LGSignUpRequest.h"
 #import "LGSignInRequest.h"
+#import "LGOAuthRequest.h"
 #import "LGForgetPwdRequest.h"
 
 @interface LGSignFlowManager ()
@@ -40,7 +41,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.flowStep = LGSignFlowStep_Splash;
+        _flowStep = LGSignFlowStep_Splash;
     }
     return self;
 }
@@ -77,7 +78,7 @@
                            
                        }
                        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                           
+                           [self broadcastFailure:error];
                        }];
 }
 
@@ -100,7 +101,7 @@
                                 [self setFlowStep:LGSignFlowStep_SignUp];
                             }
                             failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                
+                                [self broadcastFailure:error];
                             }];
 }
 
@@ -115,7 +116,19 @@
                                 [self setFlowStep:LGSignFlowStep_SignIn_Manual];
                             }
                             failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                
+                                [self broadcastFailure:error];
+                            }];
+}
+
+- (void)oAuthorize {
+    LGOAuthRequest *request = [LGOAuthRequest new];
+    [request requestWithAccessToken:[LGAccountManager instance].account[kAccountKeyAccountAccessToken]
+                            success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                                [[LGAccountManager instance] updateAccount:responseObject];
+                                [self setFlowStep:LGSignFlowStep_OAuth];
+                            }
+                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                [self broadcastFailure:error];
                             }];
 }
 
@@ -127,7 +140,7 @@
                        success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
                            [self setFlowStep:LGSignFlowStep_ModifyPassword];
                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                           
+                           [self broadcastFailure:error];
                        }];
 }
 
@@ -207,6 +220,9 @@
         case LGSignFlowStep_SignIn_Manual:
             [self nextStep:LGSignFlowStep_Home];
             break;
+        case LGSignFlowStep_OAuth:
+            [self nextStep:LGSignFlowStep_Home];
+            break;
         case LGSignFlowStep_ModifyPassword:
             [self nextStep:LGSignFlowStep_SignIn_Manual];
             break;
@@ -245,6 +261,17 @@
             id delegate = [self.listenerArray pointerAtIndex:i];
             if ([delegate respondsToSelector:@selector(signFlowManagerStepping:)]) {
                 [delegate signFlowManagerStepping:step];
+            }
+        }
+    });
+}
+
+- (void)broadcastFailure:(NSError *)error {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (NSInteger i = self.listenerArray.count - 1; i >= 0; i--) {
+            id delegate = [self.listenerArray pointerAtIndex:i];
+            if ([delegate respondsToSelector:@selector(signFlowManagerFailed:)]) {
+                [delegate signFlowManagerFailed:error];
             }
         }
     });

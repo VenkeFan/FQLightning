@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, LGSignFlowStep) {
     LGSignFlowStep_Splash,
     LGSignFlowStep_SignIn_Auto,
     LGSignFlowStep_SignIn_Manual,
+    LGSignFlowStep_OAuth,
     LGSignFlowStep_SignUp,
     LGSignFlowStep_ModifyPassword,
     LGSignFlowStep_Visitor,
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LGSignFlowManagerDelegate <NSObject>
 
 - (void)signFlowManagerStepping:(LGSignFlowStep)step;
+- (void)signFlowManagerFailed:(NSError *)error;
 
 @end
 
@@ -44,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
                    verifyCode:(NSString *)verifyCode;
 - (void)signInWithAccountName:(NSString *)accountName
                           pwd:(NSString *)pwd;
+- (void)oAuthorize;
 - (void)modifyPassword:(NSString *)newPwd
                 mobile:(NSString *)mobile
             verifyCode:(NSString *)verifyCode;
