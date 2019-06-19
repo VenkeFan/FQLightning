@@ -175,12 +175,13 @@
     _preIndex = _currentIndex;
     _currentIndex = sender.tag;
     
-    [self p_updateBtn:sender];
+    [self p_changeDecoration:sender];
+    [self p_performDelegate:YES];
 }
 
 #pragma mark - Private
 
-- (void)p_updateBtn:(UIButton *)sender {
+- (void)p_changeDecoration:(UIButton *)sender {
     sender.selected = YES;
     sender.titleLabel.font = self.onTintFont;
     
@@ -194,9 +195,11 @@
     [UIView animateWithDuration:0.25 animations:^{
         self->_markLine.center = CGPointMake(sender.center.x, self->_markLine.center.y);
     }];
-    
-    if (_delegate && [_delegate respondsToSelector:@selector(segmentedControl:didSelectedIndex:preIndex:)]) {
-        [_delegate segmentedControl:self didSelectedIndex:_currentIndex preIndex:_preIndex];
+}
+
+- (void)p_performDelegate:(BOOL)animated {
+    if (_delegate && [_delegate respondsToSelector:@selector(segmentedControl:didSelectedIndex:preIndex:animated:)]) {
+        [_delegate segmentedControl:self didSelectedIndex:_currentIndex preIndex:_preIndex animated:animated];
     }
 }
 
@@ -211,7 +214,8 @@
     _currentIndex = currentIndex;
     
     if (currentIndex >= 0 && currentIndex < _btnArray.count) {
-        [self p_updateBtn:_btnArray[currentIndex]];
+        [self p_changeDecoration:_btnArray[currentIndex]];
+        [self p_performDelegate:NO];
     }
 }
 

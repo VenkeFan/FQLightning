@@ -72,10 +72,6 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 }
 
 - (void)dealloc {
-//    [_playerView stop];
-//    [_playerView removeFromSuperview];
-//    _playerView = nil;
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -104,15 +100,19 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     
     _segmentedCtr = ({
         FQSegmentedControl *seg = [[FQSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, _oddsContentView.width, kSegmentHeight)];
-        seg.backgroundColor = kCellBgColor;
+        seg.backgroundColor = [UIColor clearColor];
         seg.currentIndex = 0;
         seg.delegate = self;
         seg.markLineColor = kMainOnTintColor;
-        seg.hSeparateLineColor = kMarqueeBgColor;
+        seg.hSeparateLineColor = [UIColor clearColor];
         
         seg;
     });
     [_oddsContentView addSubview:_segmentedCtr];
+    
+    UIView *hLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segmentedCtr.frame) - 2, _oddsContentView.width, 2)];
+    hLineView.backgroundColor = kMarqueeBgColor;
+    [_oddsContentView addSubview:hLineView];
     
     _tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segmentedCtr.frame), _oddsContentView.width, _oddsContentView.height - CGRectGetMaxY(_segmentedCtr.frame)) style:UITableViewStyleGrouped];
@@ -285,17 +285,19 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     [self.oddsDicM.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [stageArray addObject:[LGMatchDetailViewModel matchStage:obj]];
     }];
+    self.segmentedCtr.width = stageArray.count * kSizeScale(80.0);
     [self.segmentedCtr setItems:stageArray];
-    
     
     [self.tableView reloadData];
 }
 
 #pragma mark - FQSegmentedControlDelegate
 
-- (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+- (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex animated:(BOOL)animated {
+    if (animated) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 #pragma mark - LGMatchDetailHeaderViewDelegate
@@ -399,8 +401,12 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-//    [self.segmentedCtr setCurrentIndex:section];
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    LGMatchDetailTableViewCell *cell = self.tableView.visibleCells.firstObject;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [self.segmentedCtr setCurrentIndex:indexPath.section];
 }
 
 #pragma mark - Getter

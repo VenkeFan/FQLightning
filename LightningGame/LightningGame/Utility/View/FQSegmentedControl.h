@@ -15,7 +15,7 @@
 @protocol FQSegmentedControlDelegate <NSObject>
 
 @optional
-- (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex;
+- (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex animated:(BOOL)animated;
 
 @end
 

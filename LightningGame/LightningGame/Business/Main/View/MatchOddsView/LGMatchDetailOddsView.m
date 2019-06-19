@@ -11,8 +11,8 @@
 
 #define kViewPaddingX                       kSizeScale(6.0)
 
-#define kMaxNameLabelWidth                  (kMatchTeamOddsHViewWidth * 4 / 5.0)
-#define kMaxOddsLabelWidth                  (kMatchTeamOddsHViewWidth * 1 / 5.0)
+#define kMaxNameLabelWidth                  ((kMatchTeamOddsHViewWidth - kViewPaddingX) * 4 / 5.0)
+#define kMaxOddsLabelWidth                  ((kMatchTeamOddsHViewWidth - kViewPaddingX) * 1 / 5.0)
 
 @interface LGMatchDetailOddsView ()
 
@@ -34,7 +34,7 @@
         
         _flagLayer = [CALayer layer];
         _flagLayer.hidden = YES;
-        _flagLayer.frame = CGRectMake(0, 0, kSizeScale(25.0), kSizeScale(35.0));
+        _flagLayer.frame = CGRectMake(0, 0, kSizeScale(22.0), kSizeScale(32.0));
         _flagLayer.contentsScale = kScreenScale;
         _flagLayer.contentsGravity = kCAGravityResizeAspect;
         [self.layer addSublayer:_flagLayer];

@@ -82,7 +82,7 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 
 - (void)fetchData {
     {
-//        TODO(@"test data");
+//        TODO("test data");
 //        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"list_sample.json" ofType:nil];
 //        if (!filePath) {
 //            return;

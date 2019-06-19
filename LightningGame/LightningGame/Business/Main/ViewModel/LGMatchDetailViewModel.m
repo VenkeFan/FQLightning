@@ -32,7 +32,7 @@ NSString * const LGMatchStageMapping[] = {
 
 - (void)fetchDataWithMatchID:(NSString *)matchID {
     {
-//        TODO(@"test data");
+//        TODO("test data");
 //        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
 //        if (!filePath) {
 //            return;
