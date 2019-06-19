@@ -271,6 +271,10 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
                     errCode:(NSInteger)errCode {
     [self.tableView.mj_header endRefreshing];
     
+    if (teamArray.count == 0) {
+        return;
+    }
+    
     self.matchDicM = matchDic;
     self.teamArrayI = teamArray;
     self.oddsDicM = oddsDic;

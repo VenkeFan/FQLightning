@@ -62,33 +62,6 @@
 - (void)setStatus:(LGMatchOddsStatus)status {
     [super setStatus:status];
     
-    self.oddsLabel.hidden = YES;
-    self.lockLayer.hidden = YES;
-    self.flagLayer.hidden = YES;
-    
-    switch (status) {
-        case LGMatchOddsStatus_Normal: {
-            self.oddsLabel.hidden = NO;
-        }
-            break;
-        case LGMatchOddsStatus_Locked: {
-            self.lockLayer.hidden = NO;
-        }
-            break;
-        case LGMatchOddsStatus_Hidden: {
-            
-        }
-            break;
-        case LGMatchOddsStatus_Finished: {
-            self.flagLayer.hidden = NO;
-        }
-            break;
-        case LGMatchOddsStatus_Exception: {
-            
-        }
-            break;
-    }
-    
     [self p_updateLayout];
 }
 
@@ -110,13 +83,22 @@
             break;
     }
     
+    
+    self.oddsLabel.hidden = YES;
+    self.lockLayer.hidden = YES;
+    self.flagLayer.hidden = YES;
+    
     switch (self.status) {
         case LGMatchOddsStatus_Normal: {
+            self.oddsLabel.hidden = NO;
+            
             self.nameLabel.centerY = self.height * 0.5;
             self.oddsLabel.centerY = self.height * 0.5;
         }
             break;
         case LGMatchOddsStatus_Locked: {
+            self.lockLayer.hidden = NO;
+            
             self.nameLabel.centerY = self.height * 0.5;
             self.oddsLabel.centerY = self.height * 0.5;
         }
@@ -126,7 +108,10 @@
         }
             break;
         case LGMatchOddsStatus_Finished: {
-            self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) * 0.5);
+            self.flagLayer.hidden = NO;
+            
+            self.nameLabel.centerY = self.height * 0.5;
+            self.oddsLabel.centerY = self.height * 0.5;
         }
             break;
         case LGMatchOddsStatus_Exception: {
@@ -144,10 +129,6 @@
 }
 
 - (CGFloat)nameLabelWidth {
-//    CGFloat labWidth = self.nameLabel.width;
-//    return labWidth > kMaxNameLabelWidth ? kMaxNameLabelWidth: labWidth;
-    
-    
     if (self.nameLabel.width > kMaxNameLabelWidth) {
         [self adjustNameLabelFont];
     }
