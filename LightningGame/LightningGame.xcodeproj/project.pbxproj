@@ -404,7 +404,6 @@
 		B9229CE5229BEBDA0030691D /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				B9D9101F22ABA72400D54911 /* ModuleCategories */,
 				B9D9102822ABA75500D54911 /* Splash */,
 				B9D9103822AE810300D54911 /* Profile */,
 				B9229D16229CCAED0030691D /* Main */,
@@ -429,6 +428,7 @@
 		B9229CE8229BEC260030691D /* Basic */ = {
 			isa = PBXGroup;
 			children = (
+				B99924F122BA0B1E001F492E /* Transitions */,
 				B9229D13229C04D80030691D /* FQGuarder */,
 				B9229CF1229BED0F0030691D /* Scaffold */,
 			);
@@ -751,6 +751,15 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		B99924F122BA0B1E001F492E /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				B9D9104722AE84DF00D54911 /* FQAnimatedTransitioning.h */,
+				B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */,
+			);
+			path = Transitions;
+			sourceTree = "<group>";
+		};
 		B9C3A17622A0F8AE00E282B0 /* Sign */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +774,7 @@
 		B9D9101222ABA61500D54911 /* Mediator */ = {
 			isa = PBXGroup;
 			children = (
+				B9D9101F22ABA72400D54911 /* ModuleCategories */,
 				B9D9101322ABA64500D54911 /* CTMediator.h */,
 				B9D9101422ABA64500D54911 /* CTMediator.m */,
 			);
@@ -899,8 +909,6 @@
 		B9D9103A22AE817700D54911 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B9D9104722AE84DF00D54911 /* FQAnimatedTransitioning.h */,
-				B9D9104822AE84DF00D54911 /* FQAnimatedTransitioning.m */,
 				B9D9103C22AE819900D54911 /* LGProfileViewController.h */,
 				B9D9103D22AE819900D54911 /* LGProfileViewController.m */,
 			);

@@ -267,6 +267,7 @@
 }
 
 - (void)broadcastFailure:(NSError *)error {
+    [LGLoadingView dismiss];
     dispatch_async(dispatch_get_main_queue(), ^{
         for (NSInteger i = self.listenerArray.count - 1; i >= 0; i--) {
             id delegate = [self.listenerArray pointerAtIndex:i];

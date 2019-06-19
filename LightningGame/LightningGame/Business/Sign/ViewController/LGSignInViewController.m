@@ -113,7 +113,7 @@
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     registerBtn.backgroundColor = kMarqueeBgColor;
     registerBtn.frame = loginBtn.bounds;
-    registerBtn.center = CGPointMake(loginBtn.centerX, CGRectGetMaxY(loginBtn.frame) + CGRectGetHeight(registerBtn.frame) * 0.5 + paddingY);
+    registerBtn.center = CGPointMake(loginBtn.centerX, centerY);
     registerBtn.layer.cornerRadius = loginBtn.layer.cornerRadius;
     [registerBtn setTitle:kLocalizedString(@"sign_up") forState:UIControlStateNormal];
     [registerBtn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];

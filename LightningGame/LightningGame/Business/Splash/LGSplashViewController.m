@@ -42,13 +42,11 @@
 
 - (void)launch {
     if ([LGAccountManager instance].account) {
-//        UIViewController *root = [[CTMediator sharedInstance] mediator_generateMainController];
-//        [FQWindowUtility changeKeyWindowRootViewController:root];
-
         [[LGSignFlowManager instance] oAuthorize];
     } else {
         UIViewController *root = [[CTMediator sharedInstance] mediator_generateSignInController];
         [FQWindowUtility changeKeyWindowRootViewController:root];
+//        [self.navigationController setViewControllers:@[root] animated:NO];
     }
 }
 
