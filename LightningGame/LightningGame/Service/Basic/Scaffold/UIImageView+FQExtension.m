@@ -135,7 +135,7 @@
                      options:options
                    completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                        if (!image) {
-                           dispatch_sync(dispatch_get_main_queue(), ^{
+                           dispatch_async(dispatch_get_main_queue(), ^{
                                if (completed) {
                                    completed(image, url, error);
                                }
@@ -154,7 +154,7 @@
                                img = [img imageByRoundCornerRadius:cornerRadius borderWidth:borderWidth borderColor:borderColor];
                            }
                            
-                           dispatch_sync(dispatch_get_main_queue(), ^{
+                           dispatch_async(dispatch_get_main_queue(), ^{
                                strongSelf.contentMode = strongSelf.originalContentMode;
                                
                                if (cacheType == SDImageCacheTypeNone) {
@@ -163,6 +163,7 @@
                                    transition.duration = 0.35;
                                    [strongSelf.layer addAnimation:transition forKey:nil];
                                }
+
                                strongSelf.image = img;
                            });
                        });

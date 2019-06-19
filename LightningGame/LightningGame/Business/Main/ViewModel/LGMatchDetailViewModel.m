@@ -94,7 +94,7 @@ NSString * const LGMatchStageMapping[] = {
 //
 //    }
     
-    return @"";
+    return stageKey;
 }
 
 - (NSMutableDictionary *)p_handleMatchStage:(NSArray *)oddsArray {

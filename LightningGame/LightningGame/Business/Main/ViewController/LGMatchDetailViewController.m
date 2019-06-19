@@ -21,7 +21,9 @@
 static NSString * const kMatchDetailOddsReuseID = @"LGMatchDetailTableViewCell";
 static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
-@interface LGMatchDetailViewController () <LGMatchDetailViewModelDelegate, FQSegmentedControlDelegate, LGMatchDetailHeaderViewDelegate, LGMatchDetailPlayerViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface LGMatchDetailViewController () <LGMatchDetailViewModelDelegate, FQSegmentedControlDelegate, LGMatchDetailHeaderViewDelegate, LGMatchDetailPlayerViewDelegate, UITableViewDelegate, UITableViewDataSource> {
+    BOOL _isSegCtrSelected;
+}
 
 @property (nonatomic, copy) NSString *matchID;
 
@@ -46,6 +48,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 - (instancetype)initWithMatchID:(NSString *)matchID {
     if (self = [super init]) {
         _matchID = [matchID copy];
+        _isSegCtrSelected = NO;
     }
     return self;
 }
@@ -281,12 +284,19 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     
     [self.headerView setDataDic:self.matchDicM];
     
-    NSMutableArray *stageArray = [NSMutableArray arrayWithCapacity:self.oddsDicM.allKeys.count];
-    [self.oddsDicM.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [stageArray addObject:[LGMatchDetailViewModel matchStage:obj]];
-    }];
-    self.segmentedCtr.width = stageArray.count * kSizeScale(80.0);
-    [self.segmentedCtr setItems:stageArray];
+    {
+        NSMutableArray *stageArray = [NSMutableArray arrayWithCapacity:self.oddsDicM.allKeys.count];
+        [self.oddsDicM.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [stageArray addObject:[LGMatchDetailViewModel matchStage:obj]];
+        }];
+        
+        CGFloat segmentWidth = stageArray.count * kSizeScale(80.0);
+        if (segmentWidth > self.oddsContentView.width) {
+            segmentWidth = self.oddsContentView.width;
+        }
+        self.segmentedCtr.width = segmentWidth;
+        [self.segmentedCtr setItems:stageArray];
+    }
     
     [self.tableView reloadData];
 }
@@ -295,6 +305,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
 - (void)segmentedControl:(FQSegmentedControl *)control didSelectedIndex:(NSInteger)index preIndex:(NSInteger)preIndex animated:(BOOL)animated {
     if (animated) {
+        _isSegCtrSelected = YES;
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
@@ -404,9 +415,16 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_isSegCtrSelected) {
+        return;
+    }
     LGMatchDetailTableViewCell *cell = self.tableView.visibleCells.firstObject;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.segmentedCtr setCurrentIndex:indexPath.section];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    _isSegCtrSelected = NO;
 }
 
 #pragma mark - Getter
