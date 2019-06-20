@@ -8,7 +8,6 @@
 
 #import "LGMatchListOddsView.h"
 
-#define kViewPaddingY                       kSizeScale(4.0)
 #define kMatchTeamOddsVViewWidth            kSizeScale(130.0)
 #define kMatchTeamOddsVViewHeight           kSizeScale(40.0)
 
@@ -20,7 +19,7 @@
         self.oddsLabel.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) * 0.5 - kViewPaddingY);
         self.oddsLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, kViewPaddingY + CGRectGetHeight(self.oddsLabel.frame) * 0.5);
         
-        self.nameLabel.frame = self.oddsLabel.bounds;
+        self.nameLabel.frame = self.oddsLabel.bounds; // CGRectMake(0, 0, [self nameLabelWidth], self.oddsLabel.height);
         self.nameLabel.center = CGPointMake(CGRectGetWidth(self.frame) * 0.5, CGRectGetHeight(self.frame) - kViewPaddingY - CGRectGetHeight(self.nameLabel.frame) * 0.5);
     }
     return self;
@@ -31,6 +30,8 @@
     
     self.oddsLabel.hidden = YES;
     self.lockLayer.hidden = YES;
+    
+    [self adjustNameLabelFont];
     
     switch (status) {
         case LGMatchOddsStatus_Normal: {
@@ -64,6 +65,10 @@
         }
             break;
     }
+}
+
+- (void)adjustNameLabelFont {
+    [self adjustNameLabelFont:self.nameLabel maxWidth:self.width - kViewPaddingX * 2];
 }
 
 @end

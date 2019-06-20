@@ -9,14 +9,11 @@
 #import "LGMatchDetailOddsView.h"
 #import "LGMatchListKeys.h"
 
-#define kViewPaddingX                       kSizeScale(6.0)
-
 #define kMaxNameLabelWidth                  ((kMatchTeamOddsHViewWidth - kViewPaddingX) * 4 / 5.0)
 #define kMaxOddsLabelWidth                  ((kMatchTeamOddsHViewWidth - kViewPaddingX) * 1 / 5.0)
 
 @interface LGMatchDetailOddsView ()
 
-@property (nonatomic, assign) CGFloat nameLabelWidth;
 @property (nonatomic, strong) CALayer *flagLayer;
 
 @end
@@ -26,7 +23,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:CGRectMake(0, 0, kMatchTeamOddsHViewWidth, kMatchTeamOddsHViewHeight)]) {
         
-        self.nameLabel.frame = CGRectMake(0, 0, self.nameLabelWidth, self.height);
+        self.nameLabel.frame = CGRectMake(0, 0, self.nameLabel.width, self.height);
         self.nameLabel.center = CGPointMake(kViewPaddingX + self.nameLabel.width * 0.5, self.height * 0.5);
         
         self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
@@ -66,9 +63,11 @@
 }
 
 - (void)p_updateLayout {
+    [self adjustNameLabelFont];
+    
     switch (self.direction) {
         case LGMatchDetailOddsView_Left: {
-            self.nameLabel.center = CGPointMake(kViewPaddingX + self.nameLabelWidth * 0.5, self.height * 0.5);
+            self.nameLabel.center = CGPointMake(kViewPaddingX + self.nameLabel.width * 0.5, self.height * 0.5);
             
             self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
             self.oddsLabel.center = CGPointMake(self.width - kViewPaddingX - self.oddsLabel.width * 0.5, self.height * 0.5);
@@ -78,7 +77,7 @@
             self.oddsLabel.frame = CGRectMake(0, 0, kMaxOddsLabelWidth, self.height);
             self.oddsLabel.center = CGPointMake(kViewPaddingX + self.oddsLabel.width * 0.5, self.height * 0.5);
             
-            self.nameLabel.center = CGPointMake(self.width - kViewPaddingX - self.nameLabelWidth * 0.5, self.height * 0.5);
+            self.nameLabel.center = CGPointMake(self.width - kViewPaddingX - self.nameLabel.width * 0.5, self.height * 0.5);
         }
             break;
     }
@@ -128,22 +127,8 @@
     self.flagLayer.position = self.oddsLabel.center;
 }
 
-- (CGFloat)nameLabelWidth {
-    if (self.nameLabel.width > kMaxNameLabelWidth) {
-        [self adjustNameLabelFont];
-    }
-    return self.nameLabel.width;
-}
-
 - (void)adjustNameLabelFont {
-    UIFont *font = self.nameLabel.font;
-    UIFont *newFont = [UIFont fontWithName:font.familyName size:font.pointSize - 2.0];
-    self.nameLabel.font = newFont;
-    [self.nameLabel sizeToFit];
-    
-    if (self.nameLabel.width > kMaxNameLabelWidth) {
-        [self adjustNameLabelFont];
-    }
+    [self adjustNameLabelFont:self.nameLabel maxWidth:kMaxNameLabelWidth];
 }
 
 @end

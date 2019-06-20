@@ -69,6 +69,17 @@
     [self setStatus:[oddsDic[kMatchOddsKeyStatus] integerValue]];
 }
 
+- (void)adjustNameLabelFont:(UILabel *)label maxWidth:(CGFloat)maxWidth {
+    if (label.width > maxWidth) {
+        UIFont *font = label.font;
+        UIFont *newFont = [UIFont fontWithName:font.familyName size:font.pointSize - 2.0];
+        label.font = newFont;
+        [label sizeToFit];
+        
+        [self adjustNameLabelFont:label maxWidth:maxWidth];
+    }
+}
+
 #pragma mark - Event
 
 - (void)selfOnTapped {
