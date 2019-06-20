@@ -88,6 +88,7 @@
     {
         _player = [[FQAVPlayerView alloc] init];
         _player.delegate = self;
+        _player.sourceType = FQPlayerViewSourceType_Live;
         _player.frame = CGRectMake(0, CGRectGetMaxY(_titleView.frame) + y, self.width, kSizeScale(196.0));
         [self addSubview:_player];
     }
@@ -161,6 +162,7 @@
         {
             TODO("test data");
             if (liveUrl.length == 0) {
+                _player.sourceType = FQPlayerViewSourceType_NetVideo;
                 liveUrl = @"https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4";
             }
         }

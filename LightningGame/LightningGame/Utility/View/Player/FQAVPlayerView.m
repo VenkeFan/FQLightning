@@ -215,22 +215,38 @@ NSString * const FQPlayerViewStatusMapping[] = {
         CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds; // 缓冲总长度
         
-        NSLog(@"********** %@", [NSString stringWithFormat:@"caching section: [%f, %f], total caching: %f, playbuffer: %f, totalDurationSeconds: %f", startSeconds, durationSeconds, totalBuffer, self.playBuffer, self.totalDurationSeconds]);
+        NSLog(@"********** %@", [NSString stringWithFormat:@"buffer section: [%f, %f], totalBuffer: %f, playbuffer: %f, totalDurationSeconds: %f", startSeconds, durationSeconds, totalBuffer, self.playBuffer, self.totalDurationSeconds]);
         
-        if (!isnan(totalBuffer)) {
-            self.cacheProgress = totalBuffer / self.totalDurationSeconds;
-            
-            if (self.playerViewStatus != FQPlayerViewStatus_Paused
-                && self.playerViewStatus != FQPlayerViewStatus_Stopped
-                && self.playerViewStatus != FQPlayerViewStatus_Completed) {
-                if (self.playBuffer == 0 || startSeconds == self.playBuffer) {
-                    [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
-                } else {
-                    [self setPlayerViewStatus:FQPlayerViewStatus_Playing];
+        if (self.sourceType == FQPlayerViewSourceType_Live) {
+            if (!isnan(totalBuffer)) {
+                if (self.playerViewStatus != FQPlayerViewStatus_Paused
+                    && self.playerViewStatus != FQPlayerViewStatus_Stopped
+                    && self.playerViewStatus != FQPlayerViewStatus_Completed) {
+                    if (totalBuffer == 0) {
+                        [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
+                    } else {
+                        [self setPlayerViewStatus:FQPlayerViewStatus_Playing];
+                    }
                 }
+            } else {
+                [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
             }
         } else {
-            [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
+            if (!isnan(totalBuffer)) {
+                self.cacheProgress = totalBuffer / self.totalDurationSeconds;
+                
+                if (self.playerViewStatus != FQPlayerViewStatus_Paused
+                    && self.playerViewStatus != FQPlayerViewStatus_Stopped
+                    && self.playerViewStatus != FQPlayerViewStatus_Completed) {
+                    if (self.playBuffer == 0 || startSeconds >= self.playBuffer) {
+                        [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
+                    } else {
+                        [self setPlayerViewStatus:FQPlayerViewStatus_Playing];
+                    }
+                }
+            } else {
+                [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
+            }
         }
     } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
         NSLog(@"********** playbackLikelyToKeepUp: %zd", [change[@"new"] integerValue]);
@@ -238,6 +254,10 @@ NSString * const FQPlayerViewStatusMapping[] = {
         NSLog(@"********** playbackBufferFull: %zd", [change[@"new"] integerValue]);
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         NSLog(@"********** playbackBufferEmpty: %zd", [change[@"new"] integerValue]);
+        
+        if ([change[@"new"] integerValue] == 1) {
+            [self setPlayerViewStatus:FQPlayerViewStatus_CachingPaused];
+        }
     }
 }
 

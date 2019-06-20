@@ -77,7 +77,7 @@
     void (^addObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
         [obj addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     };
-    
+
     addObserverBlock(_playerView, self, @"playProgress");
     addObserverBlock(_playerView, self, @"cacheProgress");
     addObserverBlock(_playerView, self, @"playSeconds");
@@ -88,10 +88,12 @@
 }
 
 - (void)removeAllObservers {
+    NSLog(@"================> removeAllObservers");
+
     void (^removeObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
-        [obj removeObserver:obj forKeyPath:keyPath];
+        [obj removeObserver:observer forKeyPath:keyPath];
     };
-    
+
     removeObserverBlock(_playerView, self, @"playProgress");
     removeObserverBlock(_playerView, self, @"cacheProgress");
     removeObserverBlock(_playerView, self, @"playSeconds");
@@ -102,6 +104,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    NSLog(@"================> observeValueForKeyPath <====================");
     if ([object isKindOfClass:[_playerView class]]) {
         if ([keyPath isEqualToString:@"playProgress"]) {
             
@@ -115,6 +118,7 @@
             FQPlayerViewStatus status = (FQPlayerViewStatus)[change[@"new"] integerValue];
             
             switch (status) {
+                case FQPlayerViewStatus_Unknown:
                 case FQPlayerViewStatus_ReadyToPlay:
                 case FQPlayerViewStatus_CachingPaused:
                     [self setCaching:YES];

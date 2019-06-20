@@ -98,7 +98,6 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 //        return;
     }
     
-    
     LGMatchListRequest *request = [[LGMatchListRequest alloc] initWithType:self.listType];
     [request requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         NSArray *arrayI = (NSArray *)responseObject;

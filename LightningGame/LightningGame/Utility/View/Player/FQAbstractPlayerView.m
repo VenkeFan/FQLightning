@@ -156,6 +156,17 @@ static BOOL _mute = NO;
 
 - (void)setWindowMode:(FQPlayerViewWindowMode)windowMode {
     _windowMode = windowMode;
+    
+    switch (windowMode) {
+        case FQPlayerViewWindowMode_Screen: {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+        }
+            break;
+        case FQPlayerViewWindowMode_Widget: {
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+        }
+            break;
+    }
 }
 
 - (void)setPlayerOrientation:(FQPlayerViewOrientation)playerOrientation {

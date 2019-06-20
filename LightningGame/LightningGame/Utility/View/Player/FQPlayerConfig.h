@@ -20,6 +20,12 @@ typedef NS_ENUM(NSInteger, FQPlayerViewStatus) {
     FQPlayerViewStatus_Failed
 };
 
+typedef NS_ENUM(NSInteger, FQPlayerViewSourceType) {
+    FQPlayerViewSourceType_Asset,
+    FQPlayerViewSourceType_Live,
+    FQPlayerViewSourceType_NetVideo,
+};
+
 typedef NS_ENUM(NSInteger, FQPlayerViewWindowMode) {
     FQPlayerViewWindowMode_Screen,
     FQPlayerViewWindowMode_Widget

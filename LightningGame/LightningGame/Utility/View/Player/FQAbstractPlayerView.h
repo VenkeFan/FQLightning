@@ -40,6 +40,7 @@
 @property (nonatomic, assign) WLPlayerViewGravity videoGravity;
 @property (nonatomic, assign) FQPlayerViewWindowMode windowMode;
 @property (nonatomic, assign) FQPlayerViewOrientation playerOrientation;
+@property (nonatomic, assign) FQPlayerViewSourceType sourceType;
 
 @property (nonatomic, assign, getter=isLoop) BOOL loop;
 @property (nonatomic, assign) CGFloat playProgress;
