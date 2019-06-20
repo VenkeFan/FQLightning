@@ -23,7 +23,7 @@
 #pragma mark - Public
 
 - (void)rt_initializeArgument:(RotatableViewSyncBlock)block {
-    self.rt_rotatable = YES;
+    self.rt_autoRotatable = YES;
     self.rotatableBlock = block;
     self.rt_viewWidth = [UIScreen mainScreen].bounds.size.width;
     self.rt_viewHeight = [UIScreen mainScreen].bounds.size.height;
@@ -37,10 +37,6 @@
 }
 
 - (void)rt_manualChangeOrientation {
-    if (!self.rt_rotatable) {
-        return;
-    }
-    
     UIDeviceOrientation orientation = UIDeviceOrientationUnknown;
     if (self.rt_orientation != UIDeviceOrientationPortrait) {
         orientation = UIDeviceOrientationPortrait;
@@ -71,7 +67,7 @@
 }
 
 - (void)deviceOrientationDidChanged:(NSNotification *)notification {
-    if (self.rt_rotatable) {
+    if (self.rt_autoRotatable) {
         UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
         [self setRt_orientation:orientation];
     }
@@ -79,12 +75,12 @@
 
 #pragma mark - Getter & Setter
 
-- (BOOL)rt_rotatable {
-    return [objc_getAssociatedObject(self, @selector(rt_rotatable)) boolValue];
+- (BOOL)rt_autoRotatable {
+    return [objc_getAssociatedObject(self, @selector(rt_autoRotatable)) boolValue];
 }
 
-- (void)setRt_rotatable:(BOOL)rt_rotatable {
-    objc_setAssociatedObject(self, @selector(rt_rotatable), @(rt_rotatable), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setRt_autoRotatable:(BOOL)rt_autoRotatable {
+    objc_setAssociatedObject(self, @selector(rt_autoRotatable), @(rt_autoRotatable), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIDeviceOrientation)rt_orientation {

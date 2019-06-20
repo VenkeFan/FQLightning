@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)rt_clearArgument;
 - (void)rt_manualChangeOrientation;
 
-@property (nonatomic, assign) BOOL rt_rotatable;
+@property (nonatomic, assign) BOOL rt_autoRotatable;
 @property (nonatomic, assign, readonly) UIDeviceOrientation rt_orientation;
 @property (nonatomic, assign, readonly) CGFloat rt_viewWidth;
 @property (nonatomic, assign, readonly) CGFloat rt_viewHeight;

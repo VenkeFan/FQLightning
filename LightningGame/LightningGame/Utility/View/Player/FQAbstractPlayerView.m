@@ -50,6 +50,7 @@ static BOOL _mute = NO;
                     break;
             }
         }];
+        self.rt_autoRotatable = NO;
         
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
