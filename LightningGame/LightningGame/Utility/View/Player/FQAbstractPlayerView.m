@@ -23,7 +23,7 @@ static BOOL _mute = NO;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _loop = YES;
+        _loop = NO;
         _playProgress = 0.0;
         _cacheProgress = 0.0;
         
@@ -75,6 +75,12 @@ static BOOL _mute = NO;
         [self p_playerShrink];
     }
     [self p_changeOrientation];
+}
+
+- (void)playerOperateViewDidClickedClose:(FQPlayerOperateView *)operateView {
+    [self p_changeOrientation];
+    [self p_playerShrink];
+    [self stop];
 }
 
 #pragma mark - Private
@@ -153,7 +159,15 @@ static BOOL _mute = NO;
 }
 
 - (void)setPlayerOrientation:(FQPlayerViewOrientation)playerOrientation {
+    if (_playerOrientation == playerOrientation) {
+        return;
+    }
+    
     _playerOrientation = playerOrientation;
+    
+    if ([self.delegate respondsToSelector:@selector(playerViewOrientationDidChanged:)]) {
+        [self.delegate playerViewOrientationDidChanged:self];
+    }
 }
 
 - (void)setPlayerViewStatus:(FQPlayerViewStatus)playerViewStatus {

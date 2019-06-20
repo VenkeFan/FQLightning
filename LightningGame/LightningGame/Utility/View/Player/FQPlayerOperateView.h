@@ -14,6 +14,7 @@
 
 @optional
 - (void)playerOperateViewDidClickedFill:(FQPlayerOperateView *)operateView;
+- (void)playerOperateViewDidClickedClose:(FQPlayerOperateView *)operateView;
 
 @end
 

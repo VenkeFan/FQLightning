@@ -27,7 +27,6 @@
 @optional
 - (void)playerView:(FQAbstractPlayerView *)playerView statusDidChanged:(FQPlayerViewStatus)status;
 - (void)playerViewOrientationDidChanged:(FQAbstractPlayerView *)playerView;
-- (void)playerView:(FQAbstractPlayerView *)playerView didDiaplayToolsChanged:(BOOL)displayTools;
 
 @end
 

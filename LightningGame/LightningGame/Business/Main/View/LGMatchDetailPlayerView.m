@@ -15,7 +15,7 @@
 #define kDetailPlayerViewLeft           kSizeScale(6.0)
 #define kDetailPlayerViewTop            kSizeScale(6.0)
 
-@interface LGMatchDetailPlayerView ()
+@interface LGMatchDetailPlayerView () <WLPlayerViewDelegate>
 
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UILabel *tourNameLabel;
@@ -87,6 +87,7 @@
     
     {
         _player = [[FQAVPlayerView alloc] init];
+        _player.delegate = self;
         _player.frame = CGRectMake(0, CGRectGetMaxY(_titleView.frame) + y, self.width, kSizeScale(196.0));
         [self addSubview:_player];
     }
@@ -106,7 +107,7 @@
         _statusBtn.center = CGPointMake(self.width * 0.5, self.height - (self.height - CGRectGetMaxY(_player.frame)) * 0.5);
         _statusBtn.layer.cornerRadius = _statusBtn.height * 0.5;
         _statusBtn.layer.masksToBounds = YES;
-        [_statusBtn addTarget:self action:@selector(statusBtnOnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_statusBtn addTarget:self action:@selector(statusBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_statusBtn];
     }
     
@@ -203,9 +204,17 @@
     }
 }
 
+#pragma mark - WLPlayerViewDelegate
+
+- (void)playerView:(FQAbstractPlayerView *)playerView statusDidChanged:(FQPlayerViewStatus)status {
+    if (status == FQPlayerViewStatus_Stopped) {
+        [self statusBtnOnClicked];
+    }
+}
+
 #pragma mark - Events
 
-- (void)statusBtnOnClicked:(UIButton *)sender {
+- (void)statusBtnOnClicked {
     if ([self.delegate respondsToSelector:@selector(matchDetailPlayerViewDidStop:)]) {
         [self.delegate matchDetailPlayerViewDidStop:self];
     }

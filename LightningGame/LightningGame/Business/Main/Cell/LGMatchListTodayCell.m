@@ -98,8 +98,8 @@
             
             self.timeLabel.hidden = YES;
             
-            self.topStatusBtn.hidden = YES;
-            self.btmStatusBtn.hidden = YES;
+            self.topStatusBtn.hidden = NO;
+            self.btmStatusBtn.hidden = NO;
         }
             break;
         default: {
