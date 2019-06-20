@@ -23,6 +23,7 @@
         [NSStringFromClass([self class]) isEqualToString:@"_UITraitBasedAppearance"] ||
         [NSStringFromClass([self class]) isEqualToString:@"_UIPropertyBasedAppearance"] ||
         [NSStringFromClass([self class]) isEqualToString:@"_NSXPCDistantObjectWithError"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"_NSXPCDistantObjectSynchronousWithError"] ||
         [methodName isEqualToString:@"dealloc"]) {
 #if DEBUG
         NSLog(@"[%@ %p %@]", NSStringFromClass([self class]), self, NSStringFromSelector(aSelector));

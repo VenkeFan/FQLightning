@@ -103,13 +103,19 @@ NSString * const FQPlayerViewStatusMapping[] = {
 
 #pragma mark - Notification
 
-- (void)addNotifications {
+- (void)addNotificationsAndObservers {
+    [self addPlayerItemObservers];
+    [self addPlayerObservers];
     [self addPlayerItemNotifications];
-    
-    [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
-    [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
-//    [_player addObserver:self forKeyPath:@"timeControlStatus" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
-    
+}
+
+- (void)removeNotificationsAndObservers {
+    [self removePlayerItemObservers];
+    [self removePlayerObservers];
+    [self removePlayerItemNotifications];
+}
+
+- (void)addPlayerItemNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didPlayTimeJumped:)
                                                  name:AVPlayerItemTimeJumpedNotification
@@ -131,20 +137,48 @@ NSString * const FQPlayerViewStatusMapping[] = {
                                                object:nil];
 }
 
-- (void)removeNotifications {
-    [self removePlayerItemNotifications];
-    
+- (void)removePlayerItemNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemTimeJumpedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
+}
+
+- (void)didPlayTimeJumped:(NSNotification *)notification {
+    NSLog(@"didPlayTimeJumped");
+}
+
+- (void)didPlayToEndTime:(NSNotification *)notification {
+    [self p_playCompleted];
+}
+
+- (void)didFailedToPlayToEndTime:(NSNotification *)notification {
+    NSLog(@"didFailedToPlayToEndTime");
+    //    [self stop];
+}
+
+- (void)didPlaybackStalled:(NSNotification *)notification {
+    NSLog(@"didPlaybackStalled");
+}
+
+#pragma mark - Observers
+
+- (void)addPlayerObservers {
+    [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+    [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+//    [_player addObserver:self forKeyPath:@"timeControlStatus" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)removePlayerObservers {
     [_player removeObserver:self forKeyPath:@"status"];
     [_player removeObserver:self forKeyPath:@"rate"];
 //    [_player removeObserver:self forKeyPath:@"timeControlStatus"];
     
     [_player removeTimeObserver:_timeObserver];
     _timeObserver = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)addPlayerItemNotifications {
+- (void)addPlayerItemObservers {
     [_player.currentItem addObserver:self
                           forKeyPath:@"loadedTimeRanges"
                              options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -163,7 +197,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
                              context:nil];
 }
 
-- (void)removePlayerItemNotifications {
+- (void)removePlayerItemObservers {
     [_player.currentItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [_player.currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
     [_player.currentItem removeObserver:self forKeyPath:@"playbackBufferFull"];
@@ -262,23 +296,6 @@ NSString * const FQPlayerViewStatusMapping[] = {
     }
 }
 
-- (void)didPlayTimeJumped:(NSNotification *)notification {
-    NSLog(@"didPlayTimeJumped");
-}
-
-- (void)didPlayToEndTime:(NSNotification *)notification {
-    [self p_playCompleted];
-}
-
-- (void)didFailedToPlayToEndTime:(NSNotification *)notification {
-    NSLog(@"didFailedToPlayToEndTime");
-//    [self stop];
-}
-
-- (void)didPlaybackStalled:(NSNotification *)notification {
-    NSLog(@"didPlaybackStalled");
-}
-
 #pragma mark - Private
 
 - (void)p_setVolume:(BOOL)mute {
@@ -335,7 +352,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
                                                              }
                                                          }];
         
-        [self addNotifications];
+        [self addNotificationsAndObservers];
     }
 }
 
@@ -376,9 +393,11 @@ NSString * const FQPlayerViewStatusMapping[] = {
 }
 
 - (void)p_destroyPlayer {
-    [self removeNotifications];
-    [_player replaceCurrentItemWithPlayerItem:nil];
-    _player = nil;
+    if (_player) {
+        [self removeNotificationsAndObservers];
+        [_player replaceCurrentItemWithPlayerItem:nil];
+        _player = nil;
+    }
 }
 
 #pragma mark - Setter

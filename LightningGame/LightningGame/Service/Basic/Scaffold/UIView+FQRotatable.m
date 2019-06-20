@@ -11,10 +11,9 @@
 
 @interface UIView ()
 
-@property (nonatomic, assign, readwrite) UIDeviceOrientation orientation;
+@property (nonatomic, assign, readwrite) UIDeviceOrientation rt_orientation;
 @property (nonatomic, assign, readwrite) CGFloat rt_viewWidth;
 @property (nonatomic, assign, readwrite) CGFloat rt_viewHeight;
-
 @property (nonatomic, copy) RotatableViewSyncBlock rotatableBlock;
 
 @end
@@ -23,11 +22,12 @@
 
 #pragma mark - Public
 
-- (void)rt_initializeArgument {
-    self.rotatable = YES;
-    self.orientation = [[UIDevice currentDevice] orientation];
+- (void)rt_initializeArgument:(RotatableViewSyncBlock)block {
+    self.rt_rotatable = YES;
+    self.rotatableBlock = block;
     self.rt_viewWidth = [UIScreen mainScreen].bounds.size.width;
     self.rt_viewHeight = [UIScreen mainScreen].bounds.size.height;
+    self.rt_orientation = [[UIDevice currentDevice] orientation];
     
     [self addDeviceOrientationNotifications];
 }
@@ -36,15 +36,13 @@
     [self removeDeviceOrientationNotifications];
 }
 
-- (void)rt_manualChangeOrientation:(RotatableViewSyncBlock)syncBlock {
-    if (!self.rotatable) {
+- (void)rt_manualChangeOrientation {
+    if (!self.rt_rotatable) {
         return;
     }
     
-    self.rotatableBlock = syncBlock;
-    
     UIDeviceOrientation orientation = UIDeviceOrientationUnknown;
-    if (self.orientation != UIDeviceOrientationPortrait) {
+    if (self.rt_orientation != UIDeviceOrientationPortrait) {
         orientation = UIDeviceOrientationPortrait;
     } else {
         if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
@@ -54,7 +52,7 @@
         }
     }
     
-    [self setOrientation:orientation];
+    [self setRt_orientation:orientation];
 }
 
 #pragma mark - DeviceOrientation
@@ -69,34 +67,40 @@
 
 - (void)removeDeviceOrientationNotifications {
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)deviceOrientationDidChanged:(NSNotification *)notification {
-    if (self.rotatable) {
+    if (self.rt_rotatable) {
         UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-        [self setOrientation:orientation];
+        [self setRt_orientation:orientation];
     }
 }
 
 #pragma mark - Getter & Setter
 
-- (BOOL)rotatable {
-    return [objc_getAssociatedObject(self, @selector(rotatable)) boolValue];
+- (BOOL)rt_rotatable {
+    return [objc_getAssociatedObject(self, @selector(rt_rotatable)) boolValue];
 }
 
-- (void)setRotatable:(BOOL)rotatable {
-    objc_setAssociatedObject(self, @selector(rotatable), @(rotatable), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setRt_rotatable:(BOOL)rt_rotatable {
+    objc_setAssociatedObject(self, @selector(rt_rotatable), @(rt_rotatable), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIDeviceOrientation)orientation {
-    return (UIDeviceOrientation)[objc_getAssociatedObject(self, @selector(orientation)) integerValue];
+- (UIDeviceOrientation)rt_orientation {
+    return (UIDeviceOrientation)[objc_getAssociatedObject(self, @selector(rt_orientation)) integerValue];
 }
 
-- (void)setOrientation:(UIDeviceOrientation)orientation {
-    objc_setAssociatedObject(self, @selector(orientation), @(orientation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setRt_orientation:(UIDeviceOrientation)rt_orientation {
+    id obj = objc_getAssociatedObject(self, @selector(rt_orientation));
     
-    switch (orientation) {
+    objc_setAssociatedObject(self, @selector(rt_orientation), @(rt_orientation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if (!obj) {
+        return;
+    }
+    
+    switch (rt_orientation) {
         case UIDeviceOrientationPortrait: {
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
             

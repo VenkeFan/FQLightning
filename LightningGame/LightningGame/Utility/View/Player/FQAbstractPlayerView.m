@@ -27,7 +27,30 @@ static BOOL _mute = NO;
         _playProgress = 0.0;
         _cacheProgress = 0.0;
         
-        [self rt_initializeArgument];
+        __weak typeof(self) weakSelf = self;
+        [self rt_initializeArgument:^{
+            __strong typeof(weakSelf) strSelf = weakSelf;
+            switch (strSelf.rt_orientation) {
+                case UIDeviceOrientationPortrait: {
+                    [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspectFill];
+                    [strSelf setPlayerOrientation:FQPlayerViewOrientation_Portrait];
+                }
+                    break;
+                case UIDeviceOrientationLandscapeLeft: {
+                    [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
+                    [strSelf setPlayerOrientation:FQPlayerViewOrientation_Landscape];
+                }
+                    break;
+                case UIDeviceOrientationLandscapeRight: {
+                    [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
+                    [strSelf setPlayerOrientation:FQPlayerViewOrientation_Landscape];
+                }
+                    break;
+                default:
+                    break;
+            }
+        }];
+        
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         
         self.backgroundColor = [UIColor blackColor];
@@ -38,7 +61,7 @@ static BOOL _mute = NO;
         [self setPlayerOrientation:FQPlayerViewOrientation_Portrait];
         
         [self initializeUI];
-        [self addPlayerObservers];
+        [self addBasicPlayerObservers];
     }
     return self;
 }
@@ -56,7 +79,7 @@ static BOOL _mute = NO;
 }
 
 - (void)dealloc {
-    [self removeAllObservers];
+    [self removeBasicPlayerObservers];
     
     [self rt_clearArgument];
     
@@ -70,7 +93,7 @@ static BOOL _mute = NO;
 
 #pragma mark - Observer
 
-- (void)addPlayerObservers {
+- (void)addBasicPlayerObservers {
     void (^addObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
         [obj addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     };
@@ -84,7 +107,7 @@ static BOOL _mute = NO;
     addObserverBlock(self, self.operateView, @"playerOrientation");
 }
 
-- (void)removeAllObservers {
+- (void)removeBasicPlayerObservers {
     void (^removeObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
         [obj removeObserver:observer forKeyPath:keyPath];
     };
@@ -156,29 +179,7 @@ static BOOL _mute = NO;
 }
 
 - (void)p_changeOrientation {
-    __weak typeof(self) weakSelf = self;
-    [self rt_manualChangeOrientation:^{
-        __strong typeof(weakSelf) strSelf = weakSelf;
-        switch (strSelf.orientation) {
-            case UIDeviceOrientationPortrait: {
-                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspectFill];
-                [strSelf setPlayerOrientation:FQPlayerViewOrientation_Portrait];
-            }
-                break;
-            case UIDeviceOrientationLandscapeLeft: {
-                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
-                [strSelf setPlayerOrientation:FQPlayerViewOrientation_Landscape];
-            }
-                break;
-            case UIDeviceOrientationLandscapeRight: {
-                [strSelf setVideoGravity:WLPlayerViewGravity_ResizeAspect];
-                [strSelf setPlayerOrientation:FQPlayerViewOrientation_Landscape];
-            }
-                break;
-            default:
-                break;
-        }
-    }];
+    [self rt_manualChangeOrientation];
 }
 
 #pragma mark - Setter
