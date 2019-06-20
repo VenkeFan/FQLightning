@@ -108,7 +108,7 @@
     };
     
     LGMatchListView *beforeView = createListView(0);
-    beforeView.listType = LGMatchListType_Before;
+    beforeView.listType = LGMatchListType_Prepare;
     [self.scrollView addSubview:beforeView];
     
     LGMatchListView *todayView = createListView(CGRectGetMaxX(beforeView.frame));

@@ -16,12 +16,13 @@
 - (id)forwardingTargetForSelector:(SEL)aSelector {
     NSString *methodName = NSStringFromSelector(aSelector);
     if (/* [NSStringFromClass([self class]) hasPrefix:@"_"] || */
-        [self isKindOfClass:NSClassFromString(@"UITextInputController")] ||
         [NSStringFromClass([self class]) hasPrefix:@"UIKeyboard"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"UITextInputController"] ||
         [NSStringFromClass([self class]) isEqualToString:@"_UIAppearance"] ||
         [NSStringFromClass([self class]) isEqualToString:@"_UIBarItemAppearance"] ||
         [NSStringFromClass([self class]) isEqualToString:@"_UITraitBasedAppearance"] ||
         [NSStringFromClass([self class]) isEqualToString:@"_UIPropertyBasedAppearance"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"_NSXPCDistantObjectWithError"] ||
         [methodName isEqualToString:@"dealloc"]) {
 #if DEBUG
         NSLog(@"[%@ %p %@]", NSStringFromClass([self class]), self, NSStringFromSelector(aSelector));

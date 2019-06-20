@@ -49,7 +49,7 @@
 		B9229D77229E5FB80030691D /* FQNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D73229E5FB80030691D /* FQNetworkReachabilityManager.m */; };
 		B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D7C229E6EC90030691D /* LGBasicRequest.m */; };
 		B9229D8C229E74180030691D /* list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B9229D8B229E74180030691D /* list_sample.json */; };
-		B9229D90229E7D4A0030691D /* LGMatchListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */; };
+		B9229D90229E7D4A0030691D /* LGMatchListBasicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D8F229E7D4A0030691D /* LGMatchListBasicCell.m */; };
 		B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D92229EA6600030691D /* CALayer+FQExtension.m */; };
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
@@ -70,6 +70,10 @@
 		B9609CD222B36CCD003005BA /* LGMatchListOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CD122B36CCD003005BA /* LGMatchListOddsView.m */; };
 		B9609CD522B36EA5003005BA /* LGMatchDetailOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9609CD422B36EA5003005BA /* LGMatchDetailOddsView.m */; };
 		B9727B1322B771BF002B335C /* LGMatchDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9727B1222B771BF002B335C /* LGMatchDetailHeaderView.m */; };
+		B99924F422BA24D3001F492E /* LGMatchListPrepareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924F322BA24D3001F492E /* LGMatchListPrepareCell.m */; };
+		B99924F722BA24E5001F492E /* LGMatchListTodayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924F622BA24E5001F492E /* LGMatchListTodayCell.m */; };
+		B99924FA22BA24FB001F492E /* LGMatchListRollingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924F922BA24FB001F492E /* LGMatchListRollingCell.m */; };
+		B99924FD22BA250B001F492E /* LGMatchListFinishedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */; };
 		B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555222B8869000D04395 /* UIView+FQRotatable.m */; };
 		B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555922B908BE00D04395 /* LGOAuthRequest.m */; };
 		B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */; };
@@ -220,8 +224,8 @@
 		B9229D7C229E6EC90030691D /* LGBasicRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGBasicRequest.m; sourceTree = "<group>"; };
 		B9229D8A229E73500030691D /* LGMatchListKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListKeys.h; sourceTree = "<group>"; };
 		B9229D8B229E74180030691D /* list_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = list_sample.json; sourceTree = "<group>"; };
-		B9229D8E229E7D4A0030691D /* LGMatchListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListViewCell.h; sourceTree = "<group>"; };
-		B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListViewCell.m; sourceTree = "<group>"; };
+		B9229D8E229E7D4A0030691D /* LGMatchListBasicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListBasicCell.h; sourceTree = "<group>"; };
+		B9229D8F229E7D4A0030691D /* LGMatchListBasicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListBasicCell.m; sourceTree = "<group>"; };
 		B9229D91229EA6600030691D /* CALayer+FQExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+FQExtension.h"; sourceTree = "<group>"; };
 		B9229D92229EA6600030691D /* CALayer+FQExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+FQExtension.m"; sourceTree = "<group>"; };
 		B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRequest.h; sourceTree = "<group>"; };
@@ -260,6 +264,14 @@
 		B9609CD422B36EA5003005BA /* LGMatchDetailOddsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailOddsView.m; sourceTree = "<group>"; };
 		B9727B1122B771BF002B335C /* LGMatchDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailHeaderView.h; sourceTree = "<group>"; };
 		B9727B1222B771BF002B335C /* LGMatchDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailHeaderView.m; sourceTree = "<group>"; };
+		B99924F222BA24D3001F492E /* LGMatchListPrepareCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListPrepareCell.h; sourceTree = "<group>"; };
+		B99924F322BA24D3001F492E /* LGMatchListPrepareCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListPrepareCell.m; sourceTree = "<group>"; };
+		B99924F522BA24E5001F492E /* LGMatchListTodayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListTodayCell.h; sourceTree = "<group>"; };
+		B99924F622BA24E5001F492E /* LGMatchListTodayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListTodayCell.m; sourceTree = "<group>"; };
+		B99924F822BA24FB001F492E /* LGMatchListRollingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRollingCell.h; sourceTree = "<group>"; };
+		B99924F922BA24FB001F492E /* LGMatchListRollingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRollingCell.m; sourceTree = "<group>"; };
+		B99924FB22BA250B001F492E /* LGMatchListFinishedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListFinishedCell.h; sourceTree = "<group>"; };
+		B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListFinishedCell.m; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
@@ -429,7 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				B99924F122BA0B1E001F492E /* Transitions */,
-				B9229D13229C04D80030691D /* FQGuarder */,
+				B9229D13229C04D80030691D /* Guarder */,
 				B9229CF1229BED0F0030691D /* Scaffold */,
 			);
 			path = Basic;
@@ -496,7 +508,7 @@
 			path = Scaffold;
 			sourceTree = "<group>";
 		};
-		B9229D13229C04D80030691D /* FQGuarder */ = {
+		B9229D13229C04D80030691D /* Guarder */ = {
 			isa = PBXGroup;
 			children = (
 				B9C3A166229F842200E282B0 /* NSObject+MsgForwarding.h */,
@@ -510,7 +522,7 @@
 				B9229CFA229BEEC00030691D /* NSString+FQNilExamine.h */,
 				B9229CF8229BEEBF0030691D /* NSString+FQNilExamine.m */,
 			);
-			path = FQGuarder;
+			path = Guarder;
 			sourceTree = "<group>";
 		};
 		B9229D16229CCAED0030691D /* Main */ = {
@@ -654,8 +666,16 @@
 		B9229D8D229E7D2C0030691D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				B9229D8E229E7D4A0030691D /* LGMatchListViewCell.h */,
-				B9229D8F229E7D4A0030691D /* LGMatchListViewCell.m */,
+				B9229D8E229E7D4A0030691D /* LGMatchListBasicCell.h */,
+				B9229D8F229E7D4A0030691D /* LGMatchListBasicCell.m */,
+				B99924F522BA24E5001F492E /* LGMatchListTodayCell.h */,
+				B99924F622BA24E5001F492E /* LGMatchListTodayCell.m */,
+				B99924F822BA24FB001F492E /* LGMatchListRollingCell.h */,
+				B99924F922BA24FB001F492E /* LGMatchListRollingCell.m */,
+				B99924F222BA24D3001F492E /* LGMatchListPrepareCell.h */,
+				B99924F322BA24D3001F492E /* LGMatchListPrepareCell.m */,
+				B99924FB22BA250B001F492E /* LGMatchListFinishedCell.h */,
+				B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */,
 				B9609CCA22B26D93003005BA /* LGMatchDetailTableViewCell.h */,
 				B9609CCB22B26D93003005BA /* LGMatchDetailTableViewCell.m */,
 				B9F61A5E22A5044800CDC29E /* LGMatchParlayTableViewCell.h */,
@@ -1149,8 +1169,9 @@
 				B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */,
 				B9229D41229D03450030691D /* FQGZipUtility.m in Sources */,
 				B9C3A16D229FA3F800E282B0 /* LGMarqueeView.m in Sources */,
+				B99924F722BA24E5001F492E /* LGMatchListTodayCell.m in Sources */,
 				B9229D15229C170F0030691D /* NSDictionary+FQNilExamine.m in Sources */,
-				B9229D90229E7D4A0030691D /* LGMatchListViewCell.m in Sources */,
+				B9229D90229E7D4A0030691D /* LGMatchListBasicCell.m in Sources */,
 				B9F61A6022A5044800CDC29E /* LGMatchParlayTableViewCell.m in Sources */,
 				B9229D23229CD3180030691D /* LGMatchDetailViewController.m in Sources */,
 				B9229D14229C17070030691D /* NSAttributedString+FQNilExamine.m in Sources */,
@@ -1158,6 +1179,7 @@
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
 				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
+				B99924FD22BA250B001F492E /* LGMatchListFinishedCell.m in Sources */,
 				B9C3A170229FC38E00E282B0 /* LGMarqueeViewModel.m in Sources */,
 				B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */,
 				B9D9103122ADFD3400D54911 /* LGDatePickerView.m in Sources */,
@@ -1201,6 +1223,7 @@
 				B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */,
 				B9229CF0229BECE00030691D /* YYFPSLabel.m in Sources */,
 				B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */,
+				B99924FA22BA24FB001F492E /* LGMatchListRollingCell.m in Sources */,
 				B9F61A5D22A5001900CDC29E /* LGMatchParlayTableView.m in Sources */,
 				B9F61A6622A6060F00CDC29E /* LGMatchParlayKeyboard.m in Sources */,
 				B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */,
@@ -1230,6 +1253,7 @@
 				B9727B1322B771BF002B335C /* LGMatchDetailHeaderView.m in Sources */,
 				B9609CCC22B26D93003005BA /* LGMatchDetailTableViewCell.m in Sources */,
 				B9F61A5422A4BCD500CDC29E /* LGServiceButton.m in Sources */,
+				B99924F422BA24D3001F492E /* LGMatchListPrepareCell.m in Sources */,
 				B9229D7D229E6EC90030691D /* LGBasicRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

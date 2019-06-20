@@ -8,14 +8,20 @@
 
 #import "LGMatchListView.h"
 #import <MJRefresh/MJRefresh.h>
-#import "LGMatchListViewCell.h"
+#import "LGMatchListPrepareCell.h"
+#import "LGMatchListTodayCell.h"
+#import "LGMatchListRollingCell.h"
+#import "LGMatchListFinishedCell.h"
 #import "LGMarqueeView.h"
 #import "LGDatePickerView.h"
 #import "LGDatePickerTableView.h"
 #import "LGMatchParlayTableView.h"
 #import "LGMatchDetailViewController.h"
 
-static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
+static NSString * const kMatchPrepareCellReuseID = @"kMatchPrepareCellReuseID";
+static NSString * const kMatchTodayCellReuseID = @"kMatchTodayCellReuseID";
+static NSString * const kMatchRollingCellReuseID = @"kMatchRollingCellReuseID";
+static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID";
 
 @interface LGMatchListView () <LGMatchListViewModelDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isLoaded;
@@ -37,12 +43,15 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
         _isLoaded = NO;
         
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, kLGMatchListViewCellHeight * 0.5, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, kLGMatchListBasicCellHeight * 0.5, 0);
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView registerClass:[LGMatchListViewCell class] forCellReuseIdentifier:kMatchCellReuseID];
-        _tableView.rowHeight = kLGMatchListViewCellHeight;
+        [_tableView registerClass:[LGMatchListPrepareCell class] forCellReuseIdentifier:kMatchPrepareCellReuseID];
+        [_tableView registerClass:[LGMatchListTodayCell class] forCellReuseIdentifier:kMatchTodayCellReuseID];
+        [_tableView registerClass:[LGMatchListRollingCell class] forCellReuseIdentifier:kMatchRollingCellReuseID];
+        [_tableView registerClass:[LGMatchListFinishedCell class] forCellReuseIdentifier:kMatchFinishedCellReuseID];
+        _tableView.rowHeight = kLGMatchListBasicCellHeight;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addSubview:_tableView];
         
@@ -112,6 +121,7 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
     }
     
     [self.dataArray addObjectsFromArray:data];
+    [self.tableView reloadData];
 }
 
 #pragma mark - LGDatePickerViewDelegate
@@ -159,7 +169,28 @@ static NSString * const kMatchCellReuseID = @"LGMatchListViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LGMatchListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMatchCellReuseID];
+    LGMatchListBasicCell *cell;
+    switch (self.listType) {
+        case LGMatchListType_Today: {
+            cell = [tableView dequeueReusableCellWithIdentifier:kMatchTodayCellReuseID];
+        }
+            break;
+        case LGMatchListType_Rolling: {
+            cell = [tableView dequeueReusableCellWithIdentifier:kMatchRollingCellReuseID];
+        }
+            break;
+        case LGMatchListType_Prepare: {
+            cell = [tableView dequeueReusableCellWithIdentifier:kMatchPrepareCellReuseID];
+        }
+            break;
+        case LGMatchListType_Finished: {
+            cell = [tableView dequeueReusableCellWithIdentifier:kMatchFinishedCellReuseID];
+        }
+            break;
+    }
+    if (!cell) {
+        cell = [[LGMatchListTodayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kMatchTodayCellReuseID];
+    }
     [cell setDataDic:self.dataArray[indexPath.row]];
     return cell;
 }

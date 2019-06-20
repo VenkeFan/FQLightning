@@ -90,7 +90,9 @@
         }
         [view addSubview:txtField];
         _txtField = txtField;
-        *field = txtField;
+        if (field) {
+            *field = txtField;
+        }
         
         UIView *hLine = [[UIView alloc] init];
         hLine.backgroundColor = placeholderColor;
