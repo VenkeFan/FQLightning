@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class FQAbstractPlayerView, FQPlayerOperateView;
+@class FQPlayerOperateView;
 
 @protocol FQPlayerOperateViewDelegate <NSObject>
 
@@ -20,7 +20,6 @@
 
 @interface FQPlayerOperateView : UIView
 
-@property (nonatomic, weak) FQAbstractPlayerView *playerView;
 @property (nonatomic, weak) id<FQPlayerOperateViewDelegate> delegate;
 
 - (void)prepare;

@@ -62,6 +62,7 @@
 }
 
 - (void)dealloc {
+    NSLog(@"!!!!!!!!!!!! LGMatchDetailPlayerView dealloc");
     [self p_stop];
 }
 
@@ -226,7 +227,6 @@
 
 - (void)p_stop {
     [_player stop];
-    _player = nil;
 }
 
 @end

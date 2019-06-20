@@ -69,6 +69,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
 }
 
 - (void)dealloc {
+    NSLog(@"!!!!!!!!!!!! FQAVPlayerView dealloc");
     [self p_destroyPlayer];
 }
 
@@ -215,7 +216,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
         CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds; // 缓冲总长度
         
-        NSLog(@"********** %@", [NSString stringWithFormat:@"buffer section: [%f, %f], totalBuffer: %f, playbuffer: %f, totalDurationSeconds: %f", startSeconds, durationSeconds, totalBuffer, self.playBuffer, self.totalDurationSeconds]);
+//        NSLog(@"********** %@", [NSString stringWithFormat:@"buffer section: [%f, %f], totalBuffer: %f, playbuffer: %f, totalDurationSeconds: %f", startSeconds, durationSeconds, totalBuffer, self.playBuffer, self.totalDurationSeconds]);
         
         if (self.sourceType == FQPlayerViewSourceType_Live) {
             if (!isnan(totalBuffer)) {
@@ -262,7 +263,7 @@ NSString * const FQPlayerViewStatusMapping[] = {
 }
 
 - (void)didPlayTimeJumped:(NSNotification *)notification {
-//    NSLog(@"didPlayTimeJumped");
+    NSLog(@"didPlayTimeJumped");
 }
 
 - (void)didPlayToEndTime:(NSNotification *)notification {
@@ -270,12 +271,12 @@ NSString * const FQPlayerViewStatusMapping[] = {
 }
 
 - (void)didFailedToPlayToEndTime:(NSNotification *)notification {
-//    NSLog(@"didFailedToPlayToEndTime");
+    NSLog(@"didFailedToPlayToEndTime");
 //    [self stop];
 }
 
 - (void)didPlaybackStalled:(NSNotification *)notification {
-//    NSLog(@"didPlaybackStalled");
+    NSLog(@"didPlaybackStalled");
 }
 
 #pragma mark - Private

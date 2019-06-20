@@ -38,6 +38,7 @@ static BOOL _mute = NO;
         [self setPlayerOrientation:FQPlayerViewOrientation_Portrait];
         
         [self initializeUI];
+        [self addPlayerObservers];
     }
     return self;
 }
@@ -55,6 +56,8 @@ static BOOL _mute = NO;
 }
 
 - (void)dealloc {
+    [self removeAllObservers];
+    
     [self rt_clearArgument];
     
     [UIApplication sharedApplication].idleTimerDisabled = NO;
@@ -63,6 +66,36 @@ static BOOL _mute = NO;
 - (void)initializeUI {
     [self addSubview:self.operateView];
     [self.operateView prepare];
+}
+
+#pragma mark - Observer
+
+- (void)addPlayerObservers {
+    void (^addObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
+        [obj addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+    };
+    
+    addObserverBlock(self, self.operateView, @"playProgress");
+    addObserverBlock(self, self.operateView, @"cacheProgress");
+    addObserverBlock(self, self.operateView, @"playSeconds");
+    addObserverBlock(self, self.operateView, @"duration");
+    addObserverBlock(self, self.operateView, @"playerViewStatus");
+    addObserverBlock(self, self.operateView, @"windowMode");
+    addObserverBlock(self, self.operateView, @"playerOrientation");
+}
+
+- (void)removeAllObservers {
+    void (^removeObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
+        [obj removeObserver:observer forKeyPath:keyPath];
+    };
+    
+    removeObserverBlock(self, self.operateView, @"playProgress");
+    removeObserverBlock(self, self.operateView, @"cacheProgress");
+    removeObserverBlock(self, self.operateView, @"playSeconds");
+    removeObserverBlock(self, self.operateView, @"duration");
+    removeObserverBlock(self, self.operateView, @"playerViewStatus");
+    removeObserverBlock(self, self.operateView, @"windowMode");
+    removeObserverBlock(self, self.operateView, @"playerOrientation");
 }
 
 #pragma mark - FQPlayerOperateViewDelegate
@@ -252,9 +285,7 @@ static BOOL _mute = NO;
 - (FQPlayerOperateView *)operateView {
     if (!_operateView) {
         FQPlayerOperateView *view = [[FQPlayerOperateView alloc] init];
-        view.playerView = self;
         view.delegate = self;
-        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _operateView = view;
     }
     return _operateView;

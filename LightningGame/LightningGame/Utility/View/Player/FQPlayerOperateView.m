@@ -30,6 +30,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self initializeUI];
     }
@@ -55,7 +56,7 @@
 }
 
 - (void)dealloc {
-    [self removeAllObservers];
+    NSLog(@"!!!!!!!!!!!! FQPlayerOperateView dealloc");
 }
 
 - (void)initializeUI {
@@ -73,39 +74,8 @@
 
 #pragma mark - Observer
 
-- (void)addPlayerObservers {
-    void (^addObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
-        [obj addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
-    };
-
-    addObserverBlock(_playerView, self, @"playProgress");
-    addObserverBlock(_playerView, self, @"cacheProgress");
-    addObserverBlock(_playerView, self, @"playSeconds");
-    addObserverBlock(_playerView, self, @"duration");
-    addObserverBlock(_playerView, self, @"playerViewStatus");
-    addObserverBlock(_playerView, self, @"windowMode");
-    addObserverBlock(_playerView, self, @"playerOrientation");
-}
-
-- (void)removeAllObservers {
-    NSLog(@"================> removeAllObservers");
-
-    void (^removeObserverBlock)(id, id, NSString *) = ^(id obj, id observer, NSString *keyPath) {
-        [obj removeObserver:observer forKeyPath:keyPath];
-    };
-
-    removeObserverBlock(_playerView, self, @"playProgress");
-    removeObserverBlock(_playerView, self, @"cacheProgress");
-    removeObserverBlock(_playerView, self, @"playSeconds");
-    removeObserverBlock(_playerView, self, @"duration");
-    removeObserverBlock(_playerView, self, @"playerViewStatus");
-    removeObserverBlock(_playerView, self, @"windowMode");
-    removeObserverBlock(_playerView, self, @"playerOrientation");
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    NSLog(@"================> observeValueForKeyPath <====================");
-    if ([object isKindOfClass:[_playerView class]]) {
+    if ([object isKindOfClass:[FQAbstractPlayerView class]]) {
         if ([keyPath isEqualToString:@"playProgress"]) {
             
         } else if ([keyPath isEqualToString:@"cacheProgress"]) {
@@ -130,16 +100,7 @@
         } else if ([keyPath isEqualToString:@"windowMode"]) {
             
         } else if ([keyPath isEqualToString:@"playerOrientation"]) {
-            FQPlayerViewOrientation orientation = (FQPlayerViewOrientation)[change[@"new"] integerValue];
             
-            switch (orientation) {
-                case FQPlayerViewOrientation_Portrait:
-//                    self.fillBtn.selected = NO;
-                    break;
-                case FQPlayerViewOrientation_Landscape:
-//                    self.fillBtn.selected = YES;
-                    break;
-            }
         }
     }
 }
@@ -170,12 +131,6 @@
     } else {
         [self.loadingView stopAnimating];
     }
-}
-
-- (void)setPlayerView:(FQAbstractPlayerView *)playerView {
-    _playerView = playerView;
-    
-    [self addPlayerObservers];
 }
 
 #pragma mark - Getter
