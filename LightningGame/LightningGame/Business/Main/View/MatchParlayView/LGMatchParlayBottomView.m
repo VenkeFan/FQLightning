@@ -112,16 +112,14 @@
         _totalBetLab = [FQComponentFactory labelWithFont:kRegularFont(kNoteFontSize)];
         _totalBetLab.textColor = kNameFontColor;
         _totalBetLab.textAlignment = NSTextAlignmentLeft;
-        _totalBetLab.text = kLocalizedString(@"parlay_total_bet");
-        [_totalBetLab sizeToFit];
         [ctr addSubview:_totalBetLab];
         
         _totalGainLab = [FQComponentFactory labelWithFont:kRegularFont(kNoteFontSize)];
         _totalGainLab.textColor = kNameFontColor;
         _totalGainLab.textAlignment = NSTextAlignmentLeft;
-        _totalGainLab.text = kLocalizedString(@"parlay_total_gain");
-        [_totalGainLab sizeToFit];
         [ctr addSubview:_totalGainLab];
+        
+        [self setTotalBet:0.0 totalGain:0.0];
         
         ctr;
     });
@@ -139,6 +137,16 @@
         btn;
     });
     [_contentView addSubview:_rightBetBtn];
+}
+
+#pragma mark - Public
+
+- (void)setTotalBet:(CGFloat)totalBet totalGain:(CGFloat)totalGain {
+    _totalBetLab.text = [NSString stringWithFormat:@"%@ %.2f", kLocalizedString(@"parlay_total_bet"), totalBet];
+    [_totalBetLab sizeToFit];
+    
+    _totalGainLab.text = [NSString stringWithFormat:@"%@ %.2f", kLocalizedString(@"parlay_total_gain"), totalGain];
+    [_totalGainLab sizeToFit];
 }
 
 #pragma mark - Events

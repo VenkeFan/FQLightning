@@ -154,7 +154,7 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
             [self.txtLabel sizeToFit];
         }
     } @catch (NSException *exception) {
-        
+        NSLog(@"%@, %@", NSStringFromSelector(_cmd), exception);
     } @finally {
         
     }
@@ -189,6 +189,8 @@ static NSString * const cursorAnimationKey = @"cursorOpacityAnimation";
 }
 
 - (void)matchParlayKeyboardConfirmed:(LGMatchParlayKeyboard *)keyboard {
+    [self resignFirstResponder];
+    
     if ([self.delegate respondsToSelector:@selector(matchParlayTextFieldShouldReturn:)]) {
         [self.delegate matchParlayTextFieldShouldReturn:self];
     }

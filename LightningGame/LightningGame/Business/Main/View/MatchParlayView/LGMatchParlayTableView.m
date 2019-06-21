@@ -12,9 +12,10 @@
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
 
-NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 NSString * const kMatchParlayTableViewRemoveItemNotif = @"kMatchParlayTableViewRemoveItemNotif";
 NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableViewRemoveAllItemsNotif";
+
+NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 
 @interface LGMatchParlayTableView () <UITableViewDelegate, UITableViewDataSource, LGMatchParlayTableViewCellDelegate> {
     NSIndexPath *_keyboardIndexPath;
@@ -143,12 +144,12 @@ NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableV
 
 #pragma mark - LGMatchParlayTableViewCellDelegate
 
-- (void)matchParlayTableViewCellDidDeleted:(LGMatchParlayTableViewCell *)cell {
+- (void)matchParlayTableCellDidDeleted:(LGMatchParlayTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self p_removeItemWithIndexPath:indexPath];
 }
 
-- (void)matchParlayTableViewCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell {
+- (void)matchParlayTableCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell {
     NSIndexPath *preIndexPath = _keyboardIndexPath;
     if (_keyboardIndexPath) {
         if (_keyboardIndexPath && _keyboardIndexPath.row < self.itemArray.count) {
@@ -175,7 +176,7 @@ NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableV
     }
 }
 
-- (void)matchParlayTableViewCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell {
+- (void)matchParlayTableCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.itemArray.count) {
         NSMutableDictionary *dicM = self.itemArray[indexPath.row];
@@ -188,9 +189,31 @@ NSString * const kMatchParlayTableViewRemoveAllItemsNotif = @"kMatchParlayTableV
     }
 }
 
-- (void)matchParlayTableViewCellOnTapped:(LGMatchParlayTableViewCell *)cell {
+- (void)matchParlayTableCellOnTapped:(LGMatchParlayTableViewCell *)cell {
     LGMatchParlayTableViewCell *keyboardCell = [self.tableView cellForRowAtIndexPath:_keyboardIndexPath];
-    [self matchParlayTableViewCellKeyboardWillHide:keyboardCell];
+    [self matchParlayTableCellKeyboardWillHide:keyboardCell];
+}
+
+- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell {
+    __block CGFloat totalBet = 0;
+    __block CGFloat totalGain = 0;
+    
+    
+    for (NSDictionary *dic in self.itemArray) {
+        CGFloat ante = [dic[kLGMatchParlayTableViewCellKeyAnte] floatValue];
+        if (ante <= 0) {
+            continue;
+        }
+        
+        CGFloat gain = ante * [dic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOdds] floatValue];
+        
+        totalBet += ante;
+        totalGain += gain;
+    }
+    
+    if (totalGain > 0 && [self.delegate respondsToSelector:@selector(matchParlayTableViewDidBetting:totalBet:totalGain:)]) {
+        [self.delegate matchParlayTableViewDidBetting:self totalBet:totalBet totalGain:totalGain];
+    }
 }
 
 #pragma mark - Private

@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSUInteger itemCount;
 @property (nonatomic, weak) id<LGMatchParlayBottomViewDelegate> delegate;
 
+- (void)setTotalBet:(CGFloat)totalBet totalGain:(CGFloat)totalGain;
+
 @end
 
 NS_ASSUME_NONNULL_END

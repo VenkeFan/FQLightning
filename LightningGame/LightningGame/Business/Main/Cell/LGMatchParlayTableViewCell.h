@@ -18,14 +18,15 @@ extern NSString * const kLGMatchParlayTableViewCellKeyTeamDic;
 extern NSString * const kLGMatchParlayTableViewCellKeyOddsDic;
 extern NSString * const kLGMatchParlayTableViewCellKeyMatchName;
 extern NSString * const kLGMatchParlayTableViewCellKeyFieldFocused;
-extern NSString * const kLGMatchParlayTableViewCellKeyFieldText;
+extern NSString * const kLGMatchParlayTableViewCellKeyAnte;
 
 @protocol LGMatchParlayTableViewCellDelegate <NSObject>
 
-- (void)matchParlayTableViewCellDidDeleted:(LGMatchParlayTableViewCell *)cell;
-- (void)matchParlayTableViewCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell;
-- (void)matchParlayTableViewCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell;
-- (void)matchParlayTableViewCellOnTapped:(LGMatchParlayTableViewCell *)cell;
+- (void)matchParlayTableCellDidDeleted:(LGMatchParlayTableViewCell *)cell;
+- (void)matchParlayTableCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell;
+- (void)matchParlayTableCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell;
+- (void)matchParlayTableCellOnTapped:(LGMatchParlayTableViewCell *)cell;
+- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell;
 
 @end
 

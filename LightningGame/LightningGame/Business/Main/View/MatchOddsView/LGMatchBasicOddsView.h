@@ -7,17 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LGMatchListKeys.h"
 
 #define kViewPaddingX                       kSizeScale(6.0)
 #define kViewPaddingY                       kSizeScale(4.0)
-
-typedef NS_ENUM(NSInteger, LGMatchOddsStatus) {
-    LGMatchOddsStatus_Normal = 1,
-    LGMatchOddsStatus_Locked = 2,
-    LGMatchOddsStatus_Hidden = 4,
-    LGMatchOddsStatus_Finished = 5,
-    LGMatchOddsStatus_Exception = 99
-};
 
 NS_ASSUME_NONNULL_BEGIN
 

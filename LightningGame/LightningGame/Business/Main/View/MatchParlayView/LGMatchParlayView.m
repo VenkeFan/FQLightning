@@ -162,6 +162,10 @@
     [self p_destroy];
 }
 
+- (void)matchParlayTableViewDidBetting:(LGMatchParlayTableView *)view totalBet:(CGFloat)totalBet totalGain:(CGFloat)totalGain {
+    [self.bottomView setTotalBet:totalBet totalGain:totalGain];
+}
+
 #pragma mark - LGMatchParlayTopViewDelegate
 
 - (void)matchParlayTopViewDidClose:(LGMatchParlayTopView *)view {

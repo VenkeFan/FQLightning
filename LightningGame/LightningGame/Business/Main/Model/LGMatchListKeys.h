@@ -16,6 +16,14 @@ typedef NS_ENUM(NSInteger, LGMatchStatus) {
     LGMatchStatus_Canceled = 4
 };
 
+typedef NS_ENUM(NSInteger, LGMatchOddsStatus) {
+    LGMatchOddsStatus_Normal = 1,
+    LGMatchOddsStatus_Locked = 2,
+    LGMatchOddsStatus_Hidden = 4,
+    LGMatchOddsStatus_Finished = 5,
+    LGMatchOddsStatus_Exception = 99
+};
+
 #pragma mark - MatchKey
 
 extern NSString * const kMatchKeyGameID;

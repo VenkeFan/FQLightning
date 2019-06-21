@@ -13,6 +13,7 @@
 @interface LGMatchParlayTopView ()
 
 @property (nonatomic, strong) UILabel *countLab;
+@property (nonatomic, strong) UILabel *balanceLab;
 
 @end
 
@@ -63,6 +64,13 @@
     line.backgroundColor = kMainBgColor;
     line.frame = CGRectMake(CGRectGetMinX(closeBtn.frame), 0, 1.0, self.height);
     [self addSubview:line];
+    
+    _balanceLab = [FQComponentFactory labelWithFont:kRegularFont(kNoteFontSize)];
+    _balanceLab.text = [NSString stringWithFormat:@"%@: %.2f", kLocalizedString(@"profile_balance"), 0.];
+    _balanceLab.textColor = kUIColorFromRGB(0x000000);
+    [_balanceLab sizeToFit];
+    _balanceLab.center = CGPointMake(CGRectGetMinX(line.frame) - kSizeScale(8.0) - _balanceLab.width * 0.5, self.height * 0.5);
+    [self addSubview:_balanceLab];
     
     UIControl *clearCtr = ({
         UIControl *ctr =  [[UIControl alloc] init];

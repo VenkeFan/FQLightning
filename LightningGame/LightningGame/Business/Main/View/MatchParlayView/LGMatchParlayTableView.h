@@ -22,6 +22,7 @@ extern NSString * const kMatchParlayTableViewRemoveAllItemsNotif;
 
 - (void)matchParlayTableViewHeightDidChanged:(LGMatchParlayTableView *)view newHeight:(CGFloat)newHeight;
 - (void)matchParlayTableViewDidClear:(LGMatchParlayTableView *)view;
+- (void)matchParlayTableViewDidBetting:(LGMatchParlayTableView *)view totalBet:(CGFloat)totalBet totalGain:(CGFloat)totalGain;
 
 @end
 

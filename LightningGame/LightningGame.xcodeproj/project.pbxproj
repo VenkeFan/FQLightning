@@ -75,6 +75,7 @@
 		B99924FA22BA24FB001F492E /* LGMatchListRollingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924F922BA24FB001F492E /* LGMatchListRollingCell.m */; };
 		B99924FD22BA250B001F492E /* LGMatchListFinishedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */; };
 		B999250322BBB1CA001F492E /* FQTimeTickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B999250222BBB1CA001F492E /* FQTimeTickManager.m */; };
+		B999250622BC71F9001F492E /* LGBetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B999250522BC71F9001F492E /* LGBetRequest.m */; };
 		B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555222B8869000D04395 /* UIView+FQRotatable.m */; };
 		B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555922B908BE00D04395 /* LGOAuthRequest.m */; };
 		B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */; };
@@ -275,6 +276,8 @@
 		B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListFinishedCell.m; sourceTree = "<group>"; };
 		B999250122BBB1CA001F492E /* FQTimeTickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQTimeTickManager.h; sourceTree = "<group>"; };
 		B999250222BBB1CA001F492E /* FQTimeTickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQTimeTickManager.m; sourceTree = "<group>"; };
+		B999250422BC71F9001F492E /* LGBetRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGBetRequest.h; sourceTree = "<group>"; };
+		B999250522BC71F9001F492E /* LGBetRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGBetRequest.m; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
@@ -664,6 +667,8 @@
 				B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */,
 				B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */,
 				B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */,
+				B999250422BC71F9001F492E /* LGBetRequest.h */,
+				B999250522BC71F9001F492E /* LGBetRequest.m */,
 			);
 			path = APIRequest;
 			sourceTree = "<group>";
@@ -1212,6 +1217,7 @@
 				B9229D02229BEEC00030691D /* NSString+FQNilExamine.m in Sources */,
 				B9229D1D229CCB270030691D /* LGMainViewController.m in Sources */,
 				B9D9103722AE46EB00D54911 /* LGDatePickerTableView.m in Sources */,
+				B999250622BC71F9001F492E /* LGBetRequest.m in Sources */,
 				B9229D3E229D02980030691D /* FQTimerManager.m in Sources */,
 				B9229D0D229BF04F0030691D /* UIView+FQExtension.m in Sources */,
 				B9F61A6F22A75A6700CDC29E /* LGMatchParlayBottomView.m in Sources */,

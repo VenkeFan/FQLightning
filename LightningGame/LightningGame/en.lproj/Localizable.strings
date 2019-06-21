@@ -59,3 +59,6 @@ parlay_confirm_all          = "确认投注";
 parlay_form                 = "投注单";
 parlay_total_bet            = "本次投注";
 parlay_total_gain           = "最高返还";
+
+// Profile
+profile_balance             = "余额";
