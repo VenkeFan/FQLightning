@@ -74,6 +74,7 @@
 		B99924F722BA24E5001F492E /* LGMatchListTodayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924F622BA24E5001F492E /* LGMatchListTodayCell.m */; };
 		B99924FA22BA24FB001F492E /* LGMatchListRollingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924F922BA24FB001F492E /* LGMatchListRollingCell.m */; };
 		B99924FD22BA250B001F492E /* LGMatchListFinishedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */; };
+		B999250322BBB1CA001F492E /* FQTimeTickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B999250222BBB1CA001F492E /* FQTimeTickManager.m */; };
 		B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555222B8869000D04395 /* UIView+FQRotatable.m */; };
 		B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555922B908BE00D04395 /* LGOAuthRequest.m */; };
 		B9C3A164229F7DEB00E282B0 /* LGMatchBasicOddsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A163229F7DEB00E282B0 /* LGMatchBasicOddsView.m */; };
@@ -272,6 +273,8 @@
 		B99924F922BA24FB001F492E /* LGMatchListRollingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRollingCell.m; sourceTree = "<group>"; };
 		B99924FB22BA250B001F492E /* LGMatchListFinishedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListFinishedCell.h; sourceTree = "<group>"; };
 		B99924FC22BA250B001F492E /* LGMatchListFinishedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListFinishedCell.m; sourceTree = "<group>"; };
+		B999250122BBB1CA001F492E /* FQTimeTickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQTimeTickManager.h; sourceTree = "<group>"; };
+		B999250222BBB1CA001F492E /* FQTimeTickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQTimeTickManager.m; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				B9229D3A229D011C0030691D /* FQLanguageManager.m */,
 				B9229D3C229D02980030691D /* FQTimerManager.h */,
 				B9229D3D229D02980030691D /* FQTimerManager.m */,
+				B999250122BBB1CA001F492E /* FQTimeTickManager.h */,
+				B999250222BBB1CA001F492E /* FQTimeTickManager.m */,
 				B9229D48229D0B670030691D /* FQWindowUtility.h */,
 				B9229D49229D0B670030691D /* FQWindowUtility.m */,
 				B9C3A168229F93F100E282B0 /* FQComponentFactory.h */,
@@ -1183,6 +1188,7 @@
 				B9C3A170229FC38E00E282B0 /* LGMarqueeViewModel.m in Sources */,
 				B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */,
 				B9D9103122ADFD3400D54911 /* LGDatePickerView.m in Sources */,
+				B999250322BBB1CA001F492E /* FQTimeTickManager.m in Sources */,
 				B9229D4A229D0B670030691D /* FQWindowUtility.m in Sources */,
 				B9229D3B229D011C0030691D /* FQLanguageManager.m in Sources */,
 				B9229D20229CCBCA0030691D /* UIViewController+FQExtension.m in Sources */,

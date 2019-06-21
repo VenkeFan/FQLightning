@@ -34,7 +34,7 @@ const NSUInteger kDateSelectionRange = 7;
     self.currentIndex = 0;
 }
 
-- (void)previours {
+- (void)previous {
     if (!self.canPreviously) {
         return;
     }

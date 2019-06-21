@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)generateDateList:(BOOL)isPreviously;
 
-- (void)previours;
+- (void)previous;
 - (void)future;
 
 - (NSString *)stringFromDate:(NSDate *)date;

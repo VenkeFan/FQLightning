@@ -37,7 +37,7 @@
     
     self.layer.cornerRadius = CGRectGetHeight(self.frame) * 0.5;
     
-    _dateBtn.frame = CGRectMake(0, 0, kSizeScale(140.0), self.height);
+    _dateBtn.frame = CGRectMake(0, 0, kSizeScale(132.0), self.height);
     _dateBtn.center = CGPointMake(self.width * 0.5, self.height * 0.5);
     _leftBtn.frame = CGRectMake(0, 0, self.height, self.height);
     _leftBtn.center = CGPointMake(CGRectGetMinX(_dateBtn.frame) - _leftBtn.width * 0.5, self.height * 0.5);
@@ -53,8 +53,11 @@
     _dateBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.backgroundColor = [UIColor clearColor];
+        [btn setImage:[UIImage imageNamed:@"main_calendar"] forState:UIControlStateNormal];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8.0)];
         [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
         btn.titleLabel.font = kRegularFont(kNoteFontSize);
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [btn addTarget:self action:@selector(dateBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
         
         btn;
@@ -65,8 +68,8 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.backgroundColor = [UIColor clearColor];
         [btn setTitle:@"<" forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [btn addTarget:self action:@selector(leftBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
         
         btn;
@@ -78,8 +81,8 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.backgroundColor = [UIColor clearColor];
         [btn setTitle:@">" forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [btn addTarget:self action:@selector(rightBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
         
         btn;
@@ -113,7 +116,7 @@
 }
 
 - (void)leftBtnOnClicked {
-    [self.viewModel previours];
+    [self.viewModel previous];
 }
 
 - (void)rightBtnOnClicked {
