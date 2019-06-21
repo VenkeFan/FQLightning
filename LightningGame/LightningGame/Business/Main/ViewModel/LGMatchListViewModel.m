@@ -26,8 +26,8 @@ NSString * const kMatchKeyTournamentID                 = @"tournament_id";
 NSString * const kMatchKeyTournamentName               = @"tournament_name";
 NSString * const kMatchKeyTournamentShortName          = @"tournament_short_name";
 NSString * const kMatchKeyPlayCount                    = @"play_count";
-NSString * const kMatchKeyTeam                         = @"team";
-NSString * const kMatchKeyOdds                         = @"odds";
+NSString * const kMatchKeyTeamArray                    = @"team";
+NSString * const kMatchKeyOddsArray                    = @"odds";
 NSString * const kMatchKeyLiveUrl                      = @"live_url";
 
 #pragma mark - TeamKey
@@ -66,7 +66,7 @@ NSString * const kMatchOddsKeyOddsID                   = @"id";
 NSString * const kMatchOddsKeyTeamID                   = @"team_id";
 NSString * const kMatchOddsKeyName                     = @"name";
 NSString * const kMatchOddsKeyMatchID                  = @"match_id";
-NSString * const kMatchOddsKeyOdds                     = @"odds";
+NSString * const kMatchOddsKeyOddsValue                = @"odds";
 NSString * const kMatchOddsKeyTag                      = @"tag";
 NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 

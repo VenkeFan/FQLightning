@@ -20,6 +20,7 @@
 #import "LGToastView.h"
 #import "LGLoadingView.h"
 #import "LGAccountManager.h"
+#import "LGAPIErrorCode.h"
 
 #import "UIView+FQExtension.h"
 #import "CALayer+FQExtension.h"

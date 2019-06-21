@@ -29,6 +29,7 @@ extern NSString * const kMatchParlayTableViewRemoveAllItemsNotif;
 @interface LGMatchParlayTableView : UIView
 
 @property (nonatomic, assign, readonly) NSUInteger itemCount;
+@property (nonatomic, copy, readonly) NSDictionary *parlayOddsDicI;
 @property (nonatomic, strong, readonly) UITableView *tableView;
 @property (nonatomic, weak) id<LGMatchParlayTableViewDelegate> delegate;
 - (BOOL)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName;

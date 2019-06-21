@@ -17,14 +17,14 @@
     return self;
 }
 
-- (void)requestWithOddsID:(NSString *)oddsID amount:(CGFloat)amount success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
-    if (oddsID.length == 0 || amount <= 0) {
+- (void)requestWithOddsID:(NSNumber *)oddsID amount:(NSNumber *)amount success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
+    if (oddsID == nil || amount == nil) {
         return;
     }
     
     [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
     [self.paraDic setObject:oddsID forKey:@"oddsid"];
-    [self.paraDic setObject:@(amount) forKey:@"amount"];
+    [self.paraDic setObject:amount forKey:@"amount"];
     
     [super requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {

@@ -53,6 +53,7 @@
 		B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D92229EA6600030691D /* CALayer+FQExtension.m */; };
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
+		B93F3B9822BCC68500D45DEF /* LGMatchParlayViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9722BCC68500D45DEF /* LGMatchParlayViewModel.m */; };
 		B945C1FE22B395E50031E82C /* detail_sample2.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FC22B395E50031E82C /* detail_sample2.json */; };
 		B945C1FF22B395E50031E82C /* detail_sample1.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FD22B395E50031E82C /* detail_sample1.json */; };
 		B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493681229BCBE7000C3D24 /* AppDelegate.m */; };
@@ -234,6 +235,8 @@
 		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailRequest.h; sourceTree = "<group>"; };
 		B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailRequest.m; sourceTree = "<group>"; };
+		B93F3B9622BCC68500D45DEF /* LGMatchParlayViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchParlayViewModel.h; sourceTree = "<group>"; };
+		B93F3B9722BCC68500D45DEF /* LGMatchParlayViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchParlayViewModel.m; sourceTree = "<group>"; };
 		B945C1FC22B395E50031E82C /* detail_sample2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample2.json; sourceTree = "<group>"; };
 		B945C1FD22B395E50031E82C /* detail_sample1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample1.json; sourceTree = "<group>"; };
 		B949367D229BCBE7000C3D24 /* LightningGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -587,6 +590,8 @@
 				B9C3A16F229FC38E00E282B0 /* LGMarqueeViewModel.m */,
 				B9D9103222AE0D9800D54911 /* LGDatePickerViewModel.h */,
 				B9D9103322AE0D9800D54911 /* LGDatePickerViewModel.m */,
+				B93F3B9622BCC68500D45DEF /* LGMatchParlayViewModel.h */,
+				B93F3B9722BCC68500D45DEF /* LGMatchParlayViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1216,6 +1221,7 @@
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
 				B9229D02229BEEC00030691D /* NSString+FQNilExamine.m in Sources */,
 				B9229D1D229CCB270030691D /* LGMainViewController.m in Sources */,
+				B93F3B9822BCC68500D45DEF /* LGMatchParlayViewModel.m in Sources */,
 				B9D9103722AE46EB00D54911 /* LGDatePickerTableView.m in Sources */,
 				B999250622BC71F9001F492E /* LGBetRequest.m in Sources */,
 				B9229D3E229D02980030691D /* FQTimerManager.m in Sources */,

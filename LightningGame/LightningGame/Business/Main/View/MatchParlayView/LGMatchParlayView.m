@@ -7,6 +7,7 @@
 //
 
 #import "LGMatchParlayView.h"
+#import "LGMatchParlayViewModel.h"
 #import "LGMatchListKeys.h"
 #import "LGMatchParlayTableView.h"
 #import "LGMatchParlayTopView.h"
@@ -20,9 +21,11 @@
 #define kLGMatchParlayViewMixHeight                 (kLGMatchParlayTableViewCellHeight + kLGMatchParlayViewTopHeight + kLGMatchParlayViewBottomHeight)
 
 
-@interface LGMatchParlayView () <LGMatchParlayTableViewDelegate, LGMatchParlayTopViewDelegate, LGMatchParlayBottomViewDelegate>
+@interface LGMatchParlayView () <LGMatchParlayTableViewDelegate, LGMatchParlayTopViewDelegate, LGMatchParlayBottomViewDelegate, LGMatchParlayViewModelDelegate>
 
 @property (nonatomic, assign, readwrite) BOOL expanded;
+
+@property (nonatomic, strong) LGMatchParlayViewModel *viewModel;
 
 @property (nonatomic, strong) LGMatchParlayTopView *topView;
 @property (nonatomic, strong) LGMatchParlayTableView *contentView;
@@ -142,6 +145,16 @@
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+#pragma mark - LGMatchParlayViewModelDelegate
+
+- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel responseObj:(id)responseObj error:(NSError *)error {
+    if (error.code != LGErrorCode_Success) {
+        return;
+    }
+    
+    
+}
+
 #pragma mark - LGMatchParlayTableViewDelegate
 
 - (void)matchParlayTableViewHeightDidChanged:(LGMatchParlayTableView *)view newHeight:(CGFloat)newHeight {
@@ -184,6 +197,14 @@
     } else {
         [self p_expand];
     }
+}
+
+- (void)matchParlayBottomViewDidConfirm:(LGMatchParlayBottomView *)view {
+    TODO("暂未考虑多个订单的情况");
+    NSNumber *oddsID = self.contentView.parlayOddsDicI.allKeys.firstObject;
+    NSNumber *bet = [self.contentView.parlayOddsDicI objectForKey:oddsID];
+    
+    [self.viewModel parlayWithBet:bet oddsID:oddsID];
 }
 
 #pragma mark - Private
@@ -272,6 +293,16 @@
     _expanded = expanded;
     
     [self.bottomView setExpanded:expanded];
+}
+
+#pragma mark - Getter
+
+- (LGMatchParlayViewModel *)viewModel {
+    if (!_viewModel) {
+        _viewModel = [LGMatchParlayViewModel new];
+        _viewModel.delegate = self;
+    }
+    return _viewModel;
 }
 
 @end

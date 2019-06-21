@@ -218,7 +218,7 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 - (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
     NSDictionary *oddsDic = notification.object;
     for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOdds];
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOddsArray];
         if (oddsArray) {
             for (int j = 0; j < oddsArray.count; j++) {
                 NSMutableDictionary *tmpOdds = oddsArray[j];
@@ -236,7 +236,7 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 - (void)matchParlayDidRemoveAllItemsNotif:(NSNotification *)notification {
     NSArray *notiOddsArray = notification.object;
     for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOdds];
+        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOddsArray];
         if (!oddsArray) {
             continue;
         }

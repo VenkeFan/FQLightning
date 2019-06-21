@@ -165,7 +165,7 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
     {   
         @try {
             _gainLab.attributedText = [self p_gainText:[dataDic[kLGMatchParlayTableViewCellKeyAnte] floatValue]
-                                                  odds:[dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOdds] floatValue]];
+                                                  odds:[dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsValue] floatValue]];
             [_gainLab sizeToFit];
             
         } @catch (NSException *exception) {
@@ -185,7 +185,7 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
         switch (status) {
             case LGMatchOddsStatus_Normal: {
                 self.oddsLabel.hidden = NO;
-                self.oddsLabel.text = [NSString stringWithFormat:@"@ %@", oddsDic[kMatchOddsKeyOdds]];
+                self.oddsLabel.text = [NSString stringWithFormat:@"@ %@", oddsDic[kMatchOddsKeyOddsValue]];
                 [self.oddsLabel sizeToFit];
             }
                 break;
@@ -229,14 +229,15 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
         
         @try {
             CGFloat ante = [textField.text floatValue];
-            CGFloat odds = [self.dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOdds] floatValue];
+            CGFloat oddsValue = [self.dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsValue] floatValue];
             
-            _gainLab.attributedText = [self p_gainText:ante odds:odds];
+            _gainLab.attributedText = [self p_gainText:ante odds:oddsValue];
             [_gainLab sizeToFit];
             _gainLab.right = _field.right;
             
-            if ([self.delegate respondsToSelector:@selector(matchParlayTableCellDidBetting:)]) {
-                [self.delegate matchParlayTableCellDidBetting:self];
+            if ([self.delegate respondsToSelector:@selector(matchParlayTableCellDidBetting:ante:oddsID:)]) {
+                [self.delegate matchParlayTableCellDidBetting:self ante:ante
+                                                       oddsID:self.dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsID]];
             }
             
         } @catch (NSException *exception) {

@@ -61,7 +61,7 @@
     self.matchName = matchName;
     [self setSelected:[self.oddsDic[kMatchOddsExoticKeyIsSelected] boolValue]];
     
-    self.oddsLabel.text = oddsDic[kMatchOddsKeyOdds];
+    self.oddsLabel.text = oddsDic[kMatchOddsKeyOddsValue];
     self.nameLabel.text = teamDic[kMatchTeamKeyName];
     [self.nameLabel sizeToFit];
     

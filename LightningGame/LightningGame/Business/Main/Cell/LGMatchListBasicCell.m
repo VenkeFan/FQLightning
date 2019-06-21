@@ -164,8 +164,8 @@
 }
 
 - (void)separateTeamsAndOdds {
-    NSArray *teamArray = self.dataDic[kMatchKeyTeam];
-    NSArray *oddsArray = self.dataDic[kMatchKeyOdds];
+    NSArray *teamArray = self.dataDic[kMatchKeyTeamArray];
+    NSArray *oddsArray = self.dataDic[kMatchKeyOddsArray];
     
     for (NSDictionary *tmp in teamArray) {
         if ([tmp[kMatchTeamKeyPos] integerValue] == 1) {

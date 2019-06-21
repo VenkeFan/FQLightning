@@ -26,7 +26,7 @@ extern NSString * const kLGMatchParlayTableViewCellKeyAnte;
 - (void)matchParlayTableCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell;
 - (void)matchParlayTableCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell;
 - (void)matchParlayTableCellOnTapped:(LGMatchParlayTableViewCell *)cell;
-- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell;
+- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell ante:(CGFloat)ante oddsID:(NSString *)oddsID;
 
 @end
 

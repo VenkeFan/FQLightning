@@ -40,8 +40,8 @@ extern NSString * const kMatchKeyTournamentID;
 extern NSString * const kMatchKeyTournamentName;
 extern NSString * const kMatchKeyTournamentShortName;
 extern NSString * const kMatchKeyPlayCount;
-extern NSString * const kMatchKeyTeam;
-extern NSString * const kMatchKeyOdds;
+extern NSString * const kMatchKeyTeamArray;
+extern NSString * const kMatchKeyOddsArray;
 extern NSString * const kMatchKeyLiveUrl;
 
 #pragma mark - TeamKey
@@ -80,7 +80,7 @@ extern NSString * const kMatchOddsKeyOddsID;
 extern NSString * const kMatchOddsKeyTeamID;
 extern NSString * const kMatchOddsKeyName;
 extern NSString * const kMatchOddsKeyMatchID;
-extern NSString * const kMatchOddsKeyOdds;
+extern NSString * const kMatchOddsKeyOddsValue;
 extern NSString * const kMatchOddsKeyTag;
 extern NSString * const kMatchOddsExoticKeyIsSelected;
 

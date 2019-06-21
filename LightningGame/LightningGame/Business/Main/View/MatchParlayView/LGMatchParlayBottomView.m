@@ -25,6 +25,8 @@
 
 @property (nonatomic, strong) CATransition *transition;
 
+@property (nonatomic, assign) CGFloat totalBet;
+
 @end
 
 @implementation LGMatchParlayBottomView
@@ -159,7 +161,9 @@
 
 - (void)betBtnClicked {
     if (self.isExpanded) {
-        TODO("下注");
+        if ([self.delegate respondsToSelector:@selector(matchParlayBottomViewDidConfirm:)]) {
+            [self.delegate matchParlayBottomViewDidConfirm:self];
+        }
     } else {
         [self leftInfoCtrClicked];
     }

@@ -41,8 +41,8 @@ NSString * const LGMatchStageMapping[] = {
 //        NSMutableDictionary *dic = [[NSDictionary dictionaryWithJSON:data] fq_mutableDictionary];
 //        NSMutableDictionary *resultDic = [dic objectForKey:@"result"];
 //
-//        NSArray *oddsArray = resultDic[kMatchKeyOdds];
-//        NSArray *teamArray = resultDic[kMatchKeyTeam];
+//        NSArray *oddsArray = resultDic[kMatchKeyOddsArray];
+//        NSArray *teamArray = resultDic[kMatchKeyTeamArray];
 //        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
 //
 //        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
@@ -53,8 +53,8 @@ NSString * const LGMatchStageMapping[] = {
     
     LGMatchDetailRequest *request = [[LGMatchDetailRequest alloc] initWithMatchID:matchID];
     [request requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSArray *oddsArray = responseObject[kMatchKeyOdds];
-        NSArray *teamArray = responseObject[kMatchKeyTeam];
+        NSArray *oddsArray = responseObject[kMatchKeyOddsArray];
+        NSArray *teamArray = responseObject[kMatchKeyTeamArray];
         NSMutableDictionary *oddsDic = [[self p_handleMatchStage:oddsArray] fq_mutableDictionary];
         
         if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {

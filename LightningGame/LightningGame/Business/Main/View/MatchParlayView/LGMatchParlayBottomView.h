@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LGMatchParlayBottomViewDelegate <NSObject>
 
 - (void)matchParlayBottomViewDidChangeExpand:(LGMatchParlayBottomView *)view;
+- (void)matchParlayBottomViewDidConfirm:(LGMatchParlayBottomView *)view;
 
 @end
 

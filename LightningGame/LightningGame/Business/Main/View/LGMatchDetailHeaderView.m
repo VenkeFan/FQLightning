@@ -173,7 +173,7 @@
 //        _countLab.height += 2.0;
     }
     
-    NSArray *teamArray = dataDic[kMatchKeyTeam];
+    NSArray *teamArray = dataDic[kMatchKeyTeamArray];
     NSDictionary *leftTeam, *rightTeam;
     
     for (NSDictionary *tmp in teamArray) {
