@@ -54,6 +54,7 @@
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
 		B93F3B9822BCC68500D45DEF /* LGMatchParlayViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9722BCC68500D45DEF /* LGMatchParlayViewModel.m */; };
+		B93F3B9B22BCD8C600D45DEF /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9A22BCD8C600D45DEF /* LGAlertView.m */; };
 		B945C1FE22B395E50031E82C /* detail_sample2.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FC22B395E50031E82C /* detail_sample2.json */; };
 		B945C1FF22B395E50031E82C /* detail_sample1.json in Resources */ = {isa = PBXBuildFile; fileRef = B945C1FD22B395E50031E82C /* detail_sample1.json */; };
 		B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493681229BCBE7000C3D24 /* AppDelegate.m */; };
@@ -237,6 +238,8 @@
 		B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailRequest.m; sourceTree = "<group>"; };
 		B93F3B9622BCC68500D45DEF /* LGMatchParlayViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchParlayViewModel.h; sourceTree = "<group>"; };
 		B93F3B9722BCC68500D45DEF /* LGMatchParlayViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchParlayViewModel.m; sourceTree = "<group>"; };
+		B93F3B9922BCD8C600D45DEF /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGAlertView.h; sourceTree = "<group>"; };
+		B93F3B9A22BCD8C600D45DEF /* LGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGAlertView.m; sourceTree = "<group>"; };
 		B945C1FC22B395E50031E82C /* detail_sample2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample2.json; sourceTree = "<group>"; };
 		B945C1FD22B395E50031E82C /* detail_sample1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = detail_sample1.json; sourceTree = "<group>"; };
 		B949367D229BCBE7000C3D24 /* LightningGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -985,6 +988,8 @@
 				B9F61A6B22A6566300CDC29E /* LGToastView.m */,
 				B9D9102B22ADF36A00D54911 /* LGLoadingView.h */,
 				B9D9102C22ADF36A00D54911 /* LGLoadingView.m */,
+				B93F3B9922BCD8C600D45DEF /* LGAlertView.h */,
+				B93F3B9A22BCD8C600D45DEF /* LGAlertView.m */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -1211,6 +1216,7 @@
 				B9C3A17922A0F9F700E282B0 /* LGSignUpViewController.m in Sources */,
 				B94E4FB022B79CAD00A56F13 /* FQAVPlayerView.m in Sources */,
 				B94E4FB322B79CB600A56F13 /* FQPlayerOperateView.m in Sources */,
+				B93F3B9B22BCD8C600D45DEF /* LGAlertView.m in Sources */,
 				B9D9105222B1EA9F00D54911 /* LGMatchDetailViewModel.m in Sources */,
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
 				B94E4FAD22B79CA700A56F13 /* FQAbstractPlayerView.m in Sources */,

@@ -92,8 +92,8 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 //        
 //        NSArray *array = [dic objectForKey:@"result"];
 //        
-//        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-//            [self.delegate matchListDidFetch:self data:array last:YES errCode:-1];
+//        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:error:)]) {
+//            [self.delegate matchListDidFetch:self data:array last:YES error:nil];
 //        }
 //        return;
     }
@@ -111,13 +111,13 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
             return [obj1[kMatchKeyStartTime] compare:obj2[kMatchKeyStartTime]] == NSOrderedAscending;
         }];
 
-        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-            [self.delegate matchListDidFetch:self data:arrayM last:YES errCode:LGErrorCode_Success];
+        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:error:)]) {
+            [self.delegate matchListDidFetch:self data:arrayM last:YES error:nil];
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:errCode:)]) {
-            [self.delegate matchListDidFetch:self data:nil last:YES errCode:error.code];
+        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:error:)]) {
+            [self.delegate matchListDidFetch:self data:nil last:YES error:error];
         }
     }];
 }

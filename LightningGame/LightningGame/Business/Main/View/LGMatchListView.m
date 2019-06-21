@@ -102,10 +102,10 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 
 #pragma mark - LGMatchListViewModelDelegate
 
-- (void)matchListDidFetch:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
+- (void)matchListDidFetch:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last error:(nullable NSError *)error {
     [self.tableView.mj_header endRefreshing];
     
-    if (data.count == 0) {
+    if (error) {
         return;
     }
     
@@ -115,8 +115,8 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     [self.tableView reloadData];
 }
 
-- (void)matchListDidMore:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode {
-    if (data.count == 0) {
+- (void)matchListDidMore:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last error:(nullable NSError *)error {
+    if (error) {
         return;
     }
     

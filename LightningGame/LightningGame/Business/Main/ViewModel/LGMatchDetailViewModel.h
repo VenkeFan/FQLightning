@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
                    matchDic:(nullable NSMutableDictionary *)matchDic
                   teamArray:(nullable NSArray *)teamArray
                     oddsDic:(nullable NSMutableDictionary *)oddsDic
-                    errCode:(NSInteger)errCode;
+                      error:(nullable NSError *)error;;
 
 @end
 

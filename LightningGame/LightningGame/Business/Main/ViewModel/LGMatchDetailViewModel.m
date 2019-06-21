@@ -45,8 +45,8 @@ NSString * const LGMatchStageMapping[] = {
 //        NSArray *teamArray = resultDic[kMatchKeyTeamArray];
 //        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
 //
-//        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
-//            [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic errCode:-1];
+//        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:error:)]) {
+//            [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic error:nil];
 //        }
 //        return;
     }
@@ -57,13 +57,13 @@ NSString * const LGMatchStageMapping[] = {
         NSArray *teamArray = responseObject[kMatchKeyTeamArray];
         NSMutableDictionary *oddsDic = [[self p_handleMatchStage:oddsArray] fq_mutableDictionary];
         
-        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
-            [self.delegate matchDetailDidFetch:self matchDic:responseObject teamArray:teamArray oddsDic:oddsDic errCode:LGErrorCode_Success];
+        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:error:)]) {
+            [self.delegate matchDetailDidFetch:self matchDic:responseObject teamArray:teamArray oddsDic:oddsDic error:nil];
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:errCode:)]) {
-            [self.delegate matchDetailDidFetch:self matchDic:nil teamArray:nil oddsDic:nil errCode:error.code];
+        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:error:)]) {
+            [self.delegate matchDetailDidFetch:self matchDic:nil teamArray:nil oddsDic:nil error:error];
         }
     }];
 }

@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LGMatchListViewModelDelegate <NSObject>
 
-- (void)matchListDidFetch:(LGMatchListViewModel *)viewModel data:(nullable NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
-- (void)matchListDidMore:(LGMatchListViewModel *)viewModel data:(nullable NSArray *)data last:(BOOL)last errCode:(NSInteger)errCode;
+- (void)matchListDidFetch:(LGMatchListViewModel *)viewModel data:(nullable NSArray *)data last:(BOOL)last error:(nullable NSError *)error;
+- (void)matchListDidMore:(LGMatchListViewModel *)viewModel data:(nullable NSArray *)data last:(BOOL)last error:(nullable NSError *)error;
 
 @end
 

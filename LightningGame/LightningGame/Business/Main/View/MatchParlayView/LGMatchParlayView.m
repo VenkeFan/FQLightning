@@ -12,6 +12,7 @@
 #import "LGMatchParlayTableView.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
+#import "LGAlertView.h"
 
 #define kLGMatchParlayViewAnimationDuration         (0.4)
 #define kLGMatchParlayViewSpringVelocity            (5.0)
@@ -148,11 +149,15 @@
 #pragma mark - LGMatchParlayViewModelDelegate
 
 - (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel responseObj:(id)responseObj error:(NSError *)error {
-    if (error.code != LGErrorCode_Success) {
+    if (error) {
         return;
     }
     
+    [self.contentView clearAll];
     
+    [[LGAlertView new] showWithCompleted:^{
+        
+    }];
 }
 
 #pragma mark - LGMatchParlayTableViewDelegate
