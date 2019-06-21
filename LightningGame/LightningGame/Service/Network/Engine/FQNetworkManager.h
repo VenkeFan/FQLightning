@@ -49,7 +49,8 @@ typedef void(^RequestFailBlock)(NSURLSessionDataTask * _Nullable task, NSError *
 
 - (void)cancelAllRequest;
 - (void)cancelRequestWithURL:(NSString *)url;
-+ (void)updateCookie:(NSString *)cookie;
++ (void)setCookie:(NSString *)cookie;
++ (void)setAccessToken:(NSString *)accessToken;
 
 @end
 

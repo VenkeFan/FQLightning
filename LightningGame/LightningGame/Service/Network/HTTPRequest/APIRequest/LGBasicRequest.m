@@ -24,6 +24,7 @@
 }
 
 - (instancetype)initWithAPIName:(NSString *)apiName method:(HTTPRequestMethod)method {
+    NSAssert(![self isMemberOfClass:[LGBasicRequest class]], @"LGBasicRequest is an abstract class, you should not instantiate it directly.");
     if (self = [super init]) {
         _urlStr = [NSString stringWithFormat:@"%@%@", kBasicURL, apiName];
         _method = method;

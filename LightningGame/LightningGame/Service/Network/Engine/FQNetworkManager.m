@@ -16,7 +16,6 @@
 @interface FQNetworkManager ()
 
 @property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *> *allTasks;
-@property (nonatomic, strong) NSMutableDictionary *token;
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
@@ -109,9 +108,14 @@
     };
 }
 
-+ (void)updateCookie:(NSString *)cookie {
++ (void)setCookie:(NSString *)cookie {
     [[FQNetworkManager sharedManager].sessionManager.requestSerializer setValue:cookie
                                                              forHTTPHeaderField:@"Cookie"];
+}
+
++ (void)setAccessToken:(NSString *)accessToken {
+    [[FQNetworkManager sharedManager].sessionManager.requestSerializer setValue:accessToken
+                                                             forHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Private
@@ -138,14 +142,6 @@
                                       success:(RequestSucceedBlock)success
                                       failure:(RequestFailBlock)failure {
     NSURLSessionDataTask *task = nil;
-    
-//    if (parameters == nil) {
-//        parameters = @{@"token": self.token};
-//    } else {
-//        NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:parameters];
-//        [dictM setObject:self.token forKey:@"token"];
-//        parameters = dictM;
-//    }
     
     switch (method) {
         case HTTPRequestMethod_GET: {
@@ -287,26 +283,6 @@
         _allTasks = [NSMutableArray arrayWithCapacity:kMaxRequestCount];
     }
     return _allTasks;
-}
-
-- (NSMutableDictionary *)token {
-    if (!_token) {
-//        _token = @{@"mobile_type": @"1",
-//                   @"app_version": [CCSystemHelper appVersion],
-//                   @"device_name": [CCSystemHelper deviceName],
-//                   @"device_system_version": [CCSystemHelper deviceSystemVersion],
-//                   @"network_type": [FQNetworkReachabilityManager getNetworkStatusName]}.mutableCopy;
-        
-        _token = [NSMutableDictionary dictionary];
-//        [_token setObject:@"1" forKey:@"mobile_type"];
-//        [_token setObject:[CCSystemHelper appVersion] forKey:@"app_version"];
-//        [_token setObject:[CCSystemHelper deviceName] forKey:@"device_name"];
-//        [_token setObject:[CCSystemHelper deviceSystemVersion] forKey:@"device_system_version"];
-    }
-    
-    [_token setObject:[FQNetworkReachabilityManager getNetworkStatusName] forKey:@"network_type"];
-    
-    return _token;
 }
 
 @end
