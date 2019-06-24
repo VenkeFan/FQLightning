@@ -62,6 +62,8 @@
     [self setSelected:[self.oddsDic[kMatchOddsExoticKeyIsSelected] boolValue]];
     
     self.oddsLabel.text = oddsDic[kMatchOddsKeyOddsValue];
+    
+    self.nameLabel.font = kRegularFont(kNoteFontSize);
     self.nameLabel.text = teamDic[kMatchTeamKeyName];
     [self.nameLabel sizeToFit];
     
