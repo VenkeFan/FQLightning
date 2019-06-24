@@ -27,20 +27,21 @@
         _instance.layer.masksToBounds = YES;
         _instance.alpha = 0;
         _instance.isDisplay = NO;
+        
+        [kCurrentWindow addSubview:_instance];
     });
     return _instance;
 }
 
 + (void)display {
     dispatch_async(dispatch_get_main_queue(), ^{
-        LGLoadingView *bgView = [self instance];
+        LGLoadingView *bgView = [LGLoadingView instance];
         if (bgView.isDisplay) {
             return;
         }
         bgView.isDisplay = YES;
         
-        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        [window addSubview:bgView];
+        [kCurrentWindow bringSubviewToFront:bgView];
         
         UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         indicatorView.center = CGPointMake(bgView.width * 0.5, bgView.height * 0.5);
@@ -61,7 +62,7 @@
 
 + (void)dismiss {
     dispatch_async(dispatch_get_main_queue(), ^{
-        LGLoadingView *bgView = [self instance];
+        LGLoadingView *bgView = [LGLoadingView instance];
         if (!bgView.isDisplay) {
             return;
         }
@@ -75,7 +76,6 @@
                          }
                          completion:^(BOOL finished){
                              [bgView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-                             [bgView removeFromSuperview];
                          }];
     });
 }
