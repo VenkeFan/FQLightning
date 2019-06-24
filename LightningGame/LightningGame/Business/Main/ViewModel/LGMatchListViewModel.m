@@ -106,11 +106,17 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
             NSMutableDictionary *dic = [obj fq_mutableDictionary];
             [arrayM addObject:dic];
         }];
-
-        [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            return [obj1[kMatchKeyStartTime] compare:obj2[kMatchKeyStartTime]] == NSOrderedAscending;
-        }];
-
+        
+//        if (self.listType == LGMatchListType_Finished) {
+//            [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//                return [obj1[kMatchKeyStartTime] compare:obj2[kMatchKeyStartTime]] == NSOrderedDescending;
+//            }];
+//        } else {
+//            [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//                return [obj1[kMatchKeyStartTime] compare:obj2[kMatchKeyStartTime]] == NSOrderedAscending;
+//            }];
+//        }
+        
         if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:error:)]) {
             [self.delegate matchListDidFetch:self data:arrayM last:YES error:nil];
         }

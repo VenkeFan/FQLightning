@@ -30,6 +30,9 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 @property (nonatomic, strong) LGMatchListViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray *> *dataDic;
+@property (nonatomic, copy) NSArray<NSString *> *sortedKeys;
+
 @property (nonatomic, strong) LGMarqueeView *marqueeView;
 @property (nonatomic, strong) LGDatePickerView *datePickerView;
 @property (nonatomic, strong) LGDatePickerTableView *dateTableView;
@@ -110,17 +113,33 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     }
     
     [self.dataArray removeAllObjects];
+    [self.dataDic removeAllObjects];
+    self.sortedKeys = nil;
+    
     [self.dataArray addObjectsFromArray:data];
     
-    [self.tableView reloadData];
-}
-
-- (void)matchListDidMore:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last error:(nullable NSError *)error {
-    if (error) {
-        return;
+    self.dataDic = [NSMutableDictionary dictionary];
+    [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([self.dataDic objectForKey:obj[kMatchKeyStartTime]]) {
+            NSMutableArray *subArrayM = [self.dataDic objectForKey:obj[kMatchKeyStartTime]];
+            [subArrayM addObject:obj];
+        } else {
+            NSMutableArray *subArrayM = [NSMutableArray array];
+            [subArrayM addObject:obj];
+            [self.dataDic setObject:subArrayM forKey:obj[kMatchKeyStartTime]];
+        }
+    }];
+    
+    if (self.listType == LGMatchListType_Finished) {
+        self.sortedKeys = [self.dataDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2] == NSOrderedAscending;
+        }];
+    } else {
+        self.sortedKeys = [self.dataDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2] == NSOrderedDescending;
+        }];
     }
     
-    [self.dataArray addObjectsFromArray:data];
     [self.tableView reloadData];
 }
 
@@ -140,10 +159,14 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.sortedKeys.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section != 0) {
+        return nil;
+    }
+    
     UIView *view = [UIView new];
     view.backgroundColor = kMainBgColor;
     
@@ -161,11 +184,23 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section != 0) {
+        return CGFLOAT_MIN;
+    }
+    
     return kCellMarginY * 2 + kMarqueeViewHeight;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return [[self.dataDic objectForKey:self.sortedKeys[section]] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -191,12 +226,12 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     if (!cell) {
         cell = [[LGMatchListTodayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kMatchTodayCellReuseID];
     }
-    [cell setDataDic:self.dataArray[indexPath.row]];
+    [cell setDataDic:[self.dataDic objectForKey:self.sortedKeys[indexPath.section]][indexPath.row]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dic = self.dataArray[indexPath.row];
+    NSDictionary *dic = [self.dataDic objectForKey:self.sortedKeys[indexPath.section]][indexPath.row];
     
     LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kMatchKeyID]];
     [FQWindowUtility.currentViewController.navigationController pushViewController:ctr animated:YES];
@@ -216,42 +251,105 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 }
 
 - (void)matchParlayDidRemoveItemNotif:(NSNotification *)notification {
-    NSDictionary *oddsDic = notification.object;
-    for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOddsArray];
-        if (oddsArray) {
-            for (int j = 0; j < oddsArray.count; j++) {
-                NSMutableDictionary *tmpOdds = oddsArray[j];
-                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]]) {
-                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
-                    
-                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
-            }
+//    NSDictionary *oddsDic = notification.object;
+//    for (int i = 0; i < self.dataArray.count; i++) {
+//        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOddsArray];
+//        if (oddsArray) {
+//            for (int j = 0; j < oddsArray.count; j++) {
+//                NSMutableDictionary *tmpOdds = oddsArray[j];
+//                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:oddsDic[kMatchOddsKeyOddsID]]) {
+//                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+//
+//                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+//                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//                }
+//            }
+//        }
+//    }
+    
+    NSDictionary *notiOddsDic = notification.object;
+    __block NSIndexPath *indexPath = nil;
+    [self traversalOddsDicM:^(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop) {
+        if ([oddsDic[kMatchOddsKeyOddsID] isEqual:notiOddsDic[kMatchOddsKeyOddsID]]) {
+            [oddsDic setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+            
+            indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            
+            *stop = YES;
         }
+    }];
+    
+    if (indexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 
 - (void)matchParlayDidRemoveAllItemsNotif:(NSNotification *)notification {
+//    NSArray *notiOddsArray = notification.object;
+//    for (int i = 0; i < self.dataArray.count; i++) {
+//        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOddsArray];
+//        if (!oddsArray) {
+//            continue;
+//        }
+//
+//        for (int j = 0; j < oddsArray.count; j++) {
+//            NSMutableDictionary *tmpOdds = oddsArray[j];
+//
+//            for (int k = 0; k < notiOddsArray.count; k++) {
+//                NSDictionary *notiOdds = notiOddsArray[k];
+//
+//                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:notiOdds[kMatchOddsKeyOddsID]]) {
+//                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+//
+//                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+//                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//                }
+//            }
+//        }
+//    }
+    
     NSArray *notiOddsArray = notification.object;
-    for (int i = 0; i < self.dataArray.count; i++) {
-        NSArray *oddsArray = [self.dataArray[i] objectForKey:kMatchKeyOddsArray];
-        if (!oddsArray) {
-            continue;
-        }
-        
-        for (int j = 0; j < oddsArray.count; j++) {
-            NSMutableDictionary *tmpOdds = oddsArray[j];
+    NSMutableArray<NSIndexPath *> *indexPathArray = [NSMutableArray array];
+    
+    [self traversalOddsDicM:^(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop) {
+        for (int l = 0; l < notiOddsArray.count; l++) {
+            NSDictionary *notiOdds = notiOddsArray[l];
             
-            for (int k = 0; k < notiOddsArray.count; k++) {
-                NSDictionary *notiOdds = notiOddsArray[k];
+            if ([oddsDic[kMatchOddsKeyOddsID] isEqual:notiOdds[kMatchOddsKeyOddsID]]) {
+                [oddsDic setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
                 
-                if ([tmpOdds[kMatchOddsKeyOddsID] isEqual:notiOdds[kMatchOddsKeyOddsID]]) {
-                    [tmpOdds setObject:@(NO) forKey:kMatchOddsExoticKeyIsSelected];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                [indexPathArray addObject:indexPath];
+                
+                if (indexPathArray.count == notiOddsArray.count) {
+                    *stop = YES;
+                }
+            }
+        }
+    }];
+    
+    if (indexPathArray.count > 0) {
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)traversalOddsDicM:(void(^)(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop))block {
+    BOOL finished = NO;
+    for (int i = 0; i < self.sortedKeys.count; i++) {
+        NSArray *matchArray = [self.dataDic objectForKey:self.sortedKeys[i]];
+        
+        for (int j = 0; j < matchArray.count; j++) {
+            NSArray *oddsArray = [matchArray[j] objectForKey:kMatchKeyOddsArray];
+            
+            for (int k = 0; k < oddsArray.count; k++) {
+                NSMutableDictionary *tmpOdds = oddsArray[k];
+                
+                if (block) {
+                    block(i, j, tmpOdds, &finished);
                     
-                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    if (finished) {
+                        break;
+                    }
                 }
             }
         }

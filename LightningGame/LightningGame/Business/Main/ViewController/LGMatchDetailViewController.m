@@ -233,6 +233,10 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
                 
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
                 [indexPathArray addObject:indexPath];
+                
+                if (indexPathArray.count == notiOddsArray.count) {
+                    *stop = YES;
+                }
             }
         }
     }];
