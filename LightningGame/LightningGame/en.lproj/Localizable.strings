@@ -44,6 +44,7 @@ main_match_stop             = "关闭直播";
 main_match_rolling          = "滚盘";
 main_match_process          = "比赛进行中";
 main_match_cancel           = "已取消";
+main_match_immediately      = "即将开始";
 
 // Detail
 detail_title                = "游戏竞猜";
@@ -62,3 +63,6 @@ parlay_total_gain           = "最高返还";
 
 // Profile
 profile_balance             = "余额";
+
+// Order
+order_succeed               = "订单提交成功！";

@@ -78,7 +78,7 @@
         view.backgroundColor = [UIColor clearColor];
         
         _immediateLabel = [UILabel new];
-        _immediateLabel.text = @"即将开始";
+        _immediateLabel.text = kLocalizedString(@"main_match_immediately");
         _immediateLabel.textColor = kNameFontColor;
         _immediateLabel.font = kRegularFont(kNoteFontSize);
         _immediateLabel.textAlignment = NSTextAlignmentCenter;

@@ -12,7 +12,7 @@
 #import "LGMatchParlayTableView.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
-#import "LGAlertView.h"
+#import "LGAlertOrderView.h"
 
 #define kLGMatchParlayViewAnimationDuration         (0.4)
 #define kLGMatchParlayViewSpringVelocity            (5.0)
@@ -155,7 +155,7 @@
     
     [self.contentView clearAll];
     
-    [[LGAlertView new] showWithCompleted:^{
+    [[LGAlertOrderView new] showWithCompleted:^{
         
     }];
 }
