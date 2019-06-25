@@ -79,6 +79,18 @@ font = [UIFont systemFontOfSize:size];    \
 font;   \
 })
 
+//typedef void(^myBlock)(void(^)(void));
+#define myBlock (void(^)(void))
+#define kDisableTransaction(myBlock)  \
+{ \
+[CATransaction begin];  \
+[CATransaction setDisableActions:YES];  \
+if (myBlock) {    \
+myBlock();    \
+}   \
+[CATransaction commit]; \
+}  \
+
 #pragma mark - Screen Bound
 
 #define kIsiPhoneX   \
