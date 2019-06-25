@@ -21,22 +21,13 @@
 
 - (void)fq_setImageWithURLString:(NSString *)urlString {
     [self fq_setImageWithURLString:urlString
-                       placeholder:nil
-                           options:kNilOptions
-                      cornerRadius:0
-                       borderWidth:0
-                       borderColor:nil
-                         completed:nil];
+                       placeholder:nil];
 }
 
 - (void)fq_setImageWithURLString:(NSString *)urlString
                      placeholder:(UIImage *)placeholder {
     [self fq_setImageWithURLString:urlString
                        placeholder:placeholder
-                           options:kNilOptions
-                      cornerRadius:0
-                       borderWidth:0
-                       borderColor:nil
                          completed:nil];
 }
 
@@ -44,10 +35,6 @@
                        completed:(FQWebImageCompletionBlock)completed {
     [self fq_setImageWithURLString:urlString
                        placeholder:nil
-                           options:kNilOptions
-                      cornerRadius:0
-                       borderWidth:0
-                       borderColor:nil
                          completed:completed];
 }
 
@@ -56,10 +43,7 @@
                        completed:(FQWebImageCompletionBlock)completed {
     [self fq_setImageWithURLString:urlString
                        placeholder:placeholder
-                           options:kNilOptions
                       cornerRadius:0
-                       borderWidth:0
-                       borderColor:nil
                          completed:completed];
 }
 
@@ -128,7 +112,8 @@
     }
     
     __weak typeof(self) weakSelf = self;
-//    CGSize size = weakSelf.frame.size;
+    CGSize size = weakSelf.frame.size;
+    static int resizeScale = 4;
     
     [self sd_setImageWithURL:url
             placeholderImage:placeholder
@@ -149,7 +134,10 @@
                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                            UIImage *img = image;
                            
-//                           img = [image resizeToSize:size];
+                           if (img.size.width >= size.width * resizeScale || img.size.height >= size.height * resizeScale) {
+                               img = [image resizeToSize:size];
+                           }
+                           
                            if (cornerRadius > 0) {
                                img = [img imageByRoundCornerRadius:cornerRadius borderWidth:borderWidth borderColor:borderColor];
                            }
@@ -158,12 +146,13 @@
                                strongSelf.contentMode = strongSelf.originalContentMode;
                                
                                if (cacheType == SDImageCacheTypeNone) {
+                                   [strongSelf.layer removeAllAnimations];
+                                   
                                    CATransition *transition = [CATransition animation];
                                    transition.type = kCATransitionFade;
                                    transition.duration = 0.35;
                                    [strongSelf.layer addAnimation:transition forKey:nil];
                                }
-
                                strongSelf.image = img;
                            });
                        });
