@@ -7,7 +7,6 @@
 //
 
 #import "LGDatePickerView.h"
-#import "LGDatePickerViewModel.h"
 
 @interface LGDatePickerView ()
 
@@ -54,10 +53,10 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.backgroundColor = [UIColor clearColor];
         [btn setImage:[UIImage imageNamed:@"main_calendar"] forState:UIControlStateNormal];
-        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8.0)];
         [btn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
         btn.titleLabel.font = kRegularFont(kNoteFontSize);
-        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8.0, 0, 0)];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [btn addTarget:self action:@selector(dateBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
         
         btn;
@@ -90,18 +89,13 @@
     [self addSubview:_rightBtn];
 }
 
-#pragma mark - Public
-
-- (void)setIndex:(NSUInteger)index {
-    [self.viewModel setCurrentIndex:index];
-}
-
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if ([object isEqual:_viewModel] && [keyPath isEqualToString:@"currentIndex"]) {
+        NSInteger index = [change[NSKeyValueChangeNewKey] integerValue];
         
-        [self.dateBtn setTitle:self.viewModel.dateStr forState:UIControlStateNormal];
+        [self.dateBtn setTitle:self.viewModel.itemArray[index] forState:UIControlStateNormal];
         self.leftBtn.enabled = self.viewModel.canPreviously;
         self.rightBtn.enabled = self.viewModel.canFuture;
     }
@@ -117,18 +111,20 @@
 
 - (void)leftBtnOnClicked {
     [self.viewModel previous];
+    
+    if ([self.delegate respondsToSelector:@selector(datePickerViewDidChanged:newIndex:)]) {
+        [self.delegate datePickerViewDidChanged:self
+                                       newIndex:self.viewModel.currentIndex];
+    }
 }
 
 - (void)rightBtnOnClicked {
     [self.viewModel future];
-}
-
-#pragma mark - Getter & Setter
-
-- (void)setPreviously:(BOOL)previously {
-    _previously = previously;
     
-    [self.viewModel generateDateList:previously];
+    if ([self.delegate respondsToSelector:@selector(datePickerViewDidChanged:newIndex:)]) {
+        [self.delegate datePickerViewDidChanged:self
+                                       newIndex:self.viewModel.currentIndex];
+    }
 }
 
 @end

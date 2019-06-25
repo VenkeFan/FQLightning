@@ -149,6 +149,8 @@
 #pragma mark - LGMatchParlayViewModelDelegate
 
 - (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel responseObj:(id)responseObj error:(NSError *)error {
+    [LGLoadingView dismiss];
+    
     if (error) {
         return;
     }
@@ -209,6 +211,11 @@
     NSNumber *oddsID = self.contentView.parlayOddsDicI.allKeys.firstObject;
     NSNumber *bet = [self.contentView.parlayOddsDicI objectForKey:oddsID];
     
+    if (oddsID == nil || bet == nil) {
+        return;
+    }
+    
+    [LGLoadingView display];
     [self.viewModel parlayWithBet:bet oddsID:oddsID];
 }
 

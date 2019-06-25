@@ -80,8 +80,11 @@
         (__bridge id)[UIImage imageNamed:@"main_win"].CGImage :
         (__bridge id)[UIImage imageNamed:@"main_lose"].CGImage;
     };
-    _leftFlag.contents = flagImage(self.leftOdds);
-    _rightFlag.contents = flagImage(self.rightOdds);
+    
+    kDisableTransaction(^(){
+        self.leftFlag.contents = flagImage(self.leftOdds);
+        self.rightFlag.contents = flagImage(self.rightOdds);
+    });
 }
 
 @end

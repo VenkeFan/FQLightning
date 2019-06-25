@@ -33,7 +33,7 @@ NSString * const LGMatchStageMapping[] = {
 - (void)fetchDataWithMatchID:(NSString *)matchID {
     {
 //        TODO("test data");
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample1.json" ofType:nil];
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample2.json" ofType:nil];
 //        if (!filePath) {
 //            return;
 //        }
@@ -43,7 +43,7 @@ NSString * const LGMatchStageMapping[] = {
 //
 //        NSArray *oddsArray = resultDic[kMatchKeyOddsArray];
 //        NSArray *teamArray = resultDic[kMatchKeyTeamArray];
-//        NSMutableDictionary *oddsDic = [self p_handleMatchStage:oddsArray];
+//        NSMutableDictionary *oddsDic = [[self p_handleMatchStage:oddsArray] fq_mutableDictionary];
 //
 //        if ([self.delegate respondsToSelector:@selector(matchDetailDidFetch:matchDic:teamArray:oddsDic:error:)]) {
 //            [self.delegate matchDetailDidFetch:self matchDic:resultDic teamArray:teamArray oddsDic:oddsDic error:nil];

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGDatePickerTableView : UIView
 
-@property (nonatomic, strong) LGDatePickerViewModel *viewModel;
+@property (nonatomic, weak) LGDatePickerViewModel *viewModel;
 @property (nonatomic, weak) id<LGDatePickerTableViewDelegate> delegate;
 
 - (void)displayInParentView:(UIView *)parentView;

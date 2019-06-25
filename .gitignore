@@ -1,6 +1,9 @@
 .DS_Store
 */.DS_Store
 
+*/UserInterfaceState.xcuserstate
+LightningGame/LightningGame.xcworkspace/xcuserdata/fanqi.xcuserdatad/UserInterfaceState.xcuserstate
+
 LGAPIURLConfig.h
 */LGAPIURLConfig.h
 

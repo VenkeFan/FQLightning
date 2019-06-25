@@ -12,18 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGDatePickerViewModel : NSObject
 
-@property (nonatomic, copy, readonly) NSString *dateStr;
-@property (nonatomic, copy, readonly) NSArray<NSDate *> *itemArray;
+@property (nonatomic, copy) NSArray<NSString *> *itemArray;
+
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) BOOL canPreviously;
 @property (nonatomic, assign) BOOL canFuture;
 
-- (void)generateDateList:(BOOL)isPreviously;
-
 - (void)previous;
 - (void)future;
-
-- (NSString *)stringFromDate:(NSDate *)date;
 
 @end
 
