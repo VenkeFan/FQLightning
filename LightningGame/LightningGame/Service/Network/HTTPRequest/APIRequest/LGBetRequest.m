@@ -26,7 +26,7 @@
     [self.paraDic setObject:oddsID forKey:@"oddsid"];
     [self.paraDic setObject:amount forKey:@"amount"];
     
-    [super requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {
             success(task, responseObject);
         }

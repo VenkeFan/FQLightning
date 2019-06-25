@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAPIName:(NSString *)apiName method:(HTTPRequestMethod)method;
 
-- (void)requsetWithSuccess:(nullable RequestSucceedBlock)success
+- (void)requestWithSuccess:(nullable RequestSucceedBlock)success
                    failure:(nullable RequestFailBlock)failure;
 - (void)cancel;
 

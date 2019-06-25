@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)requestWithAccountName:(NSString *)accountName
                            pwd:(NSString *)pwd
-                       success:(RequestSucceedBlock)success
-                       failure:(RequestFailBlock)failure;
+                       success:(nullable RequestSucceedBlock)success
+                       failure:(nullable RequestFailBlock)failure;
 
 @end
 

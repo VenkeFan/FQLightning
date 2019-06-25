@@ -52,7 +52,7 @@ NSString * const LGMatchStageMapping[] = {
     }
     
     LGMatchDetailRequest *request = [[LGMatchDetailRequest alloc] initWithMatchID:matchID];
-    [request requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [request requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         NSArray *oddsArray = responseObject[kMatchKeyOddsArray];
         NSArray *teamArray = responseObject[kMatchKeyTeamArray];
         NSMutableDictionary *oddsDic = [[self p_handleMatchStage:oddsArray] fq_mutableDictionary];

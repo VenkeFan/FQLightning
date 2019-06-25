@@ -28,7 +28,7 @@
     [self.paraDic setObject:accountName forKey:@"username"];
     [self.paraDic setObject:pwd forKey:@"password"];
     
-    [super requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {
             success(task, responseObject);
         }

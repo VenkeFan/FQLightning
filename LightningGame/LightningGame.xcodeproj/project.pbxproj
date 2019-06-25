@@ -94,6 +94,7 @@
 		B9A1C83D22C1F106001A3694 /* LGMatchListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C81822C1F106001A3694 /* LGMatchListView.m */; };
 		B9A1C83E22C1F106001A3694 /* LGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C81A22C1F106001A3694 /* LGMainViewController.m */; };
 		B9A1C83F22C1F106001A3694 /* LGMatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C81B22C1F106001A3694 /* LGMatchDetailViewController.m */; };
+		B9A1C84222C20220001A3694 /* LGUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C84122C20220001A3694 /* LGUserInfoRequest.m */; };
 		B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555222B8869000D04395 /* UIView+FQRotatable.m */; };
 		B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555922B908BE00D04395 /* LGOAuthRequest.m */; };
 		B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */; };
@@ -316,6 +317,8 @@
 		B9A1C81B22C1F106001A3694 /* LGMatchDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailViewController.m; sourceTree = "<group>"; };
 		B9A1C81C22C1F106001A3694 /* LGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMainViewController.h; sourceTree = "<group>"; };
 		B9A1C81D22C1F106001A3694 /* LGMatchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailViewController.h; sourceTree = "<group>"; };
+		B9A1C84022C20220001A3694 /* LGUserInfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGUserInfoRequest.h; sourceTree = "<group>"; };
+		B9A1C84122C20220001A3694 /* LGUserInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserInfoRequest.m; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
@@ -606,6 +609,8 @@
 				B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */,
 				B999250422BC71F9001F492E /* LGBetRequest.h */,
 				B999250522BC71F9001F492E /* LGBetRequest.m */,
+				B9A1C84022C20220001A3694 /* LGUserInfoRequest.h */,
+				B9A1C84122C20220001A3694 /* LGUserInfoRequest.m */,
 			);
 			path = APIRequest;
 			sourceTree = "<group>";
@@ -696,12 +701,12 @@
 		B9A1C7D422C1F106001A3694 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C7D522C1F106001A3694 /* ViewModel */,
+				B9A1C7F522C1F106001A3694 /* Actions */,
 				B9A1C7E022C1F106001A3694 /* Cell */,
 				B9A1C7EF22C1F106001A3694 /* Model */,
-				B9A1C7F522C1F106001A3694 /* Actions */,
 				B9A1C7F822C1F106001A3694 /* View */,
 				B9A1C81922C1F106001A3694 /* ViewController */,
+				B9A1C7D522C1F106001A3694 /* ViewModel */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -709,16 +714,16 @@
 		B9A1C7D522C1F106001A3694 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C7D622C1F106001A3694 /* LGMarqueeViewModel.h */,
-				B9A1C7D722C1F106001A3694 /* LGMatchDetailViewModel.m */,
-				B9A1C7D822C1F106001A3694 /* LGMatchParlayViewModel.h */,
-				B9A1C7D922C1F106001A3694 /* LGMatchListViewModel.h */,
+				B9A1C7DF22C1F106001A3694 /* LGDatePickerViewModel.h */,
 				B9A1C7DA22C1F106001A3694 /* LGDatePickerViewModel.m */,
+				B9A1C7D622C1F106001A3694 /* LGMarqueeViewModel.h */,
 				B9A1C7DB22C1F106001A3694 /* LGMarqueeViewModel.m */,
 				B9A1C7DC22C1F106001A3694 /* LGMatchDetailViewModel.h */,
+				B9A1C7D722C1F106001A3694 /* LGMatchDetailViewModel.m */,
+				B9A1C7D922C1F106001A3694 /* LGMatchListViewModel.h */,
 				B9A1C7DD22C1F106001A3694 /* LGMatchListViewModel.m */,
+				B9A1C7D822C1F106001A3694 /* LGMatchParlayViewModel.h */,
 				B9A1C7DE22C1F106001A3694 /* LGMatchParlayViewModel.m */,
-				B9A1C7DF22C1F106001A3694 /* LGDatePickerViewModel.h */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -726,20 +731,20 @@
 		B9A1C7E022C1F106001A3694 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				B9A1C7E822C1F106001A3694 /* LGMatchDetailTableViewCell.h */,
 				B9A1C7E122C1F106001A3694 /* LGMatchDetailTableViewCell.m */,
+				B9A1C7ED22C1F106001A3694 /* LGMatchListBasicCell.h */,
+				B9A1C7E722C1F106001A3694 /* LGMatchListBasicCell.m */,
+				B9A1C7E522C1F106001A3694 /* LGMatchListFinishedCell.h */,
+				B9A1C7E922C1F106001A3694 /* LGMatchListFinishedCell.m */,
+				B9A1C7EE22C1F106001A3694 /* LGMatchListPrepareCell.h */,
+				B9A1C7E622C1F106001A3694 /* LGMatchListPrepareCell.m */,
+				B9A1C7EA22C1F106001A3694 /* LGMatchListRollingCell.h */,
+				B9A1C7E422C1F106001A3694 /* LGMatchListRollingCell.m */,
+				B9A1C7EC22C1F106001A3694 /* LGMatchListTodayCell.h */,
 				B9A1C7E222C1F106001A3694 /* LGMatchListTodayCell.m */,
 				B9A1C7E322C1F106001A3694 /* LGMatchParlayTableViewCell.h */,
-				B9A1C7E422C1F106001A3694 /* LGMatchListRollingCell.m */,
-				B9A1C7E522C1F106001A3694 /* LGMatchListFinishedCell.h */,
-				B9A1C7E622C1F106001A3694 /* LGMatchListPrepareCell.m */,
-				B9A1C7E722C1F106001A3694 /* LGMatchListBasicCell.m */,
-				B9A1C7E822C1F106001A3694 /* LGMatchDetailTableViewCell.h */,
-				B9A1C7E922C1F106001A3694 /* LGMatchListFinishedCell.m */,
-				B9A1C7EA22C1F106001A3694 /* LGMatchListRollingCell.h */,
 				B9A1C7EB22C1F106001A3694 /* LGMatchParlayTableViewCell.m */,
-				B9A1C7EC22C1F106001A3694 /* LGMatchListTodayCell.h */,
-				B9A1C7ED22C1F106001A3694 /* LGMatchListBasicCell.h */,
-				B9A1C7EE22C1F106001A3694 /* LGMatchListPrepareCell.h */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -747,10 +752,10 @@
 		B9A1C7EF22C1F106001A3694 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C7F022C1F106001A3694 /* LGMatchListKeys.h */,
-				B9A1C7F122C1F106001A3694 /* detail_sample1.json */,
 				B9A1C7F222C1F106001A3694 /* detail_sample.json */,
+				B9A1C7F122C1F106001A3694 /* detail_sample1.json */,
 				B9A1C7F322C1F106001A3694 /* detail_sample2.json */,
+				B9A1C7F022C1F106001A3694 /* LGMatchListKeys.h */,
 				B9A1C7F422C1F106001A3694 /* list_sample.json */,
 			);
 			path = Model;
@@ -759,8 +764,8 @@
 		B9A1C7F522C1F106001A3694 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C7F622C1F106001A3694 /* Target_Main.m */,
 				B9A1C7F722C1F106001A3694 /* Target_Main.h */,
+				B9A1C7F622C1F106001A3694 /* Target_Main.m */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -768,20 +773,20 @@
 		B9A1C7F822C1F106001A3694 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C7F922C1F106001A3694 /* LGMatchDetailPlayerView.h */,
+				B9A1C80722C1F106001A3694 /* LGDatePickerTableView.h */,
 				B9A1C7FA22C1F106001A3694 /* LGDatePickerTableView.m */,
-				B9A1C7FB22C1F106001A3694 /* MatchOddsView */,
+				B9A1C80522C1F106001A3694 /* LGDatePickerView.h */,
+				B9A1C81722C1F106001A3694 /* LGDatePickerView.m */,
+				B9A1C80922C1F106001A3694 /* LGMarqueeView.h */,
 				B9A1C80222C1F106001A3694 /* LGMarqueeView.m */,
 				B9A1C80322C1F106001A3694 /* LGMatchDetailHeaderView.h */,
-				B9A1C80422C1F106001A3694 /* LGMatchListView.h */,
-				B9A1C80522C1F106001A3694 /* LGDatePickerView.h */,
-				B9A1C80622C1F106001A3694 /* LGMatchDetailPlayerView.m */,
-				B9A1C80722C1F106001A3694 /* LGDatePickerTableView.h */,
 				B9A1C80822C1F106001A3694 /* LGMatchDetailHeaderView.m */,
-				B9A1C80922C1F106001A3694 /* LGMarqueeView.h */,
-				B9A1C80A22C1F106001A3694 /* MatchParlayView */,
-				B9A1C81722C1F106001A3694 /* LGDatePickerView.m */,
+				B9A1C7F922C1F106001A3694 /* LGMatchDetailPlayerView.h */,
+				B9A1C80622C1F106001A3694 /* LGMatchDetailPlayerView.m */,
+				B9A1C80422C1F106001A3694 /* LGMatchListView.h */,
 				B9A1C81822C1F106001A3694 /* LGMatchListView.m */,
+				B9A1C7FB22C1F106001A3694 /* MatchOddsView */,
+				B9A1C80A22C1F106001A3694 /* MatchParlayView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -790,10 +795,10 @@
 			isa = PBXGroup;
 			children = (
 				B9A1C7FC22C1F106001A3694 /* LGMatchBasicOddsView.h */,
-				B9A1C7FD22C1F106001A3694 /* LGMatchDetailOddsView.h */,
-				B9A1C7FE22C1F106001A3694 /* LGMatchListOddsView.h */,
-				B9A1C7FF22C1F106001A3694 /* LGMatchDetailOddsView.m */,
 				B9A1C80022C1F106001A3694 /* LGMatchBasicOddsView.m */,
+				B9A1C7FD22C1F106001A3694 /* LGMatchDetailOddsView.h */,
+				B9A1C7FF22C1F106001A3694 /* LGMatchDetailOddsView.m */,
+				B9A1C7FE22C1F106001A3694 /* LGMatchListOddsView.h */,
 				B9A1C80122C1F106001A3694 /* LGMatchListOddsView.m */,
 			);
 			path = MatchOddsView;
@@ -802,18 +807,18 @@
 		B9A1C80A22C1F106001A3694 /* MatchParlayView */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C80B22C1F106001A3694 /* LGMatchParlayTableView.h */,
-				B9A1C80C22C1F106001A3694 /* LGMatchParlayView.m */,
-				B9A1C80D22C1F106001A3694 /* LGMatchParlayKeyboard.m */,
-				B9A1C80E22C1F106001A3694 /* LGMatchParlayTextField.m */,
-				B9A1C80F22C1F106001A3694 /* LGMatchParlayBottomView.m */,
-				B9A1C81022C1F106001A3694 /* LGMatchParlayTopView.m */,
-				B9A1C81122C1F106001A3694 /* LGMatchParlayTableView.m */,
-				B9A1C81222C1F106001A3694 /* LGMatchParlayView.h */,
-				B9A1C81322C1F106001A3694 /* LGMatchParlayTextField.h */,
-				B9A1C81422C1F106001A3694 /* LGMatchParlayKeyboard.h */,
-				B9A1C81522C1F106001A3694 /* LGMatchParlayTopView.h */,
 				B9A1C81622C1F106001A3694 /* LGMatchParlayBottomView.h */,
+				B9A1C80F22C1F106001A3694 /* LGMatchParlayBottomView.m */,
+				B9A1C81422C1F106001A3694 /* LGMatchParlayKeyboard.h */,
+				B9A1C80D22C1F106001A3694 /* LGMatchParlayKeyboard.m */,
+				B9A1C80B22C1F106001A3694 /* LGMatchParlayTableView.h */,
+				B9A1C81122C1F106001A3694 /* LGMatchParlayTableView.m */,
+				B9A1C81322C1F106001A3694 /* LGMatchParlayTextField.h */,
+				B9A1C80E22C1F106001A3694 /* LGMatchParlayTextField.m */,
+				B9A1C81522C1F106001A3694 /* LGMatchParlayTopView.h */,
+				B9A1C81022C1F106001A3694 /* LGMatchParlayTopView.m */,
+				B9A1C81222C1F106001A3694 /* LGMatchParlayView.h */,
+				B9A1C80C22C1F106001A3694 /* LGMatchParlayView.m */,
 			);
 			path = MatchParlayView;
 			sourceTree = "<group>";
@@ -821,10 +826,10 @@
 		B9A1C81922C1F106001A3694 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B9A1C81A22C1F106001A3694 /* LGMainViewController.m */,
-				B9A1C81B22C1F106001A3694 /* LGMatchDetailViewController.m */,
 				B9A1C81C22C1F106001A3694 /* LGMainViewController.h */,
+				B9A1C81A22C1F106001A3694 /* LGMainViewController.m */,
 				B9A1C81D22C1F106001A3694 /* LGMatchDetailViewController.h */,
+				B9A1C81B22C1F106001A3694 /* LGMatchDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1233,6 +1238,7 @@
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
 				B9A1C82822C1F106001A3694 /* LGMatchListFinishedCell.m in Sources */,
 				B9229D02229BEEC00030691D /* NSString+FQNilExamine.m in Sources */,
+				B9A1C84222C20220001A3694 /* LGUserInfoRequest.m in Sources */,
 				B9A1C82422C1F106001A3694 /* LGMatchListTodayCell.m in Sources */,
 				B999250622BC71F9001F492E /* LGBetRequest.m in Sources */,
 				B9A1C83D22C1F106001A3694 /* LGMatchListView.m in Sources */,

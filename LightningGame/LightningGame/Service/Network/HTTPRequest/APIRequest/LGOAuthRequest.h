@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LGOAuthRequest : LGBasicRequest
 
 - (void)requestWithAccessToken:(NSString *)accessToken
-                       success:(RequestSucceedBlock)success
-                       failure:(RequestFailBlock)failure;
+                       success:(nullable RequestSucceedBlock)success
+                       failure:(nullable RequestFailBlock)failure;
 
 @end
 

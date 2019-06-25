@@ -112,7 +112,7 @@
     [request requestWithAccountName:accountName
                                 pwd:pwd
                             success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-                                [[LGAccountManager instance] updateAccount:responseObject];
+                                [[LGAccountManager instance] fetchAccountInfoWithIntro:responseObject];
                                 [self setFlowStep:LGSignFlowStep_SignIn_Manual];
                             }
                             failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -121,10 +121,15 @@
 }
 
 - (void)oAuthorize {
+    if ([LGAccountManager instance].account[kAccountKeyAccountAccessToken] == nil) {
+        [self broadcastFailure:nil];
+        return;
+    }
+    
     LGOAuthRequest *request = [LGOAuthRequest new];
     [request requestWithAccessToken:[LGAccountManager instance].account[kAccountKeyAccountAccessToken]
                             success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-                                [[LGAccountManager instance] updateAccount:responseObject];
+                                [[LGAccountManager instance] fetchAccountInfoWithIntro:responseObject];
                                 [self setFlowStep:LGSignFlowStep_OAuth];
                             }
                             failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
