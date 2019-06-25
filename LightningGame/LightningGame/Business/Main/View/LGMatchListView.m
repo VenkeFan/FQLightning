@@ -25,9 +25,11 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 
 @interface LGMatchListView () <LGMatchListViewModelDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isLoaded;
+    BOOL _isAutoScrolling;
 }
 
 @property (nonatomic, strong) LGMatchListViewModel *viewModel;
+@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray *> *dataDic;
@@ -44,8 +46,13 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _isLoaded = NO;
+        _isAutoScrolling = NO;
         
-        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+        _headerView = [UIView new];
+        _headerView.backgroundColor = kMainBgColor;
+        [self addSubview:_headerView];
+        
+        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, kLGMatchListBasicCellHeight * 0.5, 0);
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
@@ -76,7 +83,8 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    _tableView.frame = self.bounds;
+    _headerView.frame = CGRectMake(0, 0, self.width, kCellMarginY * 2 + kMarqueeViewHeight);
+    _tableView.frame = CGRectMake(0, CGRectGetMaxY(_headerView.frame), self.width, self.height - CGRectGetMaxY(_headerView.frame));
 }
 
 - (void)dealloc {
@@ -85,10 +93,23 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 
 #pragma mark - Public
 
+- (void)setListType:(LGMatchListType)listType {
+    _listType = listType;
+    
+    if (self.listType == LGMatchListType_Today || self.listType == LGMatchListType_Rolling) {
+        self.marqueeView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kMarqueeViewHeight);
+        [self.headerView addSubview:self.marqueeView];
+    } else {
+        self.datePickerView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kDatePickerViewHeight);
+        [self.headerView addSubview:self.datePickerView];
+    }
+}
+
 - (void)display {
     if (!_isLoaded) {
         _isLoaded = YES;
         
+        [self.marqueeView fetchData];
         [self.tableView.mj_header beginRefreshing];
     }
 }
@@ -120,13 +141,15 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     
     self.dataDic = [NSMutableDictionary dictionary];
     [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([self.dataDic objectForKey:obj[kMatchKeyStartTime]]) {
-            NSMutableArray *subArrayM = [self.dataDic objectForKey:obj[kMatchKeyStartTime]];
+        NSString *key = [obj[kMatchKeyStartTime] substringToIndex:[obj[kMatchKeyStartTime] rangeOfString:@" "].location];
+        
+        if ([self.dataDic objectForKey:key]) {
+            NSMutableArray *subArrayM = [self.dataDic objectForKey:key];
             [subArrayM addObject:obj];
         } else {
             NSMutableArray *subArrayM = [NSMutableArray array];
             [subArrayM addObject:obj];
-            [self.dataDic setObject:subArrayM forKey:obj[kMatchKeyStartTime]];
+            [self.dataDic setObject:subArrayM forKey:key];
         }
     }];
     
@@ -140,6 +163,8 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
         }];
     }
     
+    [self.datePickerView.viewModel setItemArray:self.sortedKeys];
+    
     [self.tableView reloadData];
 }
 
@@ -150,10 +175,24 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     [self.dateTableView displayInParentView:self];
 }
 
+- (void)datePickerViewDidChanged:(LGDatePickerView *)view newIndex:(NSUInteger)newIndex {
+    if (newIndex >= 0 && newIndex < self.sortedKeys.count) {
+        _isAutoScrolling = YES;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:newIndex];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+
 #pragma mark - LGDatePickerTableViewDelegate
 
 - (void)datePickerTableView:(LGDatePickerTableView *)view didSelectIndex:(NSUInteger)index {
-    [self.datePickerView setIndex:index];
+    if (index >= 0 && index < self.sortedKeys.count) {
+        _isAutoScrolling = YES;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+        [self.datePickerView.viewModel setCurrentIndex:index];
+    }
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -163,32 +202,11 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section != 0) {
-        return nil;
-    }
-    
-    UIView *view = [UIView new];
-    view.backgroundColor = kMainBgColor;
-    
-    if (self.listType == LGMatchListType_Today || self.listType == LGMatchListType_Rolling) {
-        self.marqueeView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kMarqueeViewHeight);
-        [view addSubview:self.marqueeView];
-        [self.marqueeView fetchData];
-        
-    } else {
-        self.datePickerView.frame = CGRectMake(kCellMarginX, kCellMarginY, kScreenWidth - kCellMarginX * 2, kDatePickerViewHeight);
-        [view addSubview:self.datePickerView];
-    }
-    
-    return view;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section != 0) {
-        return CGFLOAT_MIN;
-    }
-    
-    return kCellMarginY * 2 + kMarqueeViewHeight;
+    return CGFLOAT_MIN;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -235,6 +253,24 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     
     LGMatchDetailViewController *ctr = [[LGMatchDetailViewController alloc] initWithMatchID:dic[kMatchKeyID]];
     [FQWindowUtility.currentViewController.navigationController pushViewController:ctr animated:YES];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_isAutoScrolling) {
+        return;
+    }
+    LGMatchListBasicCell *cell = self.tableView.visibleCells.firstObject;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath.section != self.datePickerView.viewModel.currentIndex) {
+        [self.datePickerView.viewModel setCurrentIndex:indexPath.section];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    _isAutoScrolling = NO;
 }
 
 #pragma mark - Notification
@@ -380,7 +416,7 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     if (!_viewModel) {
         _viewModel = [LGMatchListViewModel new];
         _viewModel.delegate = self;
-        _viewModel.listType = _listType;
+        _viewModel.listType = self.listType;
     }
     return _viewModel;
 }
@@ -403,7 +439,6 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     if (!_datePickerView) {
         _datePickerView = [[LGDatePickerView alloc] initWithFrame:CGRectZero];
         _datePickerView.delegate = self;
-        _datePickerView.previously = (self.listType == LGMatchListType_Finished);
     }
     return _datePickerView;
 }

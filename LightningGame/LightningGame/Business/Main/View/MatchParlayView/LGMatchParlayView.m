@@ -211,6 +211,10 @@
     NSNumber *oddsID = self.contentView.parlayOddsDicI.allKeys.firstObject;
     NSNumber *bet = [self.contentView.parlayOddsDicI objectForKey:oddsID];
     
+    if (oddsID == nil || bet == nil) {
+        return;
+    }
+    
     [LGLoadingView display];
     [self.viewModel parlayWithBet:bet oddsID:oddsID];
 }

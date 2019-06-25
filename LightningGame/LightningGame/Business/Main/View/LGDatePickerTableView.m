@@ -95,7 +95,7 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDatePickerCellReuseID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = [self.viewModel stringFromDate:self.viewModel.itemArray[indexPath.row]];
+    cell.textLabel.text = self.viewModel.itemArray[indexPath.row];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.textColor = kNameFontColor;
     return cell;
