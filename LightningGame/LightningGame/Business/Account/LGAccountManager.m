@@ -91,4 +91,8 @@ NSString * const kAccountKeyAccountMoney                = @"money";
     return _filePath;
 }
 
+- (BOOL)isLogin {
+    return self.account != nil;
+}
+
 @end

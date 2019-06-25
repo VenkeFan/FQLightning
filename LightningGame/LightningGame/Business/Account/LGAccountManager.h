@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)instance;
 
 @property (nonatomic, copy, readonly) NSDictionary *account;
+@property (nonatomic, assign, readonly) BOOL isLogin;
 
 - (void)fetchAccountInfoWithIntro:(NSDictionary *)intro;
 - (void)updateLocalAccount:(NSDictionary *)newAccount;

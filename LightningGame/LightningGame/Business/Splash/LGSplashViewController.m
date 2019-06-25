@@ -41,7 +41,7 @@
 }
 
 - (void)launch {
-    if ([LGAccountManager instance].account) {
+    if ([LGAccountManager instance].isLogin) {
         [[LGSignFlowManager instance] oAuthorize];
     } else {
         UIViewController *root = [[CTMediator sharedInstance] mediator_generateSignInController];
