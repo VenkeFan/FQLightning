@@ -12,10 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGBetRequest : LGBasicRequest
 
-- (void)requestWithOddsID:(NSNumber *)oddsID
-                   amount:(NSNumber *)amount
-                  success:(nullable RequestSucceedBlock)success
-                  failure:(nullable RequestFailBlock)failure;
+- (void)requestWithOddsDic:(NSDictionary *)oddsDic
+                   success:(nullable RequestSucceedBlock)success
+                   failure:(nullable RequestFailBlock)failure;
 
 @end
 

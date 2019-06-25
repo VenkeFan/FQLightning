@@ -67,7 +67,7 @@
     
     _balanceLab = [FQComponentFactory labelWithFont:kRegularFont(kNoteFontSize)];
     _balanceLab.text = [NSString stringWithFormat:@"%@: %@", kLocalizedString(@"profile_balance"),
-                        [[LGAccountManager instance] account][kAccountKeyAccountMoney]];
+                        [[LGAccountManager instance] account][kAccountKeyAccountMoney] ?: @""];
     _balanceLab.textColor = kUIColorFromRGB(0x000000);
     [_balanceLab sizeToFit];
     _balanceLab.center = CGPointMake(CGRectGetMinX(line.frame) - kSizeScale(8.0) - _balanceLab.width * 0.5, self.height * 0.5);

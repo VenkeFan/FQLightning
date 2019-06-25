@@ -31,10 +31,12 @@
         _instance.sessionManager = [[AFHTTPSessionManager alloc] init];
         _instance.sessionManager.operationQueue.maxConcurrentOperationCount = kMaxRequestCount;
         // 请求
-        AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-        [requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
-        requestSerializer.timeoutInterval = kMaxTimeoutInterval;
-        _instance.sessionManager.requestSerializer = requestSerializer;
+//        AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+//        [requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+//        requestSerializer.timeoutInterval = kMaxTimeoutInterval;
+//        _instance.sessionManager.requestSerializer = requestSerializer;
+        [_instance setHTTPRequestSerializer];
+        
         // 解析
         AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
         responseSerializer.removesKeysWithNullValues = YES;
@@ -51,6 +53,20 @@
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     return [FQNetworkManager sharedManager];
+}
+
+- (void)setHTTPRequestSerializer {
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+    requestSerializer.timeoutInterval = kMaxTimeoutInterval;
+    self.sessionManager.requestSerializer = requestSerializer;
+}
+
+- (void)setJSONRequestSerializer {
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+    requestSerializer.timeoutInterval = kMaxTimeoutInterval;
+    self.sessionManager.requestSerializer = requestSerializer;
 }
 
 #pragma mark - Public
@@ -116,6 +132,11 @@
 + (void)setAccessToken:(NSString *)accessToken {
     [[FQNetworkManager sharedManager].sessionManager.requestSerializer setValue:accessToken
                                                              forHTTPHeaderField:@"Authorization"];
+}
+
++ (void)setContentType:(NSString *)contentType {
+    [[FQNetworkManager sharedManager].sessionManager.requestSerializer setValue:contentType
+                                                             forHTTPHeaderField:@"Content-Type"];
 }
 
 #pragma mark - Private

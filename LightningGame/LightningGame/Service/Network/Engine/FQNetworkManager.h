@@ -34,6 +34,9 @@ typedef void(^RequestFailBlock)(NSURLSessionDataTask * _Nullable task, NSError *
 
 + (instancetype)sharedManager;
 
+- (void)setHTTPRequestSerializer;
+- (void)setJSONRequestSerializer;
+
 - (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
                                         method:(HTTPRequestMethod)method
                                     parameters:(nullable NSDictionary *)parameters
@@ -51,6 +54,7 @@ typedef void(^RequestFailBlock)(NSURLSessionDataTask * _Nullable task, NSError *
 - (void)cancelRequestWithURL:(NSString *)url;
 + (void)setCookie:(NSString *)cookie;
 + (void)setAccessToken:(NSString *)accessToken;
++ (void)setContentType:(NSString *)contentType;
 
 @end
 

@@ -15,20 +15,18 @@
 
 @implementation LGMatchParlayViewModel
 
-- (void)parlayWithBet:(NSNumber *)bet oddsID:(NSNumber *)oddsID {
+- (void)parlayWithOddsDic:(NSDictionary *)oddsDic {
     LGBetRequest *request = [LGBetRequest new];
-    [request requestWithOddsID:oddsID
-                        amount:bet
-                       success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-                           if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:responseObj:error:)]) {
-                               [self.delegate matchParlayViewModel:self responseObj:responseObject error:nil];
-                           }
-                       }
-                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                           if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:responseObj:error:)]) {
-                               [self.delegate matchParlayViewModel:self responseObj:nil error:error];
-                           }
-                       }];
+    [request requestWithOddsDic:oddsDic
+                        success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                            if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:responseObj:error:)]) {
+                                [self.delegate matchParlayViewModel:self responseObj:responseObject error:nil];
+                            }
+                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                            if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:responseObj:error:)]) {
+                                [self.delegate matchParlayViewModel:self responseObj:nil error:error];
+                            }
+                        }];
 }
 
 @end

@@ -207,16 +207,12 @@
 }
 
 - (void)matchParlayBottomViewDidConfirm:(LGMatchParlayBottomView *)view {
-    TODO("暂未考虑多个订单的情况");
-    NSNumber *oddsID = self.contentView.parlayOddsDicI.allKeys.firstObject;
-    NSNumber *bet = [self.contentView.parlayOddsDicI objectForKey:oddsID];
-    
-    if (oddsID == nil || bet == nil) {
+    if (!self.contentView.parlayOddsDicI) {
         return;
     }
     
     [LGLoadingView display];
-    [self.viewModel parlayWithBet:bet oddsID:oddsID];
+    [self.viewModel parlayWithOddsDic:self.contentView.parlayOddsDicI];
 }
 
 #pragma mark - Private

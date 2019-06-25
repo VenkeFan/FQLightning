@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<LGMatchParlayViewModelDelegate> delegate;
 
-- (void)parlayWithBet:(NSNumber *)bet oddsID:(NSNumber *)oddsID;
+- (void)parlayWithOddsDic:(NSDictionary *)oddsDic;
 
 @end
 
