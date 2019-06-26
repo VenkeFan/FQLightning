@@ -25,7 +25,6 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 @property (nonatomic, strong) NSMutableArray *itemArray;
 @property (nonatomic, strong) UITableView *tableView;
 
-//@property (nonatomic, strong) NSMutableDictionary *parlayOddsDicM;
 @property (nonatomic, strong) NSMutableDictionary *parlayOrderDicM;
 
 @end
@@ -202,36 +201,6 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     [self matchParlayTableCellKeyboardWillHide:keyboardCell];
 }
 
-//- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell ante:(CGFloat)ante oddsID:(NSString *)oddsID dataDic:(NSDictionary *)dataDic {
-//    if (ante <= 0) {
-//        [self.parlayOddsDicM removeObjectForKey:oddsID];
-//        [self.parlayOrderDicM removeObjectForKey:oddsID];
-//        return;
-//    }
-//
-//    __block CGFloat totalBet = 0;
-//    __block CGFloat totalGain = 0;
-//
-//    [self.parlayOddsDicM setObject:@(ante) forKey:oddsID];
-//    [self.parlayOrderDicM setObject:dataDic forKey:oddsID];
-//
-//    for (NSDictionary *dic in self.itemArray) {
-//        CGFloat bet = [dic[kLGMatchParlayTableViewCellKeyAnte] floatValue];
-//        if (bet <= 0) {
-//            continue;
-//        }
-//
-//        CGFloat gain = bet * [dic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsValue] floatValue];
-//
-//        totalBet += bet;
-//        totalGain += gain;
-//    }
-//
-//    if (totalGain > 0 && [self.delegate respondsToSelector:@selector(matchParlayTableViewDidBetting:totalBet:totalGain:)]) {
-//        [self.delegate matchParlayTableViewDidBetting:self totalBet:totalBet totalGain:totalGain];
-//    }
-//}
-
 - (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell dataDic:(NSDictionary *)dataDic {
     CGFloat ante = [dataDic[kLGMatchParlayTableViewCellKeyAnte] floatValue];
     NSNumber *oddsID = dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsID];
@@ -325,17 +294,6 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     }
     return _tableView;
 }
-
-//- (NSMutableDictionary *)parlayOddsDicM {
-//    if (!_parlayOddsDicM) {
-//        _parlayOddsDicM = [NSMutableDictionary dictionary];
-//    }
-//    return _parlayOddsDicM;
-//}
-
-//- (NSDictionary *)parlayOddsDicI {
-//    return [_parlayOddsDicM copy];
-//}
 
 - (NSMutableDictionary *)parlayOrderDicM {
     if (!_parlayOrderDicM) {

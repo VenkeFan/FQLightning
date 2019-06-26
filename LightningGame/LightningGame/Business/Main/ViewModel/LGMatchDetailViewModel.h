@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<LGMatchDetailViewModelDelegate> delegate;
 
-- (void)fetchDataWithMatchID:(NSString *)matchID;
+- (void)fetchDataWithMatchID:(NSNumber *)matchID;
 + (NSString *)matchStage:(NSString *)stageKey;
 
 @end

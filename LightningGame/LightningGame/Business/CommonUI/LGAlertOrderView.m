@@ -322,6 +322,7 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
     LGAlertOrderMetaCell *cell = [tableView dequeueReusableCellWithIdentifier:kAlertOrderMetaCellReuseID];
     
     NSDictionary *orderMeta = self.orderArray[indexPath.row];
+    TODO("string id");
     [cell setOrderDic:orderMeta dataDic:[self.oddsInfoDic objectForKey:[NSNumber numberWithInteger:[orderMeta[kOrderMetaKeyOddsID] integerValue]]]];
     return cell;
 }

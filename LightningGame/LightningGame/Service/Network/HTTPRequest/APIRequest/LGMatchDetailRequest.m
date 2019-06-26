@@ -10,7 +10,7 @@
 
 @implementation LGMatchDetailRequest
 
-- (instancetype)initWithMatchID:(NSString *)matchID {
+- (instancetype)initWithMatchID:(NSNumber *)matchID {
     if (self = [super initWithAPIName:[NSString stringWithFormat:@"%@%@", kAPIMatchDetailURL, matchID] method:HTTPRequestMethod_GET]) {
         
     }

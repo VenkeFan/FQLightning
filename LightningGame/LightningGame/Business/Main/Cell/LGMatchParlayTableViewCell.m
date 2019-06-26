@@ -236,12 +236,6 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
             [_gainLab sizeToFit];
             _gainLab.right = _field.right;
             
-//            if ([self.delegate respondsToSelector:@selector(matchParlayTableCellDidBetting:ante:oddsID:dataDic:)]) {
-//                [self.delegate matchParlayTableCellDidBetting:self ante:ante
-//                                                       oddsID:self.dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsID]
-//                                                      dataDic:self.dataDic];
-//            }
-            
             if ([self.delegate respondsToSelector:@selector(matchParlayTableCellDidBetting:dataDic:)]) {
                 [self.delegate matchParlayTableCellDidBetting:self
                                                       dataDic:self.dataDic];

@@ -1,5 +1,5 @@
 //
-//  LGAlertView.h
+//  FQAlertView.h
 //  FQWidgets
 //
 //  Created by fanqi on 17/6/28.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LGAlertView : UIView
+@interface FQAlertView : UIView
 
 @property (nonatomic, strong, readonly) UIView *contentView;
 

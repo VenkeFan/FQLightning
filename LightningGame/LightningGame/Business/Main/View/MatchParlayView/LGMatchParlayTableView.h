@@ -29,7 +29,6 @@ extern NSString * const kMatchParlayTableViewRemoveAllItemsNotif;
 @interface LGMatchParlayTableView : UIView
 
 @property (nonatomic, assign, readonly) NSUInteger itemCount;
-//@property (nonatomic, copy, readonly) NSDictionary *parlayOddsDicI;
 @property (nonatomic, copy, readonly) NSDictionary *parlayOrderDicI;
 
 @property (nonatomic, weak) id<LGMatchParlayTableViewDelegate> delegate;

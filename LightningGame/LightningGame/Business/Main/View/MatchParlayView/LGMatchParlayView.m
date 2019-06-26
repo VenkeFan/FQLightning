@@ -206,12 +206,6 @@
 }
 
 - (void)matchParlayBottomViewDidConfirm:(LGMatchParlayBottomView *)view {
-//    {
-//        TODO("test step");
-//        [self matchParlayViewModel:self.viewModel data:nil error:nil];
-//        return;
-//    }
-    
     if (self.contentView.parlayOrderDicI.count == 0) {
         return;
     }

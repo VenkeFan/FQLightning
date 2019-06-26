@@ -46,7 +46,7 @@
 		B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9229D92229EA6600030691D /* CALayer+FQExtension.m */; };
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
-		B93F3B9B22BCD8C600D45DEF /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9A22BCD8C600D45DEF /* LGAlertView.m */; };
+		B93F3B9B22BCD8C600D45DEF /* FQAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9A22BCD8C600D45DEF /* FQAlertView.m */; };
 		B93F3BDC22C0640F00D45DEF /* LGAlertOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3BDB22C0640F00D45DEF /* LGAlertOrderView.m */; };
 		B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9493681229BCBE7000C3D24 /* AppDelegate.m */; };
 		B9493688229BCBE7000C3D24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9493686229BCBE7000C3D24 /* Main.storyboard */; };
@@ -224,8 +224,8 @@
 		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailRequest.h; sourceTree = "<group>"; };
 		B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchDetailRequest.m; sourceTree = "<group>"; };
-		B93F3B9922BCD8C600D45DEF /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGAlertView.h; sourceTree = "<group>"; };
-		B93F3B9A22BCD8C600D45DEF /* LGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGAlertView.m; sourceTree = "<group>"; };
+		B93F3B9922BCD8C600D45DEF /* FQAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQAlertView.h; sourceTree = "<group>"; };
+		B93F3B9A22BCD8C600D45DEF /* FQAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQAlertView.m; sourceTree = "<group>"; };
 		B93F3BDA22C0640F00D45DEF /* LGAlertOrderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAlertOrderView.h; sourceTree = "<group>"; };
 		B93F3BDB22C0640F00D45DEF /* LGAlertOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAlertOrderView.m; sourceTree = "<group>"; };
 		B949367D229BCBE7000C3D24 /* LightningGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,6 +495,8 @@
 				B9229D46229D07260030691D /* FQSegmentedControl.m */,
 				B9229D28229CF2A10030691D /* FQNavigationBar.h */,
 				B9229D27229CF2A10030691D /* FQNavigationBar.m */,
+				B93F3B9922BCD8C600D45DEF /* FQAlertView.h */,
+				B93F3B9A22BCD8C600D45DEF /* FQAlertView.m */,
 				B9229CEE229BECE00030691D /* YYFPSLabel.h */,
 				B9229CEF229BECE00030691D /* YYFPSLabel.m */,
 			);
@@ -1000,8 +1002,6 @@
 				B9F61A6B22A6566300CDC29E /* LGToastView.m */,
 				B9D9102B22ADF36A00D54911 /* LGLoadingView.h */,
 				B9D9102C22ADF36A00D54911 /* LGLoadingView.m */,
-				B93F3B9922BCD8C600D45DEF /* LGAlertView.h */,
-				B93F3B9A22BCD8C600D45DEF /* LGAlertView.m */,
 				B93F3BDA22C0640F00D45DEF /* LGAlertOrderView.h */,
 				B93F3BDB22C0640F00D45DEF /* LGAlertOrderView.m */,
 			);
@@ -1230,7 +1230,7 @@
 				B94E4FB022B79CAD00A56F13 /* FQAVPlayerView.m in Sources */,
 				B94E4FB322B79CB600A56F13 /* FQPlayerOperateView.m in Sources */,
 				B9A1C82922C1F106001A3694 /* LGMatchParlayTableViewCell.m in Sources */,
-				B93F3B9B22BCD8C600D45DEF /* LGAlertView.m in Sources */,
+				B93F3B9B22BCD8C600D45DEF /* FQAlertView.m in Sources */,
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
 				B9A1C83E22C1F106001A3694 /* LGMainViewController.m in Sources */,
 				B94E4FAD22B79CA700A56F13 /* FQAbstractPlayerView.m in Sources */,

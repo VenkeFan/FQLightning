@@ -1,20 +1,20 @@
 //
-//  LGAlertView.m
+//  FQAlertView.m
 //  FQWidgets
 //
 //  Created by fanqi on 17/6/28.
 //  Copyright © 2017年 fanqi. All rights reserved.
 //
 
-#import "LGAlertView.h"
+#import "FQAlertView.h"
 
-@interface LGAlertView ()
+@interface FQAlertView ()
 
 @property (nonatomic, strong, readwrite) UIView *contentView;
 
 @end
 
-@implementation LGAlertView
+@implementation FQAlertView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
