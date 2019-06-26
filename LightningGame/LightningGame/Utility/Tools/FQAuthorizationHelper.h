@@ -3,7 +3,7 @@
 //  FQWidgets
 //
 //  Created by fan qi on 2018/6/7.
-//  Copyright © 2018年 redefine. All rights reserved.
+//  Copyright © 2018年 fan qi. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

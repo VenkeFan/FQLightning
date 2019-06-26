@@ -3,7 +3,7 @@
 //  FQWidgets
 //
 //  Created by fan qi on 2018/11/9.
-//  Copyright © 2018 redefine. All rights reserved.
+//  Copyright © 2018 fan qi. All rights reserved.
 //
 
 #import "NSString+FQNilExamine.h"

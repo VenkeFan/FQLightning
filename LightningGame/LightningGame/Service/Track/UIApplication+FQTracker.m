@@ -2,10 +2,10 @@
 
 //
 //  UIApplication+FQTracker.m
-//  LightningGame
+//  FQWidgets
 //
-//  Created by fanqi_company on 2019/6/26.
-//  Copyright © 2019 fanqi_company. All rights reserved.
+//  Created by fan qi on 2019/6/26.
+//  Copyright © 2019 fan qi. All rights reserved.
 //
 
 /*

@@ -3,7 +3,7 @@
 //  FQWidgets
 //
 //  Created by fan qi on 2018/8/15.
-//  Copyright © 2019 fanqi_company. All rights reserved.
+//  Copyright © 2019 fan qi. All rights reserved.
 //
 
 #import "UIView+FQRotatable.h"
