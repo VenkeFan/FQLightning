@@ -95,6 +95,9 @@
 		B9A1C83E22C1F106001A3694 /* LGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C81A22C1F106001A3694 /* LGMainViewController.m */; };
 		B9A1C83F22C1F106001A3694 /* LGMatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C81B22C1F106001A3694 /* LGMatchDetailViewController.m */; };
 		B9A1C84222C20220001A3694 /* LGUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C84122C20220001A3694 /* LGUserInfoRequest.m */; };
+		B9A1C84722C35CE7001A3694 /* UIViewController+FQTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C84622C35CE7001A3694 /* UIViewController+FQTracker.m */; };
+		B9A1C85C22C376FD001A3694 /* UIControl+FQTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C85B22C376FD001A3694 /* UIControl+FQTracker.m */; };
+		B9A1C85F22C379CE001A3694 /* UIApplication+FQTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C85E22C379CE001A3694 /* UIApplication+FQTracker.m */; };
 		B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555222B8869000D04395 /* UIView+FQRotatable.m */; };
 		B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BE555922B908BE00D04395 /* LGOAuthRequest.m */; };
 		B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3A165229F842200E282B0 /* NSObject+MsgForwarding.m */; };
@@ -321,6 +324,12 @@
 		B9A1C84122C20220001A3694 /* LGUserInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserInfoRequest.m; sourceTree = "<group>"; };
 		B9A1C84322C23FF1001A3694 /* LGOrderMetaKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGOrderMetaKeys.h; sourceTree = "<group>"; };
 		B9A1C84422C24C0E001A3694 /* LGMatchParlayCustomKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchParlayCustomKeys.h; sourceTree = "<group>"; };
+		B9A1C84522C35CE7001A3694 /* UIViewController+FQTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FQTracker.h"; sourceTree = "<group>"; };
+		B9A1C84622C35CE7001A3694 /* UIViewController+FQTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FQTracker.m"; sourceTree = "<group>"; };
+		B9A1C85A22C376FD001A3694 /* UIControl+FQTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+FQTracker.h"; sourceTree = "<group>"; };
+		B9A1C85B22C376FD001A3694 /* UIControl+FQTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+FQTracker.m"; sourceTree = "<group>"; };
+		B9A1C85D22C379CE001A3694 /* UIApplication+FQTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FQTracker.h"; sourceTree = "<group>"; };
+		B9A1C85E22C379CE001A3694 /* UIApplication+FQTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+FQTracker.m"; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
@@ -588,6 +597,12 @@
 		B9229D79229E61E20030691D /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				B9A1C84522C35CE7001A3694 /* UIViewController+FQTracker.h */,
+				B9A1C84622C35CE7001A3694 /* UIViewController+FQTracker.m */,
+				B9A1C85A22C376FD001A3694 /* UIControl+FQTracker.h */,
+				B9A1C85B22C376FD001A3694 /* UIControl+FQTracker.m */,
+				B9A1C85D22C379CE001A3694 /* UIApplication+FQTracker.h */,
+				B9A1C85E22C379CE001A3694 /* UIApplication+FQTracker.m */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -1210,6 +1225,7 @@
 				B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */,
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
 				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
+				B9A1C84722C35CE7001A3694 /* UIViewController+FQTracker.m in Sources */,
 				B9A1C83322C1F106001A3694 /* LGMarqueeView.m in Sources */,
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
 				B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */,
@@ -1265,6 +1281,8 @@
 				B9229CF0229BECE00030691D /* YYFPSLabel.m in Sources */,
 				B9A1C83622C1F106001A3694 /* LGMatchParlayView.m in Sources */,
 				B9C3A167229F842200E282B0 /* NSObject+MsgForwarding.m in Sources */,
+				B9A1C85F22C379CE001A3694 /* UIApplication+FQTracker.m in Sources */,
+				B9A1C85C22C376FD001A3694 /* UIControl+FQTracker.m in Sources */,
 				B9D9104622AE820200D54911 /* CTMediator+LGProfileActions.m in Sources */,
 				B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */,
 				B9229D47229D07260030691D /* FQSegmentedControl.m in Sources */,

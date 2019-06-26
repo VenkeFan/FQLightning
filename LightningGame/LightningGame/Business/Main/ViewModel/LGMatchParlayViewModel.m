@@ -14,7 +14,7 @@
 
 NSString * const kOrderMetaKeyCode                  = @"code";
 NSString * const kOrderMetaKeyOddsID                = @"odds_id";
-NSString * const kOrderMetaKeyOddsValue             = @"odds";
+NSString * const kOrderMetaKeyOddsValue             = @"odds_value";
 NSString * const kOrderMetaKeyBetMoney              = @"bet_money";
 NSString * const kOrderMetaKeyGainMoney             = @"bet_win_money";
 

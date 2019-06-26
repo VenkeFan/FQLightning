@@ -17,11 +17,11 @@
 @implementation UINavigationController (FQExtension)
 
 + (void)load {
-    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(swizzle_viewDidLoad));
+    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_viewDidLoad));
 }
 
-- (void)swizzle_viewDidLoad {
-    [self swizzle_viewDidLoad];
+- (void)fqswizzle_viewDidLoad {
+    [self fqswizzle_viewDidLoad];
     
     self.navigationBarHidden = YES;
     self.interactivePopGestureRecognizer.delegate = self;
