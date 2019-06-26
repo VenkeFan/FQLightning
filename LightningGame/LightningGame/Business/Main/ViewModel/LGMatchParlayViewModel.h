@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LGMatchParlayViewModelDelegate <NSObject>
 
-- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel responseObj:(nullable id)responseObj error:(nullable NSError *)error;
+- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel data:(nullable NSArray *)data error:(nullable NSError *)error;
 
 @end
 

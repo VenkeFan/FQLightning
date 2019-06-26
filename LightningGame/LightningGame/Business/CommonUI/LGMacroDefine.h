@@ -9,6 +9,11 @@
 #ifndef LGMacroDefine_h
 #define LGMacroDefine_h
 
+#define kNeedLogin      if (![LGAccountManager instance].isLogin) {\
+                            [LGToastView showWithMessage:@"请先登录"];\
+                            return;\
+                        }\
+
 // App全局frame
 #define kCellMarginX                        kSizeScale(8.0)
 #define kCellMarginY                        kSizeScale(8.0)

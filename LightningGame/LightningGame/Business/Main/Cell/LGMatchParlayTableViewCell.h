@@ -14,19 +14,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const kLGMatchParlayTableViewCellKeyTeamDic;
-extern NSString * const kLGMatchParlayTableViewCellKeyOddsDic;
-extern NSString * const kLGMatchParlayTableViewCellKeyMatchName;
-extern NSString * const kLGMatchParlayTableViewCellKeyFieldFocused;
-extern NSString * const kLGMatchParlayTableViewCellKeyAnte;
-
 @protocol LGMatchParlayTableViewCellDelegate <NSObject>
 
 - (void)matchParlayTableCellDidDeleted:(LGMatchParlayTableViewCell *)cell;
 - (void)matchParlayTableCellKeyboardWillShow:(LGMatchParlayTableViewCell *)cell;
 - (void)matchParlayTableCellKeyboardWillHide:(LGMatchParlayTableViewCell *)cell;
 - (void)matchParlayTableCellOnTapped:(LGMatchParlayTableViewCell *)cell;
-- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell ante:(CGFloat)ante oddsID:(NSString *)oddsID;
+- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell dataDic:(NSDictionary *)dataDic;
 
 @end
 

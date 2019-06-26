@@ -319,6 +319,8 @@
 		B9A1C81D22C1F106001A3694 /* LGMatchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailViewController.h; sourceTree = "<group>"; };
 		B9A1C84022C20220001A3694 /* LGUserInfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGUserInfoRequest.h; sourceTree = "<group>"; };
 		B9A1C84122C20220001A3694 /* LGUserInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserInfoRequest.m; sourceTree = "<group>"; };
+		B9A1C84322C23FF1001A3694 /* LGOrderMetaKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGOrderMetaKeys.h; sourceTree = "<group>"; };
+		B9A1C84422C24C0E001A3694 /* LGMatchParlayCustomKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchParlayCustomKeys.h; sourceTree = "<group>"; };
 		B9BE555122B8869000D04395 /* UIView+FQRotatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FQRotatable.h"; sourceTree = "<group>"; };
 		B9BE555222B8869000D04395 /* UIView+FQRotatable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FQRotatable.m"; sourceTree = "<group>"; };
 		B9BE555722B8D62700D04395 /* FQPlayerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FQPlayerConfig.h; sourceTree = "<group>"; };
@@ -756,6 +758,8 @@
 				B9A1C7F122C1F106001A3694 /* detail_sample1.json */,
 				B9A1C7F322C1F106001A3694 /* detail_sample2.json */,
 				B9A1C7F022C1F106001A3694 /* LGMatchListKeys.h */,
+				B9A1C84322C23FF1001A3694 /* LGOrderMetaKeys.h */,
+				B9A1C84422C24C0E001A3694 /* LGMatchParlayCustomKeys.h */,
 				B9A1C7F422C1F106001A3694 /* list_sample.json */,
 			);
 			path = Model;

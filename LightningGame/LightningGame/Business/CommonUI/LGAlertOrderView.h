@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGAlertOrderView : LGAlertView
 
+- (void)showWithOrderArray:(NSArray *)orderArray oddsInfoDic:(NSDictionary *)oddsInfoDic;
+
 @end
 
 NS_ASSUME_NONNULL_END

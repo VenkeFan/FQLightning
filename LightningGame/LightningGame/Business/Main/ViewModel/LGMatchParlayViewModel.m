@@ -7,7 +7,16 @@
 //
 
 #import "LGMatchParlayViewModel.h"
+#import "LGOrderMetaKeys.h"
 #import "LGBetRequest.h"
+
+#pragma mark - Order Meta
+
+NSString * const kOrderMetaKeyCode                  = @"code";
+NSString * const kOrderMetaKeyOddsID                = @"odds_id";
+NSString * const kOrderMetaKeyOddsValue             = @"odds";
+NSString * const kOrderMetaKeyBetMoney              = @"bet_money";
+NSString * const kOrderMetaKeyGainMoney             = @"bet_win_money";
 
 @interface LGMatchParlayViewModel ()
 
@@ -19,12 +28,20 @@
     LGBetRequest *request = [LGBetRequest new];
     [request requestWithOddsDic:oddsDic
                         success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-                            if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:responseObj:error:)]) {
-                                [self.delegate matchParlayViewModel:self responseObj:responseObject error:nil];
+                            NSArray *arrayI = (NSArray *)responseObject;
+                            NSMutableArray *validateArray = [NSMutableArray array];
+                            [arrayI enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                if ([obj[kOrderMetaKeyCode] integerValue] == LGErrorCode_Success) {
+                                    [validateArray addObject:obj];
+                                }
+                            }];
+                            
+                            if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:data:error:)]) {
+                                [self.delegate matchParlayViewModel:self data:validateArray error:nil];
                             }
                         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                            if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:responseObj:error:)]) {
-                                [self.delegate matchParlayViewModel:self responseObj:nil error:error];
+                            if ([self.delegate respondsToSelector:@selector(matchParlayViewModel:data:error:)]) {
+                                [self.delegate matchParlayViewModel:self data:nil error:error];
                             }
                         }];
 }

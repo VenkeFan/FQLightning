@@ -94,7 +94,7 @@
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         _contentView.backgroundColor = kCellBgColor;
-        _contentView.frame = CGRectMake(0, 0, kScreenWidth, kSizeScale(284.0));
+        _contentView.frame = CGRectMake(0, 0, kScreenWidth, 0);
         _contentView.center = CGPointMake(self.width * 0.5, self.height + _contentView.height * 0.5);
         _contentView.layer.cornerRadius = kCornerRadius;
         _contentView.layer.masksToBounds = YES;
