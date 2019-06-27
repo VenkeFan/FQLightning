@@ -9,6 +9,13 @@
 #ifndef LGMatchListKeys_h
 #define LGMatchListKeys_h
 
+typedef NS_ENUM(NSInteger, LGMatchListType) {
+    LGMatchListType_Today = 1,
+    LGMatchListType_Rolling = 2,
+    LGMatchListType_Prepare = 3,
+    LGMatchListType_Finished = 4
+};
+
 typedef NS_ENUM(NSInteger, LGMatchStatus) {
     LGMatchStatus_Prepare = 1,
     LGMatchStatus_Rolling = 2,

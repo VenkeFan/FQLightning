@@ -11,13 +11,6 @@
 
 @class LGMatchListViewModel;
 
-typedef NS_ENUM(NSInteger, LGMatchListType) {
-    LGMatchListType_Today = 1,
-    LGMatchListType_Rolling = 2,
-    LGMatchListType_Prepare = 3,
-    LGMatchListType_Finished = 4
-};
-
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol LGMatchListViewModelDelegate <NSObject>
