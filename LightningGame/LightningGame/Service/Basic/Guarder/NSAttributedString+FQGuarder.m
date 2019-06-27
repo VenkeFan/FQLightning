@@ -1,16 +1,16 @@
 //
-//  NSAttributedString+FQNilExamine.m
+//  NSAttributedString+FQGuarder.m
 //  FQWidgets
 //
 //  Created by fan qi on 2019/2/26.
 //  Copyright © 2019 fan qi. All rights reserved.
 //
 
-#import "NSAttributedString+FQNilExamine.h"
+#import "NSAttributedString+FQGuarder.h"
 #import "FQRunTimeUtility.h"
 #import <UIKit/UIKit.h>
 
-@implementation NSAttributedString (FQNilExamine)
+@implementation NSAttributedString (FQGuarder)
 
 + (void)load {
     id concreteAttrStr = [NSAttributedString alloc];

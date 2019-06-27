@@ -1,15 +1,15 @@
 //
-//  NSDictionary+FQNilExamine.m
+//  NSDictionary+FQGuarder.m
 //  FQWidgets
 //
 //  Created by fan qi on 2018/11/9.
 //  Copyright © 2018 fan qi. All rights reserved.
 //
 
-#import "NSDictionary+FQNilExamine.h"
+#import "NSDictionary+FQGuarder.h"
 #import "FQRunTimeUtility.h"
 
-@implementation NSDictionary (FQNilExamine)
+@implementation NSDictionary (FQGuarder)
 
 + (void)load {
     NSMutableDictionary *mutDic = [NSMutableDictionary dictionary];

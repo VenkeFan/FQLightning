@@ -1,5 +1,5 @@
 //
-//  NSArray+FQNilExamine.h
+//  NSArray+FQGuarder.h
 //  FQWidgets
 //
 //  Created by fan qi on 2018/11/9.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray (FQNilExamine)
+@interface NSArray (FQGuarder)
 
 @end
 

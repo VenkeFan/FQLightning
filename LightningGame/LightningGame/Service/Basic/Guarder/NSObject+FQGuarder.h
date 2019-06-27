@@ -1,5 +1,5 @@
 //
-//  NSObject+MsgForwarding.h
+//  NSObject+FQGuarder.h
 //  FQWidgets
 //
 //  Created by fanqi on 17/4/19.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (MsgForwarding)
+@interface NSObject (FQGuarder)
 
 
 @end

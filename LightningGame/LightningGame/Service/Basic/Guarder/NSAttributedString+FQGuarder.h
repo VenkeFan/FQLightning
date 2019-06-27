@@ -1,5 +1,5 @@
 //
-//  NSAttributedString+FQNilExamine.h
+//  NSAttributedString+FQGuarder.h
 //  FQWidgets
 //
 //  Created by fan qi on 2019/2/26.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSAttributedString (FQNilExamine)
+@interface NSAttributedString (FQGuarder)
 
 @end
 

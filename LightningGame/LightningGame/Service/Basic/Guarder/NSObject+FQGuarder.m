@@ -1,15 +1,15 @@
 //
-//  NSObject+MsgForwarding.m
+//  NSObject+FQGuarder.m
 //  FQWidgets
 //
 //  Created by fanqi on 17/4/19.
 //  Copyright © 2017年 fanqi. All rights reserved.
 //
 
-#import "NSObject+MsgForwarding.h"
+#import "NSObject+FQGuarder.h"
 #import <objc/runtime.h>
 
-@implementation NSObject (MsgForwarding)
+@implementation NSObject (FQGuarder)
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored"-Wobjc-protocol-method-implementation"

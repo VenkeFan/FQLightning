@@ -1,15 +1,15 @@
 //
-//  NSArray+FQNilExamine.m
+//  NSArray+FQGuarder.m
 //  FQWidgets
 //
 //  Created by fan qi on 2018/11/9.
 //  Copyright © 2018 fan qi. All rights reserved.
 //
 
-#import "NSArray+FQNilExamine.h"
+#import "NSArray+FQGuarder.h"
 #import "FQRunTimeUtility.h"
 
-@implementation NSArray (FQNilExamine)
+@implementation NSArray (FQGuarder)
 
 + (void)load {
     NSMutableArray *arrayM = [NSMutableArray array];

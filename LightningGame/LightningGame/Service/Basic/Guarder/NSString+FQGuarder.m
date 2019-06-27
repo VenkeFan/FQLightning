@@ -1,15 +1,15 @@
 //
-//  NSString+FQNilExamine.m
+//  NSString+FQGuarder.m
 //  FQWidgets
 //
 //  Created by fan qi on 2018/11/9.
 //  Copyright © 2018 fan qi. All rights reserved.
 //
 
-#import "NSString+FQNilExamine.h"
+#import "NSString+FQGuarder.h"
 #import "FQRunTimeUtility.h"
 
-@implementation NSString (FQNilExamine)
+@implementation NSString (FQGuarder)
 
 + (void)load {
     id placeholderStr = [NSString alloc];
