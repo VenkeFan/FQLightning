@@ -1,5 +1,3 @@
-
-
 //
 //  UIApplication+FQTracker.m
 //  FQWidgets
@@ -73,7 +71,6 @@
 }
 
 - (void)trace_sendEvent:(UIEvent *)event {
-    // 为什么一次事件会调用两次该方法？？？？？
     [self trace_sendEvent:event];
 }
 
