@@ -17,6 +17,7 @@
 @implementation FQAlertView
 
 - (instancetype)initWithFrame:(CGRect)frame {
+    NSAssert(![self isMemberOfClass:[FQAlertView class]], @"FQAlertView is an abstract class, you should not instantiate it directly.");
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
         self.alpha = 0;

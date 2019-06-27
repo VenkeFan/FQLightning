@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
                    failure:(nullable RequestFailBlock)failure;
 - (void)cancel;
 
-@property (nonatomic, copy) NSMutableDictionary *paraDic;
+@property (nonatomic, strong) NSMutableDictionary *paraDic;
 
 @end
 

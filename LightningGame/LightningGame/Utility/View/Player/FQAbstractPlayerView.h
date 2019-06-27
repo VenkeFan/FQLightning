@@ -22,7 +22,7 @@
 
 @class FQAbstractPlayerView;
 
-@protocol WLPlayerViewDelegate <NSObject>
+@protocol FQPlayerViewDelegate <NSObject>
 
 @optional
 - (void)playerView:(FQAbstractPlayerView *)playerView statusDidChanged:(FQPlayerViewStatus)status;
@@ -48,6 +48,6 @@
 @property (nonatomic, assign) CGFloat playSeconds;
 @property (nonatomic, assign) CGFloat duration;
 
-@property (nonatomic, weak) id<WLPlayerViewDelegate> delegate;
+@property (nonatomic, weak) id<FQPlayerViewDelegate> delegate;
 
 @end
