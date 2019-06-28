@@ -6,11 +6,13 @@
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import "LGAlertView.h"
+#import "FQAlertView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGAlertOrderView : LGAlertView
+@interface LGAlertOrderView : FQAlertView
+
+- (void)showWithOrderArray:(NSArray *)orderArray oddsInfoDic:(NSDictionary *)oddsInfoDic;
 
 @end
 

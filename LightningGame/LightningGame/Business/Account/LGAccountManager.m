@@ -7,12 +7,16 @@
 //
 
 #import "LGAccountManager.h"
+#import "LGUserInfoRequest.h"
 
 #pragma mark - AccountKeys
 
 NSString * const kAccountKeyAccountID                   = @"openid";
 NSString * const kAccountKeyAccountAccessToken          = @"access_token";
 NSString * const kAccountKeyAccountExpireInterval       = @"expires_in";
+NSString * const kAccountKeyAccountUserName             = @"username";
+NSString * const kAccountKeyAccountMobile               = @"mobile";
+NSString * const kAccountKeyAccountMoney                = @"money";
 
 #pragma mark - LGAccountManager
 
@@ -44,7 +48,24 @@ NSString * const kAccountKeyAccountExpireInterval       = @"expires_in";
     return self;
 }
 
-- (void)updateAccount:(NSDictionary *)newAccount {
+- (void)fetchAccountInfoWithIntro:(NSDictionary *)intro {
+    LGUserInfoRequest *request = [LGUserInfoRequest new];
+    [request requestWithUserID:intro[kAccountKeyAccountID]
+                   accessToken:intro[kAccountKeyAccountAccessToken]
+                       success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                           NSMutableDictionary *oldInfo = [intro mutableCopy];
+                           [oldInfo addEntriesFromDictionary:responseObject];
+                           
+                           [self updateLocalAccount:oldInfo];
+                       }
+                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           if (!self.account) {
+                               [self updateLocalAccount:intro];
+                           }
+                       }];
+}
+
+- (void)updateLocalAccount:(NSDictionary *)newAccount {
     _account = [newAccount copy];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.filePath]) {
@@ -68,6 +89,10 @@ NSString * const kAccountKeyAccountExpireInterval       = @"expires_in";
         _filePath = [path stringByAppendingPathComponent:@"account_info.plist"];
     }
     return _filePath;
+}
+
+- (BOOL)isLogin {
+    return self.account != nil;
 }
 
 @end

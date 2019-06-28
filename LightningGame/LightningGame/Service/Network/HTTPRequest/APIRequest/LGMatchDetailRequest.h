@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGMatchDetailRequest : LGBasicRequest
 
-- (instancetype)initWithMatchID:(NSString *)matchID;
+- (instancetype)initWithMatchID:(NSNumber *)matchID;
 
 @end
 

@@ -34,7 +34,7 @@
     [self.paraDic setObject:mobile forKey:@"mobile"];
     [self.paraDic setObject:verifyCode forKey:@"sms"];
     
-    [super requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {
             success(task, responseObject);
         }

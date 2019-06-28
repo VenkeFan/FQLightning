@@ -15,7 +15,7 @@
 #define kDetailPlayerViewLeft           kSizeScale(6.0)
 #define kDetailPlayerViewTop            kSizeScale(6.0)
 
-@interface LGMatchDetailPlayerView () <WLPlayerViewDelegate>
+@interface LGMatchDetailPlayerView () <FQPlayerViewDelegate>
 
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UILabel *tourNameLabel;
@@ -37,28 +37,6 @@
         [self initializeUI];
     }
     return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-//    CGFloat x = kSizeScale(6.0), y = kSizeScale(6.0);
-//
-//    _titleView.frame = CGRectMake(x, y, CGRectGetWidth(self.frame) - x * 2, kSizeScale(24.0));
-//    _tourNameLabel.frame = CGRectMake(x, 0, CGRectGetWidth(_titleView.frame) - x * 2, CGRectGetHeight(_titleView.frame));
-//
-//    _player.frame = CGRectMake(0, CGRectGetMaxY(_titleView.frame) + y, self.width, kSizeScale(196.0));
-//
-//    _statusBtn.center = CGPointMake(self.width * 0.5, self.height - (self.height - CGRectGetMaxY(_player.frame)) * 0.5);
-//
-//    _leftLogoView.center = CGPointMake(x + _leftLogoView.width * 0.5, _statusBtn.centerY);
-//    _rightLogoView.center = CGPointMake(self.width - x - _rightLogoView.width * 0.5, _statusBtn.centerY);
-//
-//    CGFloat labMaxWidth = (self.width - x * 2 - _leftLogoView.width - _rightLogoView.width - x * 2 - _statusBtn.width - x * 2) * 0.5;
-//    _leftTeamLab.width = labMaxWidth;
-//    _rightTeamLab.width = labMaxWidth;
-//    _leftTeamLab.center = CGPointMake(CGRectGetMaxX(_leftLogoView.frame) + x + _leftTeamLab.width * 0.5, _statusBtn.centerY);
-//    _rightTeamLab.center = CGPointMake(CGRectGetMinX(_rightLogoView.frame) - x - _rightTeamLab.width * 0.5, _statusBtn.centerY);
 }
 
 - (void)dealloc {
@@ -160,13 +138,6 @@
     
     {
         NSString *liveUrl = dataDic[kMatchKeyLiveUrl];
-        {
-            TODO("test data");
-            if (liveUrl.length == 0) {
-                _player.sourceType = FQPlayerViewSourceType_NetVideo;
-                liveUrl = @"https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4";
-            }
-        }
         if (liveUrl.length > 0) {
             [_player setUrlString:liveUrl];
             [_player play];
@@ -207,7 +178,7 @@
     }
 }
 
-#pragma mark - WLPlayerViewDelegate
+#pragma mark - FQPlayerViewDelegate
 
 - (void)playerView:(FQAbstractPlayerView *)playerView statusDidChanged:(FQPlayerViewStatus)status {
     if (status == FQPlayerViewStatus_Stopped) {

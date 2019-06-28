@@ -7,6 +7,7 @@
 //
 
 #import "LGBasicRequest.h"
+#import "CTMediator+LGSignActions.h"
 
 @interface LGBasicRequest ()
 
@@ -33,7 +34,7 @@
     return self;
 }
 
-- (void)requsetWithSuccess:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
+- (void)requestWithSuccess:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
     NSError* (^generateError)(NSInteger) = ^(NSInteger errorCode) {
         NSError *error = [NSError errorWithDomain:@""
                                              code:errorCode
@@ -63,6 +64,13 @@
                                       
                                       @try {
                                           NSInteger errorCode = [errorObj integerValue];
+                                          
+                                          if (errorCode == LGErrorCode_AccessToken) {
+                                              UIViewController *root = [[CTMediator sharedInstance] mediator_generateSignInController];
+                                              [FQWindowUtility changeKeyWindowRootViewController:root];
+                                              return;
+                                          }
+                                          
                                           if (errorCode != LGErrorCode_Success) {
                                               if (failure) {
                                                   failure(task, generateError(errorCode));

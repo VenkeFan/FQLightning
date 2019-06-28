@@ -9,6 +9,7 @@
 #import "LGMatchParlayView.h"
 #import "LGMatchParlayViewModel.h"
 #import "LGMatchListKeys.h"
+#import "LGMatchParlayCustomKeys.h"
 #import "LGMatchParlayTableView.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
@@ -148,18 +149,16 @@
 
 #pragma mark - LGMatchParlayViewModelDelegate
 
-- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel responseObj:(id)responseObj error:(NSError *)error {
+- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel data:(NSArray *)data error:(NSError *)error {
     [LGLoadingView dismiss];
     
-    if (error) {
+    if (data.count == 0) {
         return;
     }
     
     [self.contentView clearAll];
     
-    [[LGAlertOrderView new] showWithCompleted:^{
-        
-    }];
+    [[LGAlertOrderView new] showWithOrderArray:data oddsInfoDic:self.contentView.parlayOrderDicI];
 }
 
 #pragma mark - LGMatchParlayTableViewDelegate
@@ -169,7 +168,7 @@
         [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration * 0.5
                          animations:^{
                              self.contentView.height = newHeight;
-                             self.contentView.tableView.height = newHeight;
+                             [self.contentView updateTableViewHeight:newHeight];
                              self.height = kLGMatchParlayViewTopHeight + kLGMatchParlayViewBottomHeight + self.contentView.height;
                              if (self.isExpanded) {
                                  self.top = kScreenHeight - self.height;
@@ -207,16 +206,22 @@
 }
 
 - (void)matchParlayBottomViewDidConfirm:(LGMatchParlayBottomView *)view {
-    TODO("暂未考虑多个订单的情况");
-    NSNumber *oddsID = self.contentView.parlayOddsDicI.allKeys.firstObject;
-    NSNumber *bet = [self.contentView.parlayOddsDicI objectForKey:oddsID];
-    
-    if (oddsID == nil || bet == nil) {
+    if (self.contentView.parlayOrderDicI.count == 0) {
         return;
     }
+
+    kNeedLogin;
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [self.contentView.parlayOrderDicI enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSNumber *ante = obj[kLGMatchParlayTableViewCellKeyAnte];
+        NSNumber *oddsID = key;
+        
+        [dic setObject:ante forKey:oddsID];
+    }];
     
     [LGLoadingView display];
-    [self.viewModel parlayWithBet:bet oddsID:oddsID];
+    [self.viewModel parlayWithOddsDic:dic];
 }
 
 #pragma mark - Private

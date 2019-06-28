@@ -10,15 +10,15 @@
 
 @implementation LGMatchDetailRequest
 
-- (instancetype)initWithMatchID:(NSString *)matchID {
+- (instancetype)initWithMatchID:(NSNumber *)matchID {
     if (self = [super initWithAPIName:[NSString stringWithFormat:@"%@%@", kAPIMatchDetailURL, matchID] method:HTTPRequestMethod_GET]) {
         
     }
     return self;
 }
 
-- (void)requsetWithSuccess:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
-    [super requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+- (void)requestWithSuccess:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {
             success(task, responseObject);
         }

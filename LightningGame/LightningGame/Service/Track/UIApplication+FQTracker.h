@@ -1,8 +1,8 @@
 //
-//  UINavigationController+FQExtension.h
+//  UIApplication+FQTracker.h
 //  FQWidgets
 //
-//  Created by fan qi on 2019/5/27.
+//  Created by fan qi on 2019/6/26.
 //  Copyright © 2019 fan qi. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UINavigationController (FQExtension)
+@interface UIApplication (FQTracker)
 
 @end
 

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGMatchDetailViewController : UIViewController
 
-- (instancetype)initWithMatchID:(NSString *)matchID;
+- (instancetype)initWithMatchID:(NSNumber *)matchID;
 
 @end
 

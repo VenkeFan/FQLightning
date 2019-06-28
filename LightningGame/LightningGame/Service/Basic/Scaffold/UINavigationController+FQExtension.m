@@ -2,8 +2,8 @@
 //  UINavigationController+FQExtension.m
 //  FQWidgets
 //
-//  Created by fanqi_company on 2019/5/27.
-//  Copyright © 2019 fanqi_company. All rights reserved.
+//  Created by fan qi on 2019/5/27.
+//  Copyright © 2019 fan qi. All rights reserved.
 //
 
 #import "UINavigationController+FQExtension.h"
@@ -17,11 +17,11 @@
 @implementation UINavigationController (FQExtension)
 
 + (void)load {
-    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(swizzle_viewDidLoad));
+    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_viewDidLoad));
 }
 
-- (void)swizzle_viewDidLoad {
-    [self swizzle_viewDidLoad];
+- (void)fqswizzle_viewDidLoad {
+    [self fqswizzle_viewDidLoad];
     
     self.navigationBarHidden = YES;
     self.interactivePopGestureRecognizer.delegate = self;

@@ -1,22 +1,23 @@
 //
-//  LGAlertView.m
+//  FQAlertView.m
 //  FQWidgets
 //
 //  Created by fanqi on 17/6/28.
 //  Copyright © 2017年 fanqi. All rights reserved.
 //
 
-#import "LGAlertView.h"
+#import "FQAlertView.h"
 
-@interface LGAlertView ()
+@interface FQAlertView ()
 
 @property (nonatomic, strong, readwrite) UIView *contentView;
 
 @end
 
-@implementation LGAlertView
+@implementation FQAlertView
 
 - (instancetype)initWithFrame:(CGRect)frame {
+    NSAssert(![self isMemberOfClass:[FQAlertView class]], @"FQAlertView is an abstract class, you should not instantiate it directly.");
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
         self.alpha = 0;
@@ -94,7 +95,7 @@
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         _contentView.backgroundColor = kCellBgColor;
-        _contentView.frame = CGRectMake(0, 0, kScreenWidth, kSizeScale(284.0));
+        _contentView.frame = CGRectMake(0, 0, kScreenWidth, 0);
         _contentView.center = CGPointMake(self.width * 0.5, self.height + _contentView.height * 0.5);
         _contentView.layer.cornerRadius = kCornerRadius;
         _contentView.layer.masksToBounds = YES;

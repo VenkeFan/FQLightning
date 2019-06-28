@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LGMatchParlayViewModelDelegate <NSObject>
 
-- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel responseObj:(nullable id)responseObj error:(nullable NSError *)error;
+- (void)matchParlayViewModel:(LGMatchParlayViewModel *)viewModel data:(nullable NSArray *)data error:(nullable NSError *)error;
 
 @end
 
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<LGMatchParlayViewModelDelegate> delegate;
 
-- (void)parlayWithBet:(NSNumber *)bet oddsID:(NSNumber *)oddsID;
+- (void)parlayWithOddsDic:(NSDictionary *)oddsDic;
 
 @end
 

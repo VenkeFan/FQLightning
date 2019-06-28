@@ -2,8 +2,8 @@
 //  UIViewController+FQExtension.m
 //  FQWidgets
 //
-//  Created by fanqi_company on 2019/5/28.
-//  Copyright © 2019 fanqi_company. All rights reserved.
+//  Created by fan qi on 2019/5/28.
+//  Copyright © 2019 fan qi. All rights reserved.
 //
 
 #import "UIViewController+FQExtension.h"
@@ -16,8 +16,8 @@
 @implementation UIViewController (FQExtension)
 
 + (void)load {
-    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(swizzle_viewDidLoad));
-    swizzleInstanceMethod(self, @selector(viewDidLayoutSubviews), @selector(swizzle_viewDidLayoutSubviews));
+    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_viewDidLoad));
+    swizzleInstanceMethod(self, @selector(viewDidLayoutSubviews), @selector(fqswizzle_viewDidLayoutSubviews));
 }
 
 - (void)setTitle:(NSString *)title {
@@ -34,11 +34,12 @@
 
 #pragma mark - Swizzle Method
 
-- (void)swizzle_viewDidLoad {
-    [self swizzle_viewDidLoad];
+- (void)fqswizzle_viewDidLoad {
+    [self fqswizzle_viewDidLoad];
     
     NSString *clsName = NSStringFromClass([self class]);
     if ([clsName isEqualToString:@"UIInputWindowController"]
+        || [clsName isEqualToString:@"UITextInputController"]
         || [clsName isEqualToString:@"UICompatibilityInputViewController"]
         || [clsName isEqualToString:@"UIApplicationRotationFollowingControllerNoTouches"]
         || [clsName isEqualToString:@"UISystemKeyboardDockController"]) {
@@ -50,8 +51,8 @@
     [self.view addSubview:self.navBar];
 }
 
-- (void)swizzle_viewDidLayoutSubviews {
-    [self swizzle_viewDidLayoutSubviews];
+- (void)fqswizzle_viewDidLayoutSubviews {
+    [self fqswizzle_viewDidLayoutSubviews];
     
     if (self.navigationBarAlwaysFront) {
         [self.view bringSubviewToFront:self.navBar];

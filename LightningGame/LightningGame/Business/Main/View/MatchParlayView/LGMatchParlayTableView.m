@@ -8,6 +8,7 @@
 
 #import "LGMatchParlayTableView.h"
 #import "LGMatchListKeys.h"
+#import "LGMatchParlayCustomKeys.h"
 #import "LGMatchParlayKeyboard.h"
 #import "LGMatchParlayTopView.h"
 #import "LGMatchParlayBottomView.h"
@@ -22,8 +23,9 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 }
 
 @property (nonatomic, strong) NSMutableArray *itemArray;
-@property (nonatomic, strong, readwrite) UITableView *tableView;
-@property (nonatomic, strong) NSMutableDictionary *parlayOddsDicM;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableDictionary *parlayOrderDicM;
 
 @end
 
@@ -48,6 +50,10 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
 }
 
 #pragma mark - Public
+
+- (void)updateTableViewHeight:(CGFloat)newHeight {
+    self.tableView.height = newHeight;
+}
 
 - (BOOL)addTeamDic:(NSDictionary *)teamDic oddsDic:(NSDictionary *)oddsDic matchName:(NSString *)matchName {
     if (!teamDic || !oddsDic) {
@@ -195,20 +201,24 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     [self matchParlayTableCellKeyboardWillHide:keyboardCell];
 }
 
-- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell ante:(CGFloat)ante oddsID:(NSString *)oddsID {
+- (void)matchParlayTableCellDidBetting:(LGMatchParlayTableViewCell *)cell dataDic:(NSDictionary *)dataDic {
+    CGFloat ante = [dataDic[kLGMatchParlayTableViewCellKeyAnte] floatValue];
+    NSNumber *oddsID = dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsID];
+    
     if (ante <= 0) {
+        [self.parlayOrderDicM removeObjectForKey:oddsID];
         return;
     }
     
     __block CGFloat totalBet = 0;
     __block CGFloat totalGain = 0;
     
-    [self.parlayOddsDicM setObject:@(ante) forKey:oddsID];
+    [self.parlayOrderDicM setObject:dataDic forKey:oddsID];
     
     for (NSDictionary *dic in self.itemArray) {
         CGFloat bet = [dic[kLGMatchParlayTableViewCellKeyAnte] floatValue];
         if (bet <= 0) {
-            return;
+            continue;
         }
         
         CGFloat gain = bet * [dic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsValue] floatValue];
@@ -285,15 +295,15 @@ NSString * const kMatchParlayCellReuseID = @"LGMatchParlayTableViewCell";
     return _tableView;
 }
 
-- (NSMutableDictionary *)parlayOddsDicM {
-    if (!_parlayOddsDicM) {
-        _parlayOddsDicM = [NSMutableDictionary dictionary];
+- (NSMutableDictionary *)parlayOrderDicM {
+    if (!_parlayOrderDicM) {
+        _parlayOrderDicM = [NSMutableDictionary dictionary];
     }
-    return _parlayOddsDicM;
+    return _parlayOrderDicM;
 }
 
-- (NSDictionary *)parlayOddsDicI {
-    return [_parlayOddsDicM copy];
+- (NSDictionary *)parlayOrderDicI {
+    return [_parlayOrderDicM copy];
 }
 
 @end

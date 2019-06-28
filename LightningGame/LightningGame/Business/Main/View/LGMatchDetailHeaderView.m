@@ -241,6 +241,10 @@
                 self.statusBtn.width += 6.0;
                 self.statusBtn.height += 4.0;
                 
+                NSString *liveUrl = dataDic[kMatchKeyLiveUrl];
+                self.statusBtn.enabled = liveUrl.length > 0;
+                self.statusBtn.backgroundColor = self.statusBtn.enabled ? kMainOnTintColor : [UIColor lightGrayColor];
+                
                 self.statusLabel.text = kLocalizedString(@"main_match_process");
                 [self.statusLabel sizeToFit];
             }

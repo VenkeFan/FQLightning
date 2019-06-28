@@ -8,6 +8,7 @@
 
 #import "LGMatchParlayTableViewCell.h"
 #import "LGMatchListKeys.h"
+#import "LGMatchParlayCustomKeys.h"
 #import "FQComponentFactory.h"
 #import "LGMatchParlayTextField.h"
 #import "LGMatchParlayKeyboard.h"
@@ -235,9 +236,9 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
             [_gainLab sizeToFit];
             _gainLab.right = _field.right;
             
-            if ([self.delegate respondsToSelector:@selector(matchParlayTableCellDidBetting:ante:oddsID:)]) {
-                [self.delegate matchParlayTableCellDidBetting:self ante:ante
-                                                       oddsID:self.dataDic[kLGMatchParlayTableViewCellKeyOddsDic][kMatchOddsKeyOddsID]];
+            if ([self.delegate respondsToSelector:@selector(matchParlayTableCellDidBetting:dataDic:)]) {
+                [self.delegate matchParlayTableCellDidBetting:self
+                                                      dataDic:self.dataDic];
             }
             
         } @catch (NSException *exception) {

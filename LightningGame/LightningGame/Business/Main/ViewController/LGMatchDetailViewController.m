@@ -25,7 +25,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     BOOL _isSegCtrSelected;
 }
 
-@property (nonatomic, copy) NSString *matchID;
+@property (nonatomic, strong) NSNumber *matchID;
 
 @property (nonatomic, strong) LGMatchDetailViewModel *viewModel;
 @property (nonatomic, strong) NSMutableDictionary *matchDicM;
@@ -45,9 +45,9 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
 @implementation LGMatchDetailViewController
 
-- (instancetype)initWithMatchID:(NSString *)matchID {
+- (instancetype)initWithMatchID:(NSNumber *)matchID {
     if (self = [super init]) {
-        _matchID = [matchID copy];
+        _matchID = matchID;
         _isSegCtrSelected = NO;
     }
     return self;

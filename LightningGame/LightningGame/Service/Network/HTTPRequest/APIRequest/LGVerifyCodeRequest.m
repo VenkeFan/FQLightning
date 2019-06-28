@@ -18,15 +18,15 @@
 }
 
 - (void)requestWithMobile:(NSString *)mobile
-                  success:(nullable RequestSucceedBlock)success
-                  failure:(nullable RequestFailBlock)failure {
+                  success:(RequestSucceedBlock)success
+                  failure:(RequestFailBlock)failure {
     if (mobile.length == 0) {
         return;
     }
     
     [self.paraDic setObject:mobile forKey:@"mobile"];
     
-    [super requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {
             success(task, responseObject);
         }

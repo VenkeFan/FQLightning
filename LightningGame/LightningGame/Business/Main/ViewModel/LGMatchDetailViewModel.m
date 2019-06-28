@@ -30,7 +30,7 @@ NSString * const LGMatchStageMapping[] = {
 
 @implementation LGMatchDetailViewModel
 
-- (void)fetchDataWithMatchID:(NSString *)matchID {
+- (void)fetchDataWithMatchID:(NSNumber *)matchID {
     {
 //        TODO("test data");
 //        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail_sample2.json" ofType:nil];
@@ -52,7 +52,7 @@ NSString * const LGMatchStageMapping[] = {
     }
     
     LGMatchDetailRequest *request = [[LGMatchDetailRequest alloc] initWithMatchID:matchID];
-    [request requsetWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [request requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         NSArray *oddsArray = responseObject[kMatchKeyOddsArray];
         NSArray *teamArray = responseObject[kMatchKeyTeamArray];
         NSMutableDictionary *oddsDic = [[self p_handleMatchStage:oddsArray] fq_mutableDictionary];
@@ -127,7 +127,7 @@ NSString * const LGMatchStageMapping[] = {
 
         for (int i = 0; i < tmpArray.count; i++) {
             NSDictionary *oddsDic = (NSDictionary *)tmpArray[i];
-            NSString *groupKey = [oddsDic[kMatchOddsKeyGroupID] stringValue];
+            NSNumber *groupKey = oddsDic[kMatchOddsKeyGroupID];
 
             if (nil == groupDic[groupKey]) {
                 NSMutableArray *arrayM = [NSMutableArray array];
