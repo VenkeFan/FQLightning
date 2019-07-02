@@ -28,7 +28,11 @@
     dispatch_once(&onceToken, ^{
         _instance = [[super allocWithZone:NULL] init];
         
+        [AFSecurityPolicy defaultPolicy].allowInvalidCertificates = NO;
+        [AFSecurityPolicy defaultPolicy].validatesDomainName = YES;
+        
         _instance.sessionManager = [[AFHTTPSessionManager alloc] init];
+        _instance.sessionManager.securityPolicy = [AFSecurityPolicy defaultPolicy];
         _instance.sessionManager.operationQueue.maxConcurrentOperationCount = kMaxRequestCount;
         // 请求
 //        AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
