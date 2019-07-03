@@ -97,7 +97,7 @@ static NSString * const kGameCellReuseID = @"kGameCellReuseID";
         view.backgroundColor = kNavBarColor;
         
         UILabel *lab = [FQComponentFactory labelWithFont:kRegularFont(kNameFontSize)];
-        lab.text = @"游戏筛选";
+        lab.text = kLocalizedString(@"game_list_title");
         lab.textColor = kNameFontColor;
         [lab sizeToFit];
         lab.center = CGPointMake(view.width * 0.5, view.height * 0.5);
@@ -193,7 +193,7 @@ static NSString * const kGameCellReuseID = @"kGameCellReuseID";
     
     NSMutableArray *arrayM = [NSMutableArray array];
     NSMutableDictionary *dicM = [NSMutableDictionary dictionaryWithObjectsAndKeys:kAllGameID, kGameKeyID,
-                                 @"全部", kGameKeyName, @(YES), kGameKeyIsSelected, nil];
+                                 kLocalizedString(@"game_list_all"), kGameKeyName, @(YES), kGameKeyIsSelected, nil];
     [arrayM addObject:dicM];
     [arrayM addObjectsFromArray:data];
     

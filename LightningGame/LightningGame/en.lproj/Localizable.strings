@@ -66,3 +66,10 @@ profile_balance             = "余额";
 
 // Order
 order_succeed               = "订单提交成功！";
+order_single                = "单注";
+order_succeed2              = "提交成功";
+order_tip                   = "您的订单需要系统确认，请在“投注记录”留意订单状态";
+
+// Other
+game_list_title             = "游戏筛选";
+game_list_all               = "全部";

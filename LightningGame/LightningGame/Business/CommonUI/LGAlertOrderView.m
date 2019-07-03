@@ -103,7 +103,7 @@
     [self.contentView addSubview:_lineView2];
     
     _betHintLab = [FQComponentFactory labelWithFont:kRegularFont(kFieldFontSize)];
-    _betHintLab.text = @"单注";
+    _betHintLab.text = kLocalizedString(@"order_single");
     _betHintLab.textColor = kNameFontColor;
     [_betHintLab sizeToFit];
     [self.contentView addSubview:_betHintLab];
@@ -113,7 +113,7 @@
     [self.contentView addSubview:_betLab];
     
     _gainHintLab = [FQComponentFactory labelWithFont:kRegularFont(kFieldFontSize)];
-    _gainHintLab.text = @"提交成功";
+    _gainHintLab.text = kLocalizedString(@"order_succeed2");
     _gainHintLab.textColor = kMainOnTintColor;
     [_gainHintLab sizeToFit];
     [self.contentView addSubview:_gainHintLab];
@@ -122,7 +122,7 @@
     [self.contentView addSubview:_gainLab];
     
     _orderHintLab = [FQComponentFactory labelWithFont:kRegularFont(kTinyFontSize)];
-    _orderHintLab.text = @"您的订单需要系统确认，请在“投注记录”留意订单状态";
+    _orderHintLab.text = kLocalizedString(@"order_tip");
     _orderHintLab.textColor = kOrderTintFontColor;
     [_orderHintLab sizeToFit];
     [self.contentView addSubview:_orderHintLab];

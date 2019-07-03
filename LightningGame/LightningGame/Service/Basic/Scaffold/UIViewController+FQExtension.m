@@ -59,6 +59,12 @@
     }
 }
 
+#pragma mark - Override
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - FQNavigationBarDelegate
 
 - (void)navigationBarLeftBtnDidClicked {

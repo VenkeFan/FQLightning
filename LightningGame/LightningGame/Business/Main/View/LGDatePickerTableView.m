@@ -23,7 +23,7 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kSizeScale(350) + kSafeAreaBottomY)]) {
-        self.backgroundColor = kMainBgColor;
+        self.backgroundColor = kCellBgColor;
         
         _isDisplay = NO;
         
