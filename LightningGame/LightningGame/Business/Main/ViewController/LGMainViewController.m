@@ -12,12 +12,15 @@
 #import "LGServiceButton.h"
 #import "FQSegmentedControl.h"
 #import "LGMatchListView.h"
+#import "LGGameCollectionView.h"
+#import "LGGameListKeys.h"
 
 @interface LGMainViewController () <FQSegmentedControlDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, copy) NSArray<LGMatchListView *> *listViewArray;
+@property (nonatomic, strong) LGGameCollectionView *gameView;
 
 @end
 
@@ -171,7 +174,11 @@
 }
 
 - (void)navLeft2BtnClicked {
-    NSLog(@"******navLeft2BtnClicked");
+    if (!_gameView) {
+        _gameView = [LGGameCollectionView new];
+    }
+    
+    _gameView.isDisplaying ? [_gameView dismiss] : [_gameView displayInView:self.view];
 }
 
 @end
