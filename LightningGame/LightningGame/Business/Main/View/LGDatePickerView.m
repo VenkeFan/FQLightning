@@ -95,7 +95,11 @@
     if ([object isEqual:_viewModel] && [keyPath isEqualToString:@"currentIndex"]) {
         NSInteger index = [change[NSKeyValueChangeNewKey] integerValue];
         
-        [self.dateBtn setTitle:self.viewModel.itemArray[index] forState:UIControlStateNormal];
+        if (index >= 0 && index < self.viewModel.itemArray.count) {
+            [self.dateBtn setTitle:self.viewModel.itemArray[index] forState:UIControlStateNormal];
+        } else {
+            [self.dateBtn setTitle:nil forState:UIControlStateNormal];
+        }
         self.leftBtn.enabled = self.viewModel.canPreviously;
         self.rightBtn.enabled = self.viewModel.canFuture;
     }

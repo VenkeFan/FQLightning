@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LGMatchListView : UIView
 
 @property (nonatomic, assign) LGMatchListType listType;
+@property (nonatomic, copy) NSDictionary *filterGameIDDic;
 
 - (void)display;
 

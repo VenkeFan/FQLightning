@@ -46,12 +46,6 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
     return self;
 }
 
-- (void)setViewModel:(LGDatePickerViewModel *)viewModel {
-    _viewModel = viewModel;
-    
-//    [self.tableView reloadData];
-}
-
 - (void)displayInParentView:(UIView *)parentView {
     if (_isDisplay) {
         return;
@@ -60,6 +54,7 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
     
     self.top = parentView.height;
     [parentView addSubview:self];
+    [self.tableView reloadData];
     
     [UIView animateWithDuration:0.25
                      animations:^{

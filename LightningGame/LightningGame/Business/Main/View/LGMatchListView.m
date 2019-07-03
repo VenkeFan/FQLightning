@@ -17,6 +17,7 @@
 #import "LGDatePickerTableView.h"
 #import "LGMatchParlayTableView.h"
 #import "LGMatchDetailViewController.h"
+#import "LGGameListKeys.h"
 
 static NSString * const kMatchPrepareCellReuseID = @"kMatchPrepareCellReuseID";
 static NSString * const kMatchTodayCellReuseID = @"kMatchTodayCellReuseID";
@@ -105,6 +106,13 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     }
 }
 
+- (void)setFilterGameIDDic:(NSDictionary *)filterGameIDDic {
+    _filterGameIDDic = filterGameIDDic;
+    
+    NSArray *filteredItemArray = [self p_filterData:filterGameIDDic data:self.dataArray];
+    [self p_handleData:filteredItemArray];
+}
+
 - (void)display {
     if (!_isLoaded) {
         _isLoaded = YES;
@@ -132,46 +140,16 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     if (error) {
         return;
     }
-    
     [self.dataArray removeAllObjects];
-    [self.dataDic removeAllObjects];
-    self.sortedKeys = nil;
-    
     [self.dataArray addObjectsFromArray:data];
     
-    self.dataDic = [NSMutableDictionary dictionary];
-    [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *key = [obj[kMatchKeyStartTime] substringToIndex:[obj[kMatchKeyStartTime] rangeOfString:@" "].location];
-        
-        if ([self.dataDic objectForKey:key]) {
-            NSMutableArray *subArrayM = [self.dataDic objectForKey:key];
-            [subArrayM addObject:obj];
-        } else {
-            NSMutableArray *subArrayM = [NSMutableArray array];
-            [subArrayM addObject:obj];
-            [self.dataDic setObject:subArrayM forKey:key];
-        }
-    }];
-    
-    if (self.listType == LGMatchListType_Finished) {
-        self.sortedKeys = [self.dataDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            return [obj1 compare:obj2] == NSOrderedAscending;
-        }];
-    } else {
-        self.sortedKeys = [self.dataDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            return [obj1 compare:obj2] == NSOrderedDescending;
-        }];
-    }
-    
-    [self.datePickerView.viewModel setItemArray:self.sortedKeys];
-    
-    [self.tableView reloadData];
+    NSArray *filteredItemArray = [self p_filterData:self.filterGameIDDic data:self.dataArray];
+    [self p_handleData:filteredItemArray];
 }
 
 #pragma mark - LGDatePickerViewDelegate
 
 - (void)datePickerViewDidClickedDate:(LGDatePickerView *)view {
-    self.dateTableView.viewModel = view.viewModel;
     [self.dateTableView displayInParentView:self];
 }
 
@@ -394,7 +372,61 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 
 #pragma mark - Private
 
-- (void)addFooter {
+- (NSArray *)p_filterData:(NSDictionary *)filterGameIDDic data:(NSArray *)data {
+    if (filterGameIDDic.count == 0) {
+        return data;
+    }
+    
+    if (filterGameIDDic.count == 1 && [filterGameIDDic.allKeys.firstObject isEqual:kAllGameID]) {
+        return data;
+    }
+    
+    
+    NSMutableArray *filteredItemArray = [NSMutableArray array];
+    [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *key = obj[kMatchKeyGameID];
+        if (filterGameIDDic[key]) {
+            [filteredItemArray addObject:obj];
+        }
+    }];
+    
+    return filteredItemArray;
+}
+
+- (void)p_handleData:(NSArray *)data {
+    [self.dataDic removeAllObjects];
+    self.sortedKeys = nil;
+    
+    self.dataDic = [NSMutableDictionary dictionary];
+    [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *key = [obj[kMatchKeyStartTime] substringToIndex:[obj[kMatchKeyStartTime] rangeOfString:@" "].location];
+        
+        if ([self.dataDic objectForKey:key]) {
+            NSMutableArray *subArrayM = [self.dataDic objectForKey:key];
+            [subArrayM addObject:obj];
+        } else {
+            NSMutableArray *subArrayM = [NSMutableArray array];
+            [subArrayM addObject:obj];
+            [self.dataDic setObject:subArrayM forKey:key];
+        }
+    }];
+    
+    if (self.listType == LGMatchListType_Finished) {
+        self.sortedKeys = [self.dataDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2] == NSOrderedAscending;
+        }];
+    } else {
+        self.sortedKeys = [self.dataDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2] == NSOrderedDescending;
+        }];
+    }
+    
+    [self.datePickerView.viewModel setItemArray:self.sortedKeys];
+    
+    [self.tableView reloadData];
+}
+
+- (void)p_addFooter {
     if (!self.tableView.mj_footer) {
         MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                                  refreshingAction:@selector(loadMore)];
@@ -406,7 +438,7 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     }
 }
 
-- (void)removeFooter {
+- (void)p_removeFooter {
     self.tableView.mj_footer = nil;
 }
 
@@ -447,6 +479,7 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     if (!_dateTableView) {
         _dateTableView = [LGDatePickerTableView new];
         _dateTableView.delegate = self;
+        _dateTableView.viewModel = _datePickerView.viewModel;
     }
     return _dateTableView;
 }

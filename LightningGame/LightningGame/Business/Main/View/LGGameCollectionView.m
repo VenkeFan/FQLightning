@@ -66,7 +66,6 @@
 @end
 
 static NSString * const kGameCellReuseID = @"kGameCellReuseID";
-static NSString * const kAllGameID = @"-1";
 
 @interface LGGameCollectionView () <LGGameCollectionViewModelDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -153,6 +152,18 @@ static NSString * const kAllGameID = @"-1";
         return;
     }
     _isDisplaying = NO;
+    
+    
+    NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
+    [self.itemArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj[kGameKeyIsSelected] boolValue]) {
+            [dicM setObject:@"T" forKey:obj[kGameKeyID]];
+        }
+    }];
+    
+    if (dicM.count > 0 && [self.delegate respondsToSelector:@selector(gameViewDidSelected:gameIDDic:)]) {
+        [self.delegate gameViewDidSelected:self gameIDDic:dicM];
+    }
     
     [UIView animateWithDuration:0.35
                           delay:0.0

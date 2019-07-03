@@ -9,6 +9,8 @@
 #ifndef LGGameListKeys_h
 #define LGGameListKeys_h
 
+#define kAllGameID              [NSNumber numberWithInteger:-1]
+
 extern NSString * const kGameKeyID;
 extern NSString * const kGameKeyLogo;
 extern NSString * const kGameKeyName;

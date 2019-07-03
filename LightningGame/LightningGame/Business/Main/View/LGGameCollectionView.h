@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LGGameCollectionViewDelegate <NSObject>
 
-- (void)gameView:(LGGameCollectionView *)gameView didSelectedArray:(NSArray *)gameArray;;
+- (void)gameViewDidSelected:(LGGameCollectionView *)gameView gameIDDic:(NSDictionary *)gameIDDic;;
 
 @end
 

@@ -13,9 +13,8 @@
 #import "FQSegmentedControl.h"
 #import "LGMatchListView.h"
 #import "LGGameCollectionView.h"
-#import "LGGameListKeys.h"
 
-@interface LGMainViewController () <FQSegmentedControlDelegate, UIScrollViewDelegate>
+@interface LGMainViewController () <FQSegmentedControlDelegate, LGGameCollectionViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -153,6 +152,14 @@
                      }];
 }
 
+#pragma mark - LGGameCollectionViewDelegate
+
+- (void)gameViewDidSelected:(LGGameCollectionView *)gameView gameIDDic:(nonnull NSDictionary *)gameIDDic {
+    [self.listViewArray enumerateObjectsUsingBlock:^(LGMatchListView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setFilterGameIDDic:gameIDDic];
+    }];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -176,6 +183,7 @@
 - (void)navLeft2BtnClicked {
     if (!_gameView) {
         _gameView = [LGGameCollectionView new];
+        _gameView.delegate = self;
     }
     
     _gameView.isDisplaying ? [_gameView dismiss] : [_gameView displayInView:self.view];
