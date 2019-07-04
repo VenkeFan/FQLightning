@@ -38,7 +38,8 @@
     [self fqswizzle_viewDidLoad];
     
     NSString *clsName = NSStringFromClass([self class]);
-    if ([clsName isEqualToString:@"UIInputWindowController"]
+    if ([clsName isEqualToString:@"FlutterViewController"]
+        || [clsName isEqualToString:@"UIInputWindowController"]
         || [clsName isEqualToString:@"UITextInputController"]
         || [clsName isEqualToString:@"UICompatibilityInputViewController"]
         || [clsName isEqualToString:@"UIApplicationRotationFollowingControllerNoTouches"]

@@ -8,6 +8,8 @@
 
 #import "LGServiceButton.h"
 #import "FQImageButton.h"
+#import <Flutter/Flutter.h>
+#import "AppDelegate.h"
 
 @interface LGServiceButton ()
 
@@ -42,7 +44,10 @@
 }
 
 - (void)btnClicked {
-    NSLog(@"联系客服");
+    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
+    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
+//    [FQWindowUtility.currentViewController presentViewController:flutterViewController animated:YES completion:nil];
+    [FQWindowUtility.currentViewController.navigationController pushViewController:flutterViewController animated:YES];
 }
 
 @end

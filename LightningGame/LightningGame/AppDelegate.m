@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h> // Only if you have Flutter Plugins
 #import "LGSplashViewController.h"
 #import "IQKeyboardManager.h"
 
@@ -23,7 +24,11 @@
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
-    return YES;
+    self.flutterEngine = [[FlutterEngine alloc] initWithName:@"io.flutter" project:nil];
+    [self.flutterEngine runWithEntrypoint:nil];
+    [GeneratedPluginRegistrant registerWithRegistry:self.flutterEngine];
+    
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 

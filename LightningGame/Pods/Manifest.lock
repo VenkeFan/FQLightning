@@ -16,6 +16,9 @@ PODS:
     - AFNetworking/NSURLSession
   - FBRetainCycleDetector (0.1.4)
   - FLAnimatedImage (1.0.12)
+  - Flutter (1.0.0)
+  - FlutterPluginRegistrant (0.0.1):
+    - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -61,6 +64,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - Flutter (from `../flutter_module/.ios/Flutter/engine`)
+  - FlutterPluginRegistrant (from `../flutter_module/.ios/Flutter/FlutterPluginRegistrant`)
   - FMDB
   - IQKeyboardManager
   - Masonry
@@ -85,10 +90,18 @@ SPEC REPOS:
     - MLeaksFinder
     - SDWebImage
 
+EXTERNAL SOURCES:
+  Flutter:
+    :path: "../flutter_module/.ios/Flutter/engine"
+  FlutterPluginRegistrant:
+    :path: "../flutter_module/.ios/Flutter/FlutterPluginRegistrant"
+
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  FlutterPluginRegistrant: 8855ca2b426d228cb41aa6c26c0c83b8c49e3593
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 2ca9d64893247556f53523dcd8d78641f0ba7c23
   libwebp: 10b2bf3c62bfa28046ff701771c9a75a7683d49b
@@ -98,6 +111,6 @@ SPEC CHECKSUMS:
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
 
-PODFILE CHECKSUM: 2ca87c1128c394d48b77c9e3191e69fe04159d83
+PODFILE CHECKSUM: 1d92abce792b397f0a756f352540254ebee1e80c
 
 COCOAPODS: 1.7.0
