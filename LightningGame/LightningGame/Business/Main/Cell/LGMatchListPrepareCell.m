@@ -57,7 +57,7 @@
 - (void)setDataDic:(NSDictionary *)dataDic {
     [super setDataDic:dataDic];
     
-    self.timeLabel.text = dataDic[kMatchKeyStartTime];
+    self.timeLabel.text = [dataDic[kMatchKeyStartTime] substringWithRange:NSMakeRange([dataDic[kMatchKeyStartTime] rangeOfString:@" "].location + 1, 5)];
     [self.timeLabel sizeToFit];
     
     [self setTopBtn:_topStatusBtn btmBtn:_btmStatusBtn];

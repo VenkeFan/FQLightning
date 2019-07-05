@@ -42,6 +42,8 @@ extern NSString * const kMatchKeyMatchName;
 extern NSString * const kMatchKeyMatchShortName;
 extern NSString * const kMatchKeyStartTime;
 extern NSString * const kMatchKeyEndTime;
+extern NSString * const kMatchKeyStartTimeStamp;
+extern NSString * const kMatchKeyEndTimeStamp;
 extern NSString * const kMatchKeyRound;
 extern NSString * const kMatchKeyTournamentID;
 extern NSString * const kMatchKeyTournamentName;
