@@ -186,6 +186,22 @@
     }
 }
 
+- (void)playerViewOrientationDidChanged:(FQAbstractPlayerView *)playerView {
+    BOOL hidden = NO;
+    switch (playerView.playerOrientation) {
+        case FQPlayerViewOrientation_Portrait:
+            hidden = NO;
+            break;
+        case FQPlayerViewOrientation_Landscape:
+            hidden = YES;
+            break;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(matchDetailPlayerView:statusBarHidden:)]) {
+        [self.delegate matchDetailPlayerView:self statusBarHidden:hidden];
+    }
+}
+
 #pragma mark - Events
 
 - (void)statusBtnOnClicked {

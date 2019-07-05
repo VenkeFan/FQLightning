@@ -23,6 +23,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
 @interface LGMatchDetailViewController () <LGMatchDetailViewModelDelegate, FQSegmentedControlDelegate, LGMatchDetailHeaderViewDelegate, LGMatchDetailPlayerViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isSegCtrSelected;
+    BOOL _statusBarHidden;
 }
 
 @property (nonatomic, strong) NSNumber *matchID;
@@ -49,6 +50,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     if (self = [super init]) {
         _matchID = matchID;
         _isSegCtrSelected = NO;
+        _statusBarHidden = NO;
     }
     return self;
 }
@@ -77,6 +79,12 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+- (BOOL)prefersStatusBarHidden {
+    return _statusBarHidden;
+}
+
+#pragma mark - UI
 
 - (void)initializeTopView {
     _topContentView = [[UIView alloc] init];
@@ -348,6 +356,11 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
                      } completion:^(BOOL finished) {
                          self.playerView = nil;
                      }];
+}
+
+- (void)matchDetailPlayerView:(LGMatchDetailPlayerView *)view statusBarHidden:(BOOL)statusBarHidden {
+    _statusBarHidden = statusBarHidden;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LGMatchDetailPlayerViewDelegate <NSObject>
 
 - (void)matchDetailPlayerViewDidStop:(LGMatchDetailPlayerView *)view;
+- (void)matchDetailPlayerView:(LGMatchDetailPlayerView *)view statusBarHidden:(BOOL)statusBarHidden;
 
 @end
 
