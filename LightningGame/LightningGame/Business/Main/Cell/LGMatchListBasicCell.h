@@ -59,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)generateTopStatusBtn:(__strong FQImageButton *_Nonnull*_Nonnull)topStatusBtn;
 - (void)generateBtmStatusBtn:(__strong FQImageButton *_Nonnull*_Nonnull)btmStatusBtn;
+- (NSString *)shortStartTime:(NSString *)startTime;
 
 @end
 

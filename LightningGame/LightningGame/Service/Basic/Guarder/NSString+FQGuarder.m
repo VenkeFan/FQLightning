@@ -18,13 +18,39 @@
     id placeholderStrM = [NSMutableString alloc];
     swizzleInstanceMethod([placeholderStrM class], @selector(initWithString:), @selector(safeM_initWithString:));
     
-    NSMutableString *mutStr = [NSMutableString string];
-    swizzleInstanceMethod([mutStr class], @selector(replaceCharactersInRange:withString:), @selector(safe_replaceCharactersInRange:withString:));
-    swizzleInstanceMethod([mutStr class], @selector(insertString:atIndex:), @selector(safe_insertString:atIndex:));
-    swizzleInstanceMethod([mutStr class], @selector(appendString:), @selector(safe_appendString:));
-    swizzleInstanceMethod([mutStr class], @selector(deleteCharactersInRange:), @selector(safe_deleteCharactersInRange:));
-    swizzleInstanceMethod([mutStr class], @selector(replaceOccurrencesOfString:withString:options:range:), @selector(safe_replaceOccurrencesOfString:withString:options:range:));
+    NSString *cfConstStr = [NSString string];
+//    IMP imp1 = method_getImplementation(class_getInstanceMethod([cfConstStr class], @selector(substringWithRange:)));
+//    IMP imp2 = method_getImplementation(class_getInstanceMethod([cfConstStr class], @selector(safe_substringWithRange:)));
+    swizzleInstanceMethod([cfConstStr class], @selector(substringWithRange:), @selector(safe_substringWithRange:));
+    swizzleInstanceMethod([cfConstStr class], @selector(substringFromIndex:), @selector(safe_substringFromIndex:));
+    swizzleInstanceMethod([cfConstStr class], @selector(substringToIndex:), @selector(safe_substringToIndex:));
+//    imp1 = method_getImplementation(class_getInstanceMethod([cfConstStr class], @selector(substringWithRange:)));
+//    imp2 = method_getImplementation(class_getInstanceMethod([cfConstStr class], @selector(safe_substringWithRange:)));
+    
+    NSMutableString *cfStr = [NSMutableString string];
+    swizzleInstanceMethod([cfStr class], @selector(replaceCharactersInRange:withString:), @selector(safe_replaceCharactersInRange:withString:));
+    swizzleInstanceMethod([cfStr class], @selector(insertString:atIndex:), @selector(safe_insertString:atIndex:));
+    swizzleInstanceMethod([cfStr class], @selector(appendString:), @selector(safe_appendString:));
+    swizzleInstanceMethod([cfStr class], @selector(deleteCharactersInRange:), @selector(safe_deleteCharactersInRange:));
+    swizzleInstanceMethod([cfStr class], @selector(replaceOccurrencesOfString:withString:options:range:), @selector(safe_replaceOccurrencesOfString:withString:options:range:));
+    
+    /*
+     [[NSString stringWithFormat:@""] class]                = __NSCFConstantString
+     [[NSString stringWithFormat:@"123456789a"] class]      = __NSCFString
+     [[NSString stringWithFormat:@"1"] class]               = NSTaggedPointerString
+     [[NSString stringWithFormat:@"123456789"] class]       = NSTaggedPointerString
+     */
+    NSString *taggedStr = [NSString stringWithFormat:@"1"];
+//    IMP imp3 = method_getImplementation(class_getInstanceMethod([taggedStr class], @selector(substringWithRange:)));
+//    IMP imp4 = method_getImplementation(class_getInstanceMethod([taggedStr class], @selector(safe_substringWithRange:)));
+    swizzleInstanceMethod([taggedStr class], @selector(substringWithRange:), @selector(safe_substringWithRange:));
+    swizzleInstanceMethod([taggedStr class], @selector(substringFromIndex:), @selector(safe_substringFromIndex:));
+    swizzleInstanceMethod([taggedStr class], @selector(substringToIndex:), @selector(safe_substringToIndex:));    
+//    imp3 = method_getImplementation(class_getInstanceMethod([taggedStr class], @selector(substringWithRange:)));
+//    imp4 = method_getImplementation(class_getInstanceMethod([taggedStr class], @selector(safe_substringWithRange:)));
 }
+
+#pragma mark - NSPlaceholderString
 
 - (instancetype)safe_initWithString:(NSString *)aString {
     if (nil == aString || [aString isEqual:[NSNull null]]) {
@@ -36,6 +62,8 @@
     return [self safe_initWithString:aString];
 }
 
+#pragma mark - NSPlaceholderMutableString
+
 - (instancetype)safeM_initWithString:(NSString *)aString {
     if (nil == aString || [aString isEqual:[NSNull null]]) {
 #if DEBUG
@@ -45,6 +73,45 @@
     }
     return [self safeM_initWithString:aString];
 }
+
+#pragma mark - __NSCFConstantString
+
+- (NSString *)safe_substringWithRange:(NSRange)range {
+    if (range.location < 0
+        || range.location > self.length
+        || range.location + range.length > self.length) {
+#if DEBUG
+        NSLog(@"%@ - %@ - %@", [self class], NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
+#endif
+        return self;
+    }
+    
+    return [self safe_substringWithRange:range];
+}
+
+- (NSString *)safe_substringFromIndex:(NSUInteger)from {
+    if (from < 0 || from > self.length) {
+#if DEBUG
+        NSLog(@"%@ - %@ - %@", [self class], NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
+#endif
+        return self;
+    }
+    
+    return [self safe_substringFromIndex:from];
+}
+
+- (NSString *)safe_substringToIndex:(NSUInteger)to {
+    if (to < 0 || to > self.length) {
+#if DEBUG
+        NSLog(@"%@ - %@ - %@", [self class], NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
+#endif
+        return self;
+    }
+    
+    return [self safe_substringToIndex:to];
+}
+
+#pragma mark - __NSCFString
 
 - (void)safe_replaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
     if (nil == aString || [aString isEqual:[NSNull null]]) {

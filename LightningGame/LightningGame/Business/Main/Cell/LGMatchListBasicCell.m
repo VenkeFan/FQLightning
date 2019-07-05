@@ -345,4 +345,8 @@
     }
 }
 
+- (NSString *)shortStartTime:(NSString *)startTime {
+    return [startTime substringWithRange:NSMakeRange([startTime rangeOfString:@" "].location + 1, 5)];
+}
+
 @end
