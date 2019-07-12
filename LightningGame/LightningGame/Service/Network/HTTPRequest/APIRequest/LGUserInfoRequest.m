@@ -25,9 +25,6 @@
         return;
     }
     
-    [self.paraDic setObject:userID forKey:@"openid"];
-    [self.paraDic setObject:accessToken forKey:@"access_token"];
-    
     [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {
             success(task, responseObject);

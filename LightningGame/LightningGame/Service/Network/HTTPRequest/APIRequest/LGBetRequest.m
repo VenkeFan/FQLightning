@@ -24,7 +24,7 @@
     
     [[FQNetworkManager sharedManager] setJSONRequestSerializer];
     [FQNetworkManager setContentType:@"application/json;charset=utf-8"];
-    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
+//    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
     
     NSDictionary *dic = @{@"oddsid": oddsID, @"amount": amount};
     [self.paraDic setObject:@[dic] forKey:@"datas"];
@@ -49,7 +49,7 @@
     
     [[FQNetworkManager sharedManager] setJSONRequestSerializer];
     [FQNetworkManager setContentType:@"application/json;charset=utf-8"];
-    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
+//    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
     
     NSMutableArray *arrayM = [NSMutableArray array];
     [oddsDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {

@@ -43,6 +43,8 @@
     };
     
     FQNetworkManager *manager = [FQNetworkManager sharedManager];
+    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
+    
     _task = [manager requestWithURLString:self.urlStr
                                    method:self.method
                                parameters:self.paraDic

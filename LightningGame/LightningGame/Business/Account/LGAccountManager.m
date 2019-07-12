@@ -49,6 +49,8 @@ NSString * const kAccountKeyAccountMoney                = @"money";
 }
 
 - (void)fetchAccountInfoWithIntro:(NSDictionary *)intro {
+    [self updateLocalAccount:intro];
+    
     LGUserInfoRequest *request = [LGUserInfoRequest new];
     [request requestWithUserID:intro[kAccountKeyAccountID]
                    accessToken:intro[kAccountKeyAccountAccessToken]
@@ -59,9 +61,7 @@ NSString * const kAccountKeyAccountMoney                = @"money";
                            [self updateLocalAccount:oldInfo];
                        }
                        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                           if (!self.account) {
-                               [self updateLocalAccount:intro];
-                           }
+                           
                        }];
 }
 
