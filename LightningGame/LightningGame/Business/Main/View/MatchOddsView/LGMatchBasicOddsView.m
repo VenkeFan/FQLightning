@@ -98,6 +98,16 @@
 
 #pragma mark - Setter
 
+- (void)setStatus:(LGMatchOddsStatus)status {
+    _status = status;
+    
+    if (status == LGMatchOddsStatus_Normal) {
+        self.backgroundColor = kMarqueeBgColor;
+    } else {
+        self.backgroundColor = kMainBgColor;
+    }
+}
+
 - (void)setSelected:(BOOL)selected {
     if (_selected == selected) {
         return;

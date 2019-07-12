@@ -12,8 +12,6 @@
 #import "LGMatchParlayCustomKeys.h"
 #import "FQComponentFactory.h"
 
-#define kOrderTintFontColor                 kUIColorFromRGB(0x988E7F)
-
 @interface LGAlertOrderMetaCell : UITableViewCell
 
 - (void)setOrderDic:(NSDictionary *)orderDic dataDic:(NSDictionary *)dataDic;

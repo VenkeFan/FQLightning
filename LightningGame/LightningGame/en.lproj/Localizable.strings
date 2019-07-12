@@ -63,6 +63,19 @@ parlay_total_gain           = "最高返还";
 
 // Profile
 profile_balance             = "余额";
+profile_title               = "个人资料";
+profile_wallet              = "钱包";
+profile_agency              = "代理";
+profile_share               = "分享";
+profile_bet_history         = "投注记录";
+profile_msg                 = "消息";
+profile_activity            = "活动";
+profile_rule                = "玩法规则";
+profile_about               = "关于";
+profile_version             = "版本";
+profile_setup               = "设置";
+parlay_settled              = "已结算";
+parlay_unSettle             = "未结算";
 
 // Order
 order_succeed               = "订单提交成功！";

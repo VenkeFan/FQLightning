@@ -17,30 +17,30 @@
     return self;
 }
 
-- (void)requestWithOddsID:(NSNumber *)oddsID amount:(NSNumber *)amount success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
-    if (oddsID == nil || amount == nil) {
-        return;
-    }
-    
-    [[FQNetworkManager sharedManager] setJSONRequestSerializer];
-    [FQNetworkManager setContentType:@"application/json;charset=utf-8"];
-//    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
-    
-    NSDictionary *dic = @{@"oddsid": oddsID, @"amount": amount};
-    [self.paraDic setObject:@[dic] forKey:@"datas"];
-    
-    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        [[FQNetworkManager sharedManager] setHTTPRequestSerializer];
-        if (success) {
-            success(task, responseObject);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [[FQNetworkManager sharedManager] setHTTPRequestSerializer];
-        if (failure) {
-            failure(task, error);
-        }
-    }];
-}
+//- (void)requestWithOddsID:(NSNumber *)oddsID amount:(NSNumber *)amount success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
+//    if (oddsID == nil || amount == nil) {
+//        return;
+//    }
+//    
+//    [[FQNetworkManager sharedManager] setJSONRequestSerializer];
+//    [FQNetworkManager setContentType:@"application/json;charset=utf-8"];
+////    [FQNetworkManager setAccessToken:[[LGAccountManager instance].account objectForKey:kAccountKeyAccountAccessToken]];
+//    
+//    NSDictionary *dic = @{@"odds_id": oddsID, @"amount": amount};
+//    [self.paraDic setObject:@[dic] forKey:@"datas"];
+//    
+//    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+//        [[FQNetworkManager sharedManager] setHTTPRequestSerializer];
+//        if (success) {
+//            success(task, responseObject);
+//        }
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        [[FQNetworkManager sharedManager] setHTTPRequestSerializer];
+//        if (failure) {
+//            failure(task, error);
+//        }
+//    }];
+//}
 
 - (void)requestWithOddsDic:(NSDictionary *)oddsDic success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
     if (oddsDic == nil) {
@@ -53,7 +53,7 @@
     
     NSMutableArray *arrayM = [NSMutableArray array];
     [oddsDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [arrayM addObject:@{@"oddsid": key, @"amount": obj}];
+        [arrayM addObject:@{@"odds_id": key, @"amount": obj}];
     }];
     
     [self.paraDic setObject:arrayM forKey:@"datas"];

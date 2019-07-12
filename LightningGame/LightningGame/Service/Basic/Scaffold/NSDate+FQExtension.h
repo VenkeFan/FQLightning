@@ -15,6 +15,12 @@
 + (NSDate *)dateFromISO8601String:(NSString *)string;
 - (NSString *)ISO8601String;
 
+@property (nonatomic, readonly) NSInteger year; ///< Year component
+@property (nonatomic, readonly) NSInteger month; ///< Month component (1~12)
+@property (nonatomic, readonly) NSInteger day; ///< Day component (1~31)
+@property (nonatomic, readonly) NSInteger hour; ///< Hour component (0~23)
+@property (nonatomic, readonly) NSInteger minute; ///< Minute component (0~59)
+@property (nonatomic, readonly) NSInteger second; 
 - (NSInteger)weekday;
 - (NSString *)weekdayString;
 - (NSInteger)weekdayOrdinal;

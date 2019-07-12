@@ -17,6 +17,10 @@ NSString * const kAccountKeyAccountExpireInterval       = @"expires_in";
 NSString * const kAccountKeyAccountUserName             = @"username";
 NSString * const kAccountKeyAccountMobile               = @"mobile";
 NSString * const kAccountKeyAccountMoney                = @"money";
+NSString * const kAccountKeyAccountRealName             = @"realname";
+NSString * const kAccountKeyAccountBirthday             = @"birthday";
+NSString * const kAccountKeyAccountIsAgency             = @"agent";
+NSString * const kAccountKeyAccounChargeUrl             = @"recharge_url";
 
 #pragma mark - LGAccountManager
 

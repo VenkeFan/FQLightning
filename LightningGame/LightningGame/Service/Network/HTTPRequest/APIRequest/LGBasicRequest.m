@@ -74,6 +74,7 @@
                                           }
                                           
                                           if (errorCode != LGErrorCode_Success) {
+                                              [LGToastView showWithMessage:responseObject[@"message"]];
                                               if (failure) {
                                                   failure(task, generateError(errorCode));
                                               }

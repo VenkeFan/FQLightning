@@ -36,7 +36,7 @@
         [self addSubview:self.contentView];
 //        [self addSubview:self.navLine];
         
-        self.tintColor = kNameFontColor;
+        self.tintColor = kMainOnTintColor;
     }
     return self;
 }

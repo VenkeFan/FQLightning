@@ -15,5 +15,9 @@ extern NSString * const kAccountKeyAccountExpireInterval;
 extern NSString * const kAccountKeyAccountUserName;
 extern NSString * const kAccountKeyAccountMobile;
 extern NSString * const kAccountKeyAccountMoney;
+extern NSString * const kAccountKeyAccountRealName;
+extern NSString * const kAccountKeyAccountBirthday;
+extern NSString * const kAccountKeyAccountIsAgency;
+extern NSString * const kAccountKeyAccounChargeUrl;
 
 #endif /* LGAccountKeys_h */
