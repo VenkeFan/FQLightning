@@ -12,7 +12,7 @@ NSString * const kProfileItemTitleKey = @"kProfileItemTitleKey";
 NSString * const kProfileItemBadgeKey = @"kProfileItemBadgeKey";
 NSString * const kProfileItemIconKey = @"kProfileItemIconKey";
 NSString * const kProfileItemAccessoryInfoKey = @"kProfileItemAccessoryInfoKey";
-NSString * const kProfileItemHasAccessoryKey = @"kProfileItemHasAccessoryKey";
+NSString * const kProfileItemAccessoryTypeKey = @"kProfileItemAccessoryTypeKey";
 NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
 
 @implementation LGProfileViewCell {
@@ -22,6 +22,8 @@ NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
     UILabel *_badgeLab;
     UILabel *_accessoryLab;
     UIImageView *_accessoryImgView;
+    UISwitch *_switchBtn;
+    UIDatePicker *_datePicker;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -63,6 +65,11 @@ NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
         _accessoryImgView.transform = CGAffineTransformMakeRotation(M_PI);
         [_accessoryImgView sizeToFit];
         [_containerView addSubview:_accessoryImgView];
+        
+        _switchBtn = [UISwitch new];
+        _switchBtn.onTintColor = kMainOnTintColor;
+        _switchBtn.transform = CGAffineTransformMakeScale(0.75, 0.75);
+        [_containerView addSubview:_switchBtn];
     }
     return self;
 }
@@ -84,13 +91,23 @@ NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
     } else {
         _accessoryLab.center = CGPointMake(_containerView.width - kCellMarginX - _accessoryLab.width * 0.5, centerY);
     }
+    
+    if (!_switchBtn.hidden) {
+        _switchBtn.center = CGPointMake(_containerView.width - kCellMarginX - _switchBtn.width * 0.5, centerY);
+    }
+    
+    if (!_datePicker.hidden) {
+        _datePicker.center = CGPointMake(_containerView.width - kCellMarginX - _datePicker.width * 0.5, centerY);
+    }
 }
 
 - (void)setItemDic:(NSDictionary *)itemDic {
     _itemDic = [itemDic copy];
     
-    _iconImgView.image = [UIImage imageNamed:itemDic[kProfileItemIconKey]];
-    [_iconImgView sizeToFit];
+    if (itemDic[kProfileItemIconKey]) {
+        _iconImgView.image = [UIImage imageNamed:itemDic[kProfileItemIconKey]];
+        [_iconImgView sizeToFit];
+    }
     
     _titleLab.text = itemDic[kProfileItemTitleKey];
     [_titleLab sizeToFit];
@@ -109,8 +126,27 @@ NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
         _badgeLab.hidden = YES;
     }
     
-    BOOL hasAccessory = [itemDic[kProfileItemHasAccessoryKey] boolValue];
-    _accessoryImgView.hidden = !hasAccessory;
+    LGProfileViewCellAccessoryType accessoryType = (LGProfileViewCellAccessoryType)[itemDic[kProfileItemAccessoryTypeKey] integerValue];
+    
+    _accessoryImgView.hidden = YES;
+    _switchBtn.hidden = YES;
+    _datePicker.hidden = YES;
+    
+    switch (accessoryType) {
+        case LGProfileViewCellAccessoryTypeNone:
+            break;
+        case LGProfileViewCellAccessoryTypeDisclosureIndicator:
+            _accessoryImgView.hidden = NO;
+            break;
+        case LGProfileViewCellAccessoryTypeSwitchButton:
+            _switchBtn.hidden = NO;
+            break;
+        case LGProfileViewCellAccessoryTypeDatePicker:
+            _datePicker.hidden = NO;
+            [_datePicker setDate:[NSDate date]];
+            
+            break;
+    }
     
     _accessoryLab.text = itemDic[kProfileItemAccessoryInfoKey];
     [_accessoryLab sizeToFit];

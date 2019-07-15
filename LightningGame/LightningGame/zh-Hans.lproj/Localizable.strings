@@ -77,6 +77,15 @@ profile_setup               = "设置";
 parlay_settled              = "已结算";
 parlay_unSettle             = "未结算";
 
+// Setup
+setup_real_name             = "真实姓名";
+setup_real_identify         = "用户身份";
+setup_birthday              = "出生日期";
+setup_modify_mobile         = "修改手机号";
+setup_modify_pwd            = "修改密码";
+setup_unlocked              = "指纹/脸部解锁";
+setup_signout               = "退出";
+
 // Order
 order_succeed               = "订单提交成功！";
 order_single                = "单注";
