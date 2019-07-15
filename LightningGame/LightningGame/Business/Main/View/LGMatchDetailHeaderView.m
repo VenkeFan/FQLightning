@@ -197,7 +197,7 @@
         _leftScore.text = scoreStr(leftTeam);
         [_leftScore sizeToFit];
         
-        _rightScore.text = scoreStr(leftTeam);
+        _rightScore.text = scoreStr(rightTeam);
         [_rightScore sizeToFit];
     }
     

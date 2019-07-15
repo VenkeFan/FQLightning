@@ -32,6 +32,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 @property (nonatomic, strong) NSMutableDictionary *matchDicM;
 @property (nonatomic, copy) NSArray *teamArrayI;
 @property (nonatomic, strong) NSMutableDictionary *oddsDicM;
+@property (nonatomic, copy) NSArray *sortedKeys;
 
 @property (nonatomic, strong) UIView *topContentView;
 @property (nonatomic, strong) LGMatchDetailHeaderView *headerView;
@@ -171,8 +172,8 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     NSDictionary *notiOddsDic = notification.object;
     __block NSIndexPath *indexPath = nil;
     
-//    for (int i = 0; i < self.oddsDicM.allKeys.count; i++) {
-//        NSArray *stageArray = [self.oddsDicM objectForKey:self.oddsDicM.allKeys[i]];
+//    for (int i = 0; i < self.sortedKeys.count; i++) {
+//        NSArray *stageArray = [self.oddsDicM objectForKey:self.sortedKeys[i]];
 //
 //        for (int j = 0; j < stageArray.count; j++) {
 //            NSArray *groupArray = stageArray[j];
@@ -209,8 +210,8 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     NSArray *notiOddsArray = notification.object;
     NSMutableArray<NSIndexPath *> *indexPathArray = [NSMutableArray array];
     
-//    for (int i = 0; i < self.oddsDicM.allKeys.count; i++) {
-//        NSArray *stageArray = [self.oddsDicM objectForKey:self.oddsDicM.allKeys[i]];
+//    for (int i = 0; i < self.sortedKeys.count; i++) {
+//        NSArray *stageArray = [self.oddsDicM objectForKey:self.sortedKeys[i]];
 //
 //        for (int j = 0; j < stageArray.count; j++) {
 //            NSArray *groupArray = stageArray[j];
@@ -256,8 +257,8 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 
 - (void)traversalOddsDicM:(void(^)(NSInteger section, NSInteger row, NSMutableDictionary *oddsDic, BOOL *stop))block {
     BOOL finished = NO;
-    for (int i = 0; i < self.oddsDicM.allKeys.count; i++) {
-        NSArray *stageArray = [self.oddsDicM objectForKey:self.oddsDicM.allKeys[i]];
+    for (int i = 0; i < self.sortedKeys.count; i++) {
+        NSArray *stageArray = [self.oddsDicM objectForKey:self.sortedKeys[i]];
         
         for (int j = 0; j < stageArray.count; j++) {
             NSArray *groupArray = stageArray[j];
@@ -297,8 +298,15 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     [self.headerView setDataDic:self.matchDicM];
     
     {
-        NSMutableArray *stageArray = [NSMutableArray arrayWithCapacity:self.oddsDicM.allKeys.count];
-        [self.oddsDicM.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        self.sortedKeys = [self.oddsDicM.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NSInteger index1, index2;
+            [LGMatchDetailViewModel matchStage:obj1 index:&index1];
+            [LGMatchDetailViewModel matchStage:obj2 index:&index2];
+            return index1 > index2;
+        }];
+        
+        NSMutableArray *stageArray = [NSMutableArray arrayWithCapacity:self.sortedKeys.count];
+        [self.sortedKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [stageArray addObject:[LGMatchDetailViewModel matchStage:obj]];
         }];
         
@@ -366,7 +374,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.oddsDicM.allKeys.count;
+    return self.sortedKeys.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -384,7 +392,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     lab.backgroundColor = kCellBgColor;
     lab.font = kRegularFont(kNameFontSize);
     lab.textColor = kNameFontColor;
-    lab.text = [LGMatchDetailViewModel matchStage:self.oddsDicM.allKeys[section]];
+    lab.text = [LGMatchDetailViewModel matchStage:self.sortedKeys[section]];
     lab.textAlignment = NSTextAlignmentCenter;
     [lab sizeToFit];
     lab.width += kSizeScale(12.0);
@@ -407,7 +415,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.oddsDicM objectForKey:self.oddsDicM.allKeys[section]] count];
+    return [[self.oddsDicM objectForKey:self.sortedKeys[section]] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -415,7 +423,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
         return [[self.cellHeightDicM objectForKey:indexPath] floatValue];
     }
     
-    CGFloat height = [LGMatchDetailTableViewCell cellHeight:[[self.oddsDicM objectForKey:self.oddsDicM.allKeys[indexPath.section]] objectAtIndex:indexPath.row]];
+    CGFloat height = [LGMatchDetailTableViewCell cellHeight:[[self.oddsDicM objectForKey:self.sortedKeys[indexPath.section]] objectAtIndex:indexPath.row]];
     [self.cellHeightDicM setObject:@(height) forKey:indexPath];
     
     return height;;
@@ -425,7 +433,7 @@ static CGFloat const kDetailViewEdgeAll = kSizeScale(8.0);
     LGMatchDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMatchDetailOddsReuseID];
     [cell setMatchDic:self.matchDicM
             teamArray:self.teamArrayI
-            oddsArray:[[self.oddsDicM objectForKey:self.oddsDicM.allKeys[indexPath.section]] objectAtIndex:indexPath.row]];
+            oddsArray:[[self.oddsDicM objectForKey:self.sortedKeys[indexPath.section]] objectAtIndex:indexPath.row]];
     return cell;
 }
 

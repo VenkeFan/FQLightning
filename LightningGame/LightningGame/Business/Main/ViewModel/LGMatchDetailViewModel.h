@@ -13,6 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString * const KMatchStageFinalKey;
+
 @protocol LGMatchDetailViewModelDelegate <NSObject>
 
 - (void)matchDetailDidFetch:(LGMatchDetailViewModel *)viewModel
@@ -29,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchDataWithMatchID:(NSNumber *)matchID;
 + (NSString *)matchStage:(NSString *)stageKey;
++ (NSString *)matchStage:(NSString *)stageKey index:(nullable NSInteger *)index;
 
 @end
 

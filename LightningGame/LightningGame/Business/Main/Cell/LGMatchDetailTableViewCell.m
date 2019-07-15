@@ -122,6 +122,15 @@
             } else {
                 [oddsView setTeamDic:teamArray.firstObject oddsDic:oddsArray[i] matchName:matchDic[kMatchKeyMatchName]];
             }
+            
+//            if ([leftTeam[kMatchTeamKeyTeamID] isEqual:oddsArray[i][kMatchOddsKeyTeamID]]) {
+//                [oddsView setTeamDic:leftTeam oddsDic:leftOdds matchName:matchDic[kMatchKeyMatchName]];
+//            } else if ([rightTeam[kMatchTeamKeyTeamID] isEqual:oddsArray[i][kMatchOddsKeyTeamID]]) {
+//                [oddsView setTeamDic:rightTeam oddsDic:rightOdds matchName:matchDic[kMatchKeyMatchName]];
+//            } else {
+//                [oddsView setTeamDic:teamArray.firstObject oddsDic:oddsArray[i] matchName:matchDic[kMatchKeyMatchName]];
+//            }
+            
             oddsView.direction = ((i & 1) == 0) ? LGMatchDetailOddsView_Left : LGMatchDetailOddsView_Right;
             [_oddsGroupView addSubview:oddsView];
         }

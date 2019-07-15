@@ -10,6 +10,8 @@
 #import "LGMatchDetailRequest.h"
 #import "NSDictionary+FQExtension.h"
 
+NSString * const KMatchStageFinalKey = @"final";
+
 NSString * const LGMatchStageMapping[] = {
     [1] = @"一",
     [2] = @"二",
@@ -69,30 +71,71 @@ NSString * const LGMatchStageMapping[] = {
 }
 
 + (NSString *)matchStage:(NSString *)stageKey {
-    if ([stageKey isEqualToString:@"final"]) {
-        return @"全场";
-    } else if ([stageKey isEqualToString:@"r1"]) {
-        return @"第一局";
-    } else if ([stageKey isEqualToString:@"r2"]) {
-        return @"第二局";
-    } else if ([stageKey isEqualToString:@"r3"]) {
-        return @"第三局";
-    } else if ([stageKey isEqualToString:@"map1"]) {
-        return @"地图一";
-    } else if ([stageKey isEqualToString:@"map2"]) {
-        return @"地图二";
-    } else if ([stageKey isEqualToString:@"map3"]) {
-        return @"地图三";
-    }
-    
-//    if ([stageKey isEqualToString:@"final"]) {
+//    if ([stageKey isEqualToString:KMatchStageFinalKey]) {
 //        return @"全场";
-//    } else if ([stageKey hasPrefix:@"r"]) {
-//        NSString *index = [stageKey substringFromIndex:[stageKey rangeOfString:@"r"].length];
-//
-//    } else if ([stageKey hasPrefix:@"map"]) {
-//
+//    } else if ([stageKey isEqualToString:@"r1"]) {
+//        return @"第一局";
+//    } else if ([stageKey isEqualToString:@"r2"]) {
+//        return @"第二局";
+//    } else if ([stageKey isEqualToString:@"r3"]) {
+//        return @"第三局";
+//    } else if ([stageKey isEqualToString:@"map1"]) {
+//        return @"地图一";
+//    } else if ([stageKey isEqualToString:@"map2"]) {
+//        return @"地图二";
+//    } else if ([stageKey isEqualToString:@"map3"]) {
+//        return @"地图三";
 //    }
+    
+    return [self matchStage:stageKey index:nil];
+}
+
++ (NSString *)matchStage:(NSString *)stageKey index:(nullable NSInteger *)index {
+    if ([stageKey isEqualToString:KMatchStageFinalKey]) {
+        if (index) {
+            *index = NSIntegerMin;
+        }
+        stageKey = @"全场";
+        
+    } else if ([stageKey containsString:@"r"]) {
+        NSRange range = [stageKey rangeOfString:@"r"];
+        NSInteger num = [[stageKey substringFromIndex:range.location + range.length] integerValue];
+        if (index) {
+            *index = num;
+        }
+                                            
+        stageKey = [NSString stringWithFormat:@"第%@局", LGMatchStageMapping[num]];
+        
+    } else if ([stageKey containsString:@"map"]) {
+        NSRange range = [stageKey rangeOfString:@"map"];
+        NSInteger num = [[stageKey substringFromIndex:range.location + range.length] integerValue];
+        if (index) {
+            *index = num;
+        }
+        
+        stageKey = [NSString stringWithFormat:@"地图%@", LGMatchStageMapping[num]];
+        
+    } else if ([stageKey containsString:@"1st"]) {
+        stageKey = @"上半场";
+        if (index) {
+            *index = -2;
+        }
+        
+    } else if ([stageKey containsString:@"2nd"]) {
+        stageKey = @"下半场";
+        if (index) {
+            *index = -1;
+        }
+        
+    } else if ([stageKey containsString:@"q"]) {
+        NSRange range = [stageKey rangeOfString:@"q"];
+        NSInteger num = [[stageKey substringFromIndex:range.location + range.length] integerValue];
+        if (index) {
+            *index = num;
+        }
+        
+        stageKey = [NSString stringWithFormat:@"第%@节", LGMatchStageMapping[num]];
+    }
     
     return stageKey;
 }
