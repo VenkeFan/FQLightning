@@ -23,7 +23,6 @@ NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
     UILabel *_accessoryLab;
     UIImageView *_accessoryImgView;
     UISwitch *_switchBtn;
-    UIDatePicker *_datePicker;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -95,61 +94,64 @@ NSString * const kProfileItemClassKey = @"kProfileItemClassKey";
     if (!_switchBtn.hidden) {
         _switchBtn.center = CGPointMake(_containerView.width - kCellMarginX - _switchBtn.width * 0.5, centerY);
     }
-    
-    if (!_datePicker.hidden) {
-        _datePicker.center = CGPointMake(_containerView.width - kCellMarginX - _datePicker.width * 0.5, centerY);
-    }
 }
 
 - (void)setItemDic:(NSDictionary *)itemDic {
     _itemDic = [itemDic copy];
     
-    if (itemDic[kProfileItemIconKey]) {
-        _iconImgView.image = [UIImage imageNamed:itemDic[kProfileItemIconKey]];
-        [_iconImgView sizeToFit];
+    {
+        if (itemDic[kProfileItemIconKey]) {
+            _iconImgView.image = [UIImage imageNamed:itemDic[kProfileItemIconKey]];
+            [_iconImgView sizeToFit];
+        }
     }
     
-    _titleLab.text = itemDic[kProfileItemTitleKey];
-    [_titleLab sizeToFit];
-    
-    NSInteger badge = [itemDic[kProfileItemBadgeKey] integerValue];
-    if (badge > 0) {
-        _badgeLab.hidden = NO;
-        _badgeLab.text = [NSString stringWithFormat:@"%ld", badge];
-        [_badgeLab sizeToFit];
-        _badgeLab.width += 12;
-        _badgeLab.height += 2;
-        
-        _badgeLab.layer.cornerRadius = _badgeLab.height * 0.5;
-        _badgeLab.layer.masksToBounds = YES;
-    } else {
-        _badgeLab.hidden = YES;
+    {
+        _titleLab.text = itemDic[kProfileItemTitleKey];
+        [_titleLab sizeToFit];
     }
     
-    LGProfileViewCellAccessoryType accessoryType = (LGProfileViewCellAccessoryType)[itemDic[kProfileItemAccessoryTypeKey] integerValue];
-    
-    _accessoryImgView.hidden = YES;
-    _switchBtn.hidden = YES;
-    _datePicker.hidden = YES;
-    
-    switch (accessoryType) {
-        case LGProfileViewCellAccessoryTypeNone:
-            break;
-        case LGProfileViewCellAccessoryTypeDisclosureIndicator:
-            _accessoryImgView.hidden = NO;
-            break;
-        case LGProfileViewCellAccessoryTypeSwitchButton:
-            _switchBtn.hidden = NO;
-            break;
-        case LGProfileViewCellAccessoryTypeDatePicker:
-            _datePicker.hidden = NO;
-            [_datePicker setDate:[NSDate date]];
+    {
+        NSInteger badge = [itemDic[kProfileItemBadgeKey] integerValue];
+        if (badge > 0) {
+            _badgeLab.hidden = NO;
+            _badgeLab.text = [NSString stringWithFormat:@"%ld", badge];
+            [_badgeLab sizeToFit];
+            _badgeLab.width += 12;
+            _badgeLab.height += 2;
             
-            break;
+            _badgeLab.layer.cornerRadius = _badgeLab.height * 0.5;
+            _badgeLab.layer.masksToBounds = YES;
+        } else {
+            _badgeLab.hidden = YES;
+        }
     }
     
-    _accessoryLab.text = itemDic[kProfileItemAccessoryInfoKey];
-    [_accessoryLab sizeToFit];
+    {
+        LGProfileViewCellAccessoryType accessoryType = (LGProfileViewCellAccessoryType)[itemDic[kProfileItemAccessoryTypeKey] integerValue];
+        
+        _accessoryImgView.hidden = YES;
+        _switchBtn.hidden = YES;
+        
+        switch (accessoryType) {
+            case LGProfileViewCellAccessoryTypeNone:
+                break;
+            case LGProfileViewCellAccessoryTypeDisclosureIndicator:
+                _accessoryImgView.hidden = NO;
+                break;
+            case LGProfileViewCellAccessoryTypeSwitchButton:
+                _switchBtn.hidden = NO;
+                break;
+            case LGProfileViewCellAccessoryTypeDatePicker:
+                _accessoryImgView.hidden = NO;
+                break;
+        }
+    }
+    
+    {
+        _accessoryLab.text = itemDic[kProfileItemAccessoryInfoKey];
+        [_accessoryLab sizeToFit];
+    }
 }
 
 @end

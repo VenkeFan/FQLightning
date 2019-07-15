@@ -85,6 +85,7 @@ setup_modify_mobile         = "修改手机号";
 setup_modify_pwd            = "修改密码";
 setup_unlocked              = "指纹/脸部解锁";
 setup_signout               = "退出";
+setup_pwd_old               = "旧密码";
 
 // Order
 order_succeed               = "订单提交成功！";

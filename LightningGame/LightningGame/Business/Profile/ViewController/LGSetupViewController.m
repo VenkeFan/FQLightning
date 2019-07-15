@@ -77,11 +77,12 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
         return;
     }
     
-    UIViewController *ctr = [NSClassFromString(clsName) new];
-    if (![ctr isKindOfClass:[UIViewController class]]) {
-        return;
+    id cls = [NSClassFromString(clsName) new];
+    if ([cls isKindOfClass:[UIViewController class]]) {
+        [self.navigationController pushViewController:(UIViewController *)cls animated:YES];
+    } else if ([cls isKindOfClass:[UIDatePicker class]]) {
+        
     }
-    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 #pragma mark - Getter
@@ -100,16 +101,16 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
                            @{kProfileItemTitleKey: kLocalizedString(@"setup_birthday"),
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDatePicker),
                              kProfileItemAccessoryInfoKey: [[LGAccountManager instance] account][kAccountKeyAccountBirthday],
-                             kProfileItemClassKey: @""
+                             kProfileItemClassKey: NSStringFromClass([UIDatePicker class])
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"setup_modify_mobile"),
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
                              kProfileItemAccessoryInfoKey: [[LGAccountManager instance] account][kAccountKeyAccountMobile],
-                             kProfileItemClassKey: @""
+                             kProfileItemClassKey: @"LGModifyMobileViewController"
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"setup_modify_pwd"),
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @""
+                             kProfileItemClassKey: @"LGModifyPwdViewController"
                              },
                            ],
                        @[

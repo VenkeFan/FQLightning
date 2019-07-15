@@ -132,12 +132,10 @@ static NSString * const kProfileCellReuseID = @"kProfileCellReuseID";
         return;
     }
     
-    UIViewController *ctr = [NSClassFromString(clsName) new];
-    if (![ctr isKindOfClass:[UIViewController class]]) {
-        return;
+    id cls = [NSClassFromString(clsName) new];
+    if ([cls isKindOfClass:[UIViewController class]]) {
+        [self.navigationController pushViewController:(UIViewController *)cls animated:YES];
     }
-    
-    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 #pragma mark - Events

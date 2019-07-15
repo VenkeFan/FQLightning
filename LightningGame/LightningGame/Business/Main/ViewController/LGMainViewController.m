@@ -176,6 +176,8 @@
 #pragma mark - Event
 
 - (void)navLeft1BtnClicked {
+    kNeedLogin;
+    
     UIViewController *profileCtr = [[CTMediator sharedInstance] mediator_generateProfileController];
     [self.navigationController pushViewController:profileCtr animated:YES];
 }
