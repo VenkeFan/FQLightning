@@ -72,6 +72,26 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
     NSDictionary *itemDic = self.itemArray[indexPath.section][indexPath.row];
     
     if (![itemDic[kProfileItemAccessoryTypeKey] boolValue]) {
+        if ([itemDic[kProfileItemTitleKey] isEqual:kLocalizedString(@"setup_signout")]) {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:kLocalizedString(@"setup_signout")
+                                                                           message:kLocalizedString(@"common_quit_hint")
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:kLocalizedString(@"common_confirm")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [[LGAccountManager instance] signOut];
+                                                    }]];
+            [alert addAction:[UIAlertAction actionWithTitle:kLocalizedString(@"common_cancel")
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        
+                                                    }]];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        
         return;
     }
     
@@ -93,6 +113,10 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
 #pragma mark - LGUserDatePickerViewDelegate
 
 - (void)userDatePickerView:(id)view didSelectedDate:(NSDate *)date {
+    if ([date.ISO8601StringOnlyDate isEqual:[[LGAccountManager instance] account][kAccountKeyAccountBirthday]]) {
+        return;
+    }
+    
     LGUserManager *manager = [LGUserManager manager];
     [manager modifyBirthday:date
                     success:^(NSString * _Nonnull newBirthday) {

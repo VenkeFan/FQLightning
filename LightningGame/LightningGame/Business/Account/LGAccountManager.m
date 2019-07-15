@@ -8,6 +8,7 @@
 
 #import "LGAccountManager.h"
 #import "LGUserInfoRequest.h"
+#import "CTMediator+LGSignActions.h"
 
 #pragma mark - AccountKeys
 
@@ -73,6 +74,9 @@ NSString * const kAccountKeyAccounChargeUrl             = @"recharge_url";
     _account = nil;
     
     [[NSFileManager defaultManager] removeItemAtPath:self.filePath error:nil];
+    
+    UIViewController *root = [[CTMediator sharedInstance] mediator_generateSignInController];
+    [FQWindowUtility changeKeyWindowRootViewController:root];
 }
 
 - (void)updateBirthday:(NSString *)birthday {

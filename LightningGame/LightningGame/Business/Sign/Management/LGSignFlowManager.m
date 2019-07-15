@@ -149,10 +149,6 @@
                        }];
 }
 
-- (void)signOut {
-    [[LGAccountManager instance] signOut];
-}
-
 - (void)visit {
     [self setFlowStep:LGSignFlowStep_Visitor];
 }

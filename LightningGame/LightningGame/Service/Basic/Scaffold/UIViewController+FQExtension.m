@@ -38,11 +38,13 @@
     [self fqswizzle_viewDidLoad];
     
     NSString *clsName = NSStringFromClass([self class]);
-    if ([clsName isEqualToString:@"UIInputWindowController"]
-        || [clsName isEqualToString:@"UITextInputController"]
-        || [clsName isEqualToString:@"UICompatibilityInputViewController"]
-        || [clsName isEqualToString:@"UIApplicationRotationFollowingControllerNoTouches"]
-        || [clsName isEqualToString:@"UISystemKeyboardDockController"]) {
+    if ([clsName isEqualToString:@"UIAlertController"] ||
+        [clsName isEqualToString:@"UIImagePickerController"] ||
+        [clsName isEqualToString:@"UIInputWindowController"] ||
+        [clsName isEqualToString:@"UITextInputController"] ||
+        [clsName isEqualToString:@"UICompatibilityInputViewController"] ||
+        [clsName isEqualToString:@"UIApplicationRotationFollowingControllerNoTouches"] ||
+        [clsName isEqualToString:@"UISystemKeyboardDockController"]) {
         return;
     }
     

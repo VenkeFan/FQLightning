@@ -96,3 +96,8 @@ order_tip                   = "您的订单需要系统确认，请在“投注�
 // Other
 game_list_title             = "游戏筛选";
 game_list_all               = "全部";
+
+// Common
+common_quit_hint            = "确定要退出登录吗？";
+common_confirm              = "确认";
+common_cancel               = "取消";

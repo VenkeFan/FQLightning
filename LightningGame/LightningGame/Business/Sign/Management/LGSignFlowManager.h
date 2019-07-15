@@ -50,7 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)modifyPassword:(NSString *)newPwd
                 mobile:(NSString *)mobile
             verifyCode:(NSString *)verifyCode;
-- (void)signOut;
 - (void)visit;
 
 + (BOOL)proofreadAccountName:(NSString *)accountName;
