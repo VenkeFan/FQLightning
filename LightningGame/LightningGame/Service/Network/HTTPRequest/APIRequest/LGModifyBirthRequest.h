@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGModifyBirthRequest : LGBasicRequest
 
+- (void)requestWithBirthday:(NSString *)birthday
+                    success:(nullable RequestSucceedBlock)success
+                    failure:(nullable RequestFailBlock)failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

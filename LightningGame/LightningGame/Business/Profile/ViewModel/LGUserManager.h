@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGUserManager : NSObject
 
++ (instancetype)manager;
+
+- (void)modifyBirthday:(NSDate *)birthday success:(void(^)(NSString *newBirthday))success failure:(void(^)(void))failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

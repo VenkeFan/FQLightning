@@ -14,6 +14,8 @@
 + (NSTimeInterval)currentUnixTimeInterval;
 + (NSDate *)dateFromISO8601String:(NSString *)string;
 - (NSString *)ISO8601String;
+- (NSString *)ISO8601StringOnlyDate;
+- (NSString *)ISO8601StringOnlyTime;
 
 @property (nonatomic, readonly) NSInteger year; ///< Year component
 @property (nonatomic, readonly) NSInteger month; ///< Month component (1~12)

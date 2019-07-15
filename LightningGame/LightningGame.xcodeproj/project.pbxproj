@@ -17,6 +17,7 @@
 		B91A1F7222DC49FC007982EA /* LGModifyMobileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7122DC49FC007982EA /* LGModifyMobileRequest.m */; };
 		B91A1F7522DC4A2C007982EA /* LGModifyBirthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7422DC4A2C007982EA /* LGModifyBirthRequest.m */; };
 		B91A1F7822DC4C86007982EA /* LGUserCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */; };
+		B91A1F7B22DC5DCA007982EA /* LGUserDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7A22DC5DCA007982EA /* LGUserDatePickerView.m */; };
 		B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A761F22A7D85F00155607 /* LGAccountManager.m */; };
 		B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */; };
 		B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762622A8AF1300155607 /* LGSignFlowManager.m */; };
@@ -178,6 +179,8 @@
 		B91A1F7422DC4A2C007982EA /* LGModifyBirthRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGModifyBirthRequest.m; sourceTree = "<group>"; };
 		B91A1F7622DC4C86007982EA /* LGUserCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGUserCodeRequest.h; sourceTree = "<group>"; };
 		B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserCodeRequest.m; sourceTree = "<group>"; };
+		B91A1F7922DC5DCA007982EA /* LGUserDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGUserDatePickerView.h; sourceTree = "<group>"; };
+		B91A1F7A22DC5DCA007982EA /* LGUserDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserDatePickerView.m; sourceTree = "<group>"; };
 		B91A761E22A7D85F00155607 /* LGAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountManager.h; sourceTree = "<group>"; };
 		B91A761F22A7D85F00155607 /* LGAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAccountManager.m; sourceTree = "<group>"; };
 		B91A762122A7E40E00155607 /* LGVerifyCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGVerifyCodeRequest.h; sourceTree = "<group>"; };
@@ -1090,6 +1093,8 @@
 			children = (
 				B973026322D8765D00281EDE /* LGParlayHistoryView.h */,
 				B973026422D8765D00281EDE /* LGParlayHistoryView.m */,
+				B91A1F7922DC5DCA007982EA /* LGUserDatePickerView.h */,
+				B91A1F7A22DC5DCA007982EA /* LGUserDatePickerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1365,6 +1370,7 @@
 				B973025C22D8679200281EDE /* LGRuleViewController.m in Sources */,
 				B9A1C83E22C1F106001A3694 /* LGMainViewController.m in Sources */,
 				B94E4FAD22B79CA700A56F13 /* FQAbstractPlayerView.m in Sources */,
+				B91A1F7B22DC5DCA007982EA /* LGUserDatePickerView.m in Sources */,
 				B9D9104222AE81B400D54911 /* Target_Profile.m in Sources */,
 				B91A763322A8E8E900155607 /* LGSplashViewController.m in Sources */,
 				B9A1C81F22C1F106001A3694 /* LGDatePickerViewModel.m in Sources */,

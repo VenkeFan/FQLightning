@@ -102,7 +102,7 @@
 
 - (LGUserManager *)manager {
     if (_manager) {
-        _manager = [LGUserManager new];
+        _manager = [LGUserManager manager];
     }
     return _manager;
 }

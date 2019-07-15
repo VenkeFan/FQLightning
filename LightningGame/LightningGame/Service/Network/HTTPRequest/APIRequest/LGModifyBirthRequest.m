@@ -17,4 +17,24 @@
     return self;
 }
 
+- (void)requestWithBirthday:(NSString *)birthday
+                    success:(nullable RequestSucceedBlock)success
+                    failure:(nullable RequestFailBlock)failure {
+    if (birthday.length == 0) {
+        return;
+    }
+    
+    [self.paraDic setObject:birthday forKey:@"birthday"];
+    
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if (success) {
+            success(task, responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(task, error);
+        }
+    }];
+}
+
 @end

@@ -19,8 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL isLogin;
 
 - (void)fetchAccountInfoWithIntro:(NSDictionary *)intro;
-- (void)updateLocalAccount:(NSDictionary *)newAccount;
 - (void)signOut;
+
+- (void)updateBirthday:(NSString *)birthday;
 
 @end
 

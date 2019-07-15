@@ -45,6 +45,16 @@
     return [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
 }
 
+- (NSString *)ISO8601StringOnlyDate {
+    NSString *str = [self ISO8601String];
+    return [str substringToIndex:[str rangeOfString:@"T"].location];
+}
+
+- (NSString *)ISO8601StringOnlyTime {
+    NSString *str = [self ISO8601String];
+    return [str substringWithRange:NSMakeRange([str rangeOfString:@"T"].location + 1, 8)];
+}
+
 - (NSInteger)year {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self] year];
 }

@@ -53,7 +53,7 @@ NSString * const kAccountKeyAccounChargeUrl             = @"recharge_url";
 }
 
 - (void)fetchAccountInfoWithIntro:(NSDictionary *)intro {
-    [self updateLocalAccount:intro];
+    [self p_updateLocalAccount:intro];
     
     LGUserInfoRequest *request = [LGUserInfoRequest new];
     [request requestWithUserID:intro[kAccountKeyAccountID]
@@ -62,14 +62,31 @@ NSString * const kAccountKeyAccounChargeUrl             = @"recharge_url";
                            NSMutableDictionary *oldInfo = [intro mutableCopy];
                            [oldInfo addEntriesFromDictionary:responseObject];
                            
-                           [self updateLocalAccount:oldInfo];
+                           [self p_updateLocalAccount:oldInfo];
                        }
                        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                            
                        }];
 }
 
-- (void)updateLocalAccount:(NSDictionary *)newAccount {
+- (void)signOut {
+    _account = nil;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:self.filePath error:nil];
+}
+
+- (void)updateBirthday:(NSString *)birthday {
+    if (!birthday) {
+        return;
+    }
+    NSMutableDictionary *dicM = [_account mutableCopy];
+    [dicM setObject:birthday forKey:kAccountKeyAccountBirthday];
+    [self p_updateLocalAccount:dicM];
+}
+
+#pragma mark - Private
+
+- (void)p_updateLocalAccount:(NSDictionary *)newAccount {
     _account = [newAccount copy];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.filePath]) {
@@ -77,12 +94,6 @@ NSString * const kAccountKeyAccounChargeUrl             = @"recharge_url";
     }
     
     [newAccount writeToFile:self.filePath atomically:NO];
-}
-
-- (void)signOut {
-    _account = nil;
-    
-    [[NSFileManager defaultManager] removeItemAtPath:self.filePath error:nil];
 }
 
 #pragma mark - Getter

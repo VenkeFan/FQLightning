@@ -7,11 +7,14 @@
 //
 
 #import "LGSetupViewController.h"
+#import "LGUserManager.h"
+#import "NSDate+FQExtension.h"
 #import "LGProfileViewCell.h"
+#import "LGUserDatePickerView.h"
 
 static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
 
-@interface LGSetupViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface LGSetupViewController () <UITableViewDelegate, UITableViewDataSource, LGUserDatePickerViewDelegate>
 
 @property (nonatomic, copy) NSArray<NSArray *> *itemArray;
 @property (nonatomic, strong) UITableView *tableView;
@@ -80,9 +83,25 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
     id cls = [NSClassFromString(clsName) new];
     if ([cls isKindOfClass:[UIViewController class]]) {
         [self.navigationController pushViewController:(UIViewController *)cls animated:YES];
-    } else if ([cls isKindOfClass:[UIDatePicker class]]) {
-        
+    } else if ([cls isKindOfClass:[LGUserDatePickerView class]]) {
+        LGUserDatePickerView *view = [LGUserDatePickerView new];
+        view.delegate = self;
+        [view displayInParentView:self.view];
     }
+}
+
+#pragma mark - LGUserDatePickerViewDelegate
+
+- (void)userDatePickerView:(id)view didSelectedDate:(NSDate *)date {
+    LGUserManager *manager = [LGUserManager manager];
+    [manager modifyBirthday:date
+                    success:^(NSString * _Nonnull newBirthday) {
+                        [[LGAccountManager instance] updateBirthday:newBirthday];
+                        [self.tableView reloadData];
+                    }
+                    failure:^{
+                        
+                    }];
 }
 
 #pragma mark - Getter
@@ -100,8 +119,10 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"setup_birthday"),
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDatePicker),
-                             kProfileItemAccessoryInfoKey: [[LGAccountManager instance] account][kAccountKeyAccountBirthday],
-                             kProfileItemClassKey: NSStringFromClass([UIDatePicker class])
+                             kProfileItemAccessoryInfoKey: [[[LGAccountManager instance] account][kAccountKeyAccountBirthday] length] > 0
+                             ? [[LGAccountManager instance] account][kAccountKeyAccountBirthday]
+                             : [NSDate dateWithTimestamp:NSTimeIntervalSince1970].ISO8601StringOnlyDate,
+                             kProfileItemClassKey: NSStringFromClass([LGUserDatePickerView class])
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"setup_modify_mobile"),
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
