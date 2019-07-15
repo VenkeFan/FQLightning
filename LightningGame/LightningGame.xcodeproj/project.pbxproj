@@ -16,6 +16,7 @@
 		B91A1F6F22DC4976007982EA /* LGUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F6E22DC4976007982EA /* LGUserManager.m */; };
 		B91A1F7222DC49FC007982EA /* LGModifyMobileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7122DC49FC007982EA /* LGModifyMobileRequest.m */; };
 		B91A1F7522DC4A2C007982EA /* LGModifyBirthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7422DC4A2C007982EA /* LGModifyBirthRequest.m */; };
+		B91A1F7822DC4C86007982EA /* LGUserCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */; };
 		B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A761F22A7D85F00155607 /* LGAccountManager.m */; };
 		B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */; };
 		B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762622A8AF1300155607 /* LGSignFlowManager.m */; };
@@ -175,6 +176,8 @@
 		B91A1F7122DC49FC007982EA /* LGModifyMobileRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGModifyMobileRequest.m; sourceTree = "<group>"; };
 		B91A1F7322DC4A2C007982EA /* LGModifyBirthRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGModifyBirthRequest.h; sourceTree = "<group>"; };
 		B91A1F7422DC4A2C007982EA /* LGModifyBirthRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGModifyBirthRequest.m; sourceTree = "<group>"; };
+		B91A1F7622DC4C86007982EA /* LGUserCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGUserCodeRequest.h; sourceTree = "<group>"; };
+		B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserCodeRequest.m; sourceTree = "<group>"; };
 		B91A761E22A7D85F00155607 /* LGAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountManager.h; sourceTree = "<group>"; };
 		B91A761F22A7D85F00155607 /* LGAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAccountManager.m; sourceTree = "<group>"; };
 		B91A762122A7E40E00155607 /* LGVerifyCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGVerifyCodeRequest.h; sourceTree = "<group>"; };
@@ -695,6 +698,8 @@
 				B91A1F7122DC49FC007982EA /* LGModifyMobileRequest.m */,
 				B91A1F7322DC4A2C007982EA /* LGModifyBirthRequest.h */,
 				B91A1F7422DC4A2C007982EA /* LGModifyBirthRequest.m */,
+				B91A1F7622DC4C86007982EA /* LGUserCodeRequest.h */,
+				B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */,
 			);
 			path = APIRequest;
 			sourceTree = "<group>";
@@ -1416,6 +1421,7 @@
 				B9229D04229BEEC00030691D /* UIImageView+FQExtension.m in Sources */,
 				B9D9102D22ADF36A00D54911 /* LGLoadingView.m in Sources */,
 				B9229D0E229BF04F0030691D /* NSDate+FQExtension.m in Sources */,
+				B91A1F7822DC4C86007982EA /* LGUserCodeRequest.m in Sources */,
 				B9D9101522ABA64600D54911 /* CTMediator.m in Sources */,
 				B9D9103E22AE819900D54911 /* LGProfileViewController.m in Sources */,
 				B9A1C83522C1F106001A3694 /* LGMatchDetailHeaderView.m in Sources */,

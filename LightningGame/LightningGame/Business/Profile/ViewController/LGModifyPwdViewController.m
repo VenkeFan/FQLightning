@@ -26,6 +26,9 @@
     
     self.title = kLocalizedString(@"setup_modify_pwd");
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selfOnTapped)];
+    [self.view addGestureRecognizer:tap];
+    
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight - kNavBarHeight)];
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.showsVerticalScrollIndicator = NO;
@@ -87,7 +90,12 @@
 }
 
 - (void)modifyBtnOnClicked {
+    [self.view endEditing:YES];
     
+}
+
+- (void)selfOnTapped {
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Getter
