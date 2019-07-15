@@ -21,7 +21,7 @@
                       status:(NSInteger)status
                      success:(nullable RequestSucceedBlock)success
                      failure:(nullable RequestFailBlock)failure {
-    [self.paraDic setObject:@(pageIndex) forKey:@"pagenum"];
+    [self.paraDic setObject:@(pageIndex) forKey:@"page_num"];
     [self.paraDic setObject:@(status) forKey:@"status"];
     
     [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {

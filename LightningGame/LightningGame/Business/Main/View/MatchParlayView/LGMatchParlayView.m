@@ -158,7 +158,7 @@
     
     [self.contentView clearAll];
     
-    [[LGAlertOrderView new] showWithOrderArray:data oddsInfoDic:self.contentView.parlayOrderDicI];
+    [[LGAlertOrderView new] showWithOrderArray:data];
 }
 
 #pragma mark - LGMatchParlayTableViewDelegate

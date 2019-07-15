@@ -11,12 +11,25 @@
 NSString * const kLGMediatorTargetProfile = @"Profile";
 
 NSString * const kLGMediatorActionNativeGenerateProfileController = @"nativeGenerateProfileController";
+NSString * const kLGMediatorActionNativeGenerateParlayHistoryController = @"nativeGenerateParlayHistoryController";
 
 @implementation CTMediator (LGProfileActions)
 
 - (UIViewController *)mediator_generateProfileController {
     UIViewController *viewController = [self performTarget:kLGMediatorTargetProfile
                                                     action:kLGMediatorActionNativeGenerateProfileController
+                                                    params:@{}
+                                         shouldCacheTarget:NO];
+    if ([viewController isKindOfClass:[UIViewController class]]) {
+        return viewController;
+    }
+    
+    return nil;
+}
+
+- (UIViewController *)mediator_generateParlayHistoryController {
+    UIViewController *viewController = [self performTarget:kLGMediatorTargetProfile
+                                                    action:kLGMediatorActionNativeGenerateParlayHistoryController
                                                     params:@{}
                                          shouldCacheTarget:NO];
     if ([viewController isKindOfClass:[UIViewController class]]) {

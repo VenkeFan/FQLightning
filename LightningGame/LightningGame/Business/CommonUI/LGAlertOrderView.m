@@ -8,13 +8,13 @@
 
 #import "LGAlertOrderView.h"
 #import "LGOrderMetaKeys.h"
-#import "LGMatchListKeys.h"
-#import "LGMatchParlayCustomKeys.h"
 #import "FQComponentFactory.h"
+#import "NSDate+FQExtension.h"
+#import "CTMediator+LGProfileActions.h"
 
 @interface LGAlertOrderMetaCell : UITableViewCell
 
-- (void)setOrderDic:(NSDictionary *)orderDic dataDic:(NSDictionary *)dataDic;
+- (void)setOrderDic:(NSDictionary *)orderDic;
 
 @end
 
@@ -130,12 +130,10 @@
     [self.contentView addSubview:_cellLine];
 }
 
-- (void)setOrderDic:(NSDictionary *)orderDic dataDic:(NSDictionary *)dataDic {
-    NSDictionary *oddsDic = [dataDic objectForKey:kLGMatchParlayTableViewCellKeyOddsDic];
-    
+- (void)setOrderDic:(NSDictionary *)orderDic {
     {
-        NSString *teamName = [[dataDic objectForKey:kLGMatchParlayTableViewCellKeyTeamDic] objectForKey:kMatchTeamKeyName];
-        NSString *groupName = [oddsDic objectForKey:kMatchOddsKeyGroupName];
+        NSString *teamName = [orderDic objectForKey:kOrderMetaKeyOddsName];
+        NSString *groupName = [orderDic objectForKey:kOrderMetaKeyGroupName];
         _groupNameLab.text = [NSString stringWithFormat:@"%@ %@", groupName, teamName];
         [_groupNameLab sizeToFit];
         
@@ -151,13 +149,15 @@
     }
     
     {
-        _matchNameLab.text = [dataDic objectForKey:kLGMatchParlayTableViewCellKeyMatchName];
+        _matchNameLab.text = [orderDic objectForKey:kOrderMetaKeyMatchName];
         [_matchNameLab sizeToFit];
         
-        _startTimeLab.text = [NSString stringWithFormat:@"开始时间: "];
+        NSTimeInterval timeStamp = [orderDic[kOrderMetaKeyMatchStartTimeStamp] doubleValue];
+        NSDate *date = [NSDate dateWithTimestamp:timeStamp];
+        _startTimeLab.text = [NSString stringWithFormat:@"开始时间: %@", [date ISO8601String]];
         [_startTimeLab sizeToFit];
         
-        _oddsLab.text = [NSString stringWithFormat:@"赔率: %@", oddsDic[kMatchOddsKeyOddsValue]];
+        _oddsLab.text = [NSString stringWithFormat:@"赔率: %@", orderDic[kOrderMetaKeyBetOddsValue]];
         [_oddsLab sizeToFit];
     }
     
@@ -194,7 +194,6 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 @property (nonatomic, strong) UIButton *logBtn;
 
 @property (nonatomic, copy) NSArray *orderArray;
-@property (nonatomic, copy) NSDictionary *oddsInfoDic;
 
 @end
 
@@ -287,12 +286,11 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 
 #pragma mark - Public
 
-- (void)showWithOrderArray:(NSArray *)orderArray oddsInfoDic:(NSDictionary *)oddsInfoDic {
-    if (orderArray.count == 0 || oddsInfoDic.count == 0) {
+- (void)showWithOrderArray:(NSArray *)orderArray {
+    if (orderArray.count == 0) {
         return;
     }
     self.orderArray = orderArray;
-    self.oddsInfoDic = oddsInfoDic;
     
     {
         self.tableView.scrollEnabled = self.orderArray.count > 1;
@@ -320,7 +318,7 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
     LGAlertOrderMetaCell *cell = [tableView dequeueReusableCellWithIdentifier:kAlertOrderMetaCellReuseID];
     
     NSDictionary *orderMeta = self.orderArray[indexPath.row];
-    [cell setOrderDic:orderMeta dataDic:[self.oddsInfoDic objectForKey:orderMeta[kOrderMetaKeyOddsID]]];
+    [cell setOrderDic:orderMeta];
     return cell;
 }
 
@@ -340,7 +338,10 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 }
 
 - (void)logBtnClicked {
+    UIViewController *ctr = [[CTMediator sharedInstance] mediator_generateParlayHistoryController];
+    [[[FQWindowUtility currentViewController] navigationController] pushViewController:ctr animated:YES];
     
+    [super dismiss];
 }
 
 - (void)closeBtnClicked {

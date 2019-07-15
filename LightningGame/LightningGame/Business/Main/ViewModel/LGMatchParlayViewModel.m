@@ -18,7 +18,7 @@ NSString * const kOrderMetaKeyOddsValue             = @"odds_value";
 NSString * const kOrderMetaKeyBetMoney              = @"bet_money";
 NSString * const kOrderMetaKeyGainMoney             = @"bet_win_money";
 NSString * const kOrderMetaKeyCreatedTimeStamp      = @"bet_created_time";
-NSString * const kOrderMetaKeyID                    = @"bet_id";
+NSString * const kOrderMetaKeyBetID                 = @"bet_id";
 NSString * const kOrderMetaKeyBetOddsValue          = @"bet_odds";
 NSString * const kOrderMetaKeySite                  = @"bet_site";
 NSString * const kOrderMetaKeyGameID                = @"game_id";
@@ -53,7 +53,7 @@ NSString * const kOrderMetaKeyBetResult             = @"win";
                             NSMutableArray *validateArray = [NSMutableArray array];
                             [arrayI enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                                 if ([obj[kOrderMetaKeyCode] integerValue] == LGErrorCode_Success) {
-                                    [validateArray addObject:obj];
+                                    [validateArray addObject:obj[@"record"]];
                                 }
                             }];
                             

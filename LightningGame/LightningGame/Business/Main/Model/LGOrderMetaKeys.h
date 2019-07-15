@@ -22,7 +22,7 @@ extern NSString * const kOrderMetaKeyOddsValue;
 extern NSString * const kOrderMetaKeyBetMoney;
 extern NSString * const kOrderMetaKeyGainMoney;
 extern NSString * const kOrderMetaKeyCreatedTimeStamp;
-extern NSString * const kOrderMetaKeyID;
+extern NSString * const kOrderMetaKeyBetID;
 extern NSString * const kOrderMetaKeyBetOddsValue;
 extern NSString * const kOrderMetaKeySite;
 extern NSString * const kOrderMetaKeyGameID;

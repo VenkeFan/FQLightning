@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CTMediator (LGProfileActions)
 
 - (UIViewController *)mediator_generateProfileController;
+- (UIViewController *)mediator_generateParlayHistoryController;
 
 @end
 

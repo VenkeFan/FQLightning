@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Target_Profile : NSObject
 
 - (UIViewController *)action_nativeGenerateProfileController:(NSDictionary *)params;
+- (UIViewController *)action_nativeGenerateParlayHistoryController:(NSDictionary *)params;
 
 @end
 
