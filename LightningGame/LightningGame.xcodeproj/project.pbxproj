@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D112DA8654C0849D5EFFA56 /* Pods_LightningGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F08F033B20F8D98FFE1641 /* Pods_LightningGame.framework */; };
+		B91A1F6022DC1218007982EA /* LGSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F5F22DC1218007982EA /* LGSetupViewController.m */; };
+		B91A1F6322DC1370007982EA /* LGProfileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F6222DC1370007982EA /* LGProfileViewCell.m */; };
 		B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A761F22A7D85F00155607 /* LGAccountManager.m */; };
 		B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */; };
 		B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762622A8AF1300155607 /* LGSignFlowManager.m */; };
@@ -151,6 +153,10 @@
 		64A99286D4ECBEFE1FFB1F50 /* Pods-LightningGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightningGame.release.xcconfig"; path = "Target Support Files/Pods-LightningGame/Pods-LightningGame.release.xcconfig"; sourceTree = "<group>"; };
 		88F08F033B20F8D98FFE1641 /* Pods_LightningGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LightningGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4FF264629B3E02E0CEE385C /* Pods-LightningGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightningGame.debug.xcconfig"; path = "Target Support Files/Pods-LightningGame/Pods-LightningGame.debug.xcconfig"; sourceTree = "<group>"; };
+		B91A1F5E22DC1218007982EA /* LGSetupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSetupViewController.h; sourceTree = "<group>"; };
+		B91A1F5F22DC1218007982EA /* LGSetupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGSetupViewController.m; sourceTree = "<group>"; };
+		B91A1F6122DC1370007982EA /* LGProfileViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGProfileViewCell.h; sourceTree = "<group>"; };
+		B91A1F6222DC1370007982EA /* LGProfileViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGProfileViewCell.m; sourceTree = "<group>"; };
 		B91A761E22A7D85F00155607 /* LGAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountManager.h; sourceTree = "<group>"; };
 		B91A761F22A7D85F00155607 /* LGAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAccountManager.m; sourceTree = "<group>"; };
 		B91A762122A7E40E00155607 /* LGVerifyCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGVerifyCodeRequest.h; sourceTree = "<group>"; };
@@ -748,6 +754,8 @@
 			children = (
 				B973026A22D88AF500281EDE /* LGParlayHistoryCell.h */,
 				B973026B22D88AF500281EDE /* LGParlayHistoryCell.m */,
+				B91A1F6122DC1370007982EA /* LGProfileViewCell.h */,
+				B91A1F6222DC1370007982EA /* LGProfileViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1036,6 +1044,8 @@
 				B973025E22D872F000281EDE /* LGParlayHistoryViewController.m */,
 				B973025A22D8679200281EDE /* LGRuleViewController.h */,
 				B973025B22D8679200281EDE /* LGRuleViewController.m */,
+				B91A1F5E22DC1218007982EA /* LGSetupViewController.h */,
+				B91A1F5F22DC1218007982EA /* LGSetupViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1282,9 +1292,11 @@
 				B9A1C82122C1F106001A3694 /* LGMatchListViewModel.m in Sources */,
 				B9229D14229C17070030691D /* NSAttributedString+FQGuarder.m in Sources */,
 				B9A1C83222C1F106001A3694 /* LGMatchListOddsView.m in Sources */,
+				B91A1F6022DC1218007982EA /* LGSetupViewController.m in Sources */,
 				B9D9104922AE84DF00D54911 /* FQAnimatedTransitioning.m in Sources */,
 				B9F464FC22CC484D004F1E86 /* LGGameCollectionView.m in Sources */,
 				B973024D22CC50A200281EDE /* LGGameCollectionViewModel.m in Sources */,
+				B91A1F6322DC1370007982EA /* LGProfileViewCell.m in Sources */,
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
 				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
 				B9A1C84722C35CE7001A3694 /* UIViewController+FQTracker.m in Sources */,
