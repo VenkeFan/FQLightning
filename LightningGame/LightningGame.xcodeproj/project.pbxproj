@@ -18,6 +18,7 @@
 		B91A1F7522DC4A2C007982EA /* LGModifyBirthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7422DC4A2C007982EA /* LGModifyBirthRequest.m */; };
 		B91A1F7822DC4C86007982EA /* LGUserCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */; };
 		B91A1F7B22DC5DCA007982EA /* LGUserDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7A22DC5DCA007982EA /* LGUserDatePickerView.m */; };
+		B91A1F7E22DD72FA007982EA /* LGAddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A1F7D22DD72FA007982EA /* LGAddCardViewController.m */; };
 		B91A762022A7D85F00155607 /* LGAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A761F22A7D85F00155607 /* LGAccountManager.m */; };
 		B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762222A7E40E00155607 /* LGVerifyCodeRequest.m */; };
 		B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A762622A8AF1300155607 /* LGSignFlowManager.m */; };
@@ -181,6 +182,8 @@
 		B91A1F7722DC4C86007982EA /* LGUserCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserCodeRequest.m; sourceTree = "<group>"; };
 		B91A1F7922DC5DCA007982EA /* LGUserDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGUserDatePickerView.h; sourceTree = "<group>"; };
 		B91A1F7A22DC5DCA007982EA /* LGUserDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGUserDatePickerView.m; sourceTree = "<group>"; };
+		B91A1F7C22DD72FA007982EA /* LGAddCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAddCardViewController.h; sourceTree = "<group>"; };
+		B91A1F7D22DD72FA007982EA /* LGAddCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAddCardViewController.m; sourceTree = "<group>"; };
 		B91A761E22A7D85F00155607 /* LGAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAccountManager.h; sourceTree = "<group>"; };
 		B91A761F22A7D85F00155607 /* LGAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAccountManager.m; sourceTree = "<group>"; };
 		B91A762122A7E40E00155607 /* LGVerifyCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGVerifyCodeRequest.h; sourceTree = "<group>"; };
@@ -1074,6 +1077,8 @@
 				B9D9103D22AE819900D54911 /* LGProfileViewController.m */,
 				B973025722D8672800281EDE /* LGWalletViewController.h */,
 				B973025822D8672800281EDE /* LGWalletViewController.m */,
+				B91A1F7C22DD72FA007982EA /* LGAddCardViewController.h */,
+				B91A1F7D22DD72FA007982EA /* LGAddCardViewController.m */,
 				B973025D22D872F000281EDE /* LGParlayHistoryViewController.h */,
 				B973025E22D872F000281EDE /* LGParlayHistoryViewController.m */,
 				B973025A22D8679200281EDE /* LGRuleViewController.h */,
@@ -1390,6 +1395,7 @@
 				B9229D0D229BF04F0030691D /* UIView+FQExtension.m in Sources */,
 				B9A1C82E22C1F106001A3694 /* Target_Main.m in Sources */,
 				B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */,
+				B91A1F7E22DD72FA007982EA /* LGAddCardViewController.m in Sources */,
 				B9C3A17C22A0FA2600E282B0 /* LGSignInViewController.m in Sources */,
 				B9493690229BCBE9000C3D24 /* main.m in Sources */,
 				B9229D4D229D66E90030691D /* FQImageButton.m in Sources */,

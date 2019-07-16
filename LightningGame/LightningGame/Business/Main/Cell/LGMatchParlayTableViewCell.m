@@ -100,12 +100,12 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
     [self.contentView addSubview:_teamNameLab];
     
     _groupNameLab = [FQComponentFactory labelWithFont:kRegularFont(kTinyFontSize)];
-    _groupNameLab.textColor = kUIColorFromRGB(0xA09584);
+    _groupNameLab.textColor = kLightTintColor;
     _groupNameLab.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:_groupNameLab];
     
     _matchNameLab = [FQComponentFactory labelWithFont:kRegularFont(kTinyFontSize)];
-    _matchNameLab.textColor = kUIColorFromRGB(0xA09584);
+    _matchNameLab.textColor = kLightTintColor;
     _matchNameLab.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:_matchNameLab];
     
@@ -275,7 +275,7 @@ NSString * const kLGMatchParlayTableViewCellKeyAnte             = @"kLGMatchParl
     NSString *text = kLocalizedString(@"parlay_gain");
     NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %.2f", text, gain]];
     [attrStrM addAttributes:@{NSFontAttributeName: kRegularFont(kTinyFontSize)} range:NSMakeRange(0, attrStrM.length)];
-    [attrStrM addAttributes:@{NSForegroundColorAttributeName: kUIColorFromRGB(0xA09584)} range:NSMakeRange(0, text.length)];
+    [attrStrM addAttributes:@{NSForegroundColorAttributeName: kLightTintColor} range:NSMakeRange(0, text.length)];
     [attrStrM addAttributes:@{NSForegroundColorAttributeName: kScoreFontColor} range:NSMakeRange(text.length, attrStrM.length - text.length)];
     
     return attrStrM;

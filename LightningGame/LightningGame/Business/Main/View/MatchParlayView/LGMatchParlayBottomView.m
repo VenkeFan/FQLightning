@@ -93,7 +93,7 @@
         txtLayer.string = kLocalizedString(@"parlay_expand");
         CGSize size = [txtLayer.string sizeWithAttributes:@{NSFontAttributeName: kRegularFont(kNoteFontSize)}];
         txtLayer.frame = (CGRect){.origin = CGPointZero, .size = CGSizeMake(50, size.height)};
-        txtLayer.foregroundColor = kUIColorFromRGB(0xA09584).CGColor;
+        txtLayer.foregroundColor = kLightTintColor.CGColor;
         txtLayer.alignmentMode = kCAAlignmentCenter;
         [ctr.layer addSublayer:txtLayer];
         _expandTxtlayer = txtLayer;

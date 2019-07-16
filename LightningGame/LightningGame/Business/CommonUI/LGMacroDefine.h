@@ -33,6 +33,7 @@
 // font color
 #define kNameFontColor                      kUIColorFromRGB(0xCDC3B3)
 #define kMainOnTintColor                    kUIColorFromRGB(0x8E6C37)
+#define kLightTintColor                     kUIColorFromRGB(0xA09584)
 #define kScoreFontColor                     kUIColorFromRGB(0xEBE3D7)
 #define kOrderTintFontColor                 kUIColorFromRGB(0x988E7F)
 

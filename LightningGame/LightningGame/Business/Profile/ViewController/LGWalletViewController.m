@@ -8,6 +8,7 @@
 
 #import "LGWalletViewController.h"
 #import <Masonry/Masonry.h>
+#import "LGAddCardViewController.h"
 
 @interface LGWalletViewController ()
 
@@ -127,7 +128,8 @@
 }
 
 - (void)withdrawBtnClicked {
-    
+    LGAddCardViewController *ctr = [LGAddCardViewController new];
+    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 @end

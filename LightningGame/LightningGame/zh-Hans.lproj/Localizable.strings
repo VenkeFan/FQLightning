@@ -78,6 +78,10 @@ parlay_settled              = "已结算";
 parlay_unSettle             = "未结算";
 profile_deal_history        = "交易记录";
 wallet_withdraw             = "提款";
+wallet_add_card             = "添加银行卡";
+card_retainer               = "持卡人";
+card_number                 = "卡号";
+card_bank                   = "开户银行";
 
 // Setup
 setup_real_name             = "真实姓名";
