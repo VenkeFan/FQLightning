@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LGSplashViewController.h"
 #import "IQKeyboardManager.h"
+#import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Bugly startWithAppId:@"9fd04a8c0d"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LGSplashViewController new]];
     [self.window makeKeyAndVisible];
