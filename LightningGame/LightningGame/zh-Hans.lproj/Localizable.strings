@@ -82,6 +82,10 @@ wallet_add_card             = "添加银行卡";
 card_retainer               = "持卡人";
 card_number                 = "卡号";
 card_bank                   = "开户银行";
+card_bank_card              = "银行卡";
+card_valid_balance          = "可提现额度";
+card_withdraw_all           = "全部提现";
+card_withdraw_money         = "金额";
 
 // Setup
 setup_real_name             = "真实姓名";

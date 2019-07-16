@@ -9,6 +9,7 @@
 #import "LGWalletViewController.h"
 #import <Masonry/Masonry.h>
 #import "LGAddCardViewController.h"
+#import "LGWithdrawViewController.h"
 
 @interface LGWalletViewController ()
 
@@ -107,7 +108,7 @@
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(balanceLab.mas_bottom).offset(paddingY);
             make.centerX.mas_equalTo(balanceLab);
-            make.size.mas_equalTo(CGSizeMake(kSizeScale(80), kSizeScale(24.0)));
+            make.size.mas_equalTo(CGSizeMake(kSizeScale(80.0), kSizeScale(24.0)));
             make.bottom.mas_equalTo(view.mas_bottom);
         }];
         
@@ -128,7 +129,7 @@
 }
 
 - (void)withdrawBtnClicked {
-    LGAddCardViewController *ctr = [LGAddCardViewController new];
+    LGWithdrawViewController *ctr = [LGWithdrawViewController new];
     [self.navigationController pushViewController:ctr animated:YES];
 }
 
