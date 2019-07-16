@@ -13,7 +13,8 @@
 + (NSDate *)dateWithTimestamp:(NSTimeInterval)timestamp;
 + (NSTimeInterval)currentUnixTimeInterval;
 + (NSDate *)dateFromISO8601String:(NSString *)string;
-- (NSString *)ISO8601String;
+- (NSString *)ISO8601StringRaw;
+- (NSString *)ISO8601StringDateAndTime;
 - (NSString *)ISO8601StringOnlyDate;
 - (NSString *)ISO8601StringOnlyTime;
 

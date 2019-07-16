@@ -14,8 +14,9 @@
 @interface LGParlayHistoryCell () {
     UIView *_containerView;
     
+    UIImageView *_logoView;
     UILabel *_groupNameLab;
-    UILabel *_tourNameLabel;
+    UILabel *_gameNameLab;
     UIView *_lineView1;
     UILabel *_matchNameLab;
     UILabel *_startTimeLab;
@@ -26,6 +27,8 @@
     UILabel *_gainHintLab;
     UILabel *_gainLab;
     UILabel *_orderHintLab;
+    UILabel *_orderTimeLab;
+    CALayer *_flagLayer;
 }
 
 @end
@@ -49,9 +52,13 @@
     
     CGFloat x = kSizeScale(6.0), y = kSizeScale(12.0);
     
-    _groupNameLab.center = CGPointMake(x * 2 + _groupNameLab.width * 0.5, y + _groupNameLab.height * 0.5);
-    _tourNameLabel.center = CGPointMake(_containerView.width - x * 2 - _tourNameLabel.width * 0.5, _groupNameLab.centerY);
+    _logoView.center = CGPointMake(x * 2 + _logoView.width * 0.5, y + _logoView.height * 0.5);
+    
+    _groupNameLab.center = CGPointMake(CGRectGetMaxX(_logoView.frame) + x + _groupNameLab.width * 0.5, _logoView.centerY);
+    _gameNameLab.center = CGPointMake(_containerView.width - x * 2 - _gameNameLab.width * 0.5, _logoView.centerY);
     _lineView1.frame = CGRectMake(x, CGRectGetMaxY(_groupNameLab.frame) + y, _containerView.width - x * 2, 1.0);
+    
+    _flagLayer.position = CGPointMake(_containerView.width - x * 2 - _flagLayer.width * 0.5, CGRectGetMaxY(_lineView1.frame) + _flagLayer.height * 0.5);
     
     _matchNameLab.left = x * 2;
     _matchNameLab.top = CGRectGetMaxY(_lineView1.frame) + y;
@@ -69,6 +76,7 @@
     _gainLab.center = CGPointMake(_containerView.width - x * 2 - _gainLab.width * 0.5, _betLab.centerY);
     
     _orderHintLab.center = CGPointMake(x * 2 + _orderHintLab.width * 0.5, CGRectGetMaxY(_gainLab.frame) + y + _orderHintLab.height * 0.5);
+    _orderTimeLab.center = CGPointMake(_containerView.width - x * 2 - _orderTimeLab.width * 0.5, _orderHintLab.centerY);
 }
 
 - (void)initializeUI {
@@ -79,12 +87,25 @@
     _containerView.layer.rasterizationScale = kScreenScale;
     [self.contentView addSubview:_containerView];
     
+    _logoView = [UIImageView new];
+    _logoView.frame = CGRectMake(0, 0, kSizeScale(22.0), kSizeScale(22.0));
+    _logoView.contentMode = UIViewContentModeScaleAspectFit;
+    [_containerView addSubview:_logoView];
+    
+    _flagLayer = [CALayer layer];
+    _flagLayer.hidden = YES;
+    _flagLayer.frame = CGRectMake(0, 0, kSizeScale(22.0), kSizeScale(32.0));
+    _flagLayer.contentsScale = kScreenScale;
+    _flagLayer.contentsGravity = kCAGravityResizeAspect;
+    [_containerView.layer addSublayer:_flagLayer];
+    
     _groupNameLab = [FQComponentFactory labelWithFont:kRegularFont(kNameFontSize)];
     _groupNameLab.textColor = kNameFontColor;
     [_containerView addSubview:_groupNameLab];
     
-    _tourNameLabel = [FQComponentFactory labelWithFont:kRegularFont(kNameFontSize)];
-    [_containerView addSubview:_tourNameLabel];
+    _gameNameLab = [FQComponentFactory labelWithFont:kRegularFont(kNameFontSize)];
+    _gameNameLab.textColor = kNameFontColor;
+    [_containerView addSubview:_gameNameLab];
     
     _lineView1 = [UIView new];
     _lineView1.backgroundColor = kSeparateLineColor;
@@ -126,24 +147,25 @@
     _orderHintLab = [FQComponentFactory labelWithFont:kRegularFont(kTinyFontSize)];
     _orderHintLab.textColor = kOrderTintFontColor;
     [_containerView addSubview:_orderHintLab];
+    
+    _orderTimeLab = [FQComponentFactory labelWithFont:kRegularFont(kTinyFontSize)];
+    _orderTimeLab.textColor = kOrderTintFontColor;
+    [_containerView addSubview:_orderTimeLab];
 }
 
 - (void)setItemDic:(NSDictionary *)itemDic {
+    {
+        [_logoView fq_setImageWithURLString:itemDic[kOrderMetaKeyGameLogo]];
+    }
+    
     {
         NSString *teamName = [itemDic objectForKey:kOrderMetaKeyOddsName];
         NSString *groupName = [itemDic objectForKey:kOrderMetaKeyGroupName];
         _groupNameLab.text = [NSString stringWithFormat:@"%@ %@", groupName, teamName];
         [_groupNameLab sizeToFit];
         
-        //        NSString *tourName = dataDic[kMatchKeyTournamentName];
-        //        NSString *round = [dataDic[kMatchKeyRound] uppercaseString];
-        //        NSMutableString *strM = [NSMutableString stringWithFormat:@"%@/%@", tourName, round];
-        //        NSMutableAttributedString *strAttr = [[NSMutableAttributedString alloc] initWithString:strM];
-        //        [strAttr addAttributes:@{NSFontAttributeName: kRegularFont(kNameFontSize)} range:NSMakeRange(0, strM.length)];
-        //        [strAttr addAttributes:@{NSForegroundColorAttributeName: kNameFontColor} range:NSMakeRange(0, tourName.length)];
-        //        [strAttr addAttributes:@{NSForegroundColorAttributeName: kMainOnTintColor} range:NSMakeRange(tourName.length, strM.length - tourName.length)];
-        //
-        //        _tourNameLabel.attributedText = strAttr;
+        _gameNameLab.text = itemDic[kOrderMetaKeyGameName];
+        [_gameNameLab sizeToFit];
     }
     
     {
@@ -152,7 +174,7 @@
         
         NSTimeInterval timeStamp = [itemDic[kOrderMetaKeyMatchStartTimeStamp] doubleValue];
         NSDate *date = [NSDate dateWithTimestamp:timeStamp];
-        _startTimeLab.text = [NSString stringWithFormat:@"开始时间: %@", [date ISO8601String]];
+        _startTimeLab.text = [NSString stringWithFormat:@"开始时间: %@", [date ISO8601StringDateAndTime]];
         [_startTimeLab sizeToFit];
         
         _oddsLab.text = [NSString stringWithFormat:@"赔率: %@", itemDic[kOrderMetaKeyBetOddsValue]];
@@ -160,13 +182,34 @@
     }
     
     {
-        _gainHintLab.text = [itemDic[kOrderMetaKeyOrderStatus] integerValue] == LGOrderStatus_UnSettle ? @"未结算" : @"已结算";
-        [_gainHintLab sizeToFit];
-        
         _betLab.text = [NSString stringWithFormat:@"投注金额: %@", itemDic[kOrderMetaKeyBetMoney]];
         [_betLab sizeToFit];
         
-        NSString *hint = @"预计最高返还: ";
+        NSString *hint = @"";
+        switch ((LGOrderStatus)[itemDic[kOrderMetaKeyOrderStatus] integerValue]) {
+            case LGOrderStatus_UnSettle: {
+                _flagLayer.hidden = YES;
+                
+                _gainHintLab.text = @"未结算";
+                
+                hint = @"预计最高返还: ";
+            }
+                break;
+            case LGOrderStatus_Settled: {
+                _flagLayer.hidden = NO;
+                _flagLayer.contents = [itemDic[kOrderMetaKeyBetResult] integerValue] == 1 ?
+                (__bridge id)[UIImage imageNamed:@"main_win"].CGImage :
+                (__bridge id)[UIImage imageNamed:@"main_lose"].CGImage;
+                
+                _gainHintLab.text = @"已结算";
+                
+                hint = @"盈利: ";
+            }
+                break;
+        }
+        
+        [_gainHintLab sizeToFit];
+        
         NSString *gain = itemDic[kOrderMetaKeyGainMoney];
         NSMutableString *strM = [NSMutableString stringWithFormat:@"%@%@", hint, gain];
         NSMutableAttributedString *strAttr = [[NSMutableAttributedString alloc] initWithString:strM];
@@ -175,9 +218,16 @@
         [strAttr addAttributes:@{NSForegroundColorAttributeName: kMainOnTintColor} range:NSMakeRange(hint.length, strM.length - hint.length)];
         _gainLab.attributedText = strAttr;
         [_gainLab sizeToFit];
-        
+    }
+    
+    {
         _orderHintLab.text = [NSString stringWithFormat:@"订单号: %@", itemDic[kOrderMetaKeyOrderNumber]];
         [_orderHintLab sizeToFit];
+        
+        NSTimeInterval timeStamp = [itemDic[kOrderMetaKeyCreatedTimeStamp] doubleValue];
+        NSDate *date = [NSDate dateWithTimestamp:timeStamp];
+        _orderTimeLab.text = [date ISO8601StringOnlyDate];
+        [_orderTimeLab sizeToFit];
     }
 }
 

@@ -154,7 +154,7 @@
         
         NSTimeInterval timeStamp = [orderDic[kOrderMetaKeyMatchStartTimeStamp] doubleValue];
         NSDate *date = [NSDate dateWithTimestamp:timeStamp];
-        _startTimeLab.text = [NSString stringWithFormat:@"开始时间: %@", [date ISO8601String]];
+        _startTimeLab.text = [NSString stringWithFormat:@"开始时间: %@", [date ISO8601StringDateAndTime]];
         [_startTimeLab sizeToFit];
         
         _oddsLab.text = [NSString stringWithFormat:@"赔率: %@", orderDic[kOrderMetaKeyBetOddsValue]];

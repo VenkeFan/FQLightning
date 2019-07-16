@@ -27,7 +27,7 @@
 
 - (void)modifyBirthday:(NSDate *)birthday success:(void(^)(NSString *newBirthday))success failure:(void(^)(void))failure {
     LGModifyBirthRequest *request = [LGModifyBirthRequest new];
-    [request requestWithBirthday:birthday.ISO8601String
+    [request requestWithBirthday:[birthday ISO8601StringRaw]
                          success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
                              if (success) {
                                  success(responseObject[@"birthday"]);

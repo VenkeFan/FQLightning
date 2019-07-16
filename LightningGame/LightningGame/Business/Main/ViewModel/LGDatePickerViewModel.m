@@ -78,7 +78,7 @@ const NSUInteger kDateSelectionRange = 7;
 #pragma mark - Private
 
 - (NSString *)stringFromDate:(NSDate *)date {
-    NSString *str = [date ISO8601String];
+    NSString *str = [date ISO8601StringRaw];
     NSString *week = [date weekdayString];
     NSRange range = [str rangeOfString:@"T"];
     str = [str substringToIndex:range.location];

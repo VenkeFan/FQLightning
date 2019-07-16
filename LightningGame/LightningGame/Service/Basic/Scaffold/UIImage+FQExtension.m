@@ -161,7 +161,7 @@
 
 - (UIImage *)resizeToSize:(CGSize)size {
     if (size.width <= 0 || size.height <= 0) {
-        return nil;
+        return self;
     }
     UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
