@@ -16,8 +16,6 @@
 #import "LGAlertOrderView.h"
 
 #define kLGMatchParlayViewAnimationDuration         (0.4)
-#define kLGMatchParlayViewSpringVelocity            (5.0)
-#define kLGMatchParlayViewSpringDamping             (0.8)
 
 #define kLGMatchParlayViewHintHeight                kSizeScale(45.0)
 #define kLGMatchParlayViewMixHeight                 (kLGMatchParlayTableViewCellHeight + kLGMatchParlayViewTopHeight + kLGMatchParlayViewBottomHeight)
@@ -134,6 +132,7 @@
 }
 
 - (void)removeObservers {
+    NSLog(@"11111111111111> removeObservers %@", self->_contentView);
     [self.contentView removeObserver:self forKeyPath:@"itemArray"];
 }
 
@@ -235,43 +234,36 @@
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [[UIApplication sharedApplication].keyWindow addSubview:self.bottomView];
     
-    [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration * 0.5
-                     animations:^{
-                         self.bottomView.top = kScreenHeight - kLGMatchParlayViewBottomHeight;
-                     }];
-    
     [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration
                           delay:0.0
-//         usingSpringWithDamping:kLGMatchParlayViewSpringDamping
-//          initialSpringVelocity:kLGMatchParlayViewSpringVelocity
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
+                         self.bottomView.top = kScreenHeight - kLGMatchParlayViewBottomHeight;
                          self.top = kScreenHeight - self.height;
                      }
                      completion:^(BOOL finished) {
-//                         self.expanded = YES;
+                         
                      }];
 }
 
 - (void)p_fold {
     [self p_fold:NO
        completed:^{
-//           self.expanded = NO;
+           
        }];
 }
 
 - (void)p_destroy {
+    [self removeObservers];
+    
     [self p_fold:YES
        completed:^{
-//           self.expanded = NO;
-           
-           [self removeObservers];
            
            [self removeAllSubviews];
            [self->_bottomView removeFromSuperview];
-           self->_topView = nil;
-           self->_contentView = nil;
-           self->_bottomView = nil;
+//           self->_topView = nil;
+//           self->_contentView = nil;
+//           self->_bottomView = nil;
            [self removeFromSuperview];
        }];
 }
@@ -279,15 +271,14 @@
 - (void)p_fold:(BOOL)isDestroy completed:(void(^)(void))completed {
     [FQWindowUtility resignFirstResponder];
     
-    if (!self.isExpanded && !isDestroy) {
+    if (!self.isExpanded /*  && !isDestroy */) {
         return;
     }
+    
     self.expanded = NO;
     
     [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration
                           delay:0.0
-//         usingSpringWithDamping:kLGMatchParlayViewSpringDamping
-//          initialSpringVelocity:kLGMatchParlayViewSpringVelocity
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
                          if (isDestroy) {
