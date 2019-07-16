@@ -132,7 +132,6 @@
 }
 
 - (void)removeObservers {
-    NSLog(@"11111111111111> removeObservers %@", self->_contentView);
     [self.contentView removeObserver:self forKeyPath:@"itemArray"];
 }
 
@@ -157,7 +156,7 @@
     
     [self.contentView clearAll];
     
-    [[LGAlertOrderView new] showWithOrderArray:data];
+    [[LGAlertOrderView new] displayWithOrderArray:data];
 }
 
 #pragma mark - LGMatchParlayTableViewDelegate

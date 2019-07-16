@@ -10,7 +10,7 @@
 
 @interface FQAlertView ()
 
-@property (nonatomic, strong, readwrite) UIView *contentView;
+@property (nonatomic, strong, readwrite) UIView *containerView;
 
 @end
 
@@ -21,6 +21,9 @@
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
         self.alpha = 0;
+        
+        _direction = FQAlertViewPopDirectionFromBottom;
+        _position = FQAlertViewPopPositionCenter;
     }
     return self;
 }
@@ -31,14 +34,16 @@
 
 #pragma mark - Public
 
-- (void)show {
-    [self showWithCompleted:nil];
+- (void)displayInWindow {
+    [self displayInParentView:kCurrentWindow];
 }
 
-- (void)showWithCompleted:(void (^)(void))completed {
-    [kCurrentWindow addSubview:self];
-    
-    UIView *view = self.contentView;
+- (void)displayInParentView:(UIView *)parentView {
+    [self displayInParentView:parentView completed:nil];
+}
+
+- (void)displayInParentView:(UIView *)parentView completed:(void (^)(void))completed {
+    [parentView addSubview:self];
     
     [UIView animateWithDuration:0.5
                           delay:0.0
@@ -46,7 +51,14 @@
           initialSpringVelocity:5
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         view.centerY = self.height * 0.5;
+                         switch (self.position) {
+                             case FQAlertViewPopPositionBottom:
+                                 self.containerView.centerY = self.height - self.containerView.height * 0.5;
+                                 break;
+                             case FQAlertViewPopPositionCenter:
+                                 self.containerView.centerY = self.height * 0.5;
+                                 break;
+                         }
                          
                          self.alpha = 1;
                      }
@@ -58,15 +70,13 @@
 }
 
 - (void)dismiss {
-    UIView *view = self.contentView;
-    
     [UIView animateWithDuration:0.5
                           delay:0.0
          usingSpringWithDamping:0.8
           initialSpringVelocity:5
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         view.centerY = self.height + view.height * 0.5;
+                         [self p_setContainerViewCenterY];
                          
                          self.alpha = 0;
                      }
@@ -84,24 +94,44 @@
 #pragma mark - Private
 
 - (void)p_removeSelf {
-    [_contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [_contentView removeFromSuperview];
+    [_containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [_containerView removeFromSuperview];
     [self removeFromSuperview];
+}
+
+- (void)p_setContainerViewCenterY {
+    switch (self.direction) {
+        case FQAlertViewPopDirectionFromBottom:
+            self.containerView.center = CGPointMake(self.width * 0.5, self.height + self.containerView.height * 0.5);
+            break;
+        case FQAlertViewPopDirectionFromTop:
+            self.containerView.center = CGPointMake(self.width * 0.5, -self.containerView.height * 0.5);
+            break;
+    }
+}
+
+#pragma mark - Setter
+
+- (void)setDirection:(FQAlertViewPopDirection)direction {
+    _direction = direction;
+    
+    [self p_setContainerViewCenterY];
 }
 
 #pragma mark - Getter
 
-- (UIView *)contentView {
-    if (!_contentView) {
-        _contentView = [[UIView alloc] init];
-        _contentView.backgroundColor = kCellBgColor;
-        _contentView.frame = CGRectMake(0, 0, kScreenWidth, 0);
-        _contentView.center = CGPointMake(self.width * 0.5, self.height + _contentView.height * 0.5);
-        _contentView.layer.cornerRadius = kCornerRadius;
-        _contentView.layer.masksToBounds = YES;
-        [self addSubview:_contentView];
+- (UIView *)containerView {
+    if (!_containerView) {
+        _containerView = [[UIView alloc] init];
+        _containerView.backgroundColor = kCellBgColor;
+        _containerView.frame = CGRectMake(0, 0, kScreenWidth, 0);
+        _containerView.layer.cornerRadius = kCornerRadius;
+        _containerView.layer.masksToBounds = YES;
+        [self addSubview:_containerView];
+        
+        [self p_setContainerViewCenterY];
     }
-    return _contentView;
+    return _containerView;
 }
 
 @end

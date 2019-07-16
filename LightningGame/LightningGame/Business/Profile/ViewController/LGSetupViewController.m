@@ -106,6 +106,7 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
     } else if ([cls isKindOfClass:[LGUserDatePickerView class]]) {
         LGUserDatePickerView *view = [LGUserDatePickerView new];
         view.delegate = self;
+//        [view displayInParentView:self.view];
         [view displayInParentView:self.view];
     }
 }

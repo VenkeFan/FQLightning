@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LGAlertOrderView : FQAlertView
 
-- (void)showWithOrderArray:(NSArray *)orderArray;
+- (void)displayWithOrderArray:(NSArray *)orderArray;
 
 @end
 

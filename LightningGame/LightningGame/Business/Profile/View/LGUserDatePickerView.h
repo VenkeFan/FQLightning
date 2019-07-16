@@ -6,7 +6,7 @@
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FQAlertView.h"
 
 @class LGUserDatePickerView;
 
@@ -18,12 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface LGUserDatePickerView : UIView
+@interface LGUserDatePickerView : FQAlertView
 
 @property (nonatomic, weak) id<LGUserDatePickerViewDelegate> delegate;
-
-- (void)displayInParentView:(UIView *)parentView;
-- (void)dismiss;
 
 @end
 

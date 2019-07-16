@@ -211,13 +211,13 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
     
     CGFloat x = kSizeScale(12.0);
     
-    _confirmBtn.frame = CGRectMake(x, CGRectGetMaxY(_tableView.frame) + kSizeScale(12.0), self.contentView.width - x * 2, kSizeScale(36.0));
-    _logBtn.center = CGPointMake(self.contentView.width * 0.5, CGRectGetMaxY(_confirmBtn.frame) + _logBtn.height * 0.5);
+    _confirmBtn.frame = CGRectMake(x, CGRectGetMaxY(_tableView.frame) + kSizeScale(12.0), self.containerView.width - x * 2, kSizeScale(36.0));
+    _logBtn.center = CGPointMake(self.containerView.width * 0.5, CGRectGetMaxY(_confirmBtn.frame) + _logBtn.height * 0.5);
 }
 
 - (void)initializeUI {
     UIView *topView = ({
-        UIView *view = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        UIView *view = [[UIView alloc] initWithFrame:self.containerView.bounds];
         view.height = kAlertOrderTopViewHeight;
         view.backgroundColor = kMainOnTintColor;
         
@@ -252,16 +252,16 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
         
         view;
     });
-    [self.contentView addSubview:topView];
+    [self.containerView addSubview:topView];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame), self.contentView.width, kAlertOrderMetaViewHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame), self.containerView.width, kAlertOrderMetaViewHeight) style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerClass:[LGAlertOrderMetaCell class] forCellReuseIdentifier:kAlertOrderMetaCellReuseID];
     _tableView.rowHeight = kAlertOrderMetaViewHeight;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.contentView addSubview:_tableView];
+    [self.containerView addSubview:_tableView];
     
     _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _confirmBtn.backgroundColor = kMainOnTintColor;
@@ -270,7 +270,7 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
     [_confirmBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
     _confirmBtn.titleLabel.font = kRegularFont(kHeaderFontSize);
     [_confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:_confirmBtn];
+    [self.containerView addSubview:_confirmBtn];
     
     _logBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_logBtn setAttributedTitle:[[NSAttributedString alloc] initWithString:@"查看投注记录"
@@ -281,12 +281,12 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
                        forState:UIControlStateNormal];
     [_logBtn sizeToFit];
     [_logBtn addTarget:self action:@selector(logBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:_logBtn];
+    [self.containerView addSubview:_logBtn];
 }
 
 #pragma mark - Public
 
-- (void)showWithOrderArray:(NSArray *)orderArray {
+- (void)displayWithOrderArray:(NSArray *)orderArray {
     if (orderArray.count == 0) {
         return;
     }
@@ -300,12 +300,12 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
         } else {
             self.tableView.height = kAlertOrderMetaViewHeight * kAlertOrderMetaDisplayCount;
         }
-        self.contentView.height = kAlertOrderTopViewHeight + kAlertOrderBtmViewHeight + self.tableView.height;
+        self.containerView.height = kAlertOrderTopViewHeight + kAlertOrderBtmViewHeight + self.tableView.height;
     }
     
     [self.tableView reloadData];
     
-    [super show];
+    [super displayInWindow];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -327,7 +327,7 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     CGPoint point = [touches.anyObject locationInView:self];
     
-    if (!CGRectContainsPoint(self.contentView.frame, point)) {
+    if (!CGRectContainsPoint(self.containerView.frame, point)) {
         [super touchesEnded:touches withEvent:event];
         return;
     }

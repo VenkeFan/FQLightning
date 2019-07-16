@@ -8,12 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, FQAlertViewPopDirection) {
+    FQAlertViewPopDirectionFromBottom,  ///< bottom to top
+    FQAlertViewPopDirectionFromTop      ///< top to bottom
+};
+
+typedef NS_ENUM(NSInteger, FQAlertViewPopPosition) {
+    FQAlertViewPopPositionBottom,
+    FQAlertViewPopPositionCenter
+};
+
 @interface FQAlertView : UIView
 
-@property (nonatomic, strong, readonly) UIView *contentView;
+@property (nonatomic, strong, readonly) UIView *containerView;
+@property (nonatomic, assign) FQAlertViewPopDirection direction;
+@property (nonatomic, assign) FQAlertViewPopPosition position;
 
-- (void)show;
-- (void)showWithCompleted:(void (^)(void))completed;
+- (void)displayInWindow;
+- (void)displayInParentView:(UIView *)parentView;
+- (void)displayInParentView:(UIView *)parentView completed:(void (^)(void))completed;
 - (void)dismiss;
 
 @end
