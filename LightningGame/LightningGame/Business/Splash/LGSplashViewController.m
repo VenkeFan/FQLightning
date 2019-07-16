@@ -65,8 +65,7 @@
 }
 
 - (void)signFlowManagerFailed:(NSError *)error {
-    UIViewController *root = [[CTMediator sharedInstance] mediator_generateSignInController];
-    [FQWindowUtility changeKeyWindowRootViewController:root];
+    [[LGAccountManager instance] signOut];
 }
 
 @end
