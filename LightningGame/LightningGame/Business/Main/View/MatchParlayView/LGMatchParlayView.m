@@ -270,7 +270,7 @@
 - (void)p_fold:(BOOL)isDestroy completed:(void(^)(void))completed {
     [FQWindowUtility resignFirstResponder];
     
-    if (!self.isExpanded /*  && !isDestroy */) {
+    if (!self.isExpanded && !isDestroy) {
         return;
     }
     
