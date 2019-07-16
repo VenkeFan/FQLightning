@@ -166,13 +166,13 @@ static NSString * const kProfileCellReuseID = @"kProfileCellReuseID";
                              kProfileItemBadgeKey: @(0),
                              kProfileItemIconKey: @"grsz_dl",
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @"LGWalletViewController"
+                             kProfileItemClassKey: @""
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"profile_share"),
                              kProfileItemBadgeKey: @(0),
                              kProfileItemIconKey: @"grsz_fx",
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @"LGWalletViewController"
+                             kProfileItemClassKey: @""
                              }
                          ],
                        @[
@@ -186,13 +186,13 @@ static NSString * const kProfileCellReuseID = @"kProfileCellReuseID";
                              kProfileItemBadgeKey: @(20),
                              kProfileItemIconKey: @"grsz_xx",
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @"LGWalletViewController"
+                             kProfileItemClassKey: @""
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"profile_activity"),
                              kProfileItemBadgeKey: @(3),
                              kProfileItemIconKey: @"grsz_hd",
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @"LGWalletViewController"
+                             kProfileItemClassKey: @""
                              }
                          ],
                        @[
@@ -206,7 +206,7 @@ static NSString * const kProfileCellReuseID = @"kProfileCellReuseID";
                              kProfileItemBadgeKey: @(0),
                              kProfileItemIconKey: @"grsz_gy",
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @"LGWalletViewController"
+                             kProfileItemClassKey: @""
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"profile_version"),
                              kProfileItemBadgeKey: @(0),

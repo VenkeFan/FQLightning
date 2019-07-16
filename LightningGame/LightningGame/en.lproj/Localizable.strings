@@ -76,6 +76,8 @@ profile_version             = "版本";
 profile_setup               = "设置";
 parlay_settled              = "已结算";
 parlay_unSettle             = "未结算";
+profile_deal_history        = "交易记录";
+wallet_withdraw             = "提款";
 
 // Setup
 setup_real_name             = "真实姓名";
