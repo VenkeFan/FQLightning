@@ -28,6 +28,7 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
         _isDisplay = NO;
         
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+        _tableView.contentInset = UIEdgeInsetsMake(kCellMarginY, 0, 0, 0);
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -37,9 +38,16 @@ NSString * const kDatePickerCellReuseID = @"kDatePickerCellReuseID";
         [self addSubview:_tableView];
         
         UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        closeBtn.backgroundColor = [UIColor redColor];
-        closeBtn.frame = CGRectMake(0, 0, kSizeScale(50), kSizeScale(50));
+        closeBtn.frame = CGRectMake(0, 0, kSizeScale(40), kSizeScale(40));
         closeBtn.center = CGPointMake(self.width * 0.5, self.height - closeBtn.height - kSafeAreaBottomY);
+        [closeBtn setTitle:@"×" forState:UIControlStateNormal];
+        [closeBtn setTitleColor:kMainOnTintColor forState:UIControlStateNormal];
+        closeBtn.titleLabel.font = kRegularFont(26.0);
+        closeBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        closeBtn.layer.borderColor = kMainOnTintColor.CGColor;
+        closeBtn.layer.borderWidth = 1.0;
+        closeBtn.layer.cornerRadius = closeBtn.height * 0.5;
+        closeBtn.layer.masksToBounds = YES;
         [closeBtn addTarget:self action:@selector(closeBtnOnClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:closeBtn];
     }

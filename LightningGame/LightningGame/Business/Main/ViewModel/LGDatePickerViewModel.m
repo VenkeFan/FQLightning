@@ -99,7 +99,7 @@ const NSUInteger kDateSelectionRange = 7;
 - (NSDateFormatter *)formatter {
     if (!_formatter) {
         _formatter = [[NSDateFormatter alloc] init];
-        _formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        _formatter.dateFormat = @"yyyy-MM-dd"; // @"yyyy-MM-dd HH:mm:ss";
         _formatter.timeZone = [NSTimeZone localTimeZone];
         _formatter.locale = [NSLocale currentLocale];
     }

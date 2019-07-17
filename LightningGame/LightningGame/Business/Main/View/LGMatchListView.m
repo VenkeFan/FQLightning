@@ -399,8 +399,8 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     
     self.dataDic = [NSMutableDictionary dictionary];
     [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        NSString *key = [obj[kMatchKeyStartTime] substringToIndex:[obj[kMatchKeyStartTime] rangeOfString:@" "].location];
-        NSString *key = obj[kMatchKeyStartTime];
+        NSString *key = [obj[kMatchKeyStartTime] substringToIndex:[obj[kMatchKeyStartTime] rangeOfString:@" "].location];
+//        NSString *key = obj[kMatchKeyStartTime];
         
         if ([self.dataDic objectForKey:key]) {
             NSMutableArray *subArrayM = [self.dataDic objectForKey:key];
