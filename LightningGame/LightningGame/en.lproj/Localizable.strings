@@ -76,7 +76,7 @@ profile_version             = "版本";
 profile_setup               = "设置";
 parlay_settled              = "已结算";
 parlay_unSettle             = "未结算";
-profile_deal_history        = "交易记录";
+profile_trade_history       = "交易记录";
 wallet_withdraw             = "提款";
 wallet_add_card             = "添加银行卡";
 card_retainer               = "持卡人";
@@ -87,6 +87,10 @@ card_valid_balance          = "可提现额度";
 card_withdraw_all           = "全部提现";
 card_withdraw_money         = "金额";
 card_selection              = "选择提款卡";
+trade_all                   = "全场";
+trade_charge                = "存款";
+trade_withdraw              = "提款";
+trade_discount              = "优惠";
 
 // Setup
 setup_real_name             = "真实姓名";

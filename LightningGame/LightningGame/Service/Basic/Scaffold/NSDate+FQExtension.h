@@ -17,6 +17,8 @@
 - (NSString *)ISO8601StringDateAndTime;
 - (NSString *)ISO8601StringOnlyDate;
 - (NSString *)ISO8601StringOnlyTime;
+- (NSDate *)dateInBeijingLocale;
+
 
 @property (nonatomic, readonly) NSInteger year; ///< Year component
 @property (nonatomic, readonly) NSInteger month; ///< Month component (1~12)

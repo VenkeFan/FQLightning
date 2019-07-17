@@ -1,29 +1,29 @@
 //
-//  LGParlayHistoryView.m
+//  LGTradeListView.m
 //  LightningGame
 //
-//  Created by fanqi_company on 2019/7/12.
+//  Created by fanqi_company on 2019/7/17.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
-#import "LGParlayHistoryView.h"
+#import "LGTradeListView.h"
 #import <MJRefresh/MJRefresh.h>
-#import "LGParlayHistoryViewModel.h"
-#import "LGParlayHistoryCell.h"
+#import "LGTradeHistoryViewModel.h"
+#import "LGTradeListCell.h"
 
-static NSString * const kParlayHistoryCellReuseID = @"kParlayHistoryCellReuseID";
+static NSString * const kLGTradeListCellReuseID = @"kLGTradeListCellReuseID";
 
-@interface LGParlayHistoryView () <LGParlayHistoryViewModelDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface LGTradeListView () <LGTradeHistoryViewModelDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL _isLoaded;
 }
 
-@property (nonatomic, strong) LGParlayHistoryViewModel *viewModel;
+@property (nonatomic, strong) LGTradeHistoryViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
-@implementation LGParlayHistoryView
+@implementation LGTradeListView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -33,8 +33,8 @@ static NSString * const kParlayHistoryCellReuseID = @"kParlayHistoryCellReuseID"
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView registerClass:[LGParlayHistoryCell class] forCellReuseIdentifier:kParlayHistoryCellReuseID];
-        _tableView.rowHeight = kLGParlayHistoryCellHeight;
+        [_tableView registerClass:[LGTradeListCell class] forCellReuseIdentifier:kLGTradeListCellReuseID];
+        _tableView.rowHeight = kLGTradeListCellHeight;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addSubview:_tableView];
         
@@ -78,9 +78,9 @@ static NSString * const kParlayHistoryCellReuseID = @"kParlayHistoryCellReuseID"
     [self.viewModel loadMoreData];
 }
 
-#pragma mark - LGParlayHistoryViewModelDelegate
+#pragma mark - LGTradeHistoryViewModelDelegate
 
-- (void)parlayHistoryDidFetch:(LGParlayHistoryViewModel *)viewModel data:(NSArray *)data last:(BOOL)last isRefresh:(BOOL)isRefresh error:(NSError *)error {
+- (void)tradeHistoryDidFetch:(LGTradeHistoryViewModel *)viewModel data:(NSArray *)data last:(BOOL)last isRefresh:(BOOL)isRefresh error:(NSError *)error {
     [self.tableView.mj_header endRefreshing];
     
     if (error) {
@@ -105,7 +105,7 @@ static NSString * const kParlayHistoryCellReuseID = @"kParlayHistoryCellReuseID"
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LGParlayHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:kParlayHistoryCellReuseID];
+    LGTradeListCell *cell = [tableView dequeueReusableCellWithIdentifier:kLGTradeListCellReuseID];
     [cell setItemDic:self.dataArray[indexPath.row]];
     return cell;
 }
@@ -130,11 +130,11 @@ static NSString * const kParlayHistoryCellReuseID = @"kParlayHistoryCellReuseID"
 
 #pragma mark - Getter
 
-- (LGParlayHistoryViewModel *)viewModel {
+- (LGTradeHistoryViewModel *)viewModel {
     if (!_viewModel) {
-        _viewModel = [LGParlayHistoryViewModel new];
+        _viewModel = [LGTradeHistoryViewModel new];
         _viewModel.delegate = self;
-        _viewModel.orderStatus = self.orderStatus;
+        _viewModel.tradeType = self.tradeType;
     }
     return _viewModel;
 }

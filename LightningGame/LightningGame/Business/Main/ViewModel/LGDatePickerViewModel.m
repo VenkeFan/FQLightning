@@ -55,7 +55,7 @@ const NSUInteger kDateSelectionRange = 7;
     
     [itemArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSDate *date = [self.formatter dateFromString:obj];
-        date = [date dateByAddingTimeInterval:8 * 60 * 60];
+        date = [date dateInBeijingLocale];
         
         [self.itemArrayM addObject:[self stringFromDate:date]];
     }];
@@ -99,7 +99,7 @@ const NSUInteger kDateSelectionRange = 7;
 - (NSDateFormatter *)formatter {
     if (!_formatter) {
         _formatter = [[NSDateFormatter alloc] init];
-        _formatter.dateFormat = @"yyyy-MM-dd";
+        _formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         _formatter.timeZone = [NSTimeZone localTimeZone];
         _formatter.locale = [NSLocale currentLocale];
     }

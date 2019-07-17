@@ -7,15 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LGCardKeys.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-extern NSString * const kCardKeyNumber;
-extern NSString * const kCardKeyName;
-extern NSString * const kCardKeyLogo;
-extern NSString * const kCardKeyCreatedTimestamp;
-extern NSString * const kCardKeyBindID;
-extern NSString * const kCardKeyUserID;
 
 @interface LGUserManager : NSObject
 

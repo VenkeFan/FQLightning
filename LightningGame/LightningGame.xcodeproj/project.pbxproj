@@ -62,6 +62,11 @@
 		B92337F022DEBED000109A5D /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337EF22DEBED000109A5D /* LGAlertView.m */; };
 		B92337F322DEC52500109A5D /* LGWithdrawRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337F222DEC52500109A5D /* LGWithdrawRequest.m */; };
 		B92337F622DEEB9900109A5D /* LGBankListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337F522DEEB9900109A5D /* LGBankListView.m */; };
+		B92337F922DF0BB400109A5D /* LGTradeHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337F822DF0BB400109A5D /* LGTradeHistoryViewController.m */; };
+		B92337FC22DF10CE00109A5D /* LGTradeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337FB22DF10CE00109A5D /* LGTradeListView.m */; };
+		B92337FF22DF120000109A5D /* LGTradeHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337FE22DF120000109A5D /* LGTradeHistoryViewModel.m */; };
+		B923380522DF16FF00109A5D /* LGTradeHistoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380422DF16FF00109A5D /* LGTradeHistoryRequest.m */; };
+		B923380822DF1B7B00109A5D /* LGTradeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380722DF1B7B00109A5D /* LGTradeListCell.m */; };
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
 		B93F3B9B22BCD8C600D45DEF /* FQAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9A22BCD8C600D45DEF /* FQAlertView.m */; };
@@ -287,6 +292,18 @@
 		B92337F222DEC52500109A5D /* LGWithdrawRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGWithdrawRequest.m; sourceTree = "<group>"; };
 		B92337F422DEEB9900109A5D /* LGBankListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGBankListView.h; sourceTree = "<group>"; };
 		B92337F522DEEB9900109A5D /* LGBankListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGBankListView.m; sourceTree = "<group>"; };
+		B92337F722DF0BB400109A5D /* LGTradeHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeHistoryViewController.h; sourceTree = "<group>"; };
+		B92337F822DF0BB400109A5D /* LGTradeHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeHistoryViewController.m; sourceTree = "<group>"; };
+		B92337FA22DF10CE00109A5D /* LGTradeListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeListView.h; sourceTree = "<group>"; };
+		B92337FB22DF10CE00109A5D /* LGTradeListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeListView.m; sourceTree = "<group>"; };
+		B92337FD22DF120000109A5D /* LGTradeHistoryViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeHistoryViewModel.h; sourceTree = "<group>"; };
+		B92337FE22DF120000109A5D /* LGTradeHistoryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeHistoryViewModel.m; sourceTree = "<group>"; };
+		B923380122DF133B00109A5D /* LGTradeHistoryKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeHistoryKeys.h; sourceTree = "<group>"; };
+		B923380222DF151A00109A5D /* LGCardKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGCardKeys.h; sourceTree = "<group>"; };
+		B923380322DF16FF00109A5D /* LGTradeHistoryRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeHistoryRequest.h; sourceTree = "<group>"; };
+		B923380422DF16FF00109A5D /* LGTradeHistoryRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeHistoryRequest.m; sourceTree = "<group>"; };
+		B923380622DF1B7B00109A5D /* LGTradeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeListCell.h; sourceTree = "<group>"; };
+		B923380722DF1B7B00109A5D /* LGTradeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeListCell.m; sourceTree = "<group>"; };
 		B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRequest.h; sourceTree = "<group>"; };
 		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailRequest.h; sourceTree = "<group>"; };
@@ -719,6 +736,8 @@
 				B973024F22CC51F700281EDE /* LGGameListRequest.m */,
 				B973026022D8733900281EDE /* LGParlayHistoryRequest.h */,
 				B973026122D8733900281EDE /* LGParlayHistoryRequest.m */,
+				B923380322DF16FF00109A5D /* LGTradeHistoryRequest.h */,
+				B923380422DF16FF00109A5D /* LGTradeHistoryRequest.m */,
 				B91A1F6A22DC4827007982EA /* LGModifyPwdRequest.h */,
 				B91A1F6B22DC4827007982EA /* LGModifyPwdRequest.m */,
 				B91A1F7022DC49FC007982EA /* LGModifyMobileRequest.h */,
@@ -735,6 +754,15 @@
 				B92337F222DEC52500109A5D /* LGWithdrawRequest.m */,
 			);
 			path = APIRequest;
+			sourceTree = "<group>";
+		};
+		B923380022DF131A00109A5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B923380122DF133B00109A5D /* LGTradeHistoryKeys.h */,
+				B923380222DF151A00109A5D /* LGCardKeys.h */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B9493674229BCBE7000C3D24 = {
@@ -818,6 +846,8 @@
 				B973026B22D88AF500281EDE /* LGParlayHistoryCell.m */,
 				B91A1F6122DC1370007982EA /* LGProfileViewCell.h */,
 				B91A1F6222DC1370007982EA /* LGProfileViewCell.m */,
+				B923380622DF1B7B00109A5D /* LGTradeListCell.h */,
+				B923380722DF1B7B00109A5D /* LGTradeListCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1077,6 +1107,7 @@
 		B9D9103822AE810300D54911 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B923380022DF131A00109A5D /* Model */,
 				B973026922D88ADE00281EDE /* Cell */,
 				B9D9103F22AE819E00D54911 /* Actions */,
 				B9D9103B22AE818300D54911 /* View */,
@@ -1091,6 +1122,8 @@
 			children = (
 				B973026622D8795100281EDE /* LGParlayHistoryViewModel.h */,
 				B973026722D8795100281EDE /* LGParlayHistoryViewModel.m */,
+				B92337FD22DF120000109A5D /* LGTradeHistoryViewModel.h */,
+				B92337FE22DF120000109A5D /* LGTradeHistoryViewModel.m */,
 				B91A1F6D22DC4976007982EA /* LGUserManager.h */,
 				B91A1F6E22DC4976007982EA /* LGUserManager.m */,
 			);
@@ -1104,6 +1137,8 @@
 				B9D9103D22AE819900D54911 /* LGProfileViewController.m */,
 				B973025722D8672800281EDE /* LGWalletViewController.h */,
 				B973025822D8672800281EDE /* LGWalletViewController.m */,
+				B92337F722DF0BB400109A5D /* LGTradeHistoryViewController.h */,
+				B92337F822DF0BB400109A5D /* LGTradeHistoryViewController.m */,
 				B91A1F7C22DD72FA007982EA /* LGAddCardViewController.h */,
 				B91A1F7D22DD72FA007982EA /* LGAddCardViewController.m */,
 				B91A1F7F22DDA197007982EA /* LGWithdrawViewController.h */,
@@ -1133,6 +1168,8 @@
 				B92337F522DEEB9900109A5D /* LGBankListView.m */,
 				B92337EB22DEBDC300109A5D /* LGUserBankListView.h */,
 				B92337EC22DEBDC300109A5D /* LGUserBankListView.m */,
+				B92337FA22DF10CE00109A5D /* LGTradeListView.h */,
+				B92337FB22DF10CE00109A5D /* LGTradeListView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1379,6 +1416,7 @@
 				B91A1F6322DC1370007982EA /* LGProfileViewCell.m in Sources */,
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
 				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
+				B923380522DF16FF00109A5D /* LGTradeHistoryRequest.m in Sources */,
 				B9A1C84722C35CE7001A3694 /* UIViewController+FQTracker.m in Sources */,
 				B9A1C83322C1F106001A3694 /* LGMarqueeView.m in Sources */,
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
@@ -1419,6 +1457,7 @@
 				B91A1F8122DDA197007982EA /* LGWithdrawViewController.m in Sources */,
 				B9A1C82522C1F106001A3694 /* LGMatchListRollingCell.m in Sources */,
 				B9F61A6C22A6566300CDC29E /* LGToastView.m in Sources */,
+				B92337FF22DF120000109A5D /* LGTradeHistoryViewModel.m in Sources */,
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
 				B973025922D8672800281EDE /* LGWalletViewController.m in Sources */,
 				B9A1C82822C1F106001A3694 /* LGMatchListFinishedCell.m in Sources */,
@@ -1433,6 +1472,7 @@
 				B93F3BDC22C0640F00D45DEF /* LGAlertOrderView.m in Sources */,
 				B9229D0D229BF04F0030691D /* UIView+FQExtension.m in Sources */,
 				B9A1C82E22C1F106001A3694 /* Target_Main.m in Sources */,
+				B92337FC22DF10CE00109A5D /* LGTradeListView.m in Sources */,
 				B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */,
 				B91A1F7E22DD72FA007982EA /* LGAddCardViewController.m in Sources */,
 				B9C3A17C22A0FA2600E282B0 /* LGSignInViewController.m in Sources */,
@@ -1456,6 +1496,7 @@
 				B9229D76229E5FB80030691D /* FQNetworkManager.m in Sources */,
 				B9229D47229D07260030691D /* FQSegmentedControl.m in Sources */,
 				B9A1C83922C1F106001A3694 /* LGMatchParlayBottomView.m in Sources */,
+				B92337F922DF0BB400109A5D /* LGTradeHistoryViewController.m in Sources */,
 				B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */,
 				B9A1C83822C1F106001A3694 /* LGMatchParlayTextField.m in Sources */,
 				B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */,
@@ -1481,6 +1522,7 @@
 				B91A1F6F22DC4976007982EA /* LGUserManager.m in Sources */,
 				B9BE555A22B908BE00D04395 /* LGOAuthRequest.m in Sources */,
 				B9493682229BCBE7000C3D24 /* AppDelegate.m in Sources */,
+				B923380822DF1B7B00109A5D /* LGTradeListCell.m in Sources */,
 				B91A1F6C22DC4827007982EA /* LGModifyPwdRequest.m in Sources */,
 				B9229D35229CFD940030691D /* FQFileManagerUtility.m in Sources */,
 				B91A762322A7E40E00155607 /* LGVerifyCodeRequest.m in Sources */,

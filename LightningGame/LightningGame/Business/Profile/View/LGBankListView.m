@@ -7,7 +7,7 @@
 //
 
 #import "LGBankListView.h"
-#import "LGUserManager.h"
+#import "LGCardKeys.h"
 
 @interface LGBankListCell : UITableViewCell
 

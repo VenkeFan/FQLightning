@@ -7,10 +7,11 @@
 //
 
 #import "LGWalletViewController.h"
+#import "LGUserManager.h"
 #import <Masonry/Masonry.h>
+#import "LGTradeHistoryViewController.h"
 #import "LGAddCardViewController.h"
 #import "LGWithdrawViewController.h"
-#import "LGUserManager.h"
 
 @interface LGWalletViewController ()
 
@@ -33,14 +34,14 @@
     headerView.layer.masksToBounds = YES;
     [self.view addSubview:headerView];
     
-    UIView *titleView = ({
+    UIView *tradeView = ({
         UIView *view = [UIView new];
         view.frame = CGRectMake(kCellMarginX, kCellMarginY, headerView.width - kCellMarginX * 2, kSizeScale(24.0));
         view.backgroundColor = kCellBgColor;
         view.layer.cornerRadius = kCornerRadius;
         view.layer.masksToBounds = YES;
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleViewOnTapped)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tradeViewOnTapped)];
         [view addGestureRecognizer:tap];
         
         UIImageView *iconView = [UIImageView new];
@@ -51,7 +52,7 @@
         [view addSubview:iconView];
         
         UILabel *lab = [UILabel new];
-        lab.text = kLocalizedString(@"profile_deal_history");
+        lab.text = kLocalizedString(@"profile_trade_history");
         lab.textColor = kNameFontColor;
         lab.font = kRegularFont(kFieldFontSize);
         [lab sizeToFit];
@@ -68,7 +69,7 @@
         
         view;
     });
-    [headerView addSubview:titleView];
+    [headerView addSubview:tradeView];
     
     UIView *tmpView = ({
         UIView *view = [UIView new];
@@ -119,14 +120,15 @@
     [tmpView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(kSizeScale(200.0));
         make.centerX.mas_equalTo(headerView);
-        make.centerY.mas_equalTo(headerView).offset(CGRectGetMaxY(titleView.frame) * 0.5);
+        make.centerY.mas_equalTo(headerView).offset(CGRectGetMaxY(tradeView.frame) * 0.5);
     }];
 }
 
 #pragma mark - Events
 
-- (void)titleViewOnTapped {
-    
+- (void)tradeViewOnTapped {
+    LGTradeHistoryViewController *ctr = [LGTradeHistoryViewController new];
+    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 - (void)withdrawBtnClicked {

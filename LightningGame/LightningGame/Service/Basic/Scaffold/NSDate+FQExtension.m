@@ -37,7 +37,7 @@
     struct tm *timeinfo;
     char buffer[80];
     
-    time_t rawtime = [self timeIntervalSince1970] - [[NSTimeZone localTimeZone] secondsFromGMT];
+    time_t rawtime = [self timeIntervalSince1970]; // - [[NSTimeZone localTimeZone] secondsFromGMT];
     timeinfo = localtime(&rawtime);
     
     strftime(buffer, 80, "%Y-%m-%dT%H:%M:%S%z", timeinfo);
@@ -48,13 +48,23 @@
 - (NSString *)ISO8601StringDateAndTime {
     struct tm *timeinfo;
     char buffer[80];
-    
-    time_t rawtime = [self timeIntervalSince1970] - [[NSTimeZone localTimeZone] secondsFromGMT];
+
+    time_t rawtime = [self timeIntervalSince1970]; // - [[NSTimeZone localTimeZone] secondsFromGMT];
     timeinfo = localtime(&rawtime);
-    
+
     strftime(buffer, 80, "%Y-%m-%d %H:%M:%S", timeinfo);
-    
+
     return [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
+    
+//    NSDateFormatter *formatter = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        formatter = [[NSDateFormatter alloc] init];
+//        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//        formatter.timeZone = [NSTimeZone localTimeZone];
+//        formatter.locale = [NSLocale currentLocale];
+//    });
+//    return [formatter stringFromDate:self];
 }
 
 - (NSString *)ISO8601StringOnlyDate {
@@ -65,6 +75,10 @@
 - (NSString *)ISO8601StringOnlyTime {
     NSString *str = [self ISO8601StringRaw];
     return [str substringWithRange:NSMakeRange([str rangeOfString:@"T"].location + 1, 8)];
+}
+
+- (NSDate *)dateInBeijingLocale {
+    return [self dateByAddingTimeInterval:8 * 60 * 60];
 }
 
 - (NSInteger)year {
