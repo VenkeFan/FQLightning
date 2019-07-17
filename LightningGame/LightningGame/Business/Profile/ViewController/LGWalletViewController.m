@@ -10,6 +10,7 @@
 #import <Masonry/Masonry.h>
 #import "LGAddCardViewController.h"
 #import "LGWithdrawViewController.h"
+#import "LGUserManager.h"
 
 @interface LGWalletViewController ()
 
@@ -129,8 +130,16 @@
 }
 
 - (void)withdrawBtnClicked {
-    LGWithdrawViewController *ctr = [LGWithdrawViewController new];
-    [self.navigationController pushViewController:ctr animated:YES];
+    [[LGUserManager manager] fetchUserBankListWithCompleted:^(BOOL result) {
+        if (result) {
+            LGWithdrawViewController *ctr = [LGWithdrawViewController new];
+            [self.navigationController pushViewController:ctr animated:YES];
+        } else {
+            LGAddCardViewController *ctr = [LGAddCardViewController new];
+            [self.navigationController pushViewController:ctr animated:YES];
+        }
+        
+    }];
 }
 
 @end

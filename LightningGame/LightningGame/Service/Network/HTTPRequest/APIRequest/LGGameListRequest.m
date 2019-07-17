@@ -17,16 +17,4 @@
     return self;
 }
 
-- (void)requestWithSuccess:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
-    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if (success) {
-            success(task, responseObject);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failure) {
-            failure(task, error);
-        }
-    }];
-}
-
 @end

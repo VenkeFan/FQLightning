@@ -114,6 +114,10 @@ static NSString * const kSetupCellReuseID = @"kSetupCellReuseID";
 #pragma mark - LGUserDatePickerViewDelegate
 
 - (void)userDatePickerView:(id)view didSelectedDate:(NSDate *)date {
+    if (!date) {
+        return;
+    }
+    
     if ([date.ISO8601StringOnlyDate isEqual:[[LGAccountManager instance] account][kAccountKeyAccountBirthday]]) {
         return;
     }

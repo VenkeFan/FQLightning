@@ -86,6 +86,7 @@ card_bank_card              = "银行卡";
 card_valid_balance          = "可提现额度";
 card_withdraw_all           = "全部提现";
 card_withdraw_money         = "金额";
+card_selection              = "选择提款卡";
 
 // Setup
 setup_real_name             = "真实姓名";

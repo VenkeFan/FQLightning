@@ -8,8 +8,14 @@
 
 #import "LGAddCardViewController.h"
 #import "FQComponentFactory.h"
+#import "LGUserManager.h"
+#import "LGBankListView.h"
 
-@interface LGAddCardViewController ()
+@interface LGAddCardViewController () <LGBankListViewDelegate>
+
+@property (nonatomic, weak) UITextField *cardField;
+@property (nonatomic, weak) UIButton *bankBtn;
+@property (nonatomic, copy) NSDictionary *selectedItem;
 
 @end
 
@@ -114,6 +120,7 @@
         txtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入卡号或对银行卡进行拍照"
                                                                          attributes:@{NSForegroundColorAttributeName: kLightTintColor, NSFontAttributeName: kRegularFont(kTinyFontSize)}];
         [view addSubview:txtField];
+        _cardField = txtField;
         
         view;
     });
@@ -158,6 +165,7 @@
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [btn addTarget:self action:@selector(bankBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:btn];
+        _bankBtn = btn;
         
         view;
     });
@@ -190,6 +198,15 @@
     return view;
 }
 
+#pragma mark - LGBankListViewDelegate
+
+- (void)bankListViewDidSelected:(NSDictionary *)itemDic {
+    self.selectedItem = itemDic;
+    
+    [_bankBtn setTitle:itemDic[kCardKeyName] forState:UIControlStateNormal];
+    _bankBtn.titleLabel.font = kRegularFont(kFieldFontSize);
+}
+
 #pragma mark - Events
 
 - (void)cameraBtnClicked {
@@ -199,10 +216,29 @@
 
 - (void)bankBtnClicked {
     [self.view endEditing:YES];
+    
+    LGBankListView *bankView = [LGBankListView new];
+    bankView.delegate = self;
+    [bankView displayInParentView:self.view];
 }
 
 - (void)submitBtnClicked {
     [self.view endEditing:YES];
+    
+    if (_cardField.text.length == 0 || [self.selectedItem[kCardKeyName] length] == 0) {
+        return;
+    }
+    
+    [LGLoadingView display];
+    [[LGUserManager manager] addCardNum:_cardField.text
+                               bankName:self.selectedItem[kCardKeyName]
+                              completed:^(BOOL result) {
+                                  [LGLoadingView dismiss];
+                                  
+                                  if (result) {
+                                      [self.navigationController popViewControllerAnimated:YES];
+                                  }
+                              }];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
