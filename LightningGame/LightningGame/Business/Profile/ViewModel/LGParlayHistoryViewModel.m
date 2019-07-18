@@ -47,13 +47,13 @@
                                NSArray *data = responseObject[@"records"];
                                
                                if ([self.delegate respondsToSelector:@selector(parlayHistoryDidFetch:data:last:isRefresh:error:)]) {
-                                   [self.delegate parlayHistoryDidFetch:self data:data last:(currentPage >= totalPage) isRefresh:(currentPage == 1) error:nil];
+                                   [self.delegate parlayHistoryDidFetch:self data:data last:(currentPage >= totalPage) isRefresh:(currentPage <= 1) error:nil];
                                }
                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                self.request = nil;
                                
                                if ([self.delegate respondsToSelector:@selector(parlayHistoryDidFetch:data:last:isRefresh:error:)]) {
-                                   [self.delegate parlayHistoryDidFetch:self data:nil last:YES isRefresh:(self.pageIndex == 1) error:error];
+                                   [self.delegate parlayHistoryDidFetch:self data:nil last:YES isRefresh:(self.pageIndex <= 1) error:error];
                                }
                            }];
 }

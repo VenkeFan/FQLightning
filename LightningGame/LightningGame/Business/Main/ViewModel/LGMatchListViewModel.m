@@ -119,6 +119,7 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
     
     _request = [[LGMatchListRequest alloc] initWithType:self.listType];
     [_request requestWithPageIndex:_pageIndex
+                       gameIDArray:self.gameIDArray
                            success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
                                self.request = nil;
                                
@@ -143,14 +144,14 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
                                }
                                
                                if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:isRefresh:error:)]) {
-                                   [self.delegate matchListDidFetch:self data:arrayM last:(currentPage >= totalPage) isRefresh:(currentPage == 1) error:nil];
+                                   [self.delegate matchListDidFetch:self data:arrayM last:(currentPage >= totalPage) isRefresh:(currentPage <= 1) error:nil];
                                }
                            }
                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                self.request = nil;
                                
                                if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:isRefresh:error:)]) {
-                                   [self.delegate matchListDidFetch:self data:nil last:YES isRefresh:(self.pageIndex == 1) error:error];
+                                   [self.delegate matchListDidFetch:self data:nil last:YES isRefresh:(self.pageIndex <= 1) error:error];
                                }
                            }];
 }

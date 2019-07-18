@@ -110,8 +110,11 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 - (void)setFilterGameIDDic:(NSDictionary *)filterGameIDDic {
     _filterGameIDDic = filterGameIDDic;
     
-    NSArray *filteredItemArray = [self p_filterData:filterGameIDDic data:self.dataArray];
-    [self p_handleData:filteredItemArray];
+//    NSArray *filteredItemArray = [self p_filterData:filterGameIDDic data:self.dataArray];
+//    [self p_handleData:filteredItemArray];
+    
+    self.viewModel.gameIDArray = filterGameIDDic.allKeys;
+    [self beginRefresh];
 }
 
 - (void)display {
@@ -151,8 +154,10 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
     
     last ? [self p_removeFooter] : [self p_addFooter];
     
-    NSArray *filteredItemArray = [self p_filterData:self.filterGameIDDic data:self.dataArray];
-    [self p_handleData:filteredItemArray];
+//    NSArray *filteredItemArray = [self p_filterData:self.filterGameIDDic data:self.dataArray];
+//    [self p_handleData:filteredItemArray];
+    
+    [self p_handleData:self.dataArray];
 }
 
 #pragma mark - LGDatePickerViewDelegate

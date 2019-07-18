@@ -17,8 +17,25 @@
     return self;
 }
 
-- (void)requestWithPageIndex:(NSInteger)pageIndex success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
+- (void)requestWithPageIndex:(NSInteger)pageIndex
+                     success:(RequestSucceedBlock)success
+                     failure:(RequestFailBlock)failure {
+    [self requestWithPageIndex:pageIndex
+                   gameIDArray:nil
+                       success:success
+                       failure:failure];
+}
+
+- (void)requestWithPageIndex:(NSInteger)pageIndex
+                 gameIDArray:(NSArray *)gameIDArray
+                     success:(RequestSucceedBlock)success
+                     failure:(RequestFailBlock)failure {
+    
     [self.paraDic setObject:@(pageIndex) forKey:@"page_num"];
+    
+    if (gameIDArray.count > 0) {
+        [self.paraDic setObject:[gameIDArray componentsJoinedByString:@","] forKey:@"game_ids"];
+    }
     
     [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (success) {

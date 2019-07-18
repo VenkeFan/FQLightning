@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<LGMatchListViewModelDelegate> delegate;
 @property (nonatomic, assign) LGMatchListType listType;
+@property (nonatomic, copy) NSArray *gameIDArray;
 
 - (void)fetchData;
 - (void)loadMoreData;

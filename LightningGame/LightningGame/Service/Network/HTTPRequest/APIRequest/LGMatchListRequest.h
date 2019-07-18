@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
                      success:(nullable RequestSucceedBlock)success
                      failure:(nullable RequestFailBlock)failure;
 
+- (void)requestWithPageIndex:(NSInteger)pageIndex
+                 gameIDArray:(nullable NSArray *)gameIDArray
+                     success:(nullable RequestSucceedBlock)success
+                     failure:(nullable RequestFailBlock)failure;
+
 @end
 
 NS_ASSUME_NONNULL_END
