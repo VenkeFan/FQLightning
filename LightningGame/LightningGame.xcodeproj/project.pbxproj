@@ -1734,14 +1734,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6R68WLKP9;
+				DEVELOPMENT_TEAM = BY8T2FK4MP;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LightningGame/PrefixHeader.pch";
 				INFOPLIST_FILE = LightningGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenghai.lightning.LightningGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenghai.nebula;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1753,14 +1753,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6R68WLKP9;
+				DEVELOPMENT_TEAM = BY8T2FK4MP;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LightningGame/PrefixHeader.pch";
 				INFOPLIST_FILE = LightningGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenghai.lightning.LightningGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenghai.nebula;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
