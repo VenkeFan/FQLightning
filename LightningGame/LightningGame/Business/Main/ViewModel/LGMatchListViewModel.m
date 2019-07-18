@@ -76,7 +76,8 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 
 @interface LGMatchListViewModel ()
 
-@property (nonatomic, strong) LGMatchListRequest *requset;
+@property (nonatomic, strong) LGMatchListRequest *request;
+@property (nonatomic, assign) NSInteger pageIndex;
 
 @end
 
@@ -100,38 +101,58 @@ NSString * const kMatchOddsExoticKeyIsSelected         = @"isSelected";
 //        return;
     }
     
-    LGMatchListRequest *request = [[LGMatchListRequest alloc] initWithType:self.listType];
-    [request requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSArray *arrayI = (NSArray *)responseObject;
-        NSMutableArray *arrayM = [NSMutableArray arrayWithCapacity:arrayI.count];
-        [arrayI enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSMutableDictionary *dic = [obj fq_mutableDictionary];
-            [arrayM addObject:dic];
-        }];
-        
-        if (self.listType == LGMatchListType_Finished) {
-            [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                return [obj1[kMatchKeyStartTimeStamp] compare:obj2[kMatchKeyStartTimeStamp]] == NSOrderedAscending;
-            }];
-        } else {
-            [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                return [obj1[kMatchKeyStartTimeStamp] compare:obj2[kMatchKeyStartTimeStamp]] == NSOrderedDescending;
-            }];
-        }
-        
-        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:error:)]) {
-            [self.delegate matchListDidFetch:self data:arrayM last:YES error:nil];
-        }
-
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:error:)]) {
-            [self.delegate matchListDidFetch:self data:nil last:YES error:error];
-        }
-    }];
+    _pageIndex = 1;
+    
+    [self p_requsetData];
 }
 
 - (void)loadMoreData {
+    _pageIndex++;
     
+    [self p_requsetData];
+}
+
+- (void)p_requsetData {
+    if (_request) {
+        return;
+    }
+    
+    _request = [[LGMatchListRequest alloc] initWithType:self.listType];
+    [_request requestWithPageIndex:_pageIndex
+                           success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                               self.request = nil;
+                               
+                               NSInteger totalPage = [responseObject[@"pages"] integerValue];
+                               NSInteger currentPage = [responseObject[@"page_num"] integerValue];
+                               
+                               NSArray *arrayI = (NSArray *)responseObject[@"datas"];
+                               NSMutableArray *arrayM = [NSMutableArray arrayWithCapacity:arrayI.count];
+                               [arrayI enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                   NSMutableDictionary *dic = [obj fq_mutableDictionary];
+                                   [arrayM addObject:dic];
+                               }];
+                               
+                               if (self.listType == LGMatchListType_Finished) {
+                                   [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                       return [obj1[kMatchKeyStartTimeStamp] compare:obj2[kMatchKeyStartTimeStamp]] == NSOrderedAscending;
+                                   }];
+                               } else {
+                                   [arrayM sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                       return [obj1[kMatchKeyStartTimeStamp] compare:obj2[kMatchKeyStartTimeStamp]] == NSOrderedDescending;
+                                   }];
+                               }
+                               
+                               if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:isRefresh:error:)]) {
+                                   [self.delegate matchListDidFetch:self data:arrayM last:(currentPage >= totalPage) isRefresh:(currentPage == 1) error:nil];
+                               }
+                           }
+                           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                               self.request = nil;
+                               
+                               if ([self.delegate respondsToSelector:@selector(matchListDidFetch:data:last:isRefresh:error:)]) {
+                                   [self.delegate matchListDidFetch:self data:nil last:YES isRefresh:(self.pageIndex == 1) error:error];
+                               }
+                           }];
 }
 
 @end

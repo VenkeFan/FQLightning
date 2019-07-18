@@ -82,6 +82,7 @@ static NSString * const kParlayHistoryCellReuseID = @"kParlayHistoryCellReuseID"
 
 - (void)parlayHistoryDidFetch:(LGParlayHistoryViewModel *)viewModel data:(NSArray *)data last:(BOOL)last isRefresh:(BOOL)isRefresh error:(NSError *)error {
     [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
     
     if (error) {
         return;

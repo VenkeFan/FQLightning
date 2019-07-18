@@ -17,4 +17,18 @@
     return self;
 }
 
+- (void)requestWithPageIndex:(NSInteger)pageIndex success:(RequestSucceedBlock)success failure:(RequestFailBlock)failure {
+    [self.paraDic setObject:@(pageIndex) forKey:@"page_num"];
+    
+    [super requestWithSuccess:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if (success) {
+            success(task, responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(task, error);
+        }
+    }];
+}
+
 @end

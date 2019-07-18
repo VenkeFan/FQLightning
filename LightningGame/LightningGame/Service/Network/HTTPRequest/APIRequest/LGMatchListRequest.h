@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithType:(NSInteger)type;
 
+- (void)requestWithPageIndex:(NSInteger)pageIndex
+                     success:(nullable RequestSucceedBlock)success
+                     failure:(nullable RequestFailBlock)failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

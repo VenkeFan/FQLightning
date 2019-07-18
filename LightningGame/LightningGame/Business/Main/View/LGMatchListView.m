@@ -54,7 +54,7 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
         [self addSubview:_headerView];
         
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, kLGMatchListBasicCellHeight * 0.5, 0);
+//        _tableView.contentInset = UIEdgeInsetsMake(0, 0, kLGMatchListBasicCellHeight * 0.5, 0);
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -134,14 +134,21 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 
 #pragma mark - LGMatchListViewModelDelegate
 
-- (void)matchListDidFetch:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last error:(nullable NSError *)error {
+- (void)matchListDidFetch:(LGMatchListViewModel *)manager data:(NSArray *)data last:(BOOL)last isRefresh:(BOOL)isRefresh error:(nullable NSError *)error {
     [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
     
     if (error) {
         return;
     }
-    [self.dataArray removeAllObjects];
+    
+    if (isRefresh) {
+        [self.dataArray removeAllObjects];
+    }
+    
     [self.dataArray addObjectsFromArray:data];
+    
+    last ? [self p_removeFooter] : [self p_addFooter];
     
     NSArray *filteredItemArray = [self p_filterData:self.filterGameIDDic data:self.dataArray];
     [self p_handleData:filteredItemArray];
