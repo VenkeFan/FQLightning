@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) NSArray<LGTradeListView *> *listViewArray;
+@property (nonatomic, strong) NSArray<id<LGLazyLoadProtocol>> *listViewArray;
 
 @end
 
@@ -112,7 +112,7 @@
                          self.scrollView.contentOffset = CGPointMake(self.scrollView.width * index, 0);
                      }
                      completion:^(BOOL finished) {
-                         LGTradeListView *listView = self.listViewArray[index];
+                         id<LGLazyLoadProtocol> listView = self.listViewArray[index];
                          [listView display];
                      }];
 }

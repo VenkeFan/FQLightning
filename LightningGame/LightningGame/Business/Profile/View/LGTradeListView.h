@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LGLazyLoadProtocol.h"
 #import "LGTradeHistoryKeys.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGTradeListView : UIView
+@interface LGTradeListView : UIView <LGLazyLoadProtocol>
 
 @property (nonatomic, assign) LGTradeType tradeType;
-
-- (void)display;
 
 @end
 

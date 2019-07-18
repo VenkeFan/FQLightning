@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, copy) NSArray<LGParlayHistoryView *> *listViewArray;
+@property (nonatomic, copy) NSArray<id<LGLazyLoadProtocol>> *listViewArray;
 
 @end
 
@@ -92,7 +92,7 @@
                          self.scrollView.contentOffset = CGPointMake(kScreenWidth * index, 0);
                      }
                      completion:^(BOOL finished) {
-                         LGParlayHistoryView *listView = self.listViewArray[index];
+                         id<LGLazyLoadProtocol> listView = self.listViewArray[index];
                          [listView display];
                      }];
 }

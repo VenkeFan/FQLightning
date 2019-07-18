@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LGLazyLoadProtocol.h"
 #import "LGOrderMetaKeys.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGParlayHistoryView : UIView
+@interface LGParlayHistoryView : UIView <LGLazyLoadProtocol>
 
 @property (nonatomic, assign) LGOrderStatus orderStatus;
-
-- (void)display;
 
 @end
 

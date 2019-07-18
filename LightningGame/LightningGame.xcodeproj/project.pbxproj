@@ -310,6 +310,7 @@
 		B923380A22E007EC00109A5D /* LGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGWebViewController.m; sourceTree = "<group>"; };
 		B923380C22E009AF00109A5D /* LGAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAboutViewController.h; sourceTree = "<group>"; };
 		B923380D22E009AF00109A5D /* LGAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAboutViewController.m; sourceTree = "<group>"; };
+		B923380F22E01CA600109A5D /* LGLazyLoadProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGLazyLoadProtocol.h; sourceTree = "<group>"; };
 		B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRequest.h; sourceTree = "<group>"; };
 		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailRequest.h; sourceTree = "<group>"; };
@@ -1204,6 +1205,7 @@
 			isa = PBXGroup;
 			children = (
 				B9229CEC229BEC990030691D /* LGMacroDefine.h */,
+				B923380F22E01CA600109A5D /* LGLazyLoadProtocol.h */,
 				B9F61A5222A4BCD500CDC29E /* LGServiceButton.h */,
 				B9F61A5322A4BCD500CDC29E /* LGServiceButton.m */,
 				B9F61A6A22A6566300CDC29E /* LGToastView.h */,

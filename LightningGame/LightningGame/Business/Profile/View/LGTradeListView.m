@@ -13,9 +13,7 @@
 
 static NSString * const kLGTradeListCellReuseID = @"kLGTradeListCellReuseID";
 
-@interface LGTradeListView () <LGTradeHistoryViewModelDelegate, UITableViewDelegate, UITableViewDataSource> {
-    BOOL _isLoaded;
-}
+@interface LGTradeListView () <LGTradeHistoryViewModelDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) LGTradeHistoryViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,9 +23,11 @@ static NSString * const kLGTradeListCellReuseID = @"kLGTradeListCellReuseID";
 
 @implementation LGTradeListView
 
+@synthesize loaded;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _isLoaded = NO;
+        self.loaded = NO;
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor clearColor];
@@ -61,8 +61,8 @@ static NSString * const kLGTradeListCellReuseID = @"kLGTradeListCellReuseID";
 #pragma mark - Public
 
 - (void)display {
-    if (!_isLoaded) {
-        _isLoaded = YES;
+    if (!self.isLoaded) {
+        self.loaded = YES;
         
         [self.tableView.mj_header beginRefreshing];
     }

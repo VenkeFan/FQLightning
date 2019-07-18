@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) FQSegmentedControl *segmentedCtr;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, copy) NSArray<LGMatchListView *> *listViewArray;
+@property (nonatomic, copy) NSArray<id<LGLazyLoadProtocol>> *listViewArray;
 @property (nonatomic, strong) LGGameCollectionView *gameView;
 
 @end
@@ -147,7 +147,7 @@
                          self.scrollView.contentOffset = CGPointMake(kScreenWidth * index, 0);
                      }
                      completion:^(BOOL finished) {
-                         LGMatchListView *listView = self.listViewArray[index];
+                         id<LGLazyLoadProtocol> listView = self.listViewArray[index];
                          [listView display];
                      }];
 }

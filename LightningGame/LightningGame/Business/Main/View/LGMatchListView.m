@@ -25,7 +25,6 @@ static NSString * const kMatchRollingCellReuseID = @"kMatchRollingCellReuseID";
 static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID";
 
 @interface LGMatchListView () <LGMatchListViewModelDelegate, LGDatePickerViewDelegate, LGDatePickerTableViewDelegate, UITableViewDelegate, UITableViewDataSource> {
-    BOOL _isLoaded;
     BOOL _isAutoScrolling;
 }
 
@@ -44,9 +43,11 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 
 @implementation LGMatchListView
 
+@synthesize loaded;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _isLoaded = NO;
+        self.loaded = NO;
         _isAutoScrolling = NO;
         
         _headerView = [UIView new];
@@ -114,8 +115,8 @@ static NSString * const kMatchFinishedCellReuseID = @"kMatchFinishedCellReuseID"
 }
 
 - (void)display {
-    if (!_isLoaded) {
-        _isLoaded = YES;
+    if (!self.isLoaded) {
+        self.loaded = YES;
         
         [self.marqueeView fetchData];
         [self.tableView.mj_header beginRefreshing];
