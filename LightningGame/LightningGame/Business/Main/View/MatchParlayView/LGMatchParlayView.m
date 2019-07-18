@@ -230,8 +230,8 @@
     }
     self.expanded = YES;
     
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.bottomView];
+    [kCurrentWindow addSubview:self];
+    [kCurrentWindow addSubview:self.bottomView];
     
     [UIView animateWithDuration:kLGMatchParlayViewAnimationDuration
                           delay:0.0

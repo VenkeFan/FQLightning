@@ -32,17 +32,17 @@
     }
     
     if (![self respondsToSelector:aSelector]) {
-        Class WLGuard = objc_allocateClassPair([NSObject class], "WLGuard", 0);
+        Class FQGuard = objc_allocateClassPair([NSObject class], "FQGuard", 0);
         
         NSString *msg = [NSString stringWithFormat:@"[%@ %p %@]: unrecognized selector sent to instance", NSStringFromClass([self class]), self, NSStringFromSelector(aSelector)];
-        class_addMethod(WLGuard, aSelector, imp_implementationWithBlock(^(id self) {
+        class_addMethod(FQGuard, aSelector, imp_implementationWithBlock(^(id self) {
 #if DEBUG
             NSLog(@"%@", msg);
             NSLog(@"%@", [NSThread callStackSymbols]);
 #endif
         }), "v@*");
         
-        return [WLGuard new];
+        return [FQGuard new];
     }
     return nil;
 }

@@ -111,7 +111,8 @@ isiPhoneX = NO; \
 isiPhoneX;   \
 })
 
-#define kCurrentWindow                      ([UIApplication sharedApplication].keyWindow)
+//#define kCurrentWindow                      ([UIApplication sharedApplication].keyWindow)
+#define kCurrentWindow                      ([[[UIApplication sharedApplication] delegate] window])
 #define kScreenBounds                       ([UIScreen mainScreen].bounds)
 #define kScreenWidth                        ([UIScreen mainScreen].bounds.size.width)
 #define kScreenHeight                       ([UIScreen mainScreen].bounds.size.height)

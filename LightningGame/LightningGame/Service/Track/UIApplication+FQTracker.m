@@ -65,14 +65,14 @@
 
 @implementation UIApplication (FQTracker)
 
-+ (void)load {
-    swizzleInstanceMethod(self, @selector(sendEvent:), @selector(trace_sendEvent:));
-//    swizzleInstanceMethod(self, @selector(sendAction:to:from:forEvent:), @selector(trace_sendAction:to:from:forEvent:));
-}
-
-- (void)trace_sendEvent:(UIEvent *)event {
-    [self trace_sendEvent:event];
-}
+//+ (void)load {
+//    swizzleInstanceMethod(self, @selector(sendEvent:), @selector(trace_sendEvent:));
+////    swizzleInstanceMethod(self, @selector(sendAction:to:from:forEvent:), @selector(trace_sendAction:to:from:forEvent:));
+//}
+//
+//- (void)trace_sendEvent:(UIEvent *)event {
+//    [self trace_sendEvent:event];
+//}
 
 /**
  hook这个方法，和hook UIControl 中的 sendAction:to:forEvent:方法一样。

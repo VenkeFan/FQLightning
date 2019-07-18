@@ -11,12 +11,12 @@
 
 @implementation UIViewController (FQTracker)
 
-+ (void)load {
-    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(trace_viewDidLoad));
-}
-
-- (void)trace_viewDidLoad {
-    [self trace_viewDidLoad];
-}
+//+ (void)load {
+//    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(trace_viewDidLoad));
+//}
+//
+//- (void)trace_viewDidLoad {
+//    [self trace_viewDidLoad];
+//}
 
 @end

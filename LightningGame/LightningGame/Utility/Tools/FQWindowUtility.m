@@ -11,7 +11,7 @@
 @implementation FQWindowUtility
 
 + (UIViewController *)currentViewController {
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *rootViewController = kCurrentWindow.rootViewController;
     UIViewController *currentVC = [self p_getCurrentCtrFrom:rootViewController];
     return currentVC;
 }
@@ -86,11 +86,11 @@
 }
 
 + (BOOL)changeKeyWindowRootViewController:(UIViewController *)newCtr {
-    if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[newCtr class]]) {
+    if ([kCurrentWindow.rootViewController isKindOfClass:[newCtr class]]) {
         return NO;
     }
     
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIWindow *window = kCurrentWindow;
     newCtr.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     UINavigationController *navCtr = [[UINavigationController alloc] initWithRootViewController:newCtr];
     
@@ -109,7 +109,7 @@
 }
 
 + (void)resignFirstResponder {
-//    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+//    [kCurrentWindow endEditing:YES];
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
