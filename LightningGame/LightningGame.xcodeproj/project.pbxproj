@@ -67,6 +67,8 @@
 		B92337FF22DF120000109A5D /* LGTradeHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B92337FE22DF120000109A5D /* LGTradeHistoryViewModel.m */; };
 		B923380522DF16FF00109A5D /* LGTradeHistoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380422DF16FF00109A5D /* LGTradeHistoryRequest.m */; };
 		B923380822DF1B7B00109A5D /* LGTradeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380722DF1B7B00109A5D /* LGTradeListCell.m */; };
+		B923380B22E007EC00109A5D /* LGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380A22E007EC00109A5D /* LGWebViewController.m */; };
+		B923380E22E009AF00109A5D /* LGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380D22E009AF00109A5D /* LGAboutViewController.m */; };
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
 		B93F3B9B22BCD8C600D45DEF /* FQAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9A22BCD8C600D45DEF /* FQAlertView.m */; };
@@ -304,6 +306,10 @@
 		B923380422DF16FF00109A5D /* LGTradeHistoryRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeHistoryRequest.m; sourceTree = "<group>"; };
 		B923380622DF1B7B00109A5D /* LGTradeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTradeListCell.h; sourceTree = "<group>"; };
 		B923380722DF1B7B00109A5D /* LGTradeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTradeListCell.m; sourceTree = "<group>"; };
+		B923380922E007EC00109A5D /* LGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGWebViewController.h; sourceTree = "<group>"; };
+		B923380A22E007EC00109A5D /* LGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGWebViewController.m; sourceTree = "<group>"; };
+		B923380C22E009AF00109A5D /* LGAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAboutViewController.h; sourceTree = "<group>"; };
+		B923380D22E009AF00109A5D /* LGAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAboutViewController.m; sourceTree = "<group>"; };
 		B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRequest.h; sourceTree = "<group>"; };
 		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailRequest.h; sourceTree = "<group>"; };
@@ -1147,6 +1153,8 @@
 				B973025E22D872F000281EDE /* LGParlayHistoryViewController.m */,
 				B973025A22D8679200281EDE /* LGRuleViewController.h */,
 				B973025B22D8679200281EDE /* LGRuleViewController.m */,
+				B923380C22E009AF00109A5D /* LGAboutViewController.h */,
+				B923380D22E009AF00109A5D /* LGAboutViewController.m */,
 				B91A1F5E22DC1218007982EA /* LGSetupViewController.h */,
 				B91A1F5F22DC1218007982EA /* LGSetupViewController.m */,
 				B91A1F6422DC2E19007982EA /* LGModifyMobileViewController.h */,
@@ -1206,6 +1214,8 @@
 				B93F3BDB22C0640F00D45DEF /* LGAlertOrderView.m */,
 				B92337EE22DEBED000109A5D /* LGAlertView.h */,
 				B92337EF22DEBED000109A5D /* LGAlertView.m */,
+				B923380922E007EC00109A5D /* LGWebViewController.h */,
+				B923380A22E007EC00109A5D /* LGWebViewController.m */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -1434,12 +1444,14 @@
 				B91A1F7222DC49FC007982EA /* LGModifyMobileRequest.m in Sources */,
 				B9D9102422ABA73F00D54911 /* CTMediator+LGMainActions.m in Sources */,
 				B9A1C82622C1F106001A3694 /* LGMatchListPrepareCell.m in Sources */,
+				B923380B22E007EC00109A5D /* LGWebViewController.m in Sources */,
 				B9229D01229BEEC00030691D /* NSArray+FQGuarder.m in Sources */,
 				B9A1C82322C1F106001A3694 /* LGMatchDetailTableViewCell.m in Sources */,
 				B9A1C83A22C1F106001A3694 /* LGMatchParlayTopView.m in Sources */,
 				B9229D2C229CF63E0030691D /* FQSystemUtility.m in Sources */,
 				B9C3A17922A0F9F700E282B0 /* LGSignUpViewController.m in Sources */,
 				B94E4FB022B79CAD00A56F13 /* FQAVPlayerView.m in Sources */,
+				B923380E22E009AF00109A5D /* LGAboutViewController.m in Sources */,
 				B973026222D8733900281EDE /* LGParlayHistoryRequest.m in Sources */,
 				B94E4FB322B79CB600A56F13 /* FQPlayerOperateView.m in Sources */,
 				B9A1C82922C1F106001A3694 /* LGMatchParlayTableViewCell.m in Sources */,

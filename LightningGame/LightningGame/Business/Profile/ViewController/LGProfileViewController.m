@@ -206,7 +206,7 @@ static NSString * const kProfileCellReuseID = @"kProfileCellReuseID";
                              kProfileItemBadgeKey: @(0),
                              kProfileItemIconKey: @"grsz_gy",
                              kProfileItemAccessoryTypeKey: @(LGProfileViewCellAccessoryTypeDisclosureIndicator),
-                             kProfileItemClassKey: @""
+                             kProfileItemClassKey: @"LGAboutViewController"
                              },
                            @{kProfileItemTitleKey: kLocalizedString(@"profile_version"),
                              kProfileItemBadgeKey: @(0),

@@ -1,8 +1,8 @@
 //
-//  LGRuleViewController.h
+//  LGAboutViewController.h
 //  LightningGame
 //
-//  Created by fanqi_company on 2019/7/12.
+//  Created by fanqi_company on 2019/7/18.
 //  Copyright © 2019 fanqi_company. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LGRuleViewController : LGWebViewController
+@interface LGAboutViewController : LGWebViewController
 
 @end
 
