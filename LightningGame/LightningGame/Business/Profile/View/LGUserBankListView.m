@@ -118,7 +118,7 @@ static NSString * const kUserBankListCellReuseID = @"kUserBankListCellReuseID";
         lab;
     });
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), self.containerView.width, self.containerView.height - CGRectGetMaxY(self.topView.frame))];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), self.containerView.width, self.containerView.height - CGRectGetMaxY(self.topView.frame)) style:UITableViewStyleGrouped];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -133,6 +133,14 @@ static NSString * const kUserBankListCellReuseID = @"kUserBankListCellReuseID";
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [UIView new];
