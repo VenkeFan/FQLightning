@@ -149,12 +149,8 @@
     }
     
     {
-        if (_leftTeam[kMatchTeamKeyLogo]) {
-            [_leftLogoView fq_setImageWithURLString:_leftTeam[kMatchTeamKeyLogo]];
-        }
-        if (_rightTeam[kMatchTeamKeyLogo]) {
-            [_rightLogoView fq_setImageWithURLString:_rightTeam[kMatchTeamKeyLogo]];
-        }
+        [_leftLogoView fq_setImageWithURLString:_leftTeam[kMatchTeamKeyLogo]];
+        [_rightLogoView fq_setImageWithURLString:_rightTeam[kMatchTeamKeyLogo]];
     }
     
     {
@@ -166,6 +162,11 @@
 - (void)separateTeamsAndOdds {
     NSArray *teamArray = self.dataDic[kMatchKeyTeamArray];
     NSArray *oddsArray = self.dataDic[kMatchKeyOddsArray];
+    
+    _leftTeam = nil;
+    _rightTeam = nil;
+    _leftOdds = nil;
+    _rightOdds = nil;
     
     for (NSDictionary *tmp in teamArray) {
         if ([tmp[kMatchTeamKeyPos] integerValue] == 1) {
