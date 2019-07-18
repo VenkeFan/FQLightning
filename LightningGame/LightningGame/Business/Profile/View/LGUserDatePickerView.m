@@ -29,30 +29,20 @@
     self.containerView.backgroundColor = [UIColor whiteColor];
     self.containerView.height = kSizeScale(350.0);
     
-    CGFloat size = kSizeScale(40.0);
+    self.titleView = ({
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        confirmBtn.backgroundColor = [UIColor clearColor];
+        [confirmBtn setTitle:kLocalizedString(@"parlay_confirm") forState:UIControlStateNormal];
+        [confirmBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
+        confirmBtn.titleLabel.font = kRegularFont(kNameFontSize);
+        [confirmBtn sizeToFit];
+        confirmBtn.width += 16.0;
+        [confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        confirmBtn;
+    });
     
-    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeBtn.backgroundColor = [UIColor clearColor];
-    closeBtn.frame = CGRectMake(0, 0, size, size);
-    closeBtn.center = CGPointMake(self.containerView.width - closeBtn.width * 0.5, closeBtn.height * 0.5);
-    [closeBtn setTitle:@"×" forState:UIControlStateNormal];
-    [closeBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
-    closeBtn.titleLabel.font = kRegularFont(kScoreFontSize);
-    [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.containerView addSubview:closeBtn];
-    
-    UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    confirmBtn.backgroundColor = [UIColor clearColor];
-    [confirmBtn setTitle:kLocalizedString(@"parlay_confirm") forState:UIControlStateNormal];
-    [confirmBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
-    confirmBtn.titleLabel.font = kRegularFont(kNameFontSize);
-    [confirmBtn sizeToFit];
-    confirmBtn.height = size;
-    confirmBtn.width += 16.0;
-    [confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.containerView addSubview:confirmBtn];
-    
-    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, size, self.containerView.width, self.containerView.height - size)];
+    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), self.containerView.width, self.containerView.height - CGRectGetMaxY(self.topView.frame))];
     _datePicker.backgroundColor = [UIColor clearColor];
     _datePicker.locale = [NSLocale currentLocale];
     _datePicker.calendar = [NSCalendar currentCalendar];
@@ -63,19 +53,11 @@
 
 #pragma mark - Events
 
-- (void)closeBtnClicked {
-    [super dismiss];
-}
-
 - (void)confirmBtnClicked {
     if ([self.delegate respondsToSelector:@selector(userDatePickerView:didSelectedDate:)]) {
         [self.delegate userDatePickerView:self
                           didSelectedDate:self.datePicker.date];
     }
-    [super dismiss];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super dismiss];
 }
 

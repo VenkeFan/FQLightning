@@ -88,7 +88,12 @@
 #pragma mark - Events
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self dismiss];
+    CGPoint point = [touches.anyObject locationInView:self];
+    
+    if (!CGRectContainsPoint(self.containerView.frame, point)) {
+        [self dismiss];
+        return;
+    }
 }
 
 #pragma mark - Private
@@ -123,7 +128,7 @@
 - (UIView *)containerView {
     if (!_containerView) {
         _containerView = [[UIView alloc] init];
-        _containerView.backgroundColor = kCellBgColor;
+        _containerView.backgroundColor = [UIColor whiteColor];
         _containerView.frame = CGRectMake(0, 0, kScreenWidth, 0);
         _containerView.layer.cornerRadius = kCornerRadius;
         _containerView.layer.masksToBounds = YES;

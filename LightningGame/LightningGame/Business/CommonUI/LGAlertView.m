@@ -37,20 +37,6 @@
             line.frame = CGRectMake(CGRectGetMinX(closeBtn.frame), 0, 1.0, view.height);
             [view addSubview:line];
             
-//            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//            btn.enabled = NO;
-//            [btn setImage:[UIImage imageNamed:@"common_calendar"] forState:UIControlStateDisabled];
-//            [btn setTitle:kLocalizedString(@"order_succeed") forState:UIControlStateDisabled];
-//            [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, kSizeScale(10.0), 0, 0)];
-//            [btn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateDisabled];
-//            btn.titleLabel.font = kRegularFont(kFieldFontSize);
-//            [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-//            [btn sizeToFit];
-//            btn.width += btn.titleEdgeInsets.left;
-//            btn.left = kSizeScale(12.0);
-//            btn.top = (view.height - btn.height) * 0.5;
-//            [view addSubview:btn];
-            
             view;
         });
         [self.containerView addSubview:_topView];

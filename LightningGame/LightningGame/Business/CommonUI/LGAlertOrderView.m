@@ -200,7 +200,9 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 @implementation LGAlertOrderView
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
+    if (self = [super initWithFrame:frame]) {
+        self.position = FQAlertViewPopPositionCenter;
+        
         [self initializeUI];
     }
     return self;
@@ -216,26 +218,9 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 }
 
 - (void)initializeUI {
-    UIView *topView = ({
-        UIView *view = [[UIView alloc] initWithFrame:self.containerView.bounds];
-        view.height = kAlertOrderTopViewHeight;
-        view.backgroundColor = kMainOnTintColor;
-        
-        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        closeBtn.backgroundColor = [UIColor clearColor];
-        closeBtn.frame = CGRectMake(0, 0, view.height, view.height);
-        closeBtn.center = CGPointMake(view.width - closeBtn.width * 0.5, view.height * 0.5);
-        [closeBtn setTitle:@"×" forState:UIControlStateNormal];
-        [closeBtn setTitleColor:kUIColorFromRGB(0x000000) forState:UIControlStateNormal];
-        closeBtn.titleLabel.font = kRegularFont(kScoreFontSize);
-        [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:closeBtn];
-        
-        UIView *line = [UIView new];
-        line.backgroundColor = kMainBgColor;
-        line.frame = CGRectMake(CGRectGetMinX(closeBtn.frame), 0, 1.0, view.height);
-        [view addSubview:line];
-        
+    self.containerView.backgroundColor = kCellBgColor;
+    
+    self.titleView = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.enabled = NO;
         [btn setImage:[UIImage imageNamed:@"common_calendar"] forState:UIControlStateDisabled];
@@ -246,15 +231,11 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
         [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [btn sizeToFit];
         btn.width += btn.titleEdgeInsets.left;
-        btn.left = kSizeScale(12.0);
-        btn.top = (view.height - btn.height) * 0.5;
-        [view addSubview:btn];
         
-        view;
+        btn;
     });
-    [self.containerView addSubview:topView];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame), self.containerView.width, kAlertOrderMetaViewHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), self.containerView.width, kAlertOrderMetaViewHeight) style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -324,15 +305,6 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
 
 #pragma mark - Events
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    CGPoint point = [touches.anyObject locationInView:self];
-    
-    if (!CGRectContainsPoint(self.containerView.frame, point)) {
-        [super touchesEnded:touches withEvent:event];
-        return;
-    }
-}
-
 - (void)confirmBtnClicked {
     [super dismiss];
 }
@@ -341,10 +313,6 @@ NSString * const kAlertOrderMetaCellReuseID = @"kAlertOrderMetaCellReuseID";
     UIViewController *ctr = [[CTMediator sharedInstance] mediator_generateParlayHistoryController];
     [[[FQWindowUtility currentViewController] navigationController] pushViewController:ctr animated:YES];
     
-    [super dismiss];
-}
-
-- (void)closeBtnClicked {
     [super dismiss];
 }
 
