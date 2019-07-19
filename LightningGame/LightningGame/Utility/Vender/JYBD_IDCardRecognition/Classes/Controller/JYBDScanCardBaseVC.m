@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addCloseButton];
+    
+    self.view.tintColor = kMainOnTintColor;
 }
 
 #pragma mark - 添加关闭按钮
@@ -24,6 +26,7 @@
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    UIImage *image = [UIImage imageNamed:@"idcard_back" inBundle:[IDCardRectManager getImageBundle] compatibleWithTraitCollection:nil];
     UIImage *image = [UIImage imageNamed:@"idcard_back"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [closeBtn setImage:image forState:UIControlStateNormal];
     CGFloat closeBtnWidth = 40;
     CGFloat closeBtnHeight = closeBtnWidth;

@@ -12,15 +12,13 @@
 #import "LGBankListView.h"
 #import "JYBDBankCardVC.h"
 #import "JYBDIDCardVC.h"
-#import "FQAuthorizationHelper.h"
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <Photos/Photos.h>
+#import "UIImage+FQExtension.h"
 
 @interface LGAddCardViewController () <LGBankListViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, weak) UITextField *cardField;
 @property (nonatomic, weak) UIButton *bankBtn;
-@property (nonatomic, copy) NSDictionary *selectedItem;
+@property (nonatomic, copy) NSString *selectedBank;
 
 @end
 
@@ -125,7 +123,7 @@
         txtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入卡号或对银行卡进行拍照"
                                                                          attributes:@{NSForegroundColorAttributeName: kLightTintColor, NSFontAttributeName: kRegularFont(kTinyFontSize)}];
         [view addSubview:txtField];
-        _cardField = txtField;
+        self.cardField = txtField;
         
         view;
     });
@@ -170,7 +168,7 @@
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [btn addTarget:self action:@selector(bankBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:btn];
-        _bankBtn = btn;
+        self.bankBtn = btn;
         
         view;
     });
@@ -206,27 +204,33 @@
 #pragma mark - LGBankListViewDelegate
 
 - (void)bankListViewDidSelected:(NSDictionary *)itemDic {
-    self.selectedItem = itemDic;
-    
-    [_bankBtn setTitle:itemDic[kCardKeyName] forState:UIControlStateNormal];
-    _bankBtn.titleLabel.font = kRegularFont(kFieldFontSize);
+    [self p_setBankName:itemDic[kCardKeyName]];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    NSLog(@"------------------>didFinishPickingMediaWithInfo");
     
-//    info[UIImagePickerControllerPHAsset];
-//
+    UIImage *img = info[UIImagePickerControllerOriginalImage];
+    
+    [LGLoadingView display];
+    
+    JYBDScanCardManage *manage = [JYBDScanCardManage new];
+    manage.finish = ^(JYBDBankCardInfo *info, UIImage *image) {
+        
+        [LGLoadingView dismiss];
+        
+        self.cardField.text = info.bankNumber;
+        [self p_setBankName:info.bankName];
+    };
+    [manage parseBankImageBuffer:img.CVImageBuffer];
+    
     [picker dismissViewControllerAnimated:YES completion:^{
 
     }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    NSLog(@"------------------>imagePickerControllerDidCancel");
-    
     [picker dismissViewControllerAnimated:YES completion:^{
         
     }];
@@ -246,19 +250,19 @@
 - (void)cameraBtnClicked {
     [self.view endEditing:YES];
     
-//    [FQAuthorizationHelper requestCameraAuthorizationWithFinished:^(BOOL granted) {
-//        if (granted) {
-//            [FQAuthorizationHelper requestPhotoAuthorizationWithFinished:^(BOOL granted) {
-//
-//            }];
-//        }
-//    }];
+//    UIImagePickerController *ctr = [UIImagePickerController new];
+//    ctr.sourceType = UIImagePickerControllerSourceTypeCamera;
+////    ctr.mediaTypes = @[(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie];
+//    ctr.delegate = self;
+//    [self presentViewController:ctr animated:YES completion:nil];
     
-    UIImagePickerController *ctr = [UIImagePickerController new];
-    ctr.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    ctr.mediaTypes = @[(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie];
-    ctr.delegate = self;
-    [self presentViewController:ctr animated:YES completion:nil];
+    
+    JYBDBankCardVC *vc = [[JYBDBankCardVC alloc]init];
+    vc.finish = ^(JYBDBankCardInfo *info, UIImage *image) {
+        self.cardField.text = info.bankNumber;
+        [self p_setBankName:info.bankName];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)bankBtnClicked {
@@ -272,13 +276,13 @@
 - (void)submitBtnClicked {
     [self.view endEditing:YES];
     
-    if (_cardField.text.length == 0 || [self.selectedItem[kCardKeyName] length] == 0) {
+    if (self.cardField.text.length == 0 || self.selectedBank.length == 0) {
         return;
     }
     
     [LGLoadingView display];
-    [[LGUserManager manager] addCardNum:_cardField.text
-                               bankName:self.selectedItem[kCardKeyName]
+    [[LGUserManager manager] addCardNum:self.cardField.text
+                               bankName:self.selectedBank
                               completed:^(BOOL result) {
                                   [LGLoadingView dismiss];
                                   
@@ -290,6 +294,15 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+}
+
+#pragma mark - Private
+
+- (void)p_setBankName:(NSString *)bankName {
+    self.selectedBank = bankName;
+    
+    [self.bankBtn setTitle:self.selectedBank forState:UIControlStateNormal];
+    self.bankBtn.titleLabel.font = kRegularFont(kFieldFontSize);
 }
 
 @end

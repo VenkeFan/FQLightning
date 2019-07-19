@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreMedia/CoreMedia.h>
 
 @interface UIImage (FQExtension)
 
 + (UIImage *)imageWithColor:(UIColor *)color;
+- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+- (CVImageBufferRef)CVImageBuffer;
 - (UIImage *)fixOrientation;
 - (UIImage *)compress;
 - (UIImage *)resizeToSize:(CGSize)size;

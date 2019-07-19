@@ -53,6 +53,7 @@
     
     
     UIImage *img = [UIImage imageNamed:@"scaningline" inBundle:[IDCardRectManager getImageBundle] compatibleWithTraitCollection:nil];
+    img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.scanImageView.frame = CGRectMake(self.bgImageView.frame.size.width-20, 30, img.size.width, self.bgImageView.frame.size.height-60);
     
     [self.scanImageView.layer addAnimation:[self animation] forKey:nil];
@@ -71,7 +72,7 @@
     {
         _bgImageView = [[UIImageView alloc]init];
         UIImage *imag = [UIImage imageNamed:@"scaningbgimage" inBundle:[IDCardRectManager getImageBundle] compatibleWithTraitCollection:nil];
-        
+        imag = [imag imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _bgImageView.image = imag;
       //  _bgImageView.contentMode = UIViewContentModeCenter;
     }
@@ -84,7 +85,7 @@
     {
         _scanImageView = [[UIImageView alloc]init];
         UIImage *imag = [UIImage imageNamed:@"scaningline" inBundle:[IDCardRectManager getImageBundle] compatibleWithTraitCollection:nil];
-        
+        imag = [imag imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _scanImageView.image = imag;
        // _scanImageView.contentMode = UIViewContentModeCenter;
     }

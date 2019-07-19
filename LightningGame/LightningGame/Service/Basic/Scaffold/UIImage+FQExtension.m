@@ -21,6 +21,154 @@
     return image;
 }
 
+- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer {
+    CVImageBufferRef buffer;
+    buffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
+    CVPixelBufferLockBaseAddress(buffer, 0);
+    uint8_t *base;
+    size_t width, height, bytesPerRow;
+    base = (uint8_t *)CVPixelBufferGetBaseAddress(buffer);
+    width = CVPixelBufferGetWidth(buffer);
+    height = CVPixelBufferGetHeight(buffer);
+    bytesPerRow = CVPixelBufferGetBytesPerRow(buffer);
+    
+    CGColorSpaceRef colorSpace;
+    CGContextRef cgContext;
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(colorSpace);
+    
+    CGImageRef cgImage;
+    UIImage *image;
+    cgImage = CGBitmapContextCreateImage(cgContext);
+    image = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
+    
+    CVPixelBufferUnlockBaseAddress(buffer, 0);
+    
+    return image;
+}
+
+- (CVImageBufferRef)CVImageBuffer {
+    CGImageRef imageRef = self.CGImage;
+    
+    CGSize frameSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
+    NSDictionary *options = @{
+                              (__bridge NSString *)kCVPixelBufferCGImageCompatibilityKey: @(NO),
+                              (__bridge NSString *)kCVPixelBufferCGBitmapContextCompatibilityKey: @(NO),
+                              };
+    CVPixelBufferRef pixelBuffer = NULL;
+    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,
+                                          frameSize.width,
+                                          frameSize.height,
+                                          kCVPixelFormatType_32ARGB,
+                                          (__bridge CFDictionaryRef)options,
+                                          &pixelBuffer);
+    if (status != kCVReturnSuccess) {
+        return NULL;
+    }
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    void *data = CVPixelBufferGetBaseAddress(pixelBuffer);
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(data,
+                                                 frameSize.width,
+                                                 frameSize.height,
+                                                 8,
+                                                 CVPixelBufferGetBytesPerRow(pixelBuffer),
+                                                 rgbColorSpace,
+                                                 (CGBitmapInfo)kCGImageAlphaNoneSkipLast);
+    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(imageRef),
+                                           CGImageGetHeight(imageRef)), imageRef);
+    CGColorSpaceRelease(rgbColorSpace);
+    CGContextRelease(context);
+    CGImageRelease(imageRef);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    
+    return pixelBuffer;
+    
+    
+    
+//    CGDataProviderRef provider = CGImageGetDataProvider(imageRef);
+//    CFDataRef pixelData = CGDataProviderCopyData(provider);
+//    const unsigned char *data = CFDataGetBytePtr(pixelData);
+//    size_t bitsPerPixel = CGImageGetBitsPerPixel(imageRef);
+//    size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
+//    size_t frameWidth = CGImageGetWidth(imageRef);
+//    size_t frameHeight = CGImageGetHeight(imageRef);
+//    size_t bytesPerRow = CGImageGetBytesPerRow(imageRef);
+//    CFRelease(pixelData);
+//
+//    NSDictionary *options = @{(id)kCVPixelBufferIOSurfacePropertiesKey : @{}};
+//    CVImageBufferRef pixelBuffer = NULL;
+//    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, frameWidth, frameHeight, kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange, (__bridge CFDictionaryRef)(options), &pixelBuffer);
+//    NSParameterAssert(status == kCVReturnSuccess && pixelBuffer != NULL);
+//
+//    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+//
+//    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+//    size_t height = CVPixelBufferGetHeight(pixelBuffer);
+//    size_t bpr = CVPixelBufferGetBytesPerRow(pixelBuffer);
+//
+//    size_t wh = width * height;
+//    size_t size = CVPixelBufferGetDataSize(pixelBuffer);
+//    size_t count = CVPixelBufferGetPlaneCount(pixelBuffer);
+//
+//    size_t width0 = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
+//    size_t height0 = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
+//    size_t bpr0 = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+//
+//    size_t width1 = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
+//    size_t height1 = CVPixelBufferGetHeightOfPlane(pixelBuffer, 1);
+//    size_t bpr1 = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+//
+//    unsigned char *bufY = malloc(wh);
+//    unsigned char *bufUV = malloc(wh/2);
+//
+//    size_t offset,p;
+//
+//    int r,g,b,y,u,v;
+//    int a=255;
+//    for (int row = 0; row < height; ++row) {
+//        for (int col = 0; col < width; ++col) {
+//            //
+//            offset = ((width * row) + col);
+//            p = offset*4;
+//            //
+//            r = data[p + 0];
+//            g = data[p + 1];
+//            b = data[p + 2];
+//            a = data[p + 3];
+//            //
+//            y = 0.299*r + 0.587*g + 0.114*b;
+//            u = -0.1687*r - 0.3313*g + 0.5*b + 128;
+//            v = 0.5*r - 0.4187*g - 0.0813*b + 128;
+//            //
+//            bufY[offset] = y;
+//            bufUV[(row/2)*width + (col/2)*2] = u;
+//            bufUV[(row/2)*width + (col/2)*2 + 1] = v;
+//        }
+//    }
+//    uint8_t *yPlane = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+//    memset(yPlane, 0x80, height0 * bpr0);
+//    for (int row=0; row<height0; ++row) {
+//        memcpy(yPlane + row*bpr0, bufY + row*width0, width0);
+//    }
+//    uint8_t *uvPlane = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+//    memset(uvPlane, 0x80, height1 * bpr1);
+//    for (int row=0; row<height1; ++row) {
+//        memcpy(uvPlane + row*bpr1, bufUV + row*width, width);
+//    }
+//
+//    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+//    free(bufY);
+//    free(bufUV);
+//
+//    return pixelBuffer;
+}
+
 - (UIImage *)fixOrientation {
     if (self.imageOrientation == UIImageOrientationUp) {
         return self;
