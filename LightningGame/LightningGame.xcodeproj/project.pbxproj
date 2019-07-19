@@ -69,6 +69,31 @@
 		B923380822DF1B7B00109A5D /* LGTradeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380722DF1B7B00109A5D /* LGTradeListCell.m */; };
 		B923380B22E007EC00109A5D /* LGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380A22E007EC00109A5D /* LGWebViewController.m */; };
 		B923380E22E009AF00109A5D /* LGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B923380D22E009AF00109A5D /* LGAboutViewController.m */; };
+		B923384822E0958800109A5D /* UIImage+IDCardExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = B923381522E0958800109A5D /* UIImage+IDCardExtend.m */; };
+		B923384922E0958800109A5D /* UIAlertController+IDCardExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = B923381622E0958800109A5D /* UIAlertController+IDCardExtend.m */; };
+		B923384A22E0958800109A5D /* JYBDScanCardBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B923381A22E0958800109A5D /* JYBDScanCardBaseVC.m */; };
+		B923384B22E0958800109A5D /* JYBDIDCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B923381C22E0958800109A5D /* JYBDIDCardVC.m */; };
+		B923384C22E0958800109A5D /* JYBDBankCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B923381D22E0958800109A5D /* JYBDBankCardVC.m */; };
+		B923384D22E0958800109A5D /* JYBDScanCardManage.m in Sources */ = {isa = PBXBuildFile; fileRef = B923382122E0958800109A5D /* JYBDScanCardManage.m */; };
+		B923384E22E0958800109A5D /* JYBDBankCardSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = B923382222E0958800109A5D /* JYBDBankCardSearch.m */; };
+		B923384F22E0958800109A5D /* JYBDScanCardManageBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B923382322E0958800109A5D /* JYBDScanCardManageBase.m */; };
+		B923385022E0958800109A5D /* JYBDBankCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B923382D22E0958800109A5D /* JYBDBankCardInfo.m */; };
+		B923385122E0958800109A5D /* JYBDCardIDInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B923382E22E0958800109A5D /* JYBDCardIDInfo.m */; };
+		B923385222E0958800109A5D /* JYBDNewFormeScaningV.m in Sources */ = {isa = PBXBuildFile; fileRef = B923383222E0958800109A5D /* JYBDNewFormeScaningV.m */; };
+		B923385422E0958800109A5D /* libexbankcardios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B923383622E0958800109A5D /* libexbankcardios.a */; };
+		B923385522E0958800109A5D /* libbexbankcard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B923383722E0958800109A5D /* libbexbankcard.a */; };
+		B923385622E0958800109A5D /* IDCardRectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B923383922E0958800109A5D /* IDCardRectManager.m */; };
+		B923385722E0958800109A5D /* zocr0.lib in Resources */ = {isa = PBXBuildFile; fileRef = B923383C22E0958800109A5D /* zocr0.lib */; };
+		B923385822E0958800109A5D /* scaningline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B923383E22E0958800109A5D /* scaningline@2x.png */; };
+		B923385922E0958800109A5D /* scaningline@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B923383F22E0958800109A5D /* scaningline@3x.png */; };
+		B923385A22E0958800109A5D /* idcard_back.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384022E0958800109A5D /* idcard_back.png */; };
+		B923385B22E0958800109A5D /* flashlightscan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384122E0958800109A5D /* flashlightscan@3x.png */; };
+		B923385C22E0958800109A5D /* flashlightscan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384222E0958800109A5D /* flashlightscan@2x.png */; };
+		B923385D22E0958800109A5D /* flashlightscan.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384322E0958800109A5D /* flashlightscan.png */; };
+		B923385E22E0958800109A5D /* scaningbgimage.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384422E0958800109A5D /* scaningbgimage.png */; };
+		B923385F22E0958800109A5D /* scaningbgimage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384522E0958800109A5D /* scaningbgimage@2x.png */; };
+		B923386022E0958800109A5D /* scaningbgimage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384622E0958800109A5D /* scaningbgimage@3x.png */; };
+		B923386122E0958800109A5D /* scaningline.png in Resources */ = {isa = PBXBuildFile; fileRef = B923384722E0958800109A5D /* scaningline.png */; };
 		B9339F2922B7286F00C6AF15 /* LGMatchListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */; };
 		B9339F2C22B766DF00C6AF15 /* LGMatchDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9339F2B22B766DF00C6AF15 /* LGMatchDetailRequest.m */; };
 		B93F3B9B22BCD8C600D45DEF /* FQAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B93F3B9A22BCD8C600D45DEF /* FQAlertView.m */; };
@@ -311,6 +336,49 @@
 		B923380C22E009AF00109A5D /* LGAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAboutViewController.h; sourceTree = "<group>"; };
 		B923380D22E009AF00109A5D /* LGAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAboutViewController.m; sourceTree = "<group>"; };
 		B923380F22E01CA600109A5D /* LGLazyLoadProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGLazyLoadProtocol.h; sourceTree = "<group>"; };
+		B923381422E0958700109A5D /* UIAlertController+IDCardExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+IDCardExtend.h"; sourceTree = "<group>"; };
+		B923381522E0958800109A5D /* UIImage+IDCardExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+IDCardExtend.m"; sourceTree = "<group>"; };
+		B923381622E0958800109A5D /* UIAlertController+IDCardExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+IDCardExtend.m"; sourceTree = "<group>"; };
+		B923381722E0958800109A5D /* UIImage+IDCardExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+IDCardExtend.h"; sourceTree = "<group>"; };
+		B923381922E0958800109A5D /* JYBDIDCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDIDCardVC.h; sourceTree = "<group>"; };
+		B923381A22E0958800109A5D /* JYBDScanCardBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDScanCardBaseVC.m; sourceTree = "<group>"; };
+		B923381B22E0958800109A5D /* JYBDBankCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDBankCardVC.h; sourceTree = "<group>"; };
+		B923381C22E0958800109A5D /* JYBDIDCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDIDCardVC.m; sourceTree = "<group>"; };
+		B923381D22E0958800109A5D /* JYBDBankCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDBankCardVC.m; sourceTree = "<group>"; };
+		B923381E22E0958800109A5D /* JYBDScanCardBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDScanCardBaseVC.h; sourceTree = "<group>"; };
+		B923382022E0958800109A5D /* JYBDScanCardManageBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDScanCardManageBase.h; sourceTree = "<group>"; };
+		B923382122E0958800109A5D /* JYBDScanCardManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDScanCardManage.m; sourceTree = "<group>"; };
+		B923382222E0958800109A5D /* JYBDBankCardSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDBankCardSearch.m; sourceTree = "<group>"; };
+		B923382322E0958800109A5D /* JYBDScanCardManageBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDScanCardManageBase.m; sourceTree = "<group>"; };
+		B923382422E0958800109A5D /* JYBDBankCardSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDBankCardSearch.h; sourceTree = "<group>"; };
+		B923382522E0958800109A5D /* JYBDScanCardManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDScanCardManage.h; sourceTree = "<group>"; };
+		B923382722E0958800109A5D /* exbankcardcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exbankcardcore.h; sourceTree = "<group>"; };
+		B923382822E0958800109A5D /* commondef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commondef.h; sourceTree = "<group>"; };
+		B923382922E0958800109A5D /* exbankcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exbankcard.h; sourceTree = "<group>"; };
+		B923382A22E0958800109A5D /* excards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = excards.h; sourceTree = "<group>"; };
+		B923382B22E0958800109A5D /* BankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCard.h; sourceTree = "<group>"; };
+		B923382D22E0958800109A5D /* JYBDBankCardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDBankCardInfo.m; sourceTree = "<group>"; };
+		B923382E22E0958800109A5D /* JYBDCardIDInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDCardIDInfo.m; sourceTree = "<group>"; };
+		B923382F22E0958800109A5D /* JYBDBankCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDBankCardInfo.h; sourceTree = "<group>"; };
+		B923383022E0958800109A5D /* JYBDCardIDInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDCardIDInfo.h; sourceTree = "<group>"; };
+		B923383222E0958800109A5D /* JYBDNewFormeScaningV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBDNewFormeScaningV.m; sourceTree = "<group>"; };
+		B923383322E0958800109A5D /* JYBDNewFormeScaningV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBDNewFormeScaningV.h; sourceTree = "<group>"; };
+		B923383522E0958800109A5D /* libexidcardios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libexidcardios.a; sourceTree = "<group>"; };
+		B923383622E0958800109A5D /* libexbankcardios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libexbankcardios.a; sourceTree = "<group>"; };
+		B923383722E0958800109A5D /* libbexbankcard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbexbankcard.a; sourceTree = "<group>"; };
+		B923383922E0958800109A5D /* IDCardRectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDCardRectManager.m; sourceTree = "<group>"; };
+		B923383A22E0958800109A5D /* IDCardRectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDCardRectManager.h; sourceTree = "<group>"; };
+		B923383C22E0958800109A5D /* zocr0.lib */ = {isa = PBXFileReference; lastKnownFileType = file; path = zocr0.lib; sourceTree = "<group>"; };
+		B923383E22E0958800109A5D /* scaningline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scaningline@2x.png"; sourceTree = "<group>"; };
+		B923383F22E0958800109A5D /* scaningline@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scaningline@3x.png"; sourceTree = "<group>"; };
+		B923384022E0958800109A5D /* idcard_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = idcard_back.png; sourceTree = "<group>"; };
+		B923384122E0958800109A5D /* flashlightscan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlightscan@3x.png"; sourceTree = "<group>"; };
+		B923384222E0958800109A5D /* flashlightscan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlightscan@2x.png"; sourceTree = "<group>"; };
+		B923384322E0958800109A5D /* flashlightscan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashlightscan.png; sourceTree = "<group>"; };
+		B923384422E0958800109A5D /* scaningbgimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scaningbgimage.png; sourceTree = "<group>"; };
+		B923384522E0958800109A5D /* scaningbgimage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scaningbgimage@2x.png"; sourceTree = "<group>"; };
+		B923384622E0958800109A5D /* scaningbgimage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scaningbgimage@3x.png"; sourceTree = "<group>"; };
+		B923384722E0958800109A5D /* scaningline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scaningline.png; sourceTree = "<group>"; };
 		B9339F2722B7286F00C6AF15 /* LGMatchListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchListRequest.h; sourceTree = "<group>"; };
 		B9339F2822B7286F00C6AF15 /* LGMatchListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGMatchListRequest.m; sourceTree = "<group>"; };
 		B9339F2A22B766DF00C6AF15 /* LGMatchDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGMatchDetailRequest.h; sourceTree = "<group>"; };
@@ -487,7 +555,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B923385422E0958800109A5D /* libexbankcardios.a in Frameworks */,
 				0D112DA8654C0849D5EFFA56 /* Pods_LightningGame.framework in Frameworks */,
+				B923385522E0958800109A5D /* libbexbankcard.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +658,7 @@
 		B9229CE9229BEC600030691D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				B923381022E0957900109A5D /* Vender */,
 				B9229D3F229D02FA0030691D /* Tools */,
 				B9229CED229BECCE0030691D /* View */,
 				B9229CEA229BEC680030691D /* Macro */,
@@ -770,6 +841,152 @@
 				B923380222DF151A00109A5D /* LGCardKeys.h */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B923381022E0957900109A5D /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				B923381122E0958700109A5D /* JYBD_IDCardRecognition */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		B923381122E0958700109A5D /* JYBD_IDCardRecognition */ = {
+			isa = PBXGroup;
+			children = (
+				B923381222E0958700109A5D /* Classes */,
+				B923383B22E0958800109A5D /* dicts */,
+				B923383D22E0958800109A5D /* Resources */,
+			);
+			path = JYBD_IDCardRecognition;
+			sourceTree = "<group>";
+		};
+		B923381222E0958700109A5D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B923381322E0958700109A5D /* Category */,
+				B923381822E0958800109A5D /* Controller */,
+				B923381F22E0958800109A5D /* JYBD_OCR_Bank */,
+				B923382622E0958800109A5D /* libexidcard */,
+				B923382C22E0958800109A5D /* Model */,
+				B923383122E0958800109A5D /* View */,
+				B923383422E0958800109A5D /* exbankcardcore */,
+				B923383822E0958800109A5D /* Tool */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B923381322E0958700109A5D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B923381422E0958700109A5D /* UIAlertController+IDCardExtend.h */,
+				B923381522E0958800109A5D /* UIImage+IDCardExtend.m */,
+				B923381622E0958800109A5D /* UIAlertController+IDCardExtend.m */,
+				B923381722E0958800109A5D /* UIImage+IDCardExtend.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B923381822E0958800109A5D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B923381922E0958800109A5D /* JYBDIDCardVC.h */,
+				B923381A22E0958800109A5D /* JYBDScanCardBaseVC.m */,
+				B923381B22E0958800109A5D /* JYBDBankCardVC.h */,
+				B923381C22E0958800109A5D /* JYBDIDCardVC.m */,
+				B923381D22E0958800109A5D /* JYBDBankCardVC.m */,
+				B923381E22E0958800109A5D /* JYBDScanCardBaseVC.h */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B923381F22E0958800109A5D /* JYBD_OCR_Bank */ = {
+			isa = PBXGroup;
+			children = (
+				B923382022E0958800109A5D /* JYBDScanCardManageBase.h */,
+				B923382122E0958800109A5D /* JYBDScanCardManage.m */,
+				B923382222E0958800109A5D /* JYBDBankCardSearch.m */,
+				B923382322E0958800109A5D /* JYBDScanCardManageBase.m */,
+				B923382422E0958800109A5D /* JYBDBankCardSearch.h */,
+				B923382522E0958800109A5D /* JYBDScanCardManage.h */,
+			);
+			path = JYBD_OCR_Bank;
+			sourceTree = "<group>";
+		};
+		B923382622E0958800109A5D /* libexidcard */ = {
+			isa = PBXGroup;
+			children = (
+				B923382722E0958800109A5D /* exbankcardcore.h */,
+				B923382822E0958800109A5D /* commondef.h */,
+				B923382922E0958800109A5D /* exbankcard.h */,
+				B923382A22E0958800109A5D /* excards.h */,
+				B923382B22E0958800109A5D /* BankCard.h */,
+			);
+			path = libexidcard;
+			sourceTree = "<group>";
+		};
+		B923382C22E0958800109A5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B923382D22E0958800109A5D /* JYBDBankCardInfo.m */,
+				B923382E22E0958800109A5D /* JYBDCardIDInfo.m */,
+				B923382F22E0958800109A5D /* JYBDBankCardInfo.h */,
+				B923383022E0958800109A5D /* JYBDCardIDInfo.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B923383122E0958800109A5D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B923383222E0958800109A5D /* JYBDNewFormeScaningV.m */,
+				B923383322E0958800109A5D /* JYBDNewFormeScaningV.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B923383422E0958800109A5D /* exbankcardcore */ = {
+			isa = PBXGroup;
+			children = (
+				B923383522E0958800109A5D /* libexidcardios.a */,
+				B923383622E0958800109A5D /* libexbankcardios.a */,
+				B923383722E0958800109A5D /* libbexbankcard.a */,
+			);
+			path = exbankcardcore;
+			sourceTree = "<group>";
+		};
+		B923383822E0958800109A5D /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				B923383922E0958800109A5D /* IDCardRectManager.m */,
+				B923383A22E0958800109A5D /* IDCardRectManager.h */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		B923383B22E0958800109A5D /* dicts */ = {
+			isa = PBXGroup;
+			children = (
+				B923383C22E0958800109A5D /* zocr0.lib */,
+			);
+			path = dicts;
+			sourceTree = "<group>";
+		};
+		B923383D22E0958800109A5D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B923383E22E0958800109A5D /* scaningline@2x.png */,
+				B923383F22E0958800109A5D /* scaningline@3x.png */,
+				B923384022E0958800109A5D /* idcard_back.png */,
+				B923384122E0958800109A5D /* flashlightscan@3x.png */,
+				B923384222E0958800109A5D /* flashlightscan@2x.png */,
+				B923384322E0958800109A5D /* flashlightscan.png */,
+				B923384422E0958800109A5D /* scaningbgimage.png */,
+				B923384522E0958800109A5D /* scaningbgimage@2x.png */,
+				B923384622E0958800109A5D /* scaningbgimage@3x.png */,
+				B923384722E0958800109A5D /* scaningline.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B9493674229BCBE7000C3D24 = {
@@ -1341,11 +1558,22 @@
 				B949368D229BCBE9000C3D24 /* LaunchScreen.storyboard in Resources */,
 				B9229D62229E21EF0030691D /* Localizable.strings in Resources */,
 				B9A1C82B22C1F106001A3694 /* detail_sample.json in Resources */,
+				B923386122E0958800109A5D /* scaningline.png in Resources */,
 				B949368A229BCBE9000C3D24 /* Assets.xcassets in Resources */,
+				B923385E22E0958800109A5D /* scaningbgimage.png in Resources */,
+				B923385922E0958800109A5D /* scaningline@3x.png in Resources */,
+				B923385A22E0958800109A5D /* idcard_back.png in Resources */,
+				B923385F22E0958800109A5D /* scaningbgimage@2x.png in Resources */,
 				B9A1C82A22C1F106001A3694 /* detail_sample1.json in Resources */,
+				B923385B22E0958800109A5D /* flashlightscan@3x.png in Resources */,
 				B9A1C82D22C1F106001A3694 /* list_sample.json in Resources */,
 				B9493688229BCBE7000C3D24 /* Main.storyboard in Resources */,
+				B923385722E0958800109A5D /* zocr0.lib in Resources */,
+				B923385C22E0958800109A5D /* flashlightscan@2x.png in Resources */,
+				B923385822E0958800109A5D /* scaningline@2x.png in Resources */,
 				B9A1C82C22C1F106001A3694 /* detail_sample2.json in Resources */,
+				B923386022E0958800109A5D /* scaningbgimage@3x.png in Resources */,
+				B923385D22E0958800109A5D /* flashlightscan.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1642,7 @@
 			files = (
 				B9A1C83122C1F106001A3694 /* LGMatchBasicOddsView.m in Sources */,
 				B9F61A5A22A4F5F100CDC29E /* LGForgetPwdViewController.m in Sources */,
+				B923384922E0958800109A5D /* UIAlertController+IDCardExtend.m in Sources */,
 				B9229D40229D03450030691D /* FQRunTimeUtility.m in Sources */,
 				B9BE555322B8869000D04395 /* UIView+FQRotatable.m in Sources */,
 				B9229D41229D03450030691D /* FQGZipUtility.m in Sources */,
@@ -1429,6 +1658,7 @@
 				B9229D0F229BF04F0030691D /* UIImage+FQExtension.m in Sources */,
 				B91A762722A8AF1300155607 /* LGSignFlowManager.m in Sources */,
 				B923380522DF16FF00109A5D /* LGTradeHistoryRequest.m in Sources */,
+				B923385222E0958800109A5D /* JYBDNewFormeScaningV.m in Sources */,
 				B9A1C84722C35CE7001A3694 /* UIViewController+FQTracker.m in Sources */,
 				B9A1C83322C1F106001A3694 /* LGMarqueeView.m in Sources */,
 				B9229CF4229BED190030691D /* UINavigationController+FQExtension.m in Sources */,
@@ -1445,17 +1675,21 @@
 				B973025022CC51F700281EDE /* LGGameListRequest.m in Sources */,
 				B91A1F7222DC49FC007982EA /* LGModifyMobileRequest.m in Sources */,
 				B9D9102422ABA73F00D54911 /* CTMediator+LGMainActions.m in Sources */,
+				B923385622E0958800109A5D /* IDCardRectManager.m in Sources */,
+				B923384E22E0958800109A5D /* JYBDBankCardSearch.m in Sources */,
 				B9A1C82622C1F106001A3694 /* LGMatchListPrepareCell.m in Sources */,
 				B923380B22E007EC00109A5D /* LGWebViewController.m in Sources */,
 				B9229D01229BEEC00030691D /* NSArray+FQGuarder.m in Sources */,
 				B9A1C82322C1F106001A3694 /* LGMatchDetailTableViewCell.m in Sources */,
 				B9A1C83A22C1F106001A3694 /* LGMatchParlayTopView.m in Sources */,
+				B923385022E0958800109A5D /* JYBDBankCardInfo.m in Sources */,
 				B9229D2C229CF63E0030691D /* FQSystemUtility.m in Sources */,
 				B9C3A17922A0F9F700E282B0 /* LGSignUpViewController.m in Sources */,
 				B94E4FB022B79CAD00A56F13 /* FQAVPlayerView.m in Sources */,
 				B923380E22E009AF00109A5D /* LGAboutViewController.m in Sources */,
 				B973026222D8733900281EDE /* LGParlayHistoryRequest.m in Sources */,
 				B94E4FB322B79CB600A56F13 /* FQPlayerOperateView.m in Sources */,
+				B923384822E0958800109A5D /* UIImage+IDCardExtend.m in Sources */,
 				B9A1C82922C1F106001A3694 /* LGMatchParlayTableViewCell.m in Sources */,
 				B93F3B9B22BCD8C600D45DEF /* FQAlertView.m in Sources */,
 				B9229D29229CF2A10030691D /* FQNavigationBar.m in Sources */,
@@ -1474,6 +1708,7 @@
 				B92337FF22DF120000109A5D /* LGTradeHistoryViewModel.m in Sources */,
 				B9229D44229D03E20030691D /* FQAuthorizationHelper.m in Sources */,
 				B973025922D8672800281EDE /* LGWalletViewController.m in Sources */,
+				B923384D22E0958800109A5D /* JYBDScanCardManage.m in Sources */,
 				B9A1C82822C1F106001A3694 /* LGMatchListFinishedCell.m in Sources */,
 				B9229D02229BEEC00030691D /* NSString+FQGuarder.m in Sources */,
 				B9A1C84222C20220001A3694 /* LGUserInfoRequest.m in Sources */,
@@ -1481,16 +1716,19 @@
 				B999250622BC71F9001F492E /* LGBetRequest.m in Sources */,
 				B973025F22D872F000281EDE /* LGParlayHistoryViewController.m in Sources */,
 				B9A1C83D22C1F106001A3694 /* LGMatchListView.m in Sources */,
+				B923385122E0958800109A5D /* JYBDCardIDInfo.m in Sources */,
 				B9229D3E229D02980030691D /* FQTimerManager.m in Sources */,
 				B92337E722DEB66E00109A5D /* LGAddBankCardRequest.m in Sources */,
 				B93F3BDC22C0640F00D45DEF /* LGAlertOrderView.m in Sources */,
 				B9229D0D229BF04F0030691D /* UIView+FQExtension.m in Sources */,
+				B923384C22E0958800109A5D /* JYBDBankCardVC.m in Sources */,
 				B9A1C82E22C1F106001A3694 /* Target_Main.m in Sources */,
 				B92337FC22DF10CE00109A5D /* LGTradeListView.m in Sources */,
 				B9F61A5722A4C7BA00CDC29E /* LGSignFieldView.m in Sources */,
 				B91A1F7E22DD72FA007982EA /* LGAddCardViewController.m in Sources */,
 				B9C3A17C22A0FA2600E282B0 /* LGSignInViewController.m in Sources */,
 				B9493690229BCBE9000C3D24 /* main.m in Sources */,
+				B923384A22E0958800109A5D /* JYBDScanCardBaseVC.m in Sources */,
 				B9229D4D229D66E90030691D /* FQImageButton.m in Sources */,
 				B9A1C83C22C1F106001A3694 /* LGDatePickerView.m in Sources */,
 				B9A1C83722C1F106001A3694 /* LGMatchParlayKeyboard.m in Sources */,
@@ -1514,6 +1752,7 @@
 				B91A762A22A8BB0C00155607 /* LGSignUpRequest.m in Sources */,
 				B9A1C83822C1F106001A3694 /* LGMatchParlayTextField.m in Sources */,
 				B9229D93229EA6600030691D /* CALayer+FQExtension.m in Sources */,
+				B923384B22E0958800109A5D /* JYBDIDCardVC.m in Sources */,
 				B9A1C82222C1F106001A3694 /* LGMatchParlayViewModel.m in Sources */,
 				B9A1C83F22C1F106001A3694 /* LGMatchDetailViewController.m in Sources */,
 				B9A1C83022C1F106001A3694 /* LGMatchDetailOddsView.m in Sources */,
@@ -1523,6 +1762,7 @@
 				B9A1C83B22C1F106001A3694 /* LGMatchParlayTableView.m in Sources */,
 				B9A1C82022C1F106001A3694 /* LGMarqueeViewModel.m in Sources */,
 				B91A1F7522DC4A2C007982EA /* LGModifyBirthRequest.m in Sources */,
+				B923384F22E0958800109A5D /* JYBDScanCardManageBase.m in Sources */,
 				B9A1C81E22C1F106001A3694 /* LGMatchDetailViewModel.m in Sources */,
 				B9229D04229BEEC00030691D /* UIImageView+FQExtension.m in Sources */,
 				B9D9102D22ADF36A00D54911 /* LGLoadingView.m in Sources */,
@@ -1650,8 +1890,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1710,6 +1951,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1741,6 +1983,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LightningGame/Utility/Vender/JYBD_IDCardRecognition/Classes/exbankcardcore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenghai.nebula;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1759,6 +2005,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LightningGame/Utility/Vender/JYBD_IDCardRecognition/Classes/exbankcardcore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenghai.nebula;
 				PRODUCT_NAME = "$(TARGET_NAME)";

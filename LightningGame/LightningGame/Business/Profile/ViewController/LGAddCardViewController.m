@@ -10,8 +10,13 @@
 #import "FQComponentFactory.h"
 #import "LGUserManager.h"
 #import "LGBankListView.h"
+#import "JYBDBankCardVC.h"
+#import "JYBDIDCardVC.h"
+#import "FQAuthorizationHelper.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <Photos/Photos.h>
 
-@interface LGAddCardViewController () <LGBankListViewDelegate>
+@interface LGAddCardViewController () <LGBankListViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, weak) UITextField *cardField;
 @property (nonatomic, weak) UIButton *bankBtn;
@@ -207,11 +212,53 @@
     _bankBtn.titleLabel.font = kRegularFont(kFieldFontSize);
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    NSLog(@"------------------>didFinishPickingMediaWithInfo");
+    
+//    info[UIImagePickerControllerPHAsset];
+//
+    [picker dismissViewControllerAnimated:YES completion:^{
+
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    NSLog(@"------------------>imagePickerControllerDidCancel");
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController
+      willShowViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated {
+    [navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
 #pragma mark - Events
 
 - (void)cameraBtnClicked {
     [self.view endEditing:YES];
     
+//    [FQAuthorizationHelper requestCameraAuthorizationWithFinished:^(BOOL granted) {
+//        if (granted) {
+//            [FQAuthorizationHelper requestPhotoAuthorizationWithFinished:^(BOOL granted) {
+//
+//            }];
+//        }
+//    }];
+    
+    UIImagePickerController *ctr = [UIImagePickerController new];
+    ctr.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    ctr.mediaTypes = @[(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie];
+    ctr.delegate = self;
+    [self presentViewController:ctr animated:YES completion:nil];
 }
 
 - (void)bankBtnClicked {
