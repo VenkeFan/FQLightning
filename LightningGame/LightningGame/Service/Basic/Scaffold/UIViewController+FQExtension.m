@@ -9,6 +9,8 @@
 #import "UIViewController+FQExtension.h"
 #import "FQRunTimeUtility.h"
 
+static NSDictionary *ignoreCtrNameDic;
+
 @interface UIViewController () <FQNavigationBarDelegate>
 
 @end
@@ -16,8 +18,42 @@
 @implementation UIViewController (FQExtension)
 
 + (void)load {
-    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_viewDidLoad));
-    swizzleInstanceMethod(self, @selector(viewDidLayoutSubviews), @selector(fqswizzle_viewDidLayoutSubviews));
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ignoreCtrNameDic = @{
+                             @"UIAlertController": @"T",
+                             @"UISearchController": @"T",
+                             @"UIImagePickerController": @"T",
+                             @"UIInputViewController": @"T",
+                             @"UIDocumentMenuViewController": @"T",
+                             @"UIDocumentPickerViewController": @"T",
+                             @"UIDocumentBrowserViewController": @"T",
+                             @"UISplitViewController": @"T",
+                             @"UIPageViewController": @"T",
+                             @"UIActivityViewController": @"T",
+                             @"UITableViewController": @"T",
+                             @"UICollectionViewController": @"T",
+                             @"UISearchContainerViewController": @"T",
+                             @"UIReferenceLibraryViewController": @"T",
+                             @"MPMoviePlayerViewController": @"T",
+                             @"AVPlayerViewController": @"T",
+                             
+                             @"CAMPreviewViewController": @"T",
+                             @"CAMViewfinderViewController": @"T",
+                             @"CAMImagePickerCameraViewController": @"T",
+                             @"PUUIAlbumListViewController": @"T",
+                             @"PUUIPhotosAlbumViewController": @"T",
+                             @"PUUIMomentsGridViewController": @"T",
+                             @"UIInputWindowController": @"T",
+                             @"UITextInputController": @"T",
+                             @"UICompatibilityInputViewController": @"T",
+                             @"UIApplicationRotationFollowingControllerNoTouches": @"T",
+                             @"UISystemKeyboardDockController": @"T",
+                             };
+        
+        swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_viewDidLoad));
+        swizzleInstanceMethod(self, @selector(viewDidLayoutSubviews), @selector(fqswizzle_viewDidLayoutSubviews));
+    });
 }
 
 - (void)setTitle:(NSString *)title {
@@ -38,13 +74,7 @@
     [self fqswizzle_viewDidLoad];
     
     NSString *clsName = NSStringFromClass([self class]);
-    if ([clsName isEqualToString:@"UIAlertController"] ||
-        [clsName isEqualToString:@"UIImagePickerController"] ||
-        [clsName isEqualToString:@"UIInputWindowController"] ||
-        [clsName isEqualToString:@"UITextInputController"] ||
-        [clsName isEqualToString:@"UICompatibilityInputViewController"] ||
-        [clsName isEqualToString:@"UIApplicationRotationFollowingControllerNoTouches"] ||
-        [clsName isEqualToString:@"UISystemKeyboardDockController"]) {
+    if ([ignoreCtrNameDic objectForKey:clsName]) {
         return;
     }
     

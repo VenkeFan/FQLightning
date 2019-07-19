@@ -10,6 +10,8 @@
 #import "FQRunTimeUtility.h"
 #import "FQAnimatedTransitioning.h"
 
+static NSDictionary *ignoreNavCtrNameDic;
+
 @interface UINavigationController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
 @end
@@ -17,11 +19,22 @@
 @implementation UINavigationController (FQExtension)
 
 + (void)load {
-    swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_viewDidLoad));
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ignoreNavCtrNameDic = @{
+                                @"UIImagePickerController": @"T",
+                                };
+        swizzleInstanceMethod(self, @selector(viewDidLoad), @selector(fqswizzle_nav_viewDidLoad));
+    });
 }
 
-- (void)fqswizzle_viewDidLoad {
-    [self fqswizzle_viewDidLoad];
+- (void)fqswizzle_nav_viewDidLoad {
+    [self fqswizzle_nav_viewDidLoad];
+    
+    NSString *clsName = NSStringFromClass([self class]);
+    if ([ignoreNavCtrNameDic objectForKey:clsName]) {
+        return;
+    }
     
     self.navigationBarHidden = YES;
     self.interactivePopGestureRecognizer.delegate = self;
